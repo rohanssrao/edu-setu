@@ -1,5 +1,5 @@
 import cx_Oracle
 
-db = cx_Oracle.connect("ADMIN", "EduSetuGroup1", "edusetudb_high")
+db = cx_Oracle.connect("ADMIN", "EduSetuGroup2", "edusetudb_high")
 
 print(db)
