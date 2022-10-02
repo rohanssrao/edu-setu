@@ -23,5 +23,8 @@ def disconnect(con):
     except:
         pass
 
+def prepare_response(status, data):
+    return {"status": status, "data": data}
+
 d = connect()
 print(d)
