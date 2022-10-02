@@ -93,6 +93,7 @@ def login(data):
                 False, f"User with email {email} doesn't exist. Please register first."
             )
         row["password"] = bcrypt.hashpw(row["password"].encode("utf-8"), bcrypt.gensalt())
+        password = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
         valid = row["password"] == password
         # valid = bcrypt.checkpw(password.encode("utf-8"), row["password"].encode("utf-8"))
         if valid:
