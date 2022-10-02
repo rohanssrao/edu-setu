@@ -23,6 +23,16 @@ def register(data):
             return prepare_response(
                 False, f"User with email {email} already exists."
             )
+        #check if the same phone is already present
+        query = "SELECT phone FROM USERS WHERE PHONE = :1"
+        params = [phone]
+        res = cur.execute(query, params)
+        rows = res.fetchall()
+        if len(rows):
+            return prepare_response(
+                False, f"User with phone {phone} already exists."
+            )
+
 
         # If it is a new user, insert the details into the database.
         query = "INSERT INTO USERS (EMAIL, DISPLAY_NAME, PASSWORD, TYPE, PHONE) VALUES (:1,:2,:3,:4,:5)"
@@ -46,7 +56,7 @@ def login(data):
         return prepare_response(False, "Unable to create DB connection")
     try:
         # Get the data from JSON Payload
-        email = data["email"]
+        email = data["email"].lower()
         password = data["password"]
 
         # Check if user exists
@@ -73,4 +83,4 @@ def login(data):
         return prepare_response(False, str(e))
     finally:
         disconnect(con)
-        
+
