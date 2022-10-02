@@ -92,7 +92,9 @@ def login(data):
             return prepare_response(
                 False, f"User with email {email} doesn't exist. Please register first."
             )
-        valid = bcrypt.checkpw(password.encode("utf-8"), row["password"].encode("utf-8"))
+        row["password"] = bcrypt.hashpw(row["password"].encode("utf-8"), bcrypt.gensalt())
+        valid = row["password"] == password
+        # valid = bcrypt.checkpw(password.encode("utf-8"), row["password"].encode("utf-8"))
         if valid:
             return prepare_response(
                 True, {"email": row["email"], "display_name": row["display_name"]}
