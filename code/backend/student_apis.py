@@ -79,7 +79,6 @@ def login(data):
         # Get the data from JSON Payload
         email = data["email"]
         password = data["password"]
-        user_type = data["type"]
 
         # Check if user exists
         cur = con.cursor()
