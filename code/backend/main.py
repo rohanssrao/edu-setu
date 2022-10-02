@@ -23,4 +23,4 @@ def register():
 def login():
     return student_apis.login(request.get_json(force=True))
 
-app.run(debug=True)
+app.run(debug=True,host='0.0.0.0')
