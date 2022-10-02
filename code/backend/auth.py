@@ -8,7 +8,7 @@ def register(data):
         return prepare_response(False, "Unable to create DB connection")
     try:
         # Get the data from JSON Payload
-        email = data["email"]
+        email = data["email"].lower()
         password = bcrypt.hashpw(data["password"].encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
         user_type = data["type"]
         display_name = data["display_name"]
