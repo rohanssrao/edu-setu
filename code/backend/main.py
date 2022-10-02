@@ -30,4 +30,9 @@ def login():
 def get_all_application():
     return student_apis.get_all_application()
 
+@app.route("/get_all_applications_by_student", methods=["GET"])
+def get_all_applications_by_student():
+    return student_apis.get_all_applications_by_student(request.get_json(force=True))
+
+
 app.run(debug=True,host='0.0.0.0')
