@@ -4,9 +4,11 @@ from config import *
 
 def makeDictFactory(cursor):
     columnNames = [d[0].lower() for d in cursor.description]
+
     def createRow(*args):
         return dict(zip(columnNames, args))
     return createRow
+
 
 def connect():
     try:
@@ -23,8 +25,6 @@ def disconnect(con):
     except:
         pass
 
+
 def prepare_response(status, data):
     return {"status": status, "data": data}
-
-d = connect()
-print(d)
