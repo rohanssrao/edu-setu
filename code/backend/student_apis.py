@@ -81,11 +81,12 @@ def login(data):
         password = data["password"]
 
         # Check if user exists
-        cur = con.cursor(dictionary=True)
+        cur = con.cursor()
         query = "SELECT display_name,email, password FROM USERS WHERE EMAIL = :1"
         params = [email]
-        res = cur.execute(query, params)
-        row = res.fetchone()
+        cur.execute(query, params)
+        cur.rowfactory = makeDictFactory(cur)
+        row = cur.fetchone()
         print(row)
         if row is None:
             return prepare_response(
