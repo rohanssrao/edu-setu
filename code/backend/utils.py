@@ -1,18 +1,17 @@
 import cx_Oracle
 from config import *
 
-def dict_factory(cursor, row):
-    d = {}
-    for idx, col in enumerate(cursor.description):
-        d[col[0].lower()] = row[idx]
-    return d
 
+def makeDictFactory(cursor):
+    columnNames = [d[0].lower() for d in cursor.description]
+    def createRow(*args):
+        return dict(zip(columnNames, args))
+    return createRow
 
 def connect():
     try:
         con = cx_Oracle.connect(db_user, db_pass, db_conn)
-        con.row_factory = dict_factory
-    except:
+    except Exception as e:
         con = None
     return con
 
@@ -23,3 +22,6 @@ def disconnect(con):
             con.close()
     except:
         pass
+
+d = connect()
+print(d)
