@@ -1,5 +1,5 @@
 import student_apis
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -15,5 +15,8 @@ def index():
 def get_all_users():
     return student_apis.get_all_users()
 
+@app.route("/register", methods=["POST"])
+def register():
+    return student_apis.register(request.get_json(force=True))
 
 app.run(debug=True)
