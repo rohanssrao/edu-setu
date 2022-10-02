@@ -75,7 +75,7 @@ def login(data):
         con = connect()
     except:
         return prepare_response(False, "Unable to create DB connection")
-    try:
+    if 1:
         # Get the data from JSON Payload
         email = data["email"]
         password = data["password"]
@@ -103,8 +103,8 @@ def login(data):
             )
         else:
             return prepare_response(False, "Invalid Credentials.")
-    except Exception as e:
-        print(e)
-        return prepare_response(False, str(e))
-    finally:
-        disconnect(con)
+    # except Exception as e:
+    #     print(e)
+    #     return prepare_response(False, str(e))
+    # finally:
+    #     disconnect(con)
