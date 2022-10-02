@@ -86,6 +86,7 @@ def login(data):
         params = [email]
         res = cur.execute(query, params)
         row = res.fetchone()
+        row = row[0]
         print(row)
         if row is None:
             return prepare_response(
