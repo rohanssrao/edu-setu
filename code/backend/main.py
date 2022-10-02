@@ -16,12 +16,18 @@ def index():
 def get_all_users():
     return student_apis.get_all_users()
 
+
 @app.route("/register", methods=["POST"])
 def register():
     return auth.register(request.get_json(force=True))
 
+
 @app.route("/login", methods=["POST"])
 def login():
     return auth.login(request.get_json(force=True))
+
+@app.route("/get_all_application", methods=["GET"])
+def get_all_application():
+    return student_apis.get_all_application()
 
 app.run(debug=True,host='0.0.0.0')
