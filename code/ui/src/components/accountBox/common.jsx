@@ -30,6 +30,24 @@ export const BoldLink = styled.a`
   margin: 0 4px;
 `;
 
+export const Select = styled.select`
+width: 100%;
+height: 42px;
+outline: none;
+border: 1px solid rgba(200, 200, 200, 0.3);
+padding: 0px 10px;
+border-bottom: 1.4px solid transparent;
+transition: all 200ms ease-in-out;
+font-size: 12px;
+
+&::placeholder {
+  color: rgba(200, 200, 200, 1);
+}
+  color: rgba(200, 200, 200, 1);
+  border-bottom: 1.5px solid rgba(200, 200, 200, 0.4);
+
+`;
+
 export const Input = styled.input`
   width: 100%;
   height: 42px;
@@ -42,10 +60,6 @@ export const Input = styled.input`
 
   &::placeholder {
     color: rgba(200, 200, 200, 1);
-  }
-
-  &:not(:last-of-type) {
-    border-bottom: 1.5px solid rgba(200, 200, 200, 0.4);
   }
 
   &:focus {

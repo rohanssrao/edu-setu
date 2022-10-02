@@ -6,6 +6,7 @@ import {
   Input,
   MutedLink,
   SubmitButton,
+  Select,
 } from "./common";
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
@@ -16,10 +17,15 @@ export function SignupForm(props) {
   return (
     <BoxContainer>
       <FormContainer>
-        <Input type="text" placeholder="Full Name" />
-        <Input type="email" placeholder="Email" />
-        <Input type="password" placeholder="Password" />
-        <Input type="password" placeholder="Confirm Password" />
+        <Input type="text" placeholder="Full Name" required/>
+        <Input type="email" placeholder="Email" required/>
+        <Input type="password" placeholder="Password" required/>
+        <Input type="password" placeholder="Confirm Password" required/>
+        <Select required>
+          <option value="type">Are you a ?</option>
+          <option value="student">Student</option>
+          <option value="professor" >Professor</option>
+        </Select>
       </FormContainer>
       <Marginer direction="vertical" margin={10} />
       <SubmitButton type="submit">Signup</SubmitButton>
