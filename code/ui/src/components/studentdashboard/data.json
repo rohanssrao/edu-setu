@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "role": "Research Assistant",
+        "professor": "Prof Joe Dawson",
+        "department": "CS",
+        "description": "Perform Research under well known professor",
+        "type": "remote",
+        "pay_range": "NA"
+    },
+    {
+        "id": 2,
+        "role": "Graduate Assistant",
+        "professor": "Prof Jane Dawson",
+        "department": "Mechanical Engineer",
+        "description": "People with CS background required",
+        "type": "hybrid",
+        "pay_range": "20$"
+    }
+]
