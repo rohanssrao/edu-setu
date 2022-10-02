@@ -73,3 +73,4 @@ def login(data):
         return prepare_response(False, str(e))
     finally:
         disconnect(con)
+        
