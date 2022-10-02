@@ -39,5 +39,10 @@ def get_specific_application():
     return student_apis.get_specific_application(request.get_json(force=True))
 
 
+@app.route("/add_application", methods=["POST"])
+def add_application():
+    return student_apis.add_application(request.get_json(force=True))
+
+
 
 app.run(debug=True,host='0.0.0.0')

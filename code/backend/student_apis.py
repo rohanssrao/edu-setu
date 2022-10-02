@@ -1,3 +1,4 @@
+from os import posix_fallocate
 from utils import *
 import bcrypt
 
@@ -120,3 +121,29 @@ def get_specific_application(data):
             con.close()
         except:
             pass
+
+
+def add_application(data):
+    try:
+        con = connect()
+    except:
+        return prepare_response(False, "Unable to create DB connection")
+    try:
+        # Get the data from JSON Payload
+        student = data["email"]
+        status = "pending"
+        Posting_id = "1001"
+        # Insert application into database
+        cur = con.cursor()
+        query = "INSERT INTO APPLICATIONS (STUDENT, STATUS, POSTING_ID) VALUES (:1,:2,:3)"
+        params = [student,status,Posting_id]
+        cur.execute(query, params)
+        con.commit()
+        return prepare_response(
+            True, f"Application added."
+        )
+    except Exception as e:
+        print(e)
+        return prepare_response(False, str(e))
+    finally:
+        disconnect(con)
