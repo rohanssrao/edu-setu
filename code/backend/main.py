@@ -36,7 +36,7 @@ def get_all_applications_by_student():
 
 @app.route("/get_specific_application", methods=["GET"])
 def get_specific_application():
-    return student_apis.get_specific_applicationt(request.get_json(force=True))
+    return student_apis.get_specific_application(request.get_json(force=True))
 
 
 
