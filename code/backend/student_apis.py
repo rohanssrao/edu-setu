@@ -68,3 +68,39 @@ def register(data):
         return prepare_response(False, str(e))
     finally:
         disconnect(con)
+
+
+def login(data):
+    try:
+        con = connect()
+    except:
+        return prepare_response(False, "Unable to create DB connection")
+    try:
+        # Get the data from JSON Payload
+        email = data["email"]
+        password = data["password"]
+        user_type = data["type"]
+
+        # Check if user exists
+        cur = con.cursor()
+        query = "SELECT display_name,email, password FROM USERS WHERE EMAIL = :1"
+        params = [email]
+        res = cur.execute(query, params)
+        row = res.fetchone()
+        print(row)
+        if row is None:
+            return prepare_response(
+                False, f"User with email {email} doesn't exist. Please register first."
+            )
+        valid = bcrypt.checkpw(password.encode("utf-8"), row["password"])
+        if valid:
+            return prepare_response(
+                True, {"email": row["email"], "display_name": row["display_name"]}
+            )
+        else:
+            return prepare_response(False, "Invalid Credentials.")
+    except Exception as e:
+        print(e)
+        return prepare_response(False, str(e))
+    finally:
+        disconnect(con)
