@@ -39,11 +39,10 @@ def register(data):
     try:
         # Get the data from JSON Payload
         email = data["email"]
-        password = bcrypt.hashpw(data["password"].encode("utf-8"), bcrypt.gensalt())
+        password = bcrypt.hashpw(data["password"].encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
         user_type = data["type"]
         display_name = data["display_name"]
         phone = data["phone"]
-
         # Check if email id is already present.
         cur = con.cursor()
         query = "SELECT email FROM USERS WHERE EMAIL = :1"
@@ -96,7 +95,7 @@ def login(data):
         # password = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
         # valid = row["password"] == password.encode("utf-8")
         # valid = bcrypt.checkpw(row["password"].encode("utf-8"), password)
-        valid = bcrypt.checkpw(password.encode("utf-8"), row["password"])
+        valid = bcrypt.checkpw(password.encode("utf-8"), row["password"].encode("utf-8"))
         if valid:
             return prepare_response(
                 True, {"email": row["email"], "display_name": row["display_name"]}
