@@ -19,4 +19,8 @@ def get_all_users():
 def register():
     return student_apis.register(request.get_json(force=True))
 
+@app.route("/login", methods=["POST"])
+def login():
+    return student_apis.login(request.get_json(force=True))
+
 app.run(debug=True)
