@@ -1,4 +1,5 @@
 import student_apis
+import auth
 from flask import Flask, request
 
 app = Flask(__name__)
@@ -17,10 +18,10 @@ def get_all_users():
 
 @app.route("/register", methods=["POST"])
 def register():
-    return student_apis.register(request.get_json(force=True))
+    return auth.register(request.get_json(force=True))
 
 @app.route("/login", methods=["POST"])
 def login():
-    return student_apis.login(request.get_json(force=True))
+    return auth.login(request.get_json(force=True))
 
 app.run(debug=True,host='0.0.0.0')
