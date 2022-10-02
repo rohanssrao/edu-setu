@@ -41,6 +41,8 @@ def register(data):
         email = data["email"]
         password = bcrypt.hashpw(data["password"].encode("utf-8"), bcrypt.gensalt())
         user_type = data["type"]
+        display_name = data["display_name"]
+        phone = data["phone"]
 
         # Check if email id is already present.
         cur = con.cursor()
@@ -54,8 +56,8 @@ def register(data):
             )
 
         # If it is a new user, insert the details into the database.
-        query = "INSERT INTO USERS (EMAIL, DISPLAY_NAME, PASSWORD) VALUES (:1,:2,:3)"
-        params = [email, user_type, password]
+        query = "INSERT INTO USERS (EMAIL, DISPLAY_NAME, PASSWORD, TYPE, PHONE) VALUES (:1,:2,:3)"
+        params = [email, display_name, password, user_type, phone]
         cur.execute(query, params)
         con.commit()
         return prepare_response(
