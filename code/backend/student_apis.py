@@ -56,7 +56,7 @@ def register(data):
             )
 
         # If it is a new user, insert the details into the database.
-        query = "INSERT INTO USERS (EMAIL, DISPLAY_NAME, PASSWORD, TYPE, PHONE) VALUES (:1,:2,:3)"
+        query = "INSERT INTO USERS (EMAIL, DISPLAY_NAME, PASSWORD, TYPE, PHONE) VALUES (:1,:2,:3,:4,:5)"
         params = [email, display_name, password, user_type, phone]
         cur.execute(query, params)
         con.commit()
