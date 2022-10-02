@@ -40,7 +40,7 @@ def register(data):
         # Get the data from JSON Payload
         email = data["email"]
         password = bcrypt.hashpw(data["password"].encode("utf-8"), bcrypt.gensalt())
-        type = data["type"]
+        user_type = data["type"]
 
         # Check if email id is already present.
         cur = con.cursor()
@@ -55,7 +55,7 @@ def register(data):
 
         # If it is a new user, insert the details into the database.
         query = "INSERT INTO USERS (EMAIL, DISPLAY_NAME, PASSWORD) VALUES (:1,:2,:3)"
-        params = [email, type, password]
+        params = [email, user_type, password]
         cur.execute(query, params)
         con.commit()
         return prepare_response(
