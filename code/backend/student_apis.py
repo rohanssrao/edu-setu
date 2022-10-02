@@ -94,8 +94,8 @@ def login(data):
             )
         row["password"] = bcrypt.hashpw(row["password"].encode("utf-8"), bcrypt.gensalt())
         # password = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
-        valid = row["password"] == password.encode("utf-8")
-        # valid = bcrypt.checkpw(password.encode("utf-8"), row["password"].encode("utf-8"))
+        # valid = row["password"] == password.encode("utf-8")
+        valid = bcrypt.checkpw(row["password"], password)
         if valid:
             return prepare_response(
                 True, {"email": row["email"], "display_name": row["display_name"]}
