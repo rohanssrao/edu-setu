@@ -15,7 +15,7 @@ def add_posting(data):
         location = data["area"]
         # Insert application into database
         cur = con.cursor()
-        query = "INSERT INTO POSTINGS ( TITLE, PROFESSOR, DESCRIPTION , LOCATION) VALUES (:1,:2,:3,:4)"
+        query = "INSERT INTO POSTINGS ( TITLE, PROFESSOR, DESCRIPTION, LOCATION) VALUES (:1,:2,:3,:4)"
         params = [title, professor, description, location]
         cur.execute(query, params)
         con.commit()
