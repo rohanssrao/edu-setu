@@ -2,7 +2,7 @@ from os import posix_fallocate
 from utils import *
 import bcrypt
 
-def add_positing(data):
+def add_posting(data):
     try:
         con = connect()
     except:
