@@ -11,7 +11,7 @@ def add_posting(data):
     try:
         # Get the data from JSON Payload
         professor = data["professor"]
-        title = data["designation"]
+        title = data["title"]
         description = data["description"]
         location = data["location"]
         prerequisites = data["prerequites"]
