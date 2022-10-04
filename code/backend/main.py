@@ -60,4 +60,8 @@ def get_all_postings():
 def update_posting():
     return professor_api.update_posting(request.get_json(force=True))
 
+@app.route("/get_user_profile", methods = ["POST"])
+def get_user_profile():
+    return auth.get_user_profile(request.get_json(force=True))
+
 app.run(debug=True,host='0.0.0.0')

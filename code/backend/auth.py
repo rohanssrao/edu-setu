@@ -123,3 +123,66 @@ def login(data):
     finally:
         disconnect(con)
 
+
+def get_user_profile(data):
+    try:
+        con = connect()
+    except:
+        return prepare_response(False, "Unable to create DB connection")
+    try:
+        # Get the data from JSON Payload
+        user_id = data["user_id"]
+
+        cur = con.cursor()
+        query = "SELECT * FROM USERS WHERE USER_ID = :1"
+        params = [user_id]
+        cur.execute(query, params)
+        cur.rowfactory = makeDictFactory(cur)
+        row = cur.fetchone()
+        
+        display_name = row["display_name"]
+        user_id = row["user_id"]
+        user_type = row["type"]
+        email = row["email"]
+        phone = row["phone"]
+        data1 = {
+                "email": email,
+                "user_id":user_id,
+                "display_name":display_name,
+                "type": user_type,
+                "phone": phone
+            }
+        if user_type == "student":
+            query = "SELECT * FROM STUDENT WHERE USER_ID = :1"
+            params = [user_id]
+            cur.execute(query, params)
+            cur.rowfactory = makeDictFactory(cur)
+            row = cur.fetchone()
+
+            data1["gpa"] = row["gpa"]
+            data1["major"] = row["major"]
+            data1["minor"] = row["minor"]
+            data1["degree"] = row["degree"]
+            data1["year"] = row["year"]
+        
+        elif user_type == "professor":
+            query = "SELECT * FROM PROFESSORS WHERE USER_ID = :1"
+            params = [user_id]
+            cur.execute(query, params)
+            cur.rowfactory = makeDictFactory(cur)
+            row = cur.fetchone()
+
+            data1["department"] = row["department"]
+            data1["designation"] = row["designation"]
+
+        return prepare_response(
+            True, data1
+            
+        )
+    except Exception as e:
+        print(e)
+        return prepare_response(False, str(e))
+    finally:
+        disconnect(con)
+
+
