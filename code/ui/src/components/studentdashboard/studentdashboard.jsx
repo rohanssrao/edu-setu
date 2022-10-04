@@ -21,7 +21,7 @@ function MyVerticallyCenteredModal(props) {
     >
       <Modal.Header closeButton >
         <Modal.Title id="contained-modal-title-vcenter">
-          {props.currentJob.role}
+          {props.currentJob.title}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -47,6 +47,7 @@ export class StudentDashboard extends Component {
     super(props);
     this.state={
       modalShow:false,
+      user_id:1,
       currentJob:{}
 
     }
@@ -116,7 +117,7 @@ export class StudentDashboard extends Component {
         <link rel="stylesheet" href="studentDashboard.css"></link>
 
         <div className="container">
-          <Table striped hover className="col-6">
+          <Table striped hover className="col-6" responsive>
             <thead>
               <tr>
                 <th>Job ID</th>
@@ -131,13 +132,13 @@ export class StudentDashboard extends Component {
               {
                 jobs.map(jobs => (
                   <tr>
-                    <td>{jobs.id}</td>
+                    <td>{jobs.posting_id}</td>
                     <td><a className="link-primary" onClick={() => {
                       this.setState({modalShow:true});
                       this.setState({currentJob: jobs})
                       //setCurrentJob(job => ({ ...job, role: jobs.role, description: jobs.description, prerequisites: jobs.prerequisites }));
                     }}>
-                      {jobs.role}
+                      {jobs.title}
                     </a>
 
                       <MyVerticallyCenteredModal
@@ -146,7 +147,7 @@ export class StudentDashboard extends Component {
                       /></td>
                     <td>{jobs.professor}</td>
                     <td>{jobs.department}</td>
-                    <td>{jobs.type}</td>
+                    <td>{jobs.location}</td>
                     <td>
                       <Dropdown>
                         <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
