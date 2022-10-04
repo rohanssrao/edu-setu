@@ -91,7 +91,7 @@ def login(data):
 
         # Check if user exists
         cur = con.cursor()
-        query = "SELECT display_name,email, password FROM USERS WHERE EMAIL = :1"
+        query = "SELECT display_name,email, password, user_id,type FROM USERS WHERE EMAIL = :1"
         params = [email]
         cur.execute(query, params)
         cur.rowfactory = makeDictFactory(cur)
@@ -104,13 +104,13 @@ def login(data):
         valid = bcrypt.checkpw(password.encode("utf-8"), row["password"].encode("utf-8"))
         if valid:
             display_name = row["display_name"]
-            # user_id = row["nextval"]
+            user_id = row["user_id"]
             user_type = row["type"]
             return prepare_response(
                 True, 
                 {
                 "email": email,
-                # "user_id":user_id,
+                "user_id":user_id,
                 "display_name":display_name,
                 "type": user_type
                 }
