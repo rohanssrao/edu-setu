@@ -119,7 +119,7 @@ export class StudentDashboard extends Component {
             <thead>
               <tr>
                 <th>Job ID</th>
-                <th >Role</th>
+                <th >Title</th>
                 <th>Professor</th>
                 <th>Department</th>
                 <th>Location</th>

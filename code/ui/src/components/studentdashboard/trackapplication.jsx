@@ -8,6 +8,11 @@ import NavBar from "../navbar";
 import Badge from 'react-bootstrap/Badge';
 import users from './user.json';
 import applications from './applications.json'
+import Accordion from 'react-bootstrap/Accordion';
+import Container from 'react-bootstrap/esm/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 
 function MyVerticallyCenteredModal(props) {
 
@@ -53,19 +58,22 @@ export class TrackApplication extends Component {
     }
   }
   componentWillMount() {
+    var application_temp = [];
     for (var i = 0; i < users.length; i++) {
       if (users[i].user_id == this.state.user_id) {
         this.setState({ current_user: users[i] }, () => {
-          console.log(this.state.current_user);
           for (var j = 0; j < applications.length; j++) {
-            console.log(applications)
             if (this.state.current_user.user_id == applications[j].student_user_id) {
-              this.setState({ applications: [...this.state.applications, applications[j]] }, () => console.log(this.state.applications))
+              application_temp.push(applications[j]);
+              this.setState({applications:application_temp} , ()=>{console.log(this.state.applications)})
             }
           }
         });
       }
     }
+    
+    console.log("dccccc")
+    console.log(application_temp)
 
   }
   render() {
@@ -78,53 +86,74 @@ export class TrackApplication extends Component {
         <link rel="stylesheet" href="studentDashboard.css"></link>
 
         <div className="container">
-          <Table striped hover className="col-6" responsive>
-            <thead>
-              <tr>
-                <th>Job ID</th>
-                <th >Role</th>
-                <th>Professor</th>
-                <th>Department</th>
-                <th>Location</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
+          <Container>
+            <Row>
+              <Col xs={2}><b>Application Id</b></Col>
+              <Col xs={2}><b>Applied On</b></Col>
+              <Col xs={4}><b>Title</b></Col>
+              <Col xs={2}><b>Professor</b></Col>
+              <Col xs={2}><b>Status</b></Col>
+
+            </Row>
               {
-
                 this.state.applications.map(application => (
-                  <tr>
-                    <td>{application.application_id}</td>
-                    <td><a className="link-primary" onClick={() => {
-                      this.setState({ modalShow: true });
-                      this.setState({ currentJob: application })
-                      //setCurrentJob(job => ({ ...job, role: jobs.role, description: jobs.description, prerequisites: jobs.prerequisites }));
-                    }}>
-                      {application.title}
-                    </a>
+                  <Row>
+                  <Accordion flush>
+                    <Accordion.Item eventKey="0">
+                      <Accordion.Header>
+                        <Col xs={2}>{application.application_id}</Col>
 
-                      <MyVerticallyCenteredModal
-                        show={this.state.modalShow} currentJob={this.state.currentJob}
-                        onHide={() => this.setState({ modalShow: false })}
-                      /></td>
-                    <td>{application.professor_display_name}</td>
-                    <td>{application.professor_department}</td>
-                    <td>{application.location}</td>
+                        <Col xs={2}>
+                          {application.created_at}
+                        </Col>
+                        <Col xs={4}>
+                          <a className="link-primary" onClick={() => {
+                            this.setState({ modalShow: true });
+                            this.setState({ currentJob: application })
+                            //setCurrentJob(job => ({ ...job, role: jobs.role, description: jobs.description, prerequisites: jobs.prerequisites }));
+                          }}>
+                            {application.title}
+                          </a>
+                          <MyVerticallyCenteredModal
+                            show={this.state.modalShow} currentJob={this.state.currentJob}
+                            onHide={() => this.setState({ modalShow: false })}
+                          /></Col>
+                        <Col xs={2}>
+                          {application.professor_display_name}
+                        </Col>
+                        <Col xs={2}>
+                          {
+                            (application.status == "Pending" && <Badge bg="info">Pending</Badge>) ||
+                            (application.status == "Hired" && <Badge bg="success">Hired</Badge>) ||
+                            (application.status == "Rejected" && <Badge bg="secondary">Rejected</Badge>)
 
-                    <td>
-                      {
-                        (application.status == "Pending" && <Badge bg="info">Pending</Badge>) ||
-                        (application.status == "Hired" && <Badge bg="success">Hired</Badge>) ||
-                        (application.status == "Rejected" && <Badge bg="secondary">Rejected</Badge>)
-                       
-                      }
-                    </td>
-                  </tr>
+                          }
+                        </Col>
 
+                      </Accordion.Header>
+                      <Accordion.Body>
+                        <b>Description</b><br />
+                        {application.description} <br/>
+                        <b>Status: </b>
+                        {
+                          (application.status == "Pending" && <Badge bg="info">Pending</Badge>) ||
+                          (application.status == "Hired" && <Badge bg="success">Hired</Badge>) ||
+                          (application.status == "Rejected" && <Badge bg="secondary">Rejected</Badge>)
+
+                        } <br/>
+                        {
+                          (application.remarks && <p><b>Remarks:</b> {application.remarks}</p>)
+                        }
+                        Last updated: <i>{application.updated_at}</i>
+                        
+
+                      </Accordion.Body>
+                    </Accordion.Item>
+                  </Accordion>
+                  </Row>
                 ))
               }
-            </tbody>
-          </Table>
+          </Container>
         </div>
       </>
     )
