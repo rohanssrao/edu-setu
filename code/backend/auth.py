@@ -95,9 +95,6 @@ def login(data):
         params = [email]
         cur.execute(query, params)
         cur.rowfactory = makeDictFactory(cur)
-        display_name = cur.fetchone()["display_name"]
-        user_id = cur.fetchone()["user_id"]
-        user_type = cur.fetchone()["type"]
         row = cur.fetchone()
         print(row)
         if row is None:
@@ -106,6 +103,9 @@ def login(data):
             )
         valid = bcrypt.checkpw(password.encode("utf-8"), row["password"].encode("utf-8"))
         if valid:
+            display_name = cur.fetchone()["display_name"]
+            user_id = cur.fetchone()["user_id"]
+            user_type = cur.fetchone()["type"]
             return prepare_response(
                 True, 
                 {
