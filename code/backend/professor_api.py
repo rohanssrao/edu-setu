@@ -1,7 +1,7 @@
 from os import posix_fallocate
 from utils import *
 import bcrypt
-from datetime import datetime
+import datetime
 
 def add_posting(data):
     try:
@@ -15,8 +15,9 @@ def add_posting(data):
         description = data["notes"]
         location = data["area"]
         prerequisites = data["prereq"]
-        created_at = datetime.now()
-        updated_at = datetime.now()
+        current_date = datetime.datetime.now()
+        created_at = int(current_date.strftime("%Y%m%d%H%M%S"))
+        updated_at = int(current_date.strftime("%Y%m%d%H%M%S"))
         # Insert application into database
         cur = con.cursor()
         query = "INSERT INTO POSTINGS ( TITLE, PROFESSOR, DESCRIPTION, LOCATION, PREREQUISITES, CREATED_AT, UPDATED_AT ) VALUES (:1,:2,:3,:4,:5,:6,:7)"
