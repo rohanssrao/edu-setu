@@ -104,13 +104,13 @@ def login(data):
         valid = bcrypt.checkpw(password.encode("utf-8"), row["password"].encode("utf-8"))
         if valid:
             display_name = row["display_name"]
-            user_id = row["nextval"]
+            # user_id = row["nextval"]
             user_type = row["type"]
             return prepare_response(
                 True, 
                 {
                 "email": email,
-                "user_id":user_id,
+                # "user_id":user_id,
                 "display_name":display_name,
                 "type": user_type
                 }
