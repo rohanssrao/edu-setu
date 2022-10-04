@@ -13,6 +13,7 @@ def register(data):
         user_type = data["type"]
         display_name = data["display_name"]
         phone = data["phone"]
+
         # Check if email id is already present.
         cur = con.cursor()
         query = "SELECT email FROM USERS WHERE EMAIL = :1"
@@ -32,15 +33,43 @@ def register(data):
             return prepare_response(
                 False, f"User with phone {phone} already exists."
             )
-
-
+        
         # If it is a new user, insert the details into the database.
-        query = "INSERT INTO USERS (EMAIL, DISPLAY_NAME, PASSWORD, TYPE, PHONE) VALUES (:1,:2,:3,:4,:5)"
-        params = [email, display_name, password, user_type, phone]
+        query = "SELECT USER_ID_SEQ.NEXTVAL FROM DUAL"
+        cur.execute(query)
+        cur.rowfactory = makeDictFactory(cur)
+        user_id = cur.fetchone()['nextval']
+        
+        query = "INSERT INTO USERS (USER_ID, EMAIL, DISPLAY_NAME, PASSWORD, TYPE, PHONE) VALUES (:1,:2,:3,:4,:5,:6)"
+        params = [user_id, email, display_name, password, user_type, phone]
         cur.execute(query, params)
+
+        if user_type == "student":
+            gpa = data["gpa"]
+            major = data["major"]
+            minor = data["minor"]
+            degree = data["degree"]
+            year = data["year"]
+            query = "INSERT INTO STUDENT (USER_ID, DEGREE, YEAR, MAJOR, MINOR, GPA) VALUES (:1,:2,:3,:4,:5,:6)"
+            params = [user_id, degree, year, major, minor, gpa]
+            cur.execute(query, params)
+            
+        elif user_type == "professor":
+            department = data["department"]
+            designation = data["designation"]
+            query = "INSERT INTO PROFESSORS (USER_ID,DEPARTMENT,DESIGNATION) VALUES (:1,:2,:3)"
+            params = [user_id, department,designation]
+            cur.execute(query, params)
+
         con.commit()
         return prepare_response(
-            True, f"User Registration Successful."
+            True, 
+            {
+                "email": email,
+                "user_id":user_id,
+                "display_name":display_name,
+                "type": type
+            }
         )
     except Exception as e:
         print(e)
