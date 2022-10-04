@@ -48,5 +48,13 @@ def add_application():
 def add_posting():
     return professor_api.add_posting(request.get_json(force=True))
 
+@app.route("/add_posting", methods=["POST"])
+def get_all_postings_by_professor():
+    return professor_api.get_all_postings_by_professor(request.get_json(force=True))
+
+@app.route("/get_all_postings", methods=["POST"])
+def get_all_postings():
+    return professor_api.get_all_postings(request.get_json(force=True))
+
 
 app.run(debug=True,host='0.0.0.0')
