@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
+import NavBar from "../navbar";
 
 export class TrackApplication extends Component {
   render() {
     return (
-      <div>trackapplication</div>
+      <>
+        <NavBar />
+        <div>trackapplication</div>
+      </>
     )
   }
 }

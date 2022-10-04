@@ -7,6 +7,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
+import NavBar from "../navbar";
 
 function MyVerticallyCenteredModal(props) {
 
@@ -50,6 +51,7 @@ export function StudentDashboard() {
   const [currentJob, setCurrentJob] = React.useState({ "role": "", "prerequisites": "", "description": "" });
   return (
     <>
+      <NavBar />
       <h1 className="display-3">Search for a research role</h1>
       <p>Enhance your skills by working as a research assistant under professors</p>
       <div className="container">

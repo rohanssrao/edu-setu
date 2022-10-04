@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { AccountBox } from "./components/accountBox";
 import { StudentHomePage } from "./components/studentdashboard";
 import { NavBar } from "./components/navbar"
+import TrackApplication from "./components/studentdashboard/trackapplication";
+import {  BrowserRouter, Routes, Switch, Route, Link } from "react-router-dom";
+import { StudentProfile } from "./components/studentdashboard/studentProfile";
 
 const AppContainer = styled.div`
   width: 100%;
@@ -16,9 +19,14 @@ const AppContainer = styled.div`
 function App() {
   return (
     <AppContainer>
-      {/*<AccountBox />*/}
-      <NavBar/>
-      <StudentHomePage/>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<AccountBox />} />
+          <Route exact path="/student/home" element={<StudentHomePage />} />
+          <Route exact path="/student/trackApplications" element={<TrackApplication />} />
+          <Route exact path="/student/myProfile" element={<StudentProfile />} />
+        </Routes>
+      </BrowserRouter>
     </AppContainer>
   );
 }

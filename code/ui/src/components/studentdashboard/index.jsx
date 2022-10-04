@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import StudentDashboard from "./studentdashboard";
+import TrackApplication from ".//trackapplication";
+import { Route } from "react-router";
+import { Component } from 'react'
 
-export function StudentHomePage(props) {
-    return(
-        
-    <StudentDashboard/>
+export class StudentHomePage extends Component {
+    render(){
+        return (
+            <>
+                <StudentDashboard />
+
+            </>
     
-    )
+        )
+    }
+    
 }
