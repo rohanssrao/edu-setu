@@ -16,8 +16,8 @@ def add_posting(data):
         location = data["area"]
         prerequisites = data["prereq"]
         current_date = datetime.datetime.now()
-        created_at = current_date
-        updated_at = current_date
+        created_at = "2022-10-04 03:27:17.271281"
+        updated_at = "2022-10-04 03:27:17.271281"
         # Insert application into database
         cur = con.cursor()
         query = "INSERT INTO POSTINGS ( TITLE, PROFESSOR, DESCRIPTION, LOCATION, PREREQUISITES, CREATED_AT, UPDATED_AT ) VALUES (:1,:2,:3,:4,:5,:6,:7)"
