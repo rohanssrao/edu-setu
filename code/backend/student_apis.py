@@ -132,7 +132,7 @@ def add_application(data):
         # Get the data from JSON Payload
         student = data["user_id"]
         status = "pending"
-        Posting_id = "1001"
+        Posting_id = data["posting_id"]
         remarks = ""
         # Insert application into database
         cur = con.cursor()
