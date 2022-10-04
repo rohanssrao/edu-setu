@@ -68,7 +68,7 @@ def register(data):
                 "email": email,
                 "user_id":user_id,
                 "display_name":display_name,
-                "type": type
+                "type": user_type
             }
         )
     except Exception as e:
