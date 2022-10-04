@@ -25,6 +25,7 @@ function MyVerticallyCenteredModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        <p><small><i>Posted on: {props.currentJob.created_at}</i></small></p>
         <p><b>Description</b></p>
         <p>
           {props.currentJob.description}
@@ -35,7 +36,8 @@ function MyVerticallyCenteredModal(props) {
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button onClick={props.apply}>Apply</Button>
+        <Button onClick={props.onHide} variant="secondary">Close</Button>
       </Modal.Footer>
     </Modal>
   );
@@ -43,12 +45,12 @@ function MyVerticallyCenteredModal(props) {
 
 
 export class StudentDashboard extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
-      modalShow:false,
-      user_id:1,
-      currentJob:{}
+    this.state = {
+      modalShow: false,
+      user_id: 1,
+      currentJob: {}
 
     }
   }
@@ -62,6 +64,7 @@ export class StudentDashboard extends Component {
     }
   }
   apply(jobs) {
+    console.log("Applying");
     console.log(jobs);
   }
   saveJob(jobs) {
@@ -93,12 +96,7 @@ export class StudentDashboard extends Component {
               </Dropdown.Toggle>
 
               <Dropdown.Menu variant="dark">
-                {
-                  jobs.map(jobs => (
-                    <Dropdown.Item href="#/action-1" >{jobs.department}</Dropdown.Item>
-                  )
-                  )
-                }
+                <Dropdown.Item href="#/action-1" >CS</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
             <Dropdown className="col-sm">
@@ -124,7 +122,7 @@ export class StudentDashboard extends Component {
                 <th >Role</th>
                 <th>Professor</th>
                 <th>Department</th>
-                <th>Type</th>
+                <th>Location</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -134,8 +132,8 @@ export class StudentDashboard extends Component {
                   <tr>
                     <td>{jobs.posting_id}</td>
                     <td><a className="link-primary" onClick={() => {
-                      this.setState({modalShow:true});
-                      this.setState({currentJob: jobs})
+                      this.setState({ modalShow: true });
+                      this.setState({ currentJob: jobs })
                       //setCurrentJob(job => ({ ...job, role: jobs.role, description: jobs.description, prerequisites: jobs.prerequisites }));
                     }}>
                       {jobs.title}
@@ -143,10 +141,11 @@ export class StudentDashboard extends Component {
 
                       <MyVerticallyCenteredModal
                         show={this.state.modalShow} currentJob={this.state.currentJob}
-                        onHide={() => this.setState({modalShow:false})}
+                        apply={(e) => this.apply(this.state.currentJob, e)}
+                        onHide={() => this.setState({ modalShow: false })}
                       /></td>
-                    <td>{jobs.professor}</td>
-                    <td>{jobs.department}</td>
+                    <td>{jobs.professor_display_name}</td>
+                    <td>{jobs.professor_department}</td>
                     <td>{jobs.location}</td>
                     <td>
                       <Dropdown>

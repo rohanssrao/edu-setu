@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import jobs from './jobs.json'
-import Dropdown from 'react-bootstrap/Dropdown';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import FormControl from 'react-bootstrap/FormControl';
-import InputGroup from 'react-bootstrap/InputGroup';
 import NavBar from "../navbar";
-import users from './user.json'
+import Badge from 'react-bootstrap/Badge';
+import users from './user.json';
+import applications from './applications.json'
 
 function MyVerticallyCenteredModal(props) {
 
@@ -25,6 +24,7 @@ function MyVerticallyCenteredModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        <p><small><i>Posted on: {props.currentJob.created_at}</i></small></p>
         <p><b>Description</b></p>
         <p>
           {props.currentJob.description}
@@ -47,7 +47,8 @@ export class TrackApplication extends Component {
     this.state = {
       modalShow: false,
       user_id: 1,
-      currentJob: {}
+      currentJob: {},
+      applications: []
 
     }
   }
@@ -56,9 +57,16 @@ export class TrackApplication extends Component {
       if (users[i].user_id == this.state.user_id) {
         this.setState({ current_user: users[i] }, () => {
           console.log(this.state.current_user);
+          for (var j = 0; j < applications.length; j++) {
+            console.log(applications)
+            if (this.state.current_user.user_id == applications[j].student_user_id) {
+              this.setState({ applications: [...this.state.applications, applications[j]] }, () => console.log(this.state.applications))
+            }
+          }
         });
       }
     }
+
   }
   render() {
     return (
@@ -66,7 +74,7 @@ export class TrackApplication extends Component {
         <NavBar />
         <h1 className="display-6">Hi, {this.state.current_user.display_name}</h1>
         <p>Track your applications</p>
-        
+
         <link rel="stylesheet" href="studentDashboard.css"></link>
 
         <div className="container">
@@ -77,42 +85,39 @@ export class TrackApplication extends Component {
                 <th >Role</th>
                 <th>Professor</th>
                 <th>Department</th>
-                <th>Type</th>
+                <th>Location</th>
                 <th>Status</th>
               </tr>
             </thead>
             <tbody>
               {
-                jobs.map(jobs => (
+
+                this.state.applications.map(application => (
                   <tr>
-                    <td>{jobs.posting_id}</td>
+                    <td>{application.application_id}</td>
                     <td><a className="link-primary" onClick={() => {
                       this.setState({ modalShow: true });
-                      this.setState({ currentJob: jobs })
+                      this.setState({ currentJob: application })
                       //setCurrentJob(job => ({ ...job, role: jobs.role, description: jobs.description, prerequisites: jobs.prerequisites }));
                     }}>
-                      {jobs.title}
+                      {application.title}
                     </a>
 
                       <MyVerticallyCenteredModal
                         show={this.state.modalShow} currentJob={this.state.currentJob}
                         onHide={() => this.setState({ modalShow: false })}
                       /></td>
-                    <td>{jobs.professor}</td>
-                    <td>{jobs.department}</td>
-                    <td>{jobs.location}</td>
-                    <td>
-                      <Dropdown>
-                        <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
-                          Actions
-                        </Dropdown.Toggle>
+                    <td>{application.professor_display_name}</td>
+                    <td>{application.professor_department}</td>
+                    <td>{application.location}</td>
 
-                        <Dropdown.Menu variant="dark">
-                          <Dropdown.Item href="#/action-1" active onClick={(e) => this.apply(jobs, e)}>Apply</Dropdown.Item>
-                          <Dropdown.Item href="#/action-2">Save for Later</Dropdown.Item>
-                          <Dropdown.Item href="#/action-3">Get shareable URL</Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
+                    <td>
+                      {
+                        (application.status == "Pending" && <Badge bg="info">Pending</Badge>) ||
+                        (application.status == "Hired" && <Badge bg="success">Hired</Badge>) ||
+                        (application.status == "Rejected" && <Badge bg="secondary">Rejected</Badge>)
+                       
+                      }
                     </td>
                   </tr>
 
