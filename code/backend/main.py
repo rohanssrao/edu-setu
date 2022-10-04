@@ -1,4 +1,5 @@
 import student_apis
+import professor_api
 import auth
 from flask import Flask, request
 
@@ -45,7 +46,7 @@ def add_application():
 
 @app.route("/add_posting", methods=["POST"])
 def add_posting():
-    return student_apis.add_posting(request.get_json(force=True))
+    return professor_api.add_posting(request.get_json(force=True))
 
 
 app.run(debug=True,host='0.0.0.0')
