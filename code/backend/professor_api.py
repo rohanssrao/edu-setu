@@ -19,7 +19,7 @@ def add_posting(data):
         updated_at = datetime.now()
         # Insert application into database
         cur = con.cursor()
-        query = "INSERT INTO POSTINGS ( TITLE, PROFESSOR, DESCRIPTION, LOCATION, PREREQUISITES, CREATED_AT, UPDATED_AT ) VALUES (:1,:2,:3,:4,5,:6,:7)"
+        query = "INSERT INTO POSTINGS ( TITLE, PROFESSOR, DESCRIPTION, LOCATION, PREREQUISITES, CREATED_AT, UPDATED_AT ) VALUES (:1,:2,:3,:4,:5,:6,:7)"
         params = [title, professor, description, location, prerequisites, created_at, updated_at]
         cur.execute(query, params)
         con.commit()
