@@ -77,7 +77,7 @@ def get_all_postings():
         print(e)
         return prepare_response(False,  "Unable to connect to database.")
     try:
-        query = '''SELECT * FROM POSTINGS JOIN USERS ON POSTINGS.PROFESSOR = USERS.USER_ID '''
+        query = '''SELECT * FROM USERS JOIN PROFESSORS'''
         curs.execute(query)
         curs.rowfactory = makeDictFactory(curs)
         response = curs.fetchall()
