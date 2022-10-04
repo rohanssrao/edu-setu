@@ -44,7 +44,7 @@ def get_all_postings_by_professor(data):
         print(e)
         return prepare_response(False,  "Unable to connect to database.")
     try:
-        professor = data["prof"]
+        professor = data["professor"]
         query = '''SELECT * FROM POSTINGS WHERE PROFESSOR = :1'''
         params = [professor]
         curs.execute(query, params)
