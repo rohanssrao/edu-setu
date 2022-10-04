@@ -130,13 +130,14 @@ def add_application(data):
         return prepare_response(False, "Unable to create DB connection")
     try:
         # Get the data from JSON Payload
-        student = data["email"]
+        student = data["user_id"]
         status = "pending"
         Posting_id = "1001"
+        remarks = ""
         # Insert application into database
         cur = con.cursor()
-        query = "INSERT INTO APPLICATIONS (STUDENT, STATUS, POSTING_ID) VALUES (:1,:2,:3)"
-        params = [student,status,Posting_id]
+        query = "INSERT INTO APPLICATIONS (STUDENT, STATUS, POSTING_ID, REMARKS, CREATED_AT, UPDATED_AT) VALUES (:1,:2,:3,:4,SYSTIMESTAMP,SYSTIMESTAMP)"
+        params = [student,status,Posting_id,remarks]
         cur.execute(query, params)
         con.commit()
         return prepare_response(
