@@ -43,6 +43,9 @@ def register(data):
         query = "INSERT INTO USERS (USER_ID, EMAIL, DISPLAY_NAME, PASSWORD, TYPE, PHONE) VALUES (:1,:2,:3,:4,:5,:6)"
         params = [user_id, email, display_name, password, user_type, phone]
         cur.execute(query, params)
+        if not (data["minor"]):
+            data["minor"] = "None"
+
 
         if user_type == "student":
             gpa = data["gpa"]
