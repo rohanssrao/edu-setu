@@ -1,45 +1,26 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import './index.css';
 
-function ColorSchemesExample() {
+export function NavBar() {
   return (
     <>
-      <Navbar bg="dark" variant="dark">
+      
+      <Navbar bg="primary" variant="dark" fixed="top" >
         <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
-      <br />
-      <Navbar bg="primary" variant="dark">
-        <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+          {/*<img src={`${process.env.PUBLIC_URL}/assets/images/main-logo.jpeg`}  alt="Logo" id="logo"/>*/}
+          <Navbar.Brand href="#home">Home</Navbar.Brand>
+          <Nav className="mr-auto">
+            <Nav.Link href="#home">Saved Jobs</Nav.Link>
+            <Nav.Link href="#features">Applications</Nav.Link>
+            <Nav.Link href="#pricing">Logout</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
 
-      <br />
-      <Navbar bg="light" variant="light">
-        <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
     </>
   );
 }
 
-export default ColorSchemesExample;
+export default NavBar;

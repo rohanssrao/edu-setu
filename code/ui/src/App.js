@@ -2,6 +2,7 @@ import "./App.css";
 import styled from "styled-components";
 import { AccountBox } from "./components/accountBox";
 import { StudentHomePage } from "./components/studentdashboard";
+import { NavBar } from "./components/navbar"
 
 const AppContainer = styled.div`
   width: 100%;
@@ -15,8 +16,9 @@ const AppContainer = styled.div`
 function App() {
   return (
     <AppContainer>
-      <AccountBox />
-      {/*<StudentHomePage/>*/}
+      {/*<AccountBox />*/}
+      <NavBar/>
+      <StudentHomePage/>
     </AppContainer>
   );
 }

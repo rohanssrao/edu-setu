@@ -1,0 +1,18 @@
+[
+    {
+        "id":1,
+        "name":"Raj",
+        "type":"student"
+    },
+    {
+        "id":2,
+        "name":"Rahul",
+        "type":"student"
+    },
+    {
+        "id":3,
+        "name":"Mr Prof",
+        "type":"professor"
+    }
+
+]

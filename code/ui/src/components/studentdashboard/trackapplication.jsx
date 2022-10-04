@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class trackapplication extends Component {
+export class TrackApplication extends Component {
   render() {
     return (
       <div>trackapplication</div>
@@ -8,4 +8,4 @@ export class trackapplication extends Component {
   }
 }
 
-export default trackapplication
+export default TrackApplication

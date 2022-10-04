@@ -6,5 +6,6 @@ export function StudentHomePage(props) {
     return(
         
     <StudentDashboard/>
+    
     )
 }
