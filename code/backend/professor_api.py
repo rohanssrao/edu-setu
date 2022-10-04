@@ -14,7 +14,7 @@ def add_posting(data):
         title = data["title"]
         description = data["description"]
         location = data["location"]
-        prerequisites = data["prerequites"]
+        prerequisites = data["prerequisites"]
         # created_at = 
         # updated_at = 
         # Insert application into database
