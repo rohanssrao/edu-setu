@@ -1,3 +1,4 @@
+from ast import Param
 from utils import *
 import bcrypt
 
@@ -202,24 +203,33 @@ def edit_profile(data):
 
         # Check if email id is already present.
         cur = con.cursor()
-        query = "SELECT email FROM USERS WHERE EMAIL = :1"
-        params = [email]
+        query = "SELECT * FROM USERS WHERE USER_ID = :1"
+        Params = [user_id]
         res = cur.execute(query, params)
         rows = res.fetchall()
-        if len(rows):
-            return prepare_response(
-                False, f"User with email {email} already exists."
-            )
+
+        old_email = rows["email"]
+        old_pass = rows["password"]
+
+        if(old_email != email):
+            query = "SELECT email FROM USERS WHERE EMAIL = :1"
+            params = [email]
+            res = cur.execute(query, params)
+            rows = res.fetchall()
+            if len(rows):
+                return prepare_response(
+                    False, f"User with email {email} already exists."
+                )
+        if(old_pass != password):
         #check if the same phone is already present
-        query = "SELECT phone FROM USERS WHERE PHONE = :1"
-        params = [phone]
-        res = cur.execute(query, params)
-        rows = res.fetchall()
-        if len(rows):
-            return prepare_response(
-                False, f"User with phone {phone} already exists."
-            )
-        
+            query = "SELECT phone FROM USERS WHERE PHONE = :1"
+            params = [phone]
+            res = cur.execute(query, params)
+            rows = res.fetchall()
+            if len(rows):
+                return prepare_response(
+                    False, f"User with phone {phone} already exists."
+                )
         query = "UPDATE USERS SET EMAIL = :1, DISPLAY_NAME = :2, PASSWORD = :3, TYPE = :4, PHONE = :5 WHERE USER_ID = :6"
         params = [email, display_name, password, user_type, phone, user_id]
         cur.execute(query, params)
