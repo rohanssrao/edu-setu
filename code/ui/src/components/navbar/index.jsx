@@ -23,15 +23,16 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 export function NavBar() {
   return (
     <>
+    <link rel="stylesheet" type="text/css" href="./index.css"/>
 
-      <Navbar bg="primary" variant="dark" fixed="top" id="navbar">
+      <Navbar bg="light" variant="light" fixed="top" id="navbar">
         <Container>
           <Navbar.Brand href="/student/home">
             <img src={`${process.env.PUBLIC_URL}/assets/images/Edu_Setu_Logo_Transparent.png`} alt="Logo" id="logo" />
           </Navbar.Brand>
           <Nav className="mr-auto">
-            <Nav.Link href="#home">Saved Jobs</Nav.Link>
-            <Nav.Link href="/student/trackApplications">Applications</Nav.Link>
+            <Nav.Link href="#home" class="underline-hover-effect">Saved Jobs</Nav.Link>
+            <Nav.Link href="/student/trackApplications" class="underline-hover-effect">Applications</Nav.Link>
             <Dropdown >
               <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components"  >
                 <img src="https://www.pngmart.com/files/21/Account-Avatar-Profile-PNG-Clipart.png" id="profileNavLogo" />

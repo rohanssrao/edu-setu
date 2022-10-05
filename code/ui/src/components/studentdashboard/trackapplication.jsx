@@ -76,7 +76,8 @@ export class TrackApplication extends Component {
     console.log(application_temp)
 
   }
-  render() {
+  render() 
+  {
     return (
       <>
         <NavBar />
