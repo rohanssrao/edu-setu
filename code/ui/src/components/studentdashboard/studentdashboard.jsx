@@ -97,7 +97,7 @@ export class StudentDashboard extends Component {
     var filter = e.target.id.toUpperCase();
     var table = document.getElementById("postings");
     var tr = table.getElementsByTagName("tr");
-    var td, txtValue, i;
+    var td, txtValue, i, flag=0;
 
     // Loop through all table rows, and hide those who don't match the search query
     for (i = 0; i < tr.length; i++) {
@@ -106,18 +106,34 @@ export class StudentDashboard extends Component {
         txtValue = td.textContent || td.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
           tr[i].style.display = "";
+          flag = 1;
         } else {
           tr[i].style.display = "none";
         }
       }
     }
+    this.checkMatchingPostings(flag);
+
+  }
+  checkMatchingPostings(flag){
+    if (flag == 0){
+      var table = document.getElementById("postings");
+      console.log(table);
+      table.style.display = "none";
+      const para = document.createElement("p");
+      const node = document.createTextNode("Sorry, couldn't find any matching jobs.");
+      para.appendChild(node);
+      const element = document.getElementById("mainBody");
+      element.appendChild(para);
+    }
+
   }
   filterByLocation(e) {
 
     var filter = e.target.id.toUpperCase();
     var table = document.getElementById("postings");
     var tr = table.getElementsByTagName("tr");
-    var td, txtValue, i;
+    var td, txtValue, i, flag = 0;
 
     // Loop through all table rows, and hide those who don't match the search query
     for (i = 0; i < tr.length; i++) {
@@ -126,11 +142,13 @@ export class StudentDashboard extends Component {
         txtValue = td.textContent || td.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
           tr[i].style.display = "";
+          flag = 1
         } else {
           tr[i].style.display = "none";
         }
       }
     }
+    this.checkMatchingPostings(flag);
   }
   //const[modalShow, setModalShow] = React.useState(false);
   //const[currentJob, setCurrentJob] = React.useState({ "role": "", "prerequisites": "", "description": "" });
@@ -177,7 +195,7 @@ export class StudentDashboard extends Component {
         </div>
         <link rel="stylesheet" href="studentDashboard.css"></link>
 
-        <div className="container">
+        <div className="container" id="mainBody">
           <Table striped hover className="col-6" responsive id="postings">
             <thead>
               <tr>
