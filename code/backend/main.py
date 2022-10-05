@@ -54,7 +54,7 @@ def get_all_postings_by_professor():
 
 @app.route("/get_all_postings", methods=["POST"])
 def get_all_postings():
-    return professor_api.get_all_postings(request.get_json(force=True))
+    return professor_api.get_all_postings()
 
 @app.route("/update_posting", methods=["POST"])
 def update_posting():
