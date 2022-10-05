@@ -2,6 +2,10 @@
 
 ## Backend
 
+### Relational Diagram
+
+![Relational Diagram](../../assets/Relational%20Diagram.svg)
+
 ### API Endpoints
 
 ```
