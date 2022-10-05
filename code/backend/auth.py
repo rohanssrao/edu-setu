@@ -209,8 +209,8 @@ def edit_profile(data):
         cur.rowfactory = makeDictFactory(cur)
         rows = cur.fetchone()
 
-        old_email = rows[0]["email"]
-        old_phone = rows[0]["phone"]
+        old_email = rows["email"]
+        old_phone = rows["phone"]
 
         if(old_email != email):
             query = "SELECT email FROM USERS WHERE EMAIL = :1"
