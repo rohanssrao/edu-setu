@@ -186,3 +186,28 @@ def get_all_application():
             con.close()
         except:
             pass
+
+
+def update_application(data):
+    try:
+        con = connect()
+    except:
+        return prepare_response(False, "Unable to create DB connection")
+    try:
+        # Get the data from JSON Payload
+        app_id = data["application_id"]
+        status = data["status"]
+        # Insert application into database
+        cur = con.cursor()
+        query = "UPDATE APPLICATION SET STATUS = :1, UPDATED_AT = SYSTIMESTAMP WHERE APPLICATION_ID = :2"
+        params = [status,app_id]
+        cur.execute(query, params)
+        con.commit()
+        return prepare_response(
+            True, f"Application updated."
+        )
+    except Exception as e:
+        print(e)
+        return prepare_response(False, str(e))
+    finally:
+        disconnect(con)

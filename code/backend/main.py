@@ -64,4 +64,8 @@ def update_posting():
 def get_user_profile():
     return auth.get_user_profile(request.get_json(force=True))
 
+@app.route("/update_application", methods=["POST"])
+def update_application():
+    return student_apis.update_application(request.get_json(force=True))
+
 app.run(debug=True,host='0.0.0.0')
