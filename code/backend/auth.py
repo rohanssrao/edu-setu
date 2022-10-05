@@ -207,10 +207,10 @@ def edit_profile(data):
         params = [user_id]
         cur.execute(query, params)
         cur.rowfactory = makeDictFactory(cur)
-        rows = cur.fetchall()
+        rows = cur.fetchone()
 
-        old_email = rows["email"]
-        old_pass = rows["password"]
+        old_email = rows[0]["email"]
+        old_phone = rows[0]["phone"]
 
         if(old_email != email):
             query = "SELECT email FROM USERS WHERE EMAIL = :1"
@@ -221,7 +221,7 @@ def edit_profile(data):
                 return prepare_response(
                     False, f"User with email {email} already exists."
                 )
-        if(old_pass != password):
+        if(old_phone != phone):
         #check if the same phone is already present
             query = "SELECT phone FROM USERS WHERE PHONE = :1"
             params = [phone]
