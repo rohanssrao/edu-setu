@@ -4,7 +4,7 @@
 
 ### Relational Diagram
 
-![Relational Diagram](../../assets/Relational%20Diagram.svg)
+![Relational Diagram](../../assets/Relational_Diagram.svg)
 
 ### API Endpoints
 
