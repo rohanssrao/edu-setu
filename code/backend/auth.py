@@ -204,7 +204,7 @@ def edit_profile(data):
         # Check if email id is already present.
         cur = con.cursor()
         query = "SELECT * FROM USERS WHERE USER_ID = :1"
-        Params = [user_id]
+        params = [user_id]
         res = cur.execute(query, params)
         rows = res.fetchall()
 
@@ -254,13 +254,7 @@ def edit_profile(data):
 
         con.commit()
         return prepare_response(
-            True, 
-            {
-                "email": email,
-                "user_id":user_id,
-                "display_name":display_name,
-                "type": user_type
-            }
+            True, "Profile Updated"
         )
     except Exception as e:
         print(e)
