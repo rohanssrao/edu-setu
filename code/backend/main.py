@@ -68,4 +68,9 @@ def get_user_profile():
 def update_application():
     return student_apis.update_application(request.get_json(force=True))
 
+@app.route("/edit_profile", methods=["POST"])
+def edit_profile():
+    return auth.edit_profile(request.get_json(force=True))
+
+
 app.run(debug=True,host='0.0.0.0')
