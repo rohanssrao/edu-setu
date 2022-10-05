@@ -110,7 +110,7 @@ def update_posting(data):
         # updated_at = 
         # Insert application into database
         cur = con.cursor()
-        query = "UPDATE POSTINGS SET ( TITLE, PROFESSOR, DESCRIPTION, LOCATION, PREREQUISITES, CREATED_AT, UPDATED_AT ) VALUES (:1,:2,:3,:4,:5,SYSTIMESTAMP,SYSTIMESTAMP) WHERE PROFESSOR = :2" 
+        query = "UPDATE POSTINGS SET TITLE = :1, PROFESSOR = :2, DESCRIPTION = :3, LOCATION = :4, PREREQUISITES = :5, CREATED_AT = SYSTIMESTAMP, UPDATED_AT = SYSTIMESTAMP WHERE PROFESSOR = :2" 
         params = [title, professor, description, location, prerequisites]
         cur.execute(query, params)
         con.commit()
