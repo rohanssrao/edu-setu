@@ -49,7 +49,7 @@ export class StudentDashboard extends Component {
     super(props);
     this.state = {
       modalShow: false,
-      user_id: 1,
+      user_id: 1006,
       currentJob: {},
       selectedDepartment: "",
       selectedLocation: ""
@@ -57,13 +57,15 @@ export class StudentDashboard extends Component {
     }
   }
   componentWillMount() {
-    for (var i = 0; i < users.length; i++) {
-      if (users[i].user_id == this.state.user_id) {
-        this.setState({ current_user: users[i] }, () => {
-          console.log(this.state.current_user);
-        });
-      }
-    }
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ "user_id": this.state.user_id })
+  };
+    fetch('http://140.238.250.0:5000/get_user_profile', requestOptions)
+        .then(response => response.json())
+        .then(data => this.setState({ current_user: data }, () => {console.log(this.state.current_user);  }));
+    
   }
   apply(jobs) {
     console.log("Applying");

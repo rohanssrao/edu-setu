@@ -9,17 +9,22 @@ export class StudentProfile extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            user_id: 1
+            user_id: 1006,
+            current_user:{}
         }
     }
-    componentWillMount() {
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].user_id == this.state.user_id) {
-                this.setState({ current_user: users[i] }, () => {
-                    console.log(this.state.current_user);
-                });
-            }
-        }
+    async componentWillMount() {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ "user_id": this.state.user_id })
+        };
+        const response = await fetch('http://140.238.250.0:5000/get_user_profile', requestOptions);
+        console.log(response);
+          await fetch('http://140.238.250.0:5000/get_user_profile', requestOptions)
+              .then(response => response.json())
+              .then(data => this.setState({ current_user: data.data }, () => {console.log(this.state.current_user);  }));
+        
 
     }
     render() {
