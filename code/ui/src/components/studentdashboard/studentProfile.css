@@ -16,11 +16,11 @@ body {
 
 .form-control:focus {
     box-shadow: none;
-    border-color: #BA68C8
+    border-color: #76b5c5
 }
 
 .profile-button {
-    background: rgb(99, 39, 120);
+    background: #154c79;
     box-shadow: none;
     border: none
 }

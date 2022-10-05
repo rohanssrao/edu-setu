@@ -11,22 +11,19 @@
 #navbar {
     margin-bottom: 0;
 }
-
-.underline-hover-effect {
+#underline-hover-effect {
     text-decoration: none;
     color: inherit;
     padding: 15px;
   }
   
-  .underline-hover-effect {
+  #underline-hover-effect {
     display: inline-block;
-    padding-bottom: 0.25rem; /* defines the space between text and underline */
+    padding-bottom: 0.75rem; /* defines the space between text and underline */
     position: relative;
   }
-  .underline-hover-effect:hover{
-    color:red;
-  }
-  .underline-hover-effect::before {
+
+  #underline-hover-effect::before {
     content: "";
     position: absolute;
     left: 0;
@@ -36,6 +33,6 @@
     background-color: #154c79;
     transition: width 0.25s ease-out;
   }
-  .underline-hover-effect:hover::before {
+  #underline-hover-effect:hover::before {
     width: 100%;
   }
