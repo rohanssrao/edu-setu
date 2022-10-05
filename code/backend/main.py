@@ -52,7 +52,7 @@ def add_posting():
 def get_all_postings_by_professor():
     return professor_api.get_all_postings_by_professor(request.get_json(force=True))
 
-@app.route("/get_all_postings", methods=["POST"])
+@app.route("/get_all_postings", methods=["GET"])
 def get_all_postings():
     return professor_api.get_all_postings()
 
