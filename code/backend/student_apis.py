@@ -159,7 +159,7 @@ def add_application(data):
         disconnect(con)
 
 
-def get_all_applications():
+def get_all_application():
     con = connect()
     if not con:
         return prepare_response(False,  "Unable to connect to database.")
