@@ -50,7 +50,9 @@ export class StudentDashboard extends Component {
     this.state = {
       modalShow: false,
       user_id: 1,
-      currentJob: {}
+      currentJob: {},
+      selectedDepartment: "",
+      selectedLocation: ""
 
     }
   }
@@ -70,6 +72,66 @@ export class StudentDashboard extends Component {
   saveJob(jobs) {
     console.log(jobs);
   }
+  filterByTitle() {
+    var input = document.getElementById("searchTitle");
+    console.log(input);
+    var filter = input.value.toUpperCase();
+    var table = document.getElementById("postings");
+    var tr = table.getElementsByTagName("tr");
+    var td, txtValue, i;
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[1];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+  filterByDepartment(e) {
+    var filter = e.target.id.toUpperCase();
+    var table = document.getElementById("postings");
+    var tr = table.getElementsByTagName("tr");
+    var td, txtValue, i;
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[3];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+  filterByLocation(e) {
+
+    var filter = e.target.id.toUpperCase();
+    var table = document.getElementById("postings");
+    var tr = table.getElementsByTagName("tr");
+    var td, txtValue, i;
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[4];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
   //const[modalShow, setModalShow] = React.useState(false);
   //const[currentJob, setCurrentJob] = React.useState({ "role": "", "prerequisites": "", "description": "" });
   render() {
@@ -84,30 +146,31 @@ export class StudentDashboard extends Component {
               <FormControl
                 placeholder="What are you looking for?"
                 aria-label="Search"
-                aria-describedby="basic-addon2"
+                aria-describedby="basic-addon2" id="searchTitle"
               />
-              <Button variant="outline-secondary" id="button-addon2">
+              <Button variant="outline-secondary" id="button-addon2" onClick={this.filterByTitle}>
                 Search
               </Button>
             </InputGroup>
-            <Dropdown className="col-sm text-center">
-              <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
+            <Dropdown className="col-sm text-center" id="searchDepartment">
+              <Dropdown.Toggle variant="secondary">
                 Department
               </Dropdown.Toggle>
 
               <Dropdown.Menu variant="dark">
-                <Dropdown.Item href="#/action-1" >CS</Dropdown.Item>
+                <Dropdown.Item onClick={(e) => this.filterByDepartment( e)} id="CS">CS</Dropdown.Item>
+                <Dropdown.Item onClick={(e) => this.filterByDepartment( e)} id="Mechanical">Mechanical</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
             <Dropdown className="col-sm">
               <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
-                Type
+                Location
               </Dropdown.Toggle>
 
               <Dropdown.Menu variant="dark">
-                <Dropdown.Item href="#/action-1">Remote</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Hybrid</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Office</Dropdown.Item>
+                <Dropdown.Item onClick={(e) => this.filterByLocation( e)} id="Remote">Remote</Dropdown.Item>
+                <Dropdown.Item onClick={(e) => this.filterByLocation( e)} id="Hybrid">Hybrid</Dropdown.Item>
+                <Dropdown.Item onClick={(e) => this.filterByLocation( e)} id="Physical">Physical</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </div>
@@ -115,7 +178,7 @@ export class StudentDashboard extends Component {
         <link rel="stylesheet" href="studentDashboard.css"></link>
 
         <div className="container">
-          <Table striped hover className="col-6" responsive>
+          <Table striped hover className="col-6" responsive id="postings">
             <thead>
               <tr>
                 <th>Job ID</th>
@@ -131,7 +194,7 @@ export class StudentDashboard extends Component {
                 jobs.map(jobs => (
                   <tr>
                     <td>{jobs.posting_id}</td>
-                    <td><a className="link-primary" onClick={() => {
+                    <td id="postingTitle"><a className="link-primary" onClick={() => {
                       this.setState({ modalShow: true });
                       this.setState({ currentJob: jobs })
                       //setCurrentJob(job => ({ ...job, role: jobs.role, description: jobs.description, prerequisites: jobs.prerequisites }));
@@ -145,8 +208,8 @@ export class StudentDashboard extends Component {
                         onHide={() => this.setState({ modalShow: false })}
                       /></td>
                     <td>{jobs.professor_display_name}</td>
-                    <td>{jobs.professor_department}</td>
-                    <td>{jobs.location}</td>
+                    <td id="postingDepartment">{jobs.professor_department}</td>
+                    <td id="postingLocation">{jobs.location}</td>
                     <td>
                       <Dropdown>
                         <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
