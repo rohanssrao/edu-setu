@@ -205,8 +205,9 @@ def edit_profile(data):
         cur = con.cursor()
         query = "SELECT * FROM USERS WHERE USER_ID = :1"
         params = [user_id]
-        res = cur.execute(query, params)
-        rows = res.fetchall()
+        cur.execute(query, params)
+        cur.rowfactory = makeDictFactory(cur)
+        rows = cur.fetchall()
 
         old_email = rows["email"]
         old_pass = rows["password"]
