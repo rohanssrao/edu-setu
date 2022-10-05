@@ -32,33 +32,42 @@ def get_all_users():
             pass
 
 
-def get_all_application():
-    con = connect()
-    if not con:
-        return prepare_response(False,  "Unable to connect to database.")
-    try:
-        curs = con.cursor()
-    except Exception as e:
-        print(e)
-        return prepare_response(False,  "Unable to connect to database.")
-    try:
-        query = '''SELECT * FROM APPLICATIONS'''
-        curs.execute(query)
-        curs.rowfactory = makeDictFactory(curs)
-        response = curs.fetchall()
-        try:
-            con.close()
-        except:
-            pass
-        return prepare_response(True, response)
-    except Exception as e:
-        print(e)
-        return {"status": False, "data": str(e)}
-    finally:
-        try:
-            con.close()
-        except:
-            pass
+# def get_all_application():
+#     con = connect()
+#     if not con:
+#         return prepare_response(False,  "Unable to connect to database.")
+#     try:
+#         curs = con.cursor()
+#     except Exception as e:
+#         print(e)
+#         return prepare_response(False,  "Unable to connect to database.")
+#     try:
+#         query = '''SELECT * FROM APPLICATIONS'''
+#         curs.execute(query)
+#         curs.rowfactory = makeDictFactory(curs)
+#         response = curs.fetchall()
+#         data_app = response
+#         posting_id = data_app["POSTING_ID"]
+#         created_at = data_app["CREATED_AT"]
+#         updated_at = data_app["UPDATED_AT"]
+
+
+        
+
+
+#         try:
+#             con.close()
+#         except:
+#             pass
+#         return prepare_response(True, response)
+#     except Exception as e:
+#         print(e)
+#         return {"status": False, "data": str(e)}
+#     finally:
+#         try:
+#             con.close()
+#         except:
+#             pass
 
 
 def get_all_applications_by_student(data):
@@ -148,3 +157,32 @@ def add_application(data):
         return prepare_response(False, str(e))
     finally:
         disconnect(con)
+
+
+def get_all_applications():
+    con = connect()
+    if not con:
+        return prepare_response(False,  "Unable to connect to database.")
+    try:
+        curs = con.cursor()
+    except Exception as e:
+        print(e)
+        return prepare_response(False,  "Unable to connect to database.")
+    try:
+        query = '''select APPLICATION_ID, APPLICATIONS.POSTING_ID, POSTINGS.TITLE, POSTINGS.DESCRIPTION, POSTINGS.LOCATION, POSTINGS.PREREQUISITES, APPLICATIONS.CREATED_AT, APPLICATIONS.UPDATED_AT,PROFESSORS.USER_ID, PROFESSORS.DEPARTMENT, PROFESSORS.DESIGNATION, USERS.DISPLAY_NAME, USERS.EMAIL, USERS.PHONE, STUDENT.GPA, STUDENT.MAJOR, STUDENT.MINOR, STUDENT.YEAR FROM APPLICATIONS JOIN POSTINGS ON APPLICATIONS.POSTING_ID = POSTINGS.POSTING_ID JOIN PROFESSORS ON POSTINGS.PROFESSOR = PROFESSORS.USER_ID JOIN USERS ON PROFESSORS.USER_ID = USERS.USER_ID JOIN STUDENT ON APPLICATIONS.STUDENT =  STUDENT.USER_ID'''
+        curs.execute(query)
+        curs.rowfactory = makeDictFactory(curs)
+        response = curs.fetchall()
+        try:
+            con.close()
+        except:
+            pass
+        return prepare_response(True, response)
+    except Exception as e:
+        print(e)
+        return {"status": False, "data": str(e)}
+    finally:
+        try:
+            con.close()
+        except:
+            pass
