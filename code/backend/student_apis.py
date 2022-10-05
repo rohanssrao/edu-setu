@@ -199,7 +199,7 @@ def update_application(data):
         status = data["status"]
         # Insert application into database
         cur = con.cursor()
-        query = "UPDATE APPLICATION SET STATUS = :1, UPDATED_AT = SYSTIMESTAMP WHERE APPLICATION_ID = :2"
+        query = "UPDATE APPLICATIONS SET STATUS = :1, UPDATED_AT = SYSTIMESTAMP WHERE APPLICATION_ID = :2"
         params = [status,app_id]
         cur.execute(query, params)
         con.commit()
