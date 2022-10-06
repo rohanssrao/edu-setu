@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
-import NavBar from "../navbar";
+import NavBar from "./navbar";
 
 function MyVerticallyCenteredModal(props) {
 
@@ -85,9 +85,7 @@ export class StudentDashboard extends Component {
     var jobs = [];
     for (var i = 0; i < this.state.jobs_all.length; i++) {
       var flag = 0;
-      console.log(this.state.applications)
       for (var j = 0; j < this.state.applications.length; j++) {
-        console.log(this.state.applications[j])
         if (this.state.jobs_all[i].posting_id == this.state.applications[j].posting_id) {
           flag = 1;
         }
@@ -100,7 +98,6 @@ export class StudentDashboard extends Component {
     
   }
   async apply(jobs) {
-    console.log(jobs);
     var posting_id = jobs.posting_id;
     const requestOptions = {
       method: 'POST',
@@ -121,7 +118,6 @@ export class StudentDashboard extends Component {
   }
   filterByTitle() {
     var input = document.getElementById("searchTitle");
-    console.log(input);
     var filter = input.value.toUpperCase();
     var table = document.getElementById("postings");
     var tr = table.getElementsByTagName("tr");
@@ -165,7 +161,6 @@ export class StudentDashboard extends Component {
   checkMatchingPostings(flag) {
     if (flag == 0) {
       var table = document.getElementById("postings");
-      console.log(table);
       table.style.display = "none";
       const para = document.createElement("p");
       const node = document.createTextNode("Sorry, couldn't find any matching jobs.");

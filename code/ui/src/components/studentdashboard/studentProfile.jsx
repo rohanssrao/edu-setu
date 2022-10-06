@@ -1,6 +1,6 @@
 import React from "react";
 import { Component } from 'react'
-import NavBar from "../navbar";
+import NavBar from "./navbar";
 import './studentProfile.css'
 import users from './user.json'
 
@@ -27,11 +27,7 @@ export class StudentProfile extends Component {
 
     }
     async updateProfile() {
-        console.log("wow");
         var changedDetails = {};
-        
-
-        console.log(this.state.changed_details);
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

@@ -2,7 +2,7 @@ import "./App.css";
 import styled from "styled-components";
 import { AccountBox } from "./components/accountBox";
 import { StudentHomePage } from "./components/studentdashboard";
-import { NavBar } from "./components/navbar"
+import { NavBar } from "./components/studentdashboard/navbar"
 import TrackApplication from "./components/studentdashboard/trackapplication";
 import {  BrowserRouter, Routes, Switch, Route, Link } from "react-router-dom";
 import { StudentProfile } from "./components/studentdashboard/studentProfile";
