@@ -165,7 +165,7 @@ order by postings.POSTING_ID'''
         res = {}
         pos_id = []
         for row in response:
-            if row["posting_id"] in pos_id:
+            if row["posting_id"] in pos_id and row["status"] != "Withdrawn":
                 dcit1 = {}
                 dcit1["application_id"] = row["application_id"]
                 dcit1["student_user_id"] = row["student_user_id"]
@@ -181,27 +181,28 @@ order by postings.POSTING_ID'''
         
     
             else:
-                pos_id.append(row["posting_id"])
-                temp = {}
-                temp["professor_user_id"] = row["professor_user_id"]
-                temp["posting_id"] = row["posting_id"]
-                temp["title"] = row["title"]
-                temp["description"] = row["description"]
-                temp["prerequisites"] = row["prerequisites"]
-                res[row["posting_id"]] = temp;
-                dcit1 = {}
-                dcit1["application_id"] = row["application_id"]
-                dcit1["student_user_id"] = row["student_user_id"]
-                dcit1["student_display_name"] = row["student_display_name"]
-                dcit1["student_email"] = row["student_email"]
-                dcit1["student_phone"] = row["student_phone"]
-                dcit1["student_gpa"] = row["student_gpa"]
-                dcit1["student_major"] = row["student_major"]
-                dcit1["student_minor"] = row["student_minor"]
-                dcit1["student_year"] = row["student_year"]
-                dcit1["status"] = row["status"]
-                res[row["posting_id"]]["Applications"] = []
-                res[row["posting_id"]]["Applications"].append(dcit1)
+                if row["status"] != "Withdrawn":
+                    pos_id.append(row["posting_id"])
+                    temp = {}
+                    temp["professor_user_id"] = row["professor_user_id"]
+                    temp["posting_id"] = row["posting_id"]
+                    temp["title"] = row["title"]
+                    temp["description"] = row["description"]
+                    temp["prerequisites"] = row["prerequisites"]
+                    res[row["posting_id"]] = temp
+                    dcit1 = {}
+                    dcit1["application_id"] = row["application_id"]
+                    dcit1["student_user_id"] = row["student_user_id"]
+                    dcit1["student_display_name"] = row["student_display_name"]
+                    dcit1["student_email"] = row["student_email"]
+                    dcit1["student_phone"] = row["student_phone"]
+                    dcit1["student_gpa"] = row["student_gpa"]
+                    dcit1["student_major"] = row["student_major"]
+                    dcit1["student_minor"] = row["student_minor"]
+                    dcit1["student_year"] = row["student_year"]
+                    dcit1["status"] = row["status"]
+                    res[row["posting_id"]]["Applications"] = []
+                    res[row["posting_id"]]["Applications"].append(dcit1)
         
         response = list(res.values())
 
