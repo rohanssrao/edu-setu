@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import jobs from './jobs.json'
 import Dropdown from 'react-bootstrap/Dropdown';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
 import NavBar from "../navbar";
-import users from './user.json'
 
 function MyVerticallyCenteredModal(props) {
 
@@ -49,27 +47,74 @@ export class StudentDashboard extends Component {
     super(props);
     this.state = {
       modalShow: false,
-      user_id: 1006,
+      user_id: 1007,
       currentJob: {},
       selectedDepartment: "",
-      selectedLocation: ""
+      selectedLocation: "",
+      jobs: [],
+      jobs_all: [],
+      applications: []
 
     }
   }
-  componentWillMount() {
+  async componentWillMount() {
+    var jobs = []
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ "user_id": this.state.user_id })
-  };
-    fetch('http://140.238.250.0:5000/get_user_profile', requestOptions)
-        .then(response => response.json())
-        .then(data => this.setState({ current_user: data }, () => {console.log(this.state.current_user);  }));
+    };
+    await fetch('http://140.238.250.0:5000/get_user_profile', requestOptions)
+      .then(response => response.json())
+      .then(data => this.setState({ current_user: data.data }, () => { console.log(this.state.current_user); }));
+    await fetch('http://140.238.250.0:5000/get_all_postings')
+      .then(response => response.json())
+      .then(data => this.setState({ jobs_all: data.data }, () => { console.log(this.state.jobs_all); }));
+    const requestOptions2 = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ "student": this.state.user_id })
+    };
+    
+    await fetch('http://140.238.250.0:5000/get_all_applications_by_student', requestOptions2)
+      .then(response => response.json())
+      .then(data => this.setState({ applications: data.data }));
+    this.filterIfApplied();
+  }
+  filterIfApplied(){
+    var jobs = [];
+    for (var i = 0; i < this.state.jobs_all.length; i++) {
+      var flag = 0;
+      console.log(this.state.applications)
+      for (var j = 0; j < this.state.applications.length; j++) {
+        console.log(this.state.applications[j])
+        if (this.state.jobs_all[i].posting_id == this.state.applications[j].posting_id) {
+          flag = 1;
+        }
+      }
+      if (flag == 0) {
+        jobs.push(this.state.jobs_all[i])
+      }
+    }
+    this.setState({ jobs: jobs })
     
   }
-  apply(jobs) {
-    console.log("Applying");
+  async apply(jobs) {
     console.log(jobs);
+    var posting_id = jobs.posting_id;
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id: this.state.user_id, posting_id: posting_id })
+    };
+    await fetch('http://140.238.250.0:5000/add_application', requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        if (data.data == "Application added.")
+          alert("Application submitted")
+      });
+      window.location.reload();
+
   }
   saveJob(jobs) {
     console.log(jobs);
@@ -99,7 +144,7 @@ export class StudentDashboard extends Component {
     var filter = e.target.id.toUpperCase();
     var table = document.getElementById("postings");
     var tr = table.getElementsByTagName("tr");
-    var td, txtValue, i, flag=0;
+    var td, txtValue, i, flag = 0;
 
     // Loop through all table rows, and hide those who don't match the search query
     for (i = 0; i < tr.length; i++) {
@@ -117,8 +162,8 @@ export class StudentDashboard extends Component {
     this.checkMatchingPostings(flag);
 
   }
-  checkMatchingPostings(flag){
-    if (flag == 0){
+  checkMatchingPostings(flag) {
+    if (flag == 0) {
       var table = document.getElementById("postings");
       console.log(table);
       table.style.display = "none";
@@ -178,8 +223,8 @@ export class StudentDashboard extends Component {
               </Dropdown.Toggle>
 
               <Dropdown.Menu variant="dark">
-                <Dropdown.Item onClick={(e) => this.filterByDepartment( e)} id="CS">CS</Dropdown.Item>
-                <Dropdown.Item onClick={(e) => this.filterByDepartment( e)} id="Mechanical">Mechanical</Dropdown.Item>
+                <Dropdown.Item onClick={(e) => this.filterByDepartment(e)} id="CS">CS</Dropdown.Item>
+                <Dropdown.Item onClick={(e) => this.filterByDepartment(e)} id="Mechanical">Mechanical</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
             <Dropdown className="col-sm">
@@ -188,9 +233,9 @@ export class StudentDashboard extends Component {
               </Dropdown.Toggle>
 
               <Dropdown.Menu variant="dark">
-                <Dropdown.Item onClick={(e) => this.filterByLocation( e)} id="Remote">Remote</Dropdown.Item>
-                <Dropdown.Item onClick={(e) => this.filterByLocation( e)} id="Hybrid">Hybrid</Dropdown.Item>
-                <Dropdown.Item onClick={(e) => this.filterByLocation( e)} id="Physical">Physical</Dropdown.Item>
+                <Dropdown.Item onClick={(e) => this.filterByLocation(e)} id="Remote">Remote</Dropdown.Item>
+                <Dropdown.Item onClick={(e) => this.filterByLocation(e)} id="Hybrid">Hybrid</Dropdown.Item>
+                <Dropdown.Item onClick={(e) => this.filterByLocation(e)} id="Physical">Physical</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </div>
@@ -211,9 +256,9 @@ export class StudentDashboard extends Component {
             </thead>
             <tbody>
               {
-                jobs.map(jobs => (
+                this.state.jobs.map(jobs => (
                   <tr>
-                    <td>{jobs.posting_id}</td>
+                    <td id="postingId">{jobs.posting_id}</td>
                     <td id="postingTitle"><a className="link-primary" onClick={() => {
                       this.setState({ modalShow: true });
                       this.setState({ currentJob: jobs })
@@ -227,8 +272,8 @@ export class StudentDashboard extends Component {
                         apply={(e) => this.apply(this.state.currentJob, e)}
                         onHide={() => this.setState({ modalShow: false })}
                       /></td>
-                    <td>{jobs.professor_display_name}</td>
-                    <td id="postingDepartment">{jobs.professor_department}</td>
+                    <td>{jobs.display_name}</td>
+                    <td id="postingDepartment">{jobs.department}</td>
                     <td id="postingLocation">{jobs.location}</td>
                     <td>
                       <Dropdown>
