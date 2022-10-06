@@ -136,7 +136,7 @@ def get_applications_for_professor(data):
     try:
         professor = data["professor"]
         query = '''SELECT postings.posting_id,
-       postings.professor,
+       postings.professor as professor_user_id,
        title,
        description,
        prerequisites,
