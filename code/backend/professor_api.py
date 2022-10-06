@@ -101,7 +101,7 @@ def update_posting(data):
         return prepare_response(False, "Unable to create DB connection")
     try:
         # Get the data from JSON Payload
-        professor = data["professor"]
+        posting_id = data["posting_id"]
         title = data["title"]
         description = data["description"]
         location = data["location"]
@@ -110,8 +110,8 @@ def update_posting(data):
         # updated_at = 
         # Insert application into database
         cur = con.cursor()
-        query = "UPDATE POSTINGS SET TITLE = :1, PROFESSOR = :2, DESCRIPTION = :3, LOCATION = :4, PREREQUISITES = :5, UPDATED_AT = SYSTIMESTAMP WHERE PROFESSOR = :2" 
-        params = [title, professor, description, location, prerequisites]
+        query = "UPDATE POSTINGS SET TITLE = :1, posting_id = :2, DESCRIPTION = :3, LOCATION = :4, PREREQUISITES = :5, UPDATED_AT = SYSTIMESTAMP WHERE posting_id = :2" 
+        params = [title, posting_id, description, location, prerequisites]
         cur.execute(query, params)
         con.commit()
         return prepare_response(
