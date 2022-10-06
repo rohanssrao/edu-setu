@@ -164,7 +164,7 @@ order by postings.POSTING_ID'''
         response = curs.fetchall()
         res = {}
         pos_id = []
-        for row in data:
+        for row in response:
             if row["posting_id"] in pos_id:
                 dcit1 = {}
                 dcit1["application_id"] = row["application_id"]
