@@ -178,6 +178,8 @@ def get_all_application():
                 users.phone                 AS student_phone,
                 applications.CREATED_AT,
                 applications.UPDATED_AT,
+                applications.status,
+                applications.remarks,
                 student.degree,
                 student.gpa,
                 student.major,
@@ -210,7 +212,7 @@ def get_all_application():
                 AND users.user_id = professors.user_id)
 SELECT student_application_id AS application_id,
        student_posting_id     AS posting_id,
-       title , description, location, prerequisites, CREATED_AT, UPDATED_AT, 
+       title , description, location, prerequisites, CREATED_AT, UPDATED_AT, STATUS,REMARKS,
        professor as professor_user_id,
        professor_email, department, designation, professor_display_name, 
        student as student_user_id,
