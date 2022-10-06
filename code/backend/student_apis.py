@@ -169,7 +169,61 @@ def get_all_application():
         print(e)
         return prepare_response(False,  "Unable to connect to database.")
     try:
-        query = '''select APPLICATION_ID, APPLICATIONS.POSTING_ID, POSTINGS.TITLE, POSTINGS.DESCRIPTION, POSTINGS.LOCATION, POSTINGS.PREREQUISITES, APPLICATIONS.CREATED_AT, APPLICATIONS.UPDATED_AT,PROFESSORS.USER_ID, PROFESSORS.DEPARTMENT, PROFESSORS.DESIGNATION, USERS.DISPLAY_NAME, USERS.EMAIL, USERS.PHONE, STUDENT.GPA, STUDENT.MAJOR, STUDENT.MINOR, STUDENT.YEAR FROM APPLICATIONS JOIN POSTINGS ON APPLICATIONS.POSTING_ID = POSTINGS.POSTING_ID JOIN PROFESSORS ON POSTINGS.PROFESSOR = PROFESSORS.USER_ID JOIN USERS ON PROFESSORS.USER_ID = USERS.USER_ID JOIN STUDENT ON APPLICATIONS.STUDENT =  STUDENT.USER_ID'''
+        query = '''WITH student_data
+     AS (SELECT applications.application_id AS student_application_id,
+                applications.posting_id     AS student_posting_id,
+                applications.student,
+                users.display_name          AS student_display_name,
+                users.email                 AS student_email,
+                users.phone                 AS student_phone,
+                applications.CREATED_AT,
+                applications.UPDATED_AT,
+                student.degree,
+                student.gpa,
+                student.major,
+                student.minor,
+                student.year
+         FROM   applications,
+                student,
+                users
+         WHERE  applications.student = student.user_id
+                AND users.user_id = student.user_id),
+     professor_data
+     AS (SELECT applications.application_id AS professor_application_id,
+                applications.posting_id     AS professor_posting_id,
+                postings.title,
+                postings.description,
+                postings.location,
+                postings.prerequisites,
+                postings.professor,
+                users.display_name          AS professor_display_name,
+                users.email                 AS professor_email,
+                users.phone                 AS professor_phone,
+                professors.department,
+                professors.designation
+         FROM   applications,
+                postings,
+                users,
+                professors
+         WHERE  applications.posting_id = postings.posting_id
+                AND postings.professor = professors.user_id
+                AND users.user_id = professors.user_id)
+SELECT student_application_id AS application_id,
+       student_posting_id     AS posting_id,
+       title , description, location, prerequisites, CREATED_AT, UPDATED_AT, 
+       professor as professor_user_id,
+       professor_email, department, designation, professor_display_name, 
+       student as student_user_id,
+       student_display_name, student_email, student_phone, gpa, major, minor, year
+
+
+
+FROM   student_data,
+       professor_data
+WHERE  student_data.student_application_id =
+       professor_data.professor_application_id
+       AND student_data.student_posting_id =
+professor_data.professor_posting_id; '''
         curs.execute(query)
         curs.rowfactory = makeDictFactory(curs)
         response = curs.fetchall()
