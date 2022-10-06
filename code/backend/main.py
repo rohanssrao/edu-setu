@@ -73,5 +73,9 @@ def update_application():
 def edit_profile():
     return auth.edit_profile(request.get_json(force=True))
 
+@app.route("/get_applications_for_professor", methods=["POST"])
+def get_applications_for_professor():
+    return professor_api.get_applications_for_professor(request.get_json(force=True))
+
 
 app.run(debug=True,host='0.0.0.0')

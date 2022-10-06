@@ -123,3 +123,56 @@ def update_posting(data):
     finally:
         disconnect(con)
         
+
+def get_applications_for_professor(data):
+    con = connect()
+    if not con:
+        return prepare_response(False,  "Unable to connect to database.")
+    try:
+        curs = con.cursor()
+    except Exception as e:
+        print(e)
+        return prepare_response(False,  "Unable to connect to database.")
+    try:
+        professor = data["professor"]
+        query = '''SELECT postings.posting_id,
+       postings.professor,
+       title,
+       description,
+       prerequisites,
+       applications.application_id,
+	   student.user_id AS student_user_id,
+       users.display_name AS student_display_name,
+	   users.email AS student_email,
+ 	   users.phone AS student_phone,
+	   student.gpa AS student_gpa,
+	   student.major AS student_major,
+	   student.minor AS student_minor,
+	   student.year AS	student_year,
+       applications.status
+       
+					
+FROM   postings 
+FULL OUTER JOIN applications on APPLICATIONS.posting_id = postings.POSTING_ID
+FULL OUTER JOIN student on applications.student = student.USER_ID
+left OUTER JOIN USERS on users.user_id = student.user_id
+where postings.PROFESSOR= :1
+order by postings.POSTING_ID'''
+        params = [professor]
+        curs.execute(query, params)
+        curs.rowfactory = makeDictFactory(curs)
+        response = curs.fetchall()
+        try:
+            con.close()
+        except:
+            pass
+        return prepare_response(True, response)
+    except Exception as e:
+        print(e)
+        return {"status": False, "data": str(e)}
+    finally:
+        try:
+            con.close()
+        except:
+            pass
+
