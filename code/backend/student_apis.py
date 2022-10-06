@@ -223,7 +223,7 @@ FROM   student_data,
 WHERE  student_data.student_application_id =
        professor_data.professor_application_id
        AND student_data.student_posting_id =
-professor_data.professor_posting_id; '''
+professor_data.professor_posting_id '''
         curs.execute(query)
         curs.rowfactory = makeDictFactory(curs)
         response = curs.fetchall()
