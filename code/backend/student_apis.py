@@ -251,6 +251,7 @@ def update_application(data):
         # Get the data from JSON Payload
         app_id = data["application_id"]
         status = data["status"]
+        
         # Insert application into database
         cur = con.cursor()
         query = "UPDATE APPLICATIONS SET STATUS = :1, UPDATED_AT = SYSTIMESTAMP WHERE APPLICATION_ID = :2"
