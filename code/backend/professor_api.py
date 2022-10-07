@@ -156,7 +156,7 @@ FROM   postings
 FULL OUTER JOIN applications on APPLICATIONS.posting_id = postings.POSTING_ID
 FULL OUTER JOIN student on applications.student = student.USER_ID
 left OUTER JOIN USERS on users.user_id = student.user_id
-where postings.PROFESSOR= :1
+where postings.PROFESSOR= :1 and application_id is not NULL
 order by postings.POSTING_ID'''
         params = [professor]
         curs.execute(query, params)
