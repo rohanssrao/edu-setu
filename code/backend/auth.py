@@ -59,8 +59,8 @@ def register(data):
         elif user_type == "professor":
             department = data["department"]
             designation = data["designation"]
-            query = "INSERT INTO PROFESSORS (USER_ID,DEPARTMENT,DESIGNATION) VALUES (:1,:2,:3)"
-            params = [user_id, department,designation]
+            query = "INSERT INTO PROFESSORS (USER_ID, DEPARTMENT, DESIGNATION) VALUES (:1,:2,:3)"
+            params = [user_id, department, designation]
             cur.execute(query, params)
 
         con.commit()
