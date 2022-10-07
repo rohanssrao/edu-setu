@@ -2,7 +2,6 @@ import React from "react";
 import { Component } from 'react'
 import NavBar from "./navbar";
 import './studentProfile.css'
-import users from './user.json'
 
 
 export class StudentProfile extends Component {

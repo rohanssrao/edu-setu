@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import jobs from './jobs.json'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import NavBar from "./navbar";
 import Badge from 'react-bootstrap/Badge';
-import users from './user.json';
-import applications from './applications.json'
 import Accordion from 'react-bootstrap/Accordion';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/Row';
@@ -80,7 +77,20 @@ export class TrackApplication extends Component {
 
   }
 
-  withdrawApplication(application){
+  withdrawApplication(application) {
+    const requestOptions2 = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ "application_id": application.application_id, "status":"Withdrawn" })
+    };
+    fetch('http://140.238.250.0:5000/update_application', requestOptions2)
+    .then(response => response.json())
+    .then(data => {
+      if (data.data == "Application updated."){
+        alert("Application Withdrawn.");
+      }
+    });
+    window.location.reload();
 
   }
 
@@ -133,8 +143,8 @@ export class TrackApplication extends Component {
                           {
                             (application.status.toLowerCase() == "pending" && <Badge bg="info">Pending</Badge>) ||
                             (application.status.toLowerCase() == "hired" && <Badge bg="success">Hired</Badge>) ||
-                            (application.status.toLowerCase() == "rejected" && <Badge bg="secondary">Rejected</Badge>)
-
+                            (application.status.toLowerCase() == "rejected" && <Badge bg="secondary">Rejected</Badge>) ||
+                            (application.status.toLowerCase() == "withdrawn" && <Badge bg="dark">Withdrawn</Badge>)
                           }
                         </Col>
 
@@ -146,23 +156,26 @@ export class TrackApplication extends Component {
                         {
                           (application.status.toLowerCase() == "pending" && <Badge bg="info">Pending</Badge>) ||
                           (application.status.toLowerCase() == "hired" && <Badge bg="success">Hired</Badge>) ||
-                          (application.status.toLowerCase() == "rejected" && <Badge bg="secondary">Rejected</Badge>)
+                          (application.status.toLowerCase() == "rejected" && <Badge bg="secondary">Rejected</Badge>) ||
+                          (application.status.toLowerCase() == "withdrawn" && <Badge bg="dark">Withdrawn</Badge>)
 
                         } <br />
                         {
                           (application.remarks && <p><b>Remarks:</b> {application.remarks}</p>)
                         }
-                        Last updated: <i>{application.updated_at}</i>
-
-
-                      </Accordion.Body>
-                    </Accordion.Item>
-                  </Accordion>
+                        Last updated: <i>{application.updated_at}</i><br/>
+                        {
+                          application.status.toLowerCase() != "withdrawn" && <Button onClick={(e) => this.withdrawApplication(application, e)} variant="danger" size="sm">Withdraw</Button>
+                        }
+                  
+                    </Accordion.Body>
+                  </Accordion.Item>
+                </Accordion>
                 </Row>
-              ))
+          ))
             }
-          </Container>
-        </div>
+        </Container>
+      </div>
       </>
     )
   }
