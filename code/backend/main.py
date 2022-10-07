@@ -32,7 +32,7 @@ def login():
 def get_all_application():
     return student_apis.get_all_application()
 
-@app.route("/get_all_applications_by_student", methods=["GET"])
+@app.route("/get_all_applications_by_student", methods=["POST"])
 def get_all_applications_by_student():
     return student_apis.get_all_applications_by_student(request.get_json(force=True))
 
