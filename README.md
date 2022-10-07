@@ -15,16 +15,16 @@
 
 ## Table of Contents
 
-1. [About](#about)
-2. [Getting started](#getting-started)
-3. [Documentation](#documentation)
-   - [Development Specifications](#development-specifications)
-     - [Backend](./code/backend/README.md)
-     - Frontend
-   - Deployment Specificatoins
-   - User Manual
-4. [License](#license)
-5. [Contributors](#contributors)
+- [About](#about)
+- [Getting started](#getting-started)
+- [Documentation](#documentation)
+- [Development Specifications](#development-specifications)
+  - [Backend](./code/backend/README.md)
+  - Frontend
+- Deployment Specificatoins
+- User Manual
+- [License](#license)
+- [Contributors](#contributors)
 
 ---
 
