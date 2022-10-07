@@ -4,20 +4,27 @@ import "../Login/Login.css";
 const { Title } = Typography;
 const { Option } = Select;
 
-export class AddNewPosting extends Component {
+export class UpdatePosting extends Component {
   constructor(props) {
     super(props);
   }
-  onSubmitAddPosting = () => {
-    this.props.formRef.current.validateFields().then((values) => {
+  onSubmitUpdatePosting = () => {
+    this.props.updateFormRef.current.validateFields().then((values) => {
       values.professor = sessionStorage.getItem("user_id");
-      this.props.submitAddPosting(values);
+      values.posting_id = this.props.updateData.posting_id;
+      this.props.submitUpdatePosting(values);
     });
   };
+  componentDidMount() {
+    this.props.populateUpdateData();
+  }
+  componentDidUpdate() {
+    this.props.populateUpdateData();
+  }
   render() {
     return (
       <Form
-        ref={this.props.formRef}
+        ref={this.props.updateFormRef}
         name="basic"
         labelCol={{
           span: 8,
@@ -28,7 +35,7 @@ export class AddNewPosting extends Component {
         initialValues={{
           remember: true,
         }}
-        onFinish={this.onSubmitAddPosting}
+        onFinish={this.onSubmitUpdatePosting}
       >
         <Form.Item
           label="Title"
@@ -118,4 +125,4 @@ export class AddNewPosting extends Component {
   }
 }
 
-export default AddNewPosting;
+export default UpdatePosting;

@@ -1,26 +1,61 @@
 import Layout, { Content, Header } from "antd/lib/layout/layout";
 import React from "react";
-import { Typography, Divider, Table, message, Modal, Button, Spin } from "antd";
+import {
+  Typography,
+  Divider,
+  Table,
+  message,
+  Modal,
+  Button,
+  Space,
+  Tooltip,
+  Input,
+} from "antd";
 import config from "../../config";
 import Column from "antd/lib/table/Column";
-import { BarChartOutlined } from "@ant-design/icons";
+import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import AddNewPosting from "./AddNewPosting";
+import { UpdatePosting } from "./UpdatePosting";
 const { Title } = Typography;
-
+const { Search } = Input;
 export default class Postings extends React.Component {
+  formRef = React.createRef();
+  updateFormRef = React.createRef();
   constructor(props) {
     super(props);
     this.state = {
       data: [],
       filteredData: [],
       loading: false,
+      loadingAddPosting: false,
       visible: false,
+      updateVisible: false,
+      updateData: {},
     };
   }
+  onSearch = (value) => {
+    const { data } = this.state;
+    let searchLower = value.toLowerCase();
+    let filtered = data.filter((item) => {
+      if (item.title.toLowerCase().includes(searchLower)) {
+        return true;
+      }
+    });
+    this.setState({ filteredData: filtered });
+  };
+  onSearchChange = (e) => {
+    if (e.target.value.length === 0) {
+      this.onSearch("");
+    }
+  };
   onClose = () => {
-    this.setState({ visible: false });
+    this.setState({ visible: false, updateVisible: false });
   };
   onAddPosting = () => {
     this.setState({ visible: true });
+  };
+  populateUpdateData = () => {
+    this.updateFormRef.current?.setFieldsValue(this.state.updateData);
   };
   fetchPostings = () => {
     this.setState({ loading: true });
@@ -48,7 +83,61 @@ export default class Postings extends React.Component {
   };
   componentDidMount() {
     this.fetchPostings();
+    // this.setState({ visible: true });
   }
+  submitAddPosting = (data) => {
+    this.setState({ loadingAddPosting: true });
+    let url = `${config.baseUrl}/add_posting`;
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.status) {
+          this.setState({ visible: false });
+          message.success(response.data);
+          this.fetchPostings();
+        } else {
+          message.error(response.data, 3);
+          this.registerFormRef.current?.resetFields();
+        }
+        this.setState({ loadingAddPosting: false });
+      })
+      .catch((err) => console.log(err));
+  };
+  submitUpdatePosting = (data) => {
+    this.setState({ loadingAddPosting: true });
+    let url = `${config.baseUrl}/update_posting`;
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.status) {
+          this.setState({ updateVisible: false });
+          message.success(response.data);
+          this.fetchPostings();
+        } else {
+          message.error(response.data, 3);
+          this.registerFormRef.current?.resetFields();
+        }
+        this.setState({ loadingAddPosting: false });
+      })
+      .catch((err) => console.log(err));
+  };
+  onUpdate = (record) => {
+    this.setState({ updateVisible: true, updateData: record });
+  };
   render() {
     return (
       <Layout>
@@ -56,9 +145,17 @@ export default class Postings extends React.Component {
           <Title style={{ float: "left", marginTop: "15px" }} level={4}>
             Postings
           </Title>
+          <Search
+            onChange={this.onSearchChange}
+            placeholder="Search..."
+            allowClear
+            style={{ width: "60%", marginTop: "15px", marginLeft: "8%" }}
+            onSearch={this.onSearch}
+            name="postingSearch"
+          />
           <Button
             style={{ float: "right", marginTop: "15px" }}
-            icon={<BarChartOutlined />}
+            icon={<PlusOutlined />}
             type="primary"
             onClick={this.onAddPosting}
           >
@@ -75,7 +172,17 @@ export default class Postings extends React.Component {
             maskClosable={false}
             centered={true}
           >
-            Add posting
+            <AddNewPosting {...this} {...this.state} {...this.props} />
+          </Modal>
+          <Modal
+            title="Update Posting"
+            visible={this.state.updateVisible}
+            onCancel={this.onClose}
+            footer={null}
+            maskClosable={false}
+            centered={true}
+          >
+            <UpdatePosting {...this} {...this.state} {...this.props} />
           </Modal>
           <Table
             loading={this.state.loading}
@@ -95,6 +202,25 @@ export default class Postings extends React.Component {
             />
             <Column title="Created" dataIndex="created_at" key="created_at" />
             <Column title="Updated" dataIndex="updated_at" key="updated_at" />
+            <Column
+              title="Actions"
+              key="action"
+              render={(record) => (
+                <Space size="small">
+                  <Tooltip title="Update Posting">
+                    <Button
+                      disabled={this.state.readOnly}
+                      type="link"
+                      icon={<EditOutlined />}
+                      onClick={() => this.onUpdate(record)}
+                    />
+                  </Tooltip>
+                  <Tooltip title="Delete Posting">
+                    <Button disabled type="link" icon={<DeleteOutlined />} />
+                  </Tooltip>
+                </Space>
+              )}
+            ></Column>
           </Table>
         </Content>
       </Layout>
