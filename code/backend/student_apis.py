@@ -271,11 +271,12 @@ def update_application(data):
         # Get the data from JSON Payload
         app_id = data["application_id"]
         status = data["status"]
+        remarks = data["remarks"]
         
         # Insert application into database
         cur = con.cursor()
-        query = "UPDATE APPLICATIONS SET STATUS = :1, UPDATED_AT = SYSTIMESTAMP WHERE APPLICATION_ID = :2"
-        params = [status,app_id]
+        query = "UPDATE APPLICATIONS SET STATUS = :1, REMARKS = :2 UPDATED_AT = SYSTIMESTAMP WHERE APPLICATION_ID = :3"
+        params = [status,remarks,app_id]
         cur.execute(query, params)
         con.commit()
         return prepare_response(
