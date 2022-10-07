@@ -59,6 +59,7 @@ export class StudentDashboard extends Component {
   }
   async componentWillMount() {
     var jobs = []
+    await this.setState({ user_id: sessionStorage.getItem("user_id") })
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -69,19 +70,21 @@ export class StudentDashboard extends Component {
       .then(data => this.setState({ current_user: data.data }, () => { console.log(this.state.current_user); }));
     await fetch('http://140.238.250.0:5000/get_all_postings')
       .then(response => response.json())
-      .then(data => this.setState({ jobs_all: data.data }, () => { console.log(this.state.jobs_all); }));
+      .then(data => this.setState({ jobs_all: data.data }, () => {
+      }));
     const requestOptions2 = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ "student": this.state.user_id })
     };
-    
+
     await fetch('http://140.238.250.0:5000/get_all_applications_by_student', requestOptions2)
       .then(response => response.json())
-      .then(data => this.setState({ applications: data.data }));
-    this.filterIfApplied();
+      .then(data => this.setState({ applications: data.data }, () => {
+        this.filterIfApplied();
+      }));
   }
-  filterIfApplied(){
+  filterIfApplied() {
     var jobs = [];
     for (var i = 0; i < this.state.jobs_all.length; i++) {
       var flag = 0;
@@ -94,8 +97,13 @@ export class StudentDashboard extends Component {
         jobs.push(this.state.jobs_all[i])
       }
     }
-    this.setState({ jobs: jobs })
-    
+    this.setState({ jobs: jobs }, () => {
+      if (this.state.jobs.length == 0) {
+        var message = "Sorry! There are no postings available right now."
+        this.removeTable(message);
+      }
+    })
+
   }
   async apply(jobs) {
     var posting_id = jobs.posting_id;
@@ -110,11 +118,22 @@ export class StudentDashboard extends Component {
         if (data.data == "Application added.")
           alert("Application submitted")
       });
-      window.location.reload();
+    window.location.reload();
 
   }
   saveJob(jobs) {
     console.log(jobs);
+  }
+  removeTable(message) {
+
+    var table = document.getElementById("postings");
+    table.style.display = "none";
+    const para = document.createElement("p");
+    const node = document.createTextNode(message);
+    para.appendChild(node);
+    const element = document.getElementById("mainBody");
+    element.appendChild(para);
+
   }
   filterByTitle() {
     var input = document.getElementById("searchTitle");
@@ -159,14 +178,9 @@ export class StudentDashboard extends Component {
 
   }
   checkMatchingPostings(flag) {
+    var message = "Sorry, couldn't find any matching jobs."
     if (flag == 0) {
-      var table = document.getElementById("postings");
-      table.style.display = "none";
-      const para = document.createElement("p");
-      const node = document.createTextNode("Sorry, couldn't find any matching jobs.");
-      para.appendChild(node);
-      const element = document.getElementById("mainBody");
-      element.appendChild(para);
+      this.removeTable(message);
     }
 
   }
@@ -237,58 +251,63 @@ export class StudentDashboard extends Component {
         </div>
         <link rel="stylesheet" href="studentDashboard.css"></link>
 
-        <div className="container" id="mainBody">
-          <Table striped hover className="col-6" responsive id="postings">
-            <thead>
-              <tr>
-                <th>Job ID</th>
-                <th >Title</th>
-                <th>Professor</th>
-                <th>Department</th>
-                <th>Location</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                this.state.jobs.map(jobs => (
+        <div id="mainBody">
+          <div className="container" id="postings">
+            {
+              (this.state.jobs.length > 0) &&
+              <Table striped hover className="col-6" responsive id="postings">
+                <thead>
                   <tr>
-                    <td id="postingId">{jobs.posting_id}</td>
-                    <td id="postingTitle"><a className="link-primary" onClick={() => {
-                      this.setState({ modalShow: true });
-                      this.setState({ currentJob: jobs })
-                      //setCurrentJob(job => ({ ...job, role: jobs.role, description: jobs.description, prerequisites: jobs.prerequisites }));
-                    }}>
-                      {jobs.title}
-                    </a>
-
-                      <MyVerticallyCenteredModal
-                        show={this.state.modalShow} currentJob={this.state.currentJob}
-                        apply={(e) => this.apply(this.state.currentJob, e)}
-                        onHide={() => this.setState({ modalShow: false })}
-                      /></td>
-                    <td>{jobs.display_name}</td>
-                    <td id="postingDepartment">{jobs.department}</td>
-                    <td id="postingLocation">{jobs.location}</td>
-                    <td>
-                      <Dropdown>
-                        <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
-                          Actions
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu variant="dark">
-                          <Dropdown.Item href="#/action-1" active onClick={(e) => this.apply(jobs, e)}>Apply</Dropdown.Item>
-                          <Dropdown.Item href="#/action-2">Save for Later</Dropdown.Item>
-                          <Dropdown.Item href="#/action-3">Get shareable URL</Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
-                    </td>
+                    <th>Job ID</th>
+                    <th >Title</th>
+                    <th>Professor</th>
+                    <th>Department</th>
+                    <th>Location</th>
+                    <th>Actions</th>
                   </tr>
+                </thead>
+                <tbody>
+                  {
+                    this.state.jobs.map(jobs => (
+                      <tr>
+                        <td id="postingId">{jobs.posting_id}</td>
+                        <td id="postingTitle"><a className="link-primary" onClick={() => {
+                          this.setState({ modalShow: true });
+                          this.setState({ currentJob: jobs })
+                          //setCurrentJob(job => ({ ...job, role: jobs.role, description: jobs.description, prerequisites: jobs.prerequisites }));
+                        }}>
+                          {jobs.title}
+                        </a>
 
-                ))
-              }
-            </tbody>
-          </Table>
+                          <MyVerticallyCenteredModal
+                            show={this.state.modalShow} currentJob={this.state.currentJob}
+                            apply={(e) => this.apply(this.state.currentJob, e)}
+                            onHide={() => this.setState({ modalShow: false })}
+                          /></td>
+                        <td>{jobs.display_name}</td>
+                        <td id="postingDepartment">{jobs.department}</td>
+                        <td id="postingLocation">{jobs.location}</td>
+                        <td>
+                          <Dropdown>
+                            <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
+                              Actions
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu variant="dark">
+                              <Dropdown.Item active onClick={(e) => this.apply(jobs, e)}>Apply</Dropdown.Item>
+                              <Dropdown.Item >Save for Later</Dropdown.Item>
+                              <Dropdown.Item >Get shareable URL</Dropdown.Item>
+                            </Dropdown.Menu>
+                          </Dropdown>
+                        </td>
+                      </tr>
+
+                    ))
+                  }
+                </tbody>
+              </Table>
+            }
+          </div>
         </div>
       </>
     )
