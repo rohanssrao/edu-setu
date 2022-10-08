@@ -1,0 +1,24 @@
+[
+    {
+		"user_id": 1, 
+		"display_name": "Jable Doe", 
+		"email": "jable.doe@gmail.com", 
+		"phone": "9882997444",
+		"type": "Student",
+		"gpa": 3,
+		"major": "CS",
+		"minor": "Physics",
+		"degree": "MS",
+		"year": "2022"
+	},
+    {
+		"user_id": 2, 
+		"display_name": "Jane Doe", 
+		"email": "jane.doe@gmail.com", 
+		"phone": "9882997414",
+		"type": "Professor",
+		"department": "CS",
+		"designation": "Assistant Professor" 
+	}
+
+]
