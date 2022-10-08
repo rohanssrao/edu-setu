@@ -250,7 +250,7 @@ export default class Login extends React.Component {
 								<Option key="student" value="student">
 									Student
 								</Option>
-								<Option key="professor" value="profesor">
+								<Option key="professor" value="professor">
 									Professor
 								</Option>
 							</Select>
