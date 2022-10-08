@@ -1,9 +1,9 @@
 import Layout, { Content, Header } from "antd/lib/layout/layout";
 import React from "react";
-import { Typography, Divider, Table, message, Modal, Button, Space, Tooltip, Input } from "antd";
+import { Typography, Divider, Table, message, Modal, Button, Space, Tooltip, Input, Popconfirm } from "antd";
 import config from "../../config";
 import Column from "antd/lib/table/Column";
-import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { PlusOutlined, EditOutlined, DeleteOutlined, ReloadOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 import AddNewPosting from "./AddNewPosting";
 import { UpdatePosting } from "./UpdatePosting";
 const { Title } = Typography;
@@ -21,6 +21,7 @@ export default class Postings extends React.Component {
 			visible: false,
 			updateVisible: false,
 			updateData: {},
+			loadingDeletePosting: false,
 		};
 	}
 	onSearch = (value) => {
@@ -127,6 +128,29 @@ export default class Postings extends React.Component {
 	onUpdate = (record) => {
 		this.setState({ updateVisible: true, updateData: record });
 	};
+	onDeletePosting = (data) => {
+		this.setState({ loadingDeletePosting: true });
+		let url = `${config.baseUrl}/delete_posting`;
+		fetch(url, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "*",
+			},
+			body: JSON.stringify(data),
+		})
+			.then((res) => res.json())
+			.then((response) => {
+				if (response.status) {
+					message.success(response.data);
+					this.fetchPostings();
+				} else {
+					message.error(response.data, 3);
+				}
+				this.setState({ loadingDeletePosting: false });
+			})
+			.catch((err) => console.log(err));
+	};
 	render() {
 		return (
 			<Layout>
@@ -144,6 +168,9 @@ export default class Postings extends React.Component {
 					/>
 					<Button style={{ float: "right", marginTop: "15px" }} icon={<PlusOutlined />} type="primary" onClick={this.onAddPosting}>
 						Add posting
+					</Button>
+					<Button style={{ float: "right", marginTop: "15px" }} type="link" icon={<ReloadOutlined />} onClick={this.fetchPostings}>
+						Refresh
 					</Button>
 				</Header>
 				<Divider></Divider>
@@ -168,9 +195,17 @@ export default class Postings extends React.Component {
 									<Tooltip title="Update Posting">
 										<Button disabled={this.state.readOnly} type="link" icon={<EditOutlined />} onClick={() => this.onUpdate(record)} />
 									</Tooltip>
-									<Tooltip title="Delete Posting">
-										<Button disabled type="link" icon={<DeleteOutlined />} />
-									</Tooltip>
+									<Popconfirm
+										placement="bottom"
+										title="Are you sure? This would also delete all the corresponding applications and linked data!"
+										onConfirm={() => this.onDeletePosting(record)}
+										okText="Yes"
+										cancelText="No"
+										icon={<QuestionCircleOutlined />}>
+										<Tooltip title="Delete Posting">
+											<Button type="link" icon={<DeleteOutlined />} />
+										</Tooltip>
+									</Popconfirm>
 								</Space>
 							)}></Column>
 					</Table>

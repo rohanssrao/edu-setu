@@ -78,7 +78,7 @@ export default class Login extends React.Component {
 				}
 				this.setState({ waitingForLogin: false });
 				if (sessionStorage.getItem("loggedIn") !== null && sessionStorage.getItem("loggedIn") === "true") {
-					if (sessionStorage.getItem("type").toLowerCase() === "profesor") window.location.replace("/professor");
+					if (sessionStorage.getItem("type").toLowerCase() === "professor") window.location.replace("/professor");
 					else if (sessionStorage.getItem("type").toLowerCase() === "student") window.location.replace("/student/home");
 					else message.error("Unknown Type! Please contact the application owner");
 				}

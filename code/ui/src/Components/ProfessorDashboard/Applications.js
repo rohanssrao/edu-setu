@@ -3,9 +3,7 @@ import React from "react";
 import { Typography, Divider, Table, message, Modal, Button, Space, Tooltip, Tag } from "antd";
 import config from "../../config";
 import Column from "antd/lib/table/Column";
-import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import AddNewPosting from "./AddNewPosting";
-import { UpdatePosting } from "./UpdatePosting";
+import { EditOutlined, ReloadOutlined } from "@ant-design/icons";
 import { UpdateApplication } from "./UpdateApplication";
 const { Title } = Typography;
 const statusColors = {
@@ -111,6 +109,9 @@ export default class Applications extends React.Component {
 					<Title style={{ float: "left", marginTop: "15px" }} level={4}>
 						Applications
 					</Title>
+					<Button style={{ float: "right", marginTop: "15px" }} type="link" icon={<ReloadOutlined />} onClick={this.fetchApplications}>
+						Refresh
+					</Button>
 				</Header>
 				<Divider></Divider>
 				<Content>
