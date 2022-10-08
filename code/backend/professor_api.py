@@ -24,7 +24,7 @@ def add_posting(data):
         cur.execute(query, params)
         con.commit()
         return prepare_response(
-            True, f"posting added."
+            True, f"Posting Added Successfully."
         )
     except Exception as e:
         print(e)
@@ -101,7 +101,7 @@ def update_posting(data):
         return prepare_response(False, "Unable to create DB connection")
     try:
         # Get the data from JSON Payload
-        professor = data["professor"]
+        posting_id = data["posting_id"]
         title = data["title"]
         description = data["description"]
         location = data["location"]
@@ -110,12 +110,12 @@ def update_posting(data):
         # updated_at = 
         # Insert application into database
         cur = con.cursor()
-        query = "UPDATE POSTINGS SET TITLE = :1, PROFESSOR = :2, DESCRIPTION = :3, LOCATION = :4, PREREQUISITES = :5, UPDATED_AT = SYSTIMESTAMP WHERE PROFESSOR = :2" 
-        params = [title, professor, description, location, prerequisites]
+        query = "UPDATE POSTINGS SET TITLE = :1, posting_id = :2, DESCRIPTION = :3, LOCATION = :4, PREREQUISITES = :5, UPDATED_AT = SYSTIMESTAMP WHERE posting_id = :2" 
+        params = [title, posting_id, description, location, prerequisites]
         cur.execute(query, params)
         con.commit()
         return prepare_response(
-            True, f"posting updated."
+            True, f"Posting Updated Successfully."
         )
     except Exception as e:
         print(e)
@@ -123,3 +123,123 @@ def update_posting(data):
     finally:
         disconnect(con)
         
+
+def get_applications_for_professor(data):
+    con = connect()
+    if not con:
+        return prepare_response(False,  "Unable to connect to database.")
+    try:
+        curs = con.cursor()
+    except Exception as e:
+        print(e)
+        return prepare_response(False,  "Unable to connect to database.")
+    try:
+        professor = data["professor"]
+        query = '''SELECT postings.posting_id,
+       postings.professor as professor_user_id,
+       title,
+       description,
+       prerequisites,
+       applications.application_id,
+	   student.user_id AS student_user_id,
+       users.display_name AS student_display_name,
+	   users.email AS student_email,
+ 	   users.phone AS student_phone,
+	   student.gpa AS student_gpa,
+	   student.major AS student_major,
+	   student.minor AS student_minor,
+	   student.year AS	student_year,
+       applications.status
+       
+					
+FROM   postings 
+FULL OUTER JOIN applications on APPLICATIONS.posting_id = postings.POSTING_ID
+FULL OUTER JOIN student on applications.student = student.USER_ID
+left OUTER JOIN USERS on users.user_id = student.user_id
+where postings.PROFESSOR= :1 and application_id is not NULL
+order by postings.POSTING_ID'''
+        params = [professor]
+        curs.execute(query, params)
+        curs.rowfactory = makeDictFactory(curs)
+        response = curs.fetchall()
+        res = {}
+        pos_id = []
+        for row in response:
+            if row["posting_id"] in pos_id and row["status"] != "Withdrawn":
+                dcit1 = {}
+                dcit1["application_id"] = row["application_id"]
+                dcit1["student_user_id"] = row["student_user_id"]
+                dcit1["student_display_name"] = row["student_display_name"]
+                dcit1["student_email"] = row["student_email"]
+                dcit1["student_phone"] = row["student_phone"]
+                dcit1["student_gpa"] = row["student_gpa"]
+                dcit1["student_major"] = row["student_major"]
+                dcit1["student_minor"] = row["student_minor"]
+                dcit1["student_year"] = row["student_year"]
+                dcit1["status"] = row["status"]
+                res[row["posting_id"]]["Applications"].append(dcit1)
+        
+    
+            else:
+                if row["status"] != "Withdrawn":
+                    pos_id.append(row["posting_id"])
+                    temp = {}
+                    temp["professor_user_id"] = row["professor_user_id"]
+                    temp["posting_id"] = row["posting_id"]
+                    temp["title"] = row["title"]
+                    temp["description"] = row["description"]
+                    temp["prerequisites"] = row["prerequisites"]
+                    res[row["posting_id"]] = temp
+                    dcit1 = {}
+                    dcit1["application_id"] = row["application_id"]
+                    dcit1["student_user_id"] = row["student_user_id"]
+                    dcit1["student_display_name"] = row["student_display_name"]
+                    dcit1["student_email"] = row["student_email"]
+                    dcit1["student_phone"] = row["student_phone"]
+                    dcit1["student_gpa"] = row["student_gpa"]
+                    dcit1["student_major"] = row["student_major"]
+                    dcit1["student_minor"] = row["student_minor"]
+                    dcit1["student_year"] = row["student_year"]
+                    dcit1["status"] = row["status"]
+                    res[row["posting_id"]]["Applications"] = []
+                    res[row["posting_id"]]["Applications"].append(dcit1)
+        
+        response = list(res.values())
+
+        try:
+            con.close()
+        except:
+            pass
+        return prepare_response(True, response)
+    except Exception as e:
+        print(e)
+        return {"status": False, "data": str(e)}
+    finally:
+        try:
+            con.close()
+        except:
+            pass
+
+
+def delete_posting(data):
+    try:
+        con = connect()
+    except:
+        return prepare_response(False, "Unable to create DB connection")
+    try:
+        # Get the data from JSON Payload
+        posting_id = data["posting_id"]
+        cur = con.cursor()
+        query = "DELETE FROM POSTINGS WHERE posting_id = :1" 
+        params = [posting_id]
+        cur.execute(query, params)
+        con.commit()
+        return prepare_response(
+            True, f"Posting Deleted."
+        )
+    except Exception as e:
+        print(e)
+        return prepare_response(False, str(e))
+    finally:
+        disconnect(con)
+
