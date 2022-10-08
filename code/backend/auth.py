@@ -13,7 +13,7 @@ def register(data):
         password = bcrypt.hashpw(data["password"].encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
         user_type = data["type"]
         display_name = data["display_name"]
-        phone = data["phone"]
+        phone = data["phone"] if data["phone"] else None
 
         # Check if email id is already present.
         cur = con.cursor()
@@ -47,18 +47,18 @@ def register(data):
 
 
         if user_type == "student":
-            gpa = data["gpa"]
-            major = data["major"]
-            minor = data["minor"]
-            degree = data["degree"]
-            year = data["year"]
+            gpa = data["gpa"] if data["gpa"] else None
+            major = data["major"] if data["major"] else None
+            minor = data["minor"] if data["minor"] else None
+            degree = data["degree"] if data["degree"] else None
+            year = data["year"] if data["year"] else None
             query = "INSERT INTO STUDENT (USER_ID, DEGREE, YEAR, MAJOR, MINOR, GPA) VALUES (:1,:2,:3,:4,:5,:6)"
             params = [user_id, degree, year, major, minor, gpa]
             cur.execute(query, params)
             
         elif user_type == "professor":
-            department = data["department"]
-            designation = data["designation"]
+            department = data["department"] if data["department"] else None
+            designation = data["designation"] if data["designation"] else None
             query = "INSERT INTO PROFESSORS (USER_ID, DEPARTMENT, DESIGNATION) VALUES (:1,:2,:3)"
             params = [user_id, department, designation]
             cur.execute(query, params)
