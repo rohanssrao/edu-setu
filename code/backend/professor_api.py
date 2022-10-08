@@ -220,3 +220,26 @@ order by postings.POSTING_ID'''
         except:
             pass
 
+
+def delete_posting(data):
+    try:
+        con = connect()
+    except:
+        return prepare_response(False, "Unable to create DB connection")
+    try:
+        # Get the data from JSON Payload
+        posting_id = data["posting_id"]
+        cur = con.cursor()
+        query = "DELETE FROM POSTINGS WHERE posting_id = :1" 
+        params = [posting_id]
+        cur.execute(query, params)
+        con.commit()
+        return prepare_response(
+            True, f"Posting Deleted."
+        )
+    except Exception as e:
+        print(e)
+        return prepare_response(False, str(e))
+    finally:
+        disconnect(con)
+
