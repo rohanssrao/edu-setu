@@ -196,7 +196,7 @@ def edit_profile(data):
         # Get the data from JSON Payload
         email = data["email"]
         user_id = data["user_id"]
-        password = bcrypt.hashpw(data["password"].encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
+        # password = bcrypt.hashpw(data["password"].encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
         user_type = data["type"]
         display_name = data["display_name"]
         phone = data["phone"]
@@ -231,8 +231,8 @@ def edit_profile(data):
                 return prepare_response(
                     False, f"User with phone {phone} already exists."
                 )
-        query = "UPDATE USERS SET EMAIL = :1, DISPLAY_NAME = :2, PASSWORD = :3, TYPE = :4, PHONE = :5 WHERE USER_ID = :6"
-        params = [email, display_name, password, user_type, phone, user_id]
+        query = "UPDATE USERS SET EMAIL = :1, DISPLAY_NAME = :2, TYPE = :3, PHONE = :4 WHERE USER_ID = :5"
+        params = [email, display_name, user_type, phone, user_id]
         cur.execute(query, params)
 
 
