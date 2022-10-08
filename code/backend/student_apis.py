@@ -168,7 +168,7 @@ def add_application(data):
         cur.execute(query, params)
         con.commit()
         return prepare_response(
-            True, f"Application added."
+            True, f"Application Added Successfully."
         )
     except Exception as e:
         print(e)
@@ -280,7 +280,7 @@ def update_application(data):
         cur.execute(query, params)
         con.commit()
         return prepare_response(
-            True, f"Application updated."
+            True, f"Application Updated Successfully."
         )
     except Exception as e:
         print(e)

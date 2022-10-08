@@ -23,7 +23,7 @@ def register(data):
         rows = res.fetchall()
         if len(rows):
             return prepare_response(
-                False, f"User with email {email} already exists."
+                False, f"User with the Email: {email} already exists."
             )
         #check if the same phone is already present
         query = "SELECT phone FROM USERS WHERE PHONE = :1"
@@ -32,7 +32,7 @@ def register(data):
         rows = res.fetchall()
         if len(rows):
             return prepare_response(
-                False, f"User with phone {phone} already exists."
+                False, f"User with Phone: {phone} already exists."
             )
         
         # If it is a new user, insert the details into the database.
@@ -100,7 +100,7 @@ def login(data):
         print(row)
         if row is None:
             return prepare_response(
-                False, f"User with email {email} doesn't exist. Please register first."
+                False, f"User with Email {email} doesn't exist. Please register first."
             )
         valid = bcrypt.checkpw(password.encode("utf-8"), row["password"].encode("utf-8"))
         if valid:
@@ -255,7 +255,7 @@ def edit_profile(data):
 
         con.commit()
         return prepare_response(
-            True, "Profile Updated"
+            True, "Profile Updated Successfully"
         )
     except Exception as e:
         print(e)

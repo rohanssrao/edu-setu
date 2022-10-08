@@ -24,7 +24,7 @@ def add_posting(data):
         cur.execute(query, params)
         con.commit()
         return prepare_response(
-            True, f"posting added."
+            True, f"Posting Added Successfully."
         )
     except Exception as e:
         print(e)
@@ -115,7 +115,7 @@ def update_posting(data):
         cur.execute(query, params)
         con.commit()
         return prepare_response(
-            True, f"posting updated."
+            True, f"Posting Updated Successfully."
         )
     except Exception as e:
         print(e)
