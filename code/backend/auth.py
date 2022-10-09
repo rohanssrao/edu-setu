@@ -97,7 +97,6 @@ def login(data):
         cur.execute(query, params)
         cur.rowfactory = makeDictFactory(cur)
         row = cur.fetchone()
-        print(row)
         if row is None:
             return prepare_response(
                 False, f"User with email {email} doesn't exist. Please register first."

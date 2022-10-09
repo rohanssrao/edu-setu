@@ -121,7 +121,7 @@ Response:
 ---
 
 ```
-/get_all_applications [GET]
+/get_all_application [GET]
 Request: N/A
 Response:
 {
