@@ -23,8 +23,7 @@
 - [Development Specifications](#development-specifications)
   - [Backend](./code/backend/README.md)
   - [Frontend](./code/ui/README.md)
-- Deployment Specificatoins
-- User Manual
+- Features Overview
 - [License](#license)
 - [Contributors](#contributors)
 
@@ -49,6 +48,22 @@ And, as you might have guessed, students can come in to apply and connect with t
 
 ## Getting Started
 
+Like any web application, this project consists of 3 major components. Frontend, Backend and Database.
+We have already deployed the backend on Oracle Cloud Infrastructure. So, that includes the _complicated_ Database configuration setup. All you need to do to start using this project is to setup the User Interface. Unfortunately, we couldn't deploy the frontend on the server because of memory limitations on the free-tier account. So, we have the next-best thing in place! Yes, using DOCKER, which means you don't even have to clone the git repo!
+
+Follow the below steps to get started:
+
+1. [Install docker](https://docs.docker.com/get-docker/), if it's not already installed in your system!
+2. Start Docker Desktop and run the container using the below command - Yes, just one command...
+
+```
+docker run -it -d -p 3000:3000 jayrajmulani/edusetu_ui
+```
+
+3. Navigate to [localhost:3000](http://localhost:3000) to your browser.
+4. Hit register to create your account
+5. Login to begin bridging opportunities!
+
 ---
 
 ## Documentation
@@ -56,6 +71,8 @@ And, as you might have guessed, students can come in to apply and connect with t
 <br/>
 
 ### Development Specifications
+
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
 ![ReactJS](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 
@@ -66,7 +83,7 @@ And, as you might have guessed, students can come in to apply and connect with t
 The portal is developed with the above mentioned tech-stack. Detailed documentation for each component can be found as below:
 
 1. [Backend](./code/backend/README.md)
-2. Frontend
+2. [Frontend](./code/ui/README.md)
 
 ## License
 
