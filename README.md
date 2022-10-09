@@ -4,6 +4,8 @@
   <img src="./assets/Edu_Setu_Logo.gif" alt="Logo"/>
 </p>
 
+## Discord channel link - [![Discord](https://img.shields.io/discord/1010335378831585310)](https://discord.gg/ANGKkKvmWH)
+
 [![License](https://img.shields.io/github/license/jayrajmulani/group1-se-homeworks)](https://github.com/jayrajmulani/group2-se-homeworks/blob/main/LICENSE)
 ![Repo size](https://img.shields.io/github/repo-size/jayrajmulani/edu-setu)
 
