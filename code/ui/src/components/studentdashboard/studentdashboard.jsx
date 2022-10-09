@@ -115,7 +115,7 @@ export class StudentDashboard extends Component {
     await fetch('http://140.238.250.0:5000/add_application', requestOptions)
       .then(response => response.json())
       .then(data => {
-        if (data.data == "Application added.")
+        if (data.status == true)
           alert("Application submitted")
       });
     window.location.reload();

@@ -48,7 +48,7 @@ export class StudentProfile extends Component {
         await fetch('http://140.238.250.0:5000/edit_profile', requestOptions)
             .then(response => response.json())
             .then(data => {
-                if(data.data == "Profile Updated")
+                if(data.status == true)
                     alert("Profile updated succesfully!")
             });
         
