@@ -4,7 +4,8 @@
 
 ### Relational Diagram
 
-![Relational Diagram](../../assets/Relational_Diagram.svg)
+<img src="../../assets/Relational_Diagram.png"/>
+<!-- ![Relational Diagram](../../assets/Relational_Diagram.svg) -->
 
 ### API Endpoints
 
@@ -70,6 +71,151 @@ Response:
 ---
 
 ```
+
+/get_all_users [GET]
+Request: N/A
+Response:
+{
+    status: boolean,
+
+    if status is True:
+        data:{
+            email: string,
+            user_id: number,
+			phone: number,
+            display_name: string
+            type: string (Professor / Student)
+        }
+    else:
+        data: string (containing an error message)
+}
+```
+
+---
+
+```
+
+/get_all_applications_by_student [POST]
+Request:
+{
+    email : string,
+    password: string
+}
+Response:
+{
+	status: boolean,
+
+	if status is True:
+		data:
+		[
+			{
+				application_id: number,
+				posting_id: number,
+				title: string,
+				description: string,
+				location: string,
+				prerequisites: string,
+				created_at: string, (of the application, NOT the posting)
+				updated_at: string, (of the application, NOT the posting)
+				professor_user_id: number,
+				professor_email: string,
+				professor_department: string,
+				professor_designation: string
+				professor_display_name: string,
+				student_user_id: number,
+				student_display_name: string,
+				student_email: string,
+				student_phone: string,
+				student_gpa: float,
+				student_major: string,
+				student_minor: string,
+				student_year: string,
+				status: string // This is the status of the application and NOT the response.
+				remarks: string
+			}
+		]
+	else:
+	data: string (error message)
+}
+
+```
+
+---
+
+```
+
+/get_specific_application [POST]
+
+Request:
+{
+	application_id: number,
+}
+Response:
+{
+
+	status: boolean
+	data: {
+		student: number,
+		remarks: string,
+		posting_id: number,
+		status: string (By default it will be Pending)
+		created_at: string,
+		updated_at: string
+
+}
+
+```
+
+---
+
+```
+
+/get_all_postings_by_professor [POST]
+Request:
+{
+
+    student: number (user id of student),
+
+}
+Response:
+{
+    status: boolean
+    data:
+	{
+		posting_id: number,
+		title: string,
+		professor: number (user id of professor)
+		description: string,
+    	location: string,
+   		prerequisites: string,
+		created_at: string,
+		updated_at: string
+	}
+}
+
+```
+
+---
+
+```
+
+/delete_posting [POST]
+Request:
+{
+    posting_id : number ,
+}
+Response:
+{
+    status: boolean,
+    data: message (Success / Error message as per status)
+}
+
+```
+
+---
+
+```
+
 /add_posting [POST]
 Request:
 {
