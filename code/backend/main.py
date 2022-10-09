@@ -83,5 +83,5 @@ def edit_profile():
 def get_applications_for_professor():
     return professor_api.get_applications_for_professor(request.get_json(force=True))
 
-
-app.run(debug=True,host='0.0.0.0')
+if __name__ == "__main__":
+    app.run(debug=True,host='0.0.0.0')

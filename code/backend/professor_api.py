@@ -1,4 +1,3 @@
-from os import posix_fallocate
 from utils import *
 import bcrypt
 import datetime

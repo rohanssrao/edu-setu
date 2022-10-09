@@ -9,7 +9,7 @@
 
 ### API Endpoints
 
-```
+
 /login [POST]
 Request:
 {
@@ -30,11 +30,11 @@ Response:
     else:
         data: string (containing an error message)
 }
-```
+
 
 ---
 
-```
+
 /register [POST]
 Request:
 {
@@ -66,11 +66,11 @@ Response:
     else:
         data: string (containing an error message)
 }
-```
+
 
 ---
 
-```
+
 
 /get_all_users [GET]
 Request: N/A
@@ -89,11 +89,11 @@ Response:
     else:
         data: string (containing an error message)
 }
-```
+
 
 ---
 
-```
+
 
 /get_all_applications_by_student [POST]
 Request:
@@ -138,11 +138,11 @@ Response:
 	data: string (error message)
 }
 
-```
+
 
 ---
 
-```
+
 
 /get_specific_application [POST]
 
@@ -164,11 +164,11 @@ Response:
 
 }
 
-```
+
 
 ---
 
-```
+
 
 /get_all_postings_by_professor [POST]
 Request:
@@ -193,11 +193,11 @@ Response:
 	}
 }
 
-```
+
 
 ---
 
-```
+
 
 /delete_posting [POST]
 Request:
@@ -210,11 +210,11 @@ Response:
     data: message (Success / Error message as per status)
 }
 
-```
+
 
 ---
 
-```
+
 
 /add_posting [POST]
 Request:
@@ -231,11 +231,11 @@ Response:
     data: message (Success / Error message as per status)
     // CREATED_AT and UPDATED_AT timestamps to be appropriately set by the API
 }
-```
+
 
 ---
 
-```
+
 /get_all_postings [GET]
 Request: N/A
 Response:
@@ -262,11 +262,11 @@ Response:
 	else:
 	data: string (error message)
 }
-```
+
 
 ---
 
-```
+
 /get_all_application [GET]
 Request: N/A
 Response:
@@ -306,11 +306,11 @@ Response:
 	data: string (error message)
 }
 
-```
+
 
 ---
 
-```
+
 /update_posting [POST]
 Request:
 {
@@ -326,11 +326,11 @@ Response:
 	data: (Success / Error message as per status)
 	// UPDATED_AT timestamp should be auto updated by the API
 }
-```
+
 
 ---
 
-```
+
 /update_application [POST]
 Request:
 {
@@ -345,11 +345,11 @@ Response:
 	// UPDATED_AT timestamp should be auto updated by the API
 }
 
-```
+
 
 ---
 
-```
+
 /edit_profile
 Request:
 {
@@ -374,11 +374,11 @@ Response:
 	status: boolean
 	data: (Success / Error message as per status)
 }
-```
+
 
 ---
 
-```
+
 /get_user_profile [POST]
 Request:
 {
@@ -406,11 +406,11 @@ Response:
 	}
 
 }
-```
+
 
 ---
 
-```
+
 /add_application
 Request:
 {
@@ -426,11 +426,11 @@ Response:
 	// CREATED_AT and UPDATED_AT timestamps to be appropriately set by the API
 }
 
-```
+
 
 ---
 
-```
+
 /get_applications_for_professor [POST]
 Request:
 {
@@ -467,4 +467,3 @@ Response:
 		}
 	]
 }
-```
