@@ -28,6 +28,14 @@
 
 ---
 
+<a href="https://app.animaker.com/animo/xJq8qgUlHE0MX9wp/"><h2>Intro Video</h2></a>
+
+<p align="center">
+  <a href="https://app.animaker.com/animo/xJq8qgUlHE0MX9wp/"><img src="./assets/video1.png" alt="Click me" width="50%" height="50%"/></a>
+</p>
+
+---
+
 ## About
 
 "Setu" literally translates to "Bridge" in Hindi.
