@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+  backend:
+    build: ./backend
+    expose:
+     - 5000
+    ports:
+      - 5000:5000
+    volumes:
+      - ./backend:/usr/src/backend
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=main.py
+      - FLASK_DEBUG=1
+  ui:
+    build: ./ui
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
+    volumes:
+      - ./ui/src/:/usr/src/ui/src
+      - ./ui/public/:/usr/src/ui/public
+    links:
+      - "backend:backend"

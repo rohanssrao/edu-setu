@@ -1,0 +1,56 @@
+#profileLogo {
+    height: 100px;
+    width: 100px;
+}
+
+body {
+    padding-top: 60px;
+}
+
+@media (max-width: 979px) {
+    body {
+        padding-top: 0px;
+    }
+}
+
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #76b5c5
+}
+
+.profile-button {
+    background: #154c79;
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: #154c79
+}
+
+.profile-button:focus {
+    background: #154c79;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #154c79;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #154c79;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 11px
+}
+
+.add-experience:hover {
+    background: #76b5c5;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #76b5c5
+}

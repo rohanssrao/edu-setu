@@ -13,7 +13,7 @@ def register(data):
         password = bcrypt.hashpw(data["password"].encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
         user_type = data["type"]
         display_name = data["display_name"]
-        phone = data["phone"]
+        phone = data["phone"] if data["phone"] else None
 
         # Check if email id is already present.
         cur = con.cursor()
@@ -23,7 +23,7 @@ def register(data):
         rows = res.fetchall()
         if len(rows):
             return prepare_response(
-                False, f"User with email {email} already exists."
+                False, f"User with the Email: {email} already exists."
             )
         #check if the same phone is already present
         query = "SELECT phone FROM USERS WHERE PHONE = :1"
@@ -32,7 +32,7 @@ def register(data):
         rows = res.fetchall()
         if len(rows):
             return prepare_response(
-                False, f"User with phone {phone} already exists."
+                False, f"User with Phone: {phone} already exists."
             )
         
         # If it is a new user, insert the details into the database.
@@ -47,20 +47,20 @@ def register(data):
 
 
         if user_type == "student":
-            gpa = data["gpa"]
-            major = data["major"]
-            minor = data["minor"]
-            degree = data["degree"]
-            year = data["year"]
+            gpa = data["gpa"] if data["gpa"] else None
+            major = data["major"] if data["major"] else None
+            minor = data["minor"] if data["minor"] else None
+            degree = data["degree"] if data["degree"] else None
+            year = data["year"] if data["year"] else None
             query = "INSERT INTO STUDENT (USER_ID, DEGREE, YEAR, MAJOR, MINOR, GPA) VALUES (:1,:2,:3,:4,:5,:6)"
             params = [user_id, degree, year, major, minor, gpa]
             cur.execute(query, params)
             
         elif user_type == "professor":
-            department = data["department"]
-            designation = data["designation"]
-            query = "INSERT INTO PROFESSORS (USER_ID,DEPARTMENT,DESIGNATION) VALUES (:1,:2,:3)"
-            params = [user_id, department,designation]
+            department = data["department"] if data["department"] else None
+            designation = data["designation"] if data["designation"] else None
+            query = "INSERT INTO PROFESSORS (USER_ID, DEPARTMENT, DESIGNATION) VALUES (:1,:2,:3)"
+            params = [user_id, department, designation]
             cur.execute(query, params)
 
         con.commit()
@@ -99,7 +99,7 @@ def login(data):
         row = cur.fetchone()
         if row is None:
             return prepare_response(
-                False, f"User with email {email} doesn't exist. Please register first."
+                False, f"User with Email {email} doesn't exist. Please register first."
             )
         valid = bcrypt.checkpw(password.encode("utf-8"), row["password"].encode("utf-8"))
         if valid:
@@ -195,7 +195,7 @@ def edit_profile(data):
         # Get the data from JSON Payload
         email = data["email"]
         user_id = data["user_id"]
-        password = bcrypt.hashpw(data["password"].encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
+        # password = bcrypt.hashpw(data["password"].encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
         user_type = data["type"]
         display_name = data["display_name"]
         phone = data["phone"]
@@ -230,8 +230,8 @@ def edit_profile(data):
                 return prepare_response(
                     False, f"User with phone {phone} already exists."
                 )
-        query = "UPDATE USERS SET EMAIL = :1, DISPLAY_NAME = :2, PASSWORD = :3, TYPE = :4, PHONE = :5 WHERE USER_ID = :6"
-        params = [email, display_name, password, user_type, phone, user_id]
+        query = "UPDATE USERS SET EMAIL = :1, DISPLAY_NAME = :2, TYPE = :3, PHONE = :4 WHERE USER_ID = :5"
+        params = [email, display_name, user_type, phone, user_id]
         cur.execute(query, params)
 
 
@@ -254,7 +254,7 @@ def edit_profile(data):
 
         con.commit()
         return prepare_response(
-            True, "Profile Updated"
+            True, "Profile Updated Successfully"
         )
     except Exception as e:
         print(e)

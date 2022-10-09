@@ -2,9 +2,10 @@ import student_apis
 import professor_api
 import auth
 from flask import Flask, request
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app)
 
 @app.route("/")
 def index():
@@ -31,7 +32,7 @@ def login():
 def get_all_application():
     return student_apis.get_all_application()
 
-@app.route("/get_all_applications_by_student", methods=["GET"])
+@app.route("/get_all_applications_by_student", methods=["POST"])
 def get_all_applications_by_student():
     return student_apis.get_all_applications_by_student(request.get_json(force=True))
 
@@ -60,6 +61,12 @@ def get_all_postings():
 def update_posting():
     return professor_api.update_posting(request.get_json(force=True))
 
+
+@app.route("/delete_posting", methods=["POST"])
+def delete_posting():
+    return professor_api.delete_posting(request.get_json(force=True))
+
+
 @app.route("/get_user_profile", methods = ["POST"])
 def get_user_profile():
     return auth.get_user_profile(request.get_json(force=True))
@@ -71,6 +78,10 @@ def update_application():
 @app.route("/edit_profile", methods=["POST"])
 def edit_profile():
     return auth.edit_profile(request.get_json(force=True))
+
+@app.route("/get_applications_for_professor", methods=["POST"])
+def get_applications_for_professor():
+    return professor_api.get_applications_for_professor(request.get_json(force=True))
 
 
 app.run(debug=True,host='0.0.0.0')
