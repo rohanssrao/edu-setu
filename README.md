@@ -22,7 +22,7 @@
 - [Documentation](#documentation)
 - [Development Specifications](#development-specifications)
   - [Backend](./code/backend/README.md)
-  - Frontend
+  - [Frontend](./code/ui/README.md)
 - Deployment Specificatoins
 - User Manual
 - [License](#license)
