@@ -4,7 +4,8 @@
 
 ### Relational Diagram
 
-![Relational Diagram](../../assets/Relational_Diagram.svg)
+<img src="../../assets/Relational_Diagram."/>
+<!-- ![Relational Diagram](../../assets/Relational_Diagram.svg) -->
 
 ### API Endpoints
 
@@ -160,7 +161,7 @@ Response:
 		status: string (By default it will be Pending)
 		created_at: string,
 		updated_at: string
-	
+
 }
 
 ```
@@ -172,14 +173,14 @@ Response:
 /get_all_postings_by_professor [POST]
 Request:
 {
-    
+
     student: number (user id of student),
-    
+
 }
 Response:
 {
     status: boolean
-    data: 
+    data:
 	{
 		posting_id: number,
 		title: string,
