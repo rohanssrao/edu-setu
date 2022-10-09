@@ -4,7 +4,7 @@
 
 ### Relational Diagram
 
-<img src="../../assets/Relational_Diagram."/>
+<img src="../../assets/Relational_Diagram.png"/>
 <!-- ![Relational Diagram](../../assets/Relational_Diagram.svg) -->
 
 ### API Endpoints
