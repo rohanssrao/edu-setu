@@ -3,6 +3,26 @@ import bcrypt
 import datetime
 
 def add_posting(data):
+    
+    '''
+    ```
+    Request:
+    {
+        title: string,
+        professor: number (user id of professor),
+        description: string,
+        location: string,
+        prerequisites: string
+    }
+    Response:
+    {
+        status: boolean
+        data: message (Success / Error message as per status)
+        // CREATED_AT and UPDATED_AT timestamps to be appropriately set by the API
+    }
+    ```
+    '''
+    
     try:
         con = connect()
     except:
@@ -33,6 +53,38 @@ def add_posting(data):
         
         
 def get_all_postings():
+    '''
+    ```
+    /get_all_postings [GET]
+Request: N/A
+Response:
+{
+	status: boolean,
+
+	if status is True:
+		data:
+		[
+			{
+				posting_id: number,
+				title: string,
+				description: string,
+				professor_email: string,
+				professor_department: string,
+				professor_designation: string
+				professor_display_name: string,
+				location: string,
+				prerequisites: string,
+				created_at: string,
+				updated_at: string
+			}
+		]
+	else:
+	data: string (error message)
+}
+```
+    '''   
+    
+    
     con = connect()
     if not con:
         return prepare_response(False,  "Unable to connect to database.")
@@ -62,6 +114,34 @@ def get_all_postings():
    
 
 def get_all_postings_by_professor(data):
+    
+    '''
+    ```
+    Request:
+    {
+
+        student: number (user id of student),
+
+    }
+    Response:
+    {
+        status: boolean
+        data:
+        {
+            posting_id: number,
+            title: string,
+            professor: number (user id of professor)
+            description: string,
+            location: string,
+            prerequisites: string,
+            created_at: string,
+            updated_at: string
+        }
+        
+    }
+    ```
+    '''
+    
     con = connect()
     if not con:
         return prepare_response(False,  "Unable to connect to database.")
@@ -94,6 +174,28 @@ def get_all_postings_by_professor(data):
 
 
 def update_posting(data):
+    
+    '''
+    ```
+    /update_posting [POST]
+    Request:
+    {
+        posting_id: number,
+        title: string,
+        description: string,
+        location: string,
+        prerequisites: string,
+    }
+    Response:
+    {
+        status: boolean
+        data: (Success / Error message as per status)
+        // UPDATED_AT timestamp should be auto updated by the API
+    }
+    ```
+    '''
+    
+    
     try:
         con = connect()
     except:
@@ -124,6 +226,49 @@ def update_posting(data):
         
 
 def get_applications_for_professor(data):
+    
+    '''
+    ```
+    /get_applications_for_professor [POST]
+Request:
+{
+	professor: number
+}
+Response:
+{
+	status: boolean
+	data:
+	[
+		{
+			professor: number
+			position_id: number,
+			title: string,
+			description: string,
+			prerequisites: string,
+			applications: // A list of all the applications for this position_id
+			[
+				{
+					application_id: number
+					student_user_id: number,
+					student_display_name: string,
+					student_email: string,
+					student_phone: string,
+					student_gpa: float,
+					student_major: string,
+					student_minor: string,
+					student_year: string,
+					status: string // This is the status of the application and NOT the response.
+					remarks: string
+
+				}
+			]
+		}
+	]
+}
+    ```
+    '''
+    
+    
     con = connect()
     if not con:
         return prepare_response(False,  "Unable to connect to database.")
@@ -221,6 +366,23 @@ order by postings.POSTING_ID'''
 
 
 def delete_posting(data):
+    
+    '''
+    ```
+    /delete_posting [POST]
+    Request:
+    {
+        posting_id : number ,
+    }
+    Response:
+    {
+        status: boolean,
+        data: message (Success / Error message as per status)
+    }
+    ```
+    
+    '''
+    
     try:
         con = connect()
     except:

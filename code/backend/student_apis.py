@@ -3,6 +3,29 @@ import bcrypt
 
 
 def get_all_users():
+    
+    '''
+    ```
+    /get_all_users [GET]
+    Request: N/A
+    Response:
+    {
+        status: boolean,
+
+        if status is True:
+            data:{
+                email: string,
+                user_id: number,
+                phone: number,
+                display_name: string
+                type: string (Professor / Student)
+            }
+        else:
+            data: string (containing an error message)
+    }
+    ```
+    '''
+    
     con = connect()
     if not con:
         return prepare_response(False,  "Unable to connect to database.")
@@ -31,6 +54,55 @@ def get_all_users():
             pass
 
 def get_all_applications_by_student(data):
+    
+    '''
+    ```
+    /get_all_applications_by_student [POST]
+    Request:
+    {
+        email : string,
+        password: string
+    }
+    Response:
+    {
+        status: boolean,
+
+        if status is True:
+            data:
+            [
+                {
+                    application_id: number,
+                    posting_id: number,
+                    title: string,
+                    description: string,
+                    location: string,
+                    prerequisites: string,
+                    created_at: string, (of the application, NOT the posting)
+                    updated_at: string, (of the application, NOT the posting)
+                    professor_user_id: number,
+                    professor_email: string,
+                    professor_department: string,
+                    professor_designation: string
+                    professor_display_name: string,
+                    student_user_id: number,
+                    student_display_name: string,
+                    student_email: string,
+                    student_phone: string,
+                    student_gpa: float,
+                    student_major: string,
+                    student_minor: string,
+                    student_year: string,
+                    status: string // This is the status of the application and NOT the response.
+                    remarks: string
+                }
+            ]
+        else:
+        data: string (error message)
+    }
+```
+    
+    '''
+    
     con = connect()
     if not con:
         return prepare_response(False,  "Unable to connect to database.")
@@ -119,6 +191,31 @@ AND student = :1'''
 
 
 def get_specific_application(data):
+    
+    '''
+    ```
+    /get_specific_application [POST]
+
+    Request:
+    {
+        application_id: number,
+    }
+    Response:
+    {
+
+        status: boolean
+        data: {
+            student: number,
+            remarks: string,
+            posting_id: number,
+            status: string (By default it will be Pending)
+            created_at: string,
+            updated_at: string
+
+    }
+    ```
+    '''
+    
     con = connect()
     if not con:
         return prepare_response(False,  "Unable to connect to database.")
@@ -150,6 +247,26 @@ def get_specific_application(data):
 
 
 def add_application(data):
+    
+    '''
+    ```
+    /add_application
+    Request:
+    {
+        student: number,
+        remarks: string,
+        posting_id: number,
+        status: string (By default it will be Pending)
+    }
+    Response:
+    {
+        status: boolean
+        data: message (Success / Error message as per status)
+        // CREATED_AT and UPDATED_AT timestamps to be appropriately set by the API
+    }
+    ```
+    '''
+    
     try:
         con = connect()
     except:
@@ -177,6 +294,53 @@ def add_application(data):
 
 
 def get_all_application():
+    
+    '''
+    ```
+    /get_all_applications_by_student [POST]
+Request:
+{
+    email : string,
+    password: string
+}
+Response:
+{
+	status: boolean,
+
+	if status is True:
+		data:
+		[
+			{
+				application_id: number,
+				posting_id: number,
+				title: string,
+				description: string,
+				location: string,
+				prerequisites: string,
+				created_at: string, (of the application, NOT the posting)
+				updated_at: string, (of the application, NOT the posting)
+				professor_user_id: number,
+				professor_email: string,
+				professor_department: string,
+				professor_designation: string
+				professor_display_name: string,
+				student_user_id: number,
+				student_display_name: string,
+				student_email: string,
+				student_phone: string,
+				student_gpa: float,
+				student_major: string,
+				student_minor: string,
+				student_year: string,
+				status: string // This is the status of the application and NOT the response.
+				remarks: string
+			}
+		]
+	else:
+	data: string (error message)
+}
+    ```
+    '''
     con = connect()
     if not con:
         return prepare_response(False,  "Unable to connect to database.")
@@ -262,6 +426,26 @@ professor_data.professor_posting_id '''
 
 
 def update_application(data):
+    
+    '''
+    ```
+    /update_application [POST]
+    Request:
+    {
+        application_id: number,
+        status: string (This should be overwritten in the DB by API),
+    remarks: string
+    }
+    Response:
+    {
+        status: boolean
+        data: (Success / Error message as per status)
+        // UPDATED_AT timestamp should be auto updated by the API
+    }
+    ```
+    '''
+    
+    
     try:
         con = connect()
     except:
