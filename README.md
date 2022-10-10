@@ -24,6 +24,7 @@
   - [Frontend](./code/ui/README.md)
 - Features Overview
 - [License](#license)
+- [Future Scope](#future-scope)
 - [Contributors](#contributors)
 
 ---
