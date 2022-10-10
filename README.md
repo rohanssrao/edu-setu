@@ -22,7 +22,7 @@
 - [Development Specifications](#development-specifications)
   - [Backend](./code/backend/README.md)
   - [Frontend](./code/ui/README.md)
-- Features Overview
+- [Features Overview](https://www.youtube.com/watch?v=2PfVqtwufgw)
 - [License](#license)
 - [Future Scope](#future-scope)
 - [Contributors](#contributors)
@@ -109,7 +109,6 @@ Further details regarding the license can be found [here](https://github.com/jay
 - Validate whether an email is an Edu mail (can also validate it for specific college edu mail as only students from that college should be allowed to apply for college specific positions) or not, also provide an OTP mechanism so that only authentic users can register.
 - Provide a feature so that students or professors who have worked together on a project can endorse each other's skills (Like Linkedin).
 - Once logged in maintain the status as logged in for a particular device until the user signs out to provide more convenience to the user.
-
 
 <a href="https://app.animaker.com/animo/xJq8qgUlHE0MX9wp/"><h2>Why FORK our project</h2></a>
 
