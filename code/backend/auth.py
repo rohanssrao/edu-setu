@@ -14,7 +14,7 @@ def register(data):
             "utf-8"), bcrypt.gensalt()).decode("utf-8")
         user_type = data["type"]
         display_name = data["display_name"]
-        phone = data["phone"] if data["phone"] else None
+        phone = data["phone"] if "phone" in data.keys() else None
 
         # Check if email id is already present.
         cur = con.cursor()
