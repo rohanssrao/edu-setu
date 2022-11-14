@@ -4,9 +4,9 @@ import { Route, BrowserRouter as Router, Switch, Redirect } from "react-router-d
 import Login from "./Components/Login/Login";
 import Home from "./Components/Home/Home";
 import NotFound from "./Components/Home/NotFound";
-import { StudentProfile } from "./Components/studentdashboard/studentProfile";
-import TrackApplication from "./Components/studentdashboard/trackapplication";
-import { StudentHomePage } from "./Components/studentdashboard";
+import { StudentProfile } from "./components/studentdashboard/studentProfile";
+import TrackApplication from "./components/studentdashboard/trackapplication";
+import { StudentHomePage } from "./components/studentdashboard";
 
 export default class Redirections extends Component {
 	constructor(props) {

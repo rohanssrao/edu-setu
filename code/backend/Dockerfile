@@ -6,7 +6,7 @@ RUN apt-get install -y python3-pip python3
 RUN mkdir -p /usr/src/backend
 WORKDIR /usr/src/backend
 
-COPY requirements.txt /usr/src/backend/
+COPY * /usr/src/backend/
 RUN pip3 install -r requirements.txt
 
 ENTRYPOINT [ "flask" ]
