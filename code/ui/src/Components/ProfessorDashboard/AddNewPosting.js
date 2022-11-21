@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Input, Button, Typography, Select } from "antd";
+import { Form, Input, Button, Typography, Select, message} from "antd";
 import "../Login/Login.css";
 const { Title } = Typography;
 const { Option } = Select;
@@ -9,9 +9,21 @@ export class AddNewPosting extends Component {
     super(props);
     this.state = {applicationQuestions: 1};
   }
+
+  errorMessage = (text) => {
+    message.destroy(text);
+    let config = {content:text, duration: 2, key:text};
+    message.error(config);
+  }
+
   alterApplicationQuestions = (value) => {
     this.setState((prevState)=>{
     if(prevState.applicationQuestions + value < 0){
+      this.errorMessage("No question to remove!");
+      return prevState;
+    }
+    else if(prevState.applicationQuestions + value > 10){
+      this.errorMessage("You can only have 10 questions per posting!");
       return prevState;
     }
     return {
