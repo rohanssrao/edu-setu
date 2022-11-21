@@ -34,13 +34,31 @@ def add_posting(data):
         description = data["description"]
         location = data["location"]
         prerequisites = data["prerequisites"]
-        # created_at = 
-        # updated_at = 
+        questions = []
+
+        # load in application questions as list - 10 is max # of questions
+        for i in range(10):
+            if ("application question " + str(i)) in data:
+                questions.append(data["application question " + str(i)])
+
         # Insert application into database
         cur = con.cursor()
-        query = "INSERT INTO POSTINGS ( TITLE, PROFESSOR, DESCRIPTION, LOCATION, PREREQUISITES, CREATED_AT, UPDATED_AT ) VALUES (:1,:2,:3,:4,:5,SYSTIMESTAMP,SYSTIMESTAMP)"
-        params = [title, professor, description, location, prerequisites]
+        bind_id = cur.var(int)
+        query = "INSERT INTO POSTINGS ( TITLE, PROFESSOR, DESCRIPTION, LOCATION, \
+          PREREQUISITES, CREATED_AT, UPDATED_AT ) VALUES (:1,:2,:3,:4,:5,SYSTIMESTAMP,SYSTIMESTAMP) \
+          RETURNING POSTING_ID into :6"
+        params = [title, professor, description, location, prerequisites, bind_id]
         cur.execute(query, params)
+
+        # Get id of inserted
+        inserted_id = bind_id.getvalue()[0]
+
+        # Insert application questions to database
+        for i in range(len(questions)):
+            query = "INSERT INTO POSTING_QUESTIONS ( QUESTION, POSTING_ID, CREATED_AT, UPDATED_AT) VALUES (:1, :2, SYSTIMESTAMP, SYSTIMESTAMP)"
+            params = [questions[i], inserted_id]
+            cur.execute(query, params)
+
         con.commit()
         return prepare_response(
             True, f"Posting Added Successfully."
