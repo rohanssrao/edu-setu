@@ -112,10 +112,13 @@ Response:
         print(e)
         return prepare_response(False,  "Unable to connect to database.")
     try:
+        # query = '''select POSTING_ID, TITLE, DESCRIPTION, USERS.EMAIL, PROFESSORS.DEPARTMENT, PROFESSORs.DESIGNATION, USERS.DISPLAY_NAME, LOCATION, PREREQUISITES, CREATED_AT, UPDATED_AT from USERS JOIN PROFESSORS ON USERS.USER_ID = PROFESSORS.USER_ID JOIN POSTINGS ON PROFESSORS.USER_ID = POSTINGS.PROFESSOR'''
         query = '''select POSTING_ID, TITLE, DESCRIPTION, USERS.EMAIL, PROFESSORS.DEPARTMENT, PROFESSORs.DESIGNATION, USERS.DISPLAY_NAME, LOCATION, PREREQUISITES, CREATED_AT, UPDATED_AT from USERS JOIN PROFESSORS ON USERS.USER_ID = PROFESSORS.USER_ID JOIN POSTINGS ON PROFESSORS.USER_ID = POSTINGS.PROFESSOR'''
         curs.execute(query)
         curs.rowfactory = makeDictFactory(curs)
         response = curs.fetchall()
+        print("Response:")
+        print(response)
         try:
             con.close()
         except:

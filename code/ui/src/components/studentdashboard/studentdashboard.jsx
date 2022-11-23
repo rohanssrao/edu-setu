@@ -7,6 +7,8 @@ import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
 import NavBar from "./navbar";
+import config from "../../config";
+
 
 function MyVerticallyCenteredModal(props) {
 
@@ -65,10 +67,10 @@ export class StudentDashboard extends Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ "user_id": this.state.user_id })
     };
-    await fetch('http://140.238.250.0:5000/get_user_profile', requestOptions)
+    await fetch(`${config.baseUrl}/get_user_profile`, requestOptions)
       .then(response => response.json())
       .then(data => this.setState({ current_user: data.data }, () => { console.log(this.state.current_user); }));
-    await fetch('http://140.238.250.0:5000/get_all_postings')
+    await fetch(`${config.baseUrl}/get_all_postings`)
       .then(response => response.json())
       .then(data => this.setState({ jobs_all: data.data }, () => {
       }));
@@ -78,14 +80,16 @@ export class StudentDashboard extends Component {
       body: JSON.stringify({ "student": this.state.user_id })
     };
 
-    await fetch('http://140.238.250.0:5000/get_all_applications_by_student', requestOptions2)
+    await fetch(`${config.baseUrl}/get_all_applications_by_student`, requestOptions2)
       .then(response => response.json())
       .then(data => this.setState({ applications: data.data }, () => {
         this.filterIfApplied();
+        
       }));
   }
   filterIfApplied() {
     var jobs = [];
+    console.log(this.state.jobs_all);
     for (var i = 0; i < this.state.jobs_all.length; i++) {
       var flag = 0;
       for (var j = 0; j < this.state.applications.length; j++) {
@@ -112,7 +116,7 @@ export class StudentDashboard extends Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user_id: this.state.user_id, posting_id: posting_id })
     };
-    await fetch('http://140.238.250.0:5000/add_application', requestOptions)
+    await fetch(`${config.baseUrl}/add_application`, requestOptions)
       .then(response => response.json())
       .then(data => {
         if (data.status == true)
