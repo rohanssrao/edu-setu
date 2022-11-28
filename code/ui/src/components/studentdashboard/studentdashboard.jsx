@@ -8,13 +8,67 @@ import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
 import NavBar from "./navbar";
 import config from "../../config";
+import { Form, Input, message } from "antd";
 
 
-function MyVerticallyCenteredModal(props) {
+const MyVerticallyCenteredModal = (props) => {
+  const [loading, setLoading] = React.useState(true);
+  const [appQuestions, setAppQuestions] = React.useState(null);
+  const [appResponses, setAppResponses] = React.useState([]);
+
+  const handleApplicationQuestion = (e, idx) => {
+    let responses = [...appResponses];
+    responses[idx] = e.target.value;
+    console.log("IDX: " + idx);
+    console.log(responses[idx]);
+    setAppResponses(responses);
+  }
+
+  const handleApply = () => {
+    //build appropriate object
+    let answers = [];
+    for(let i = 0; i < appQuestions.length; i++) {
+      answers.push({
+        question_id: appQuestions[i].question_id,
+        answer: appResponses[i]
+      });
+    }
+    props.apply(props.currentJob, answers, props.user_id);
+  }
+
+  React.useEffect(()=>{
+    let postingId = props.currentJob.posting_id;
+    if(postingId){
+      let url = `${config.baseUrl}/get_questions_by_posting`;
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+          posting_id: postingId
+        })
+      })
+        .then((res) => res.json())
+        .then((response) => {
+          if (response.status) {
+            setAppQuestions(response.data);
+            setAppResponses(Array(response.data.length).fill(''));
+          } else {
+            message.error(response.data, 1);
+          }
+          setLoading(false);
+        })
+        .catch((err) => console.log(err));
+    } 
+    
+  }, [props.currentJob.posting_id]);
 
   return (
     <Modal
-      {...props}
+      show = {props.show}
+      onHide = {props.onHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -34,9 +88,27 @@ function MyVerticallyCenteredModal(props) {
         <p>
           {props.currentJob.prerequisites}
         </p>
+        <p><b>Application Questions</b></p>
+
+        {loading && <p>
+          Loading...
+          </p>}
+        {!loading && appQuestions && appQuestions.map((question, idx)=>{
+          return(
+            <div key = {"app question" + idx} >
+            <p>{question.question}</p>
+            <input
+              type="text"
+              label={question.question}
+              name= {question.question}
+              onChange = {(e)=>{handleApplicationQuestion(e, idx)}}
+              value={appResponses[idx]}
+            />
+          </div>);
+        })}
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.apply}>Apply</Button>
+        <Button onClick={handleApply}>Apply</Button>
         <Button onClick={props.onHide} variant="secondary">Close</Button>
       </Modal.Footer>
     </Modal>
@@ -109,12 +181,13 @@ export class StudentDashboard extends Component {
     })
 
   }
-  async apply(jobs) {
+  async apply(jobs, answers, user_id) {
     var posting_id = jobs.posting_id;
+    
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ user_id: this.state.user_id, posting_id: posting_id })
+      body: JSON.stringify({ user_id: user_id, posting_id: posting_id, responses: answers })
     };
     await fetch(`${config.baseUrl}/add_application`, requestOptions)
       .then(response => response.json())
@@ -277,7 +350,7 @@ export class StudentDashboard extends Component {
                         <td id="postingId">{jobs.posting_id}</td>
                         <td id="postingTitle"><a className="link-primary" onClick={() => {
                           this.setState({ modalShow: true });
-                          this.setState({ currentJob: jobs })
+                          this.setState({ currentJob: jobs });
                           //setCurrentJob(job => ({ ...job, role: jobs.role, description: jobs.description, prerequisites: jobs.prerequisites }));
                         }}>
                           {jobs.title}
@@ -285,8 +358,10 @@ export class StudentDashboard extends Component {
 
                           <MyVerticallyCenteredModal
                             show={this.state.modalShow} currentJob={this.state.currentJob}
-                            apply={(e) => this.apply(this.state.currentJob, e)}
+                            apply={this.apply}
+                            user_id={this.state.user_id}
                             onHide={() => this.setState({ modalShow: false })}
+
                           /></td>
                         <td>{jobs.display_name}</td>
                         <td id="postingDepartment">{jobs.department}</td>
@@ -298,7 +373,9 @@ export class StudentDashboard extends Component {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu variant="dark">
-                              <Dropdown.Item active onClick={(e) => this.apply(jobs, e)}>Apply</Dropdown.Item>
+                              <Dropdown.Item active onClick={() => {                          
+                                this.setState({ modalShow: true });
+                                this.setState({ currentJob: jobs });}}>Apply</Dropdown.Item>
                               <Dropdown.Item >Save for Later</Dropdown.Item>
                               <Dropdown.Item >Get shareable URL</Dropdown.Item>
                             </Dropdown.Menu>

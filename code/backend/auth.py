@@ -217,7 +217,6 @@ def get_user_profile(data):
     }
     ```
     '''
-    print("ID: " + data["user_id"])
     try:
         con = connect()
     except:

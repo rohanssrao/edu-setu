@@ -7,7 +7,6 @@ const { Option } = Select;
 export class UpdatePosting extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {applicationQuestions: props.updateQuestions.length};
   }
   alterApplicationQuestions = (value) => {

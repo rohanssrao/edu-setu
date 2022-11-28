@@ -1,6 +1,7 @@
 from utils import *
 import bcrypt
 import datetime
+import traceback
 
 def add_posting(data):
     
@@ -162,6 +163,7 @@ def get_questions_by_posting(data):
         return prepare_response(False,  "Unable to connect to database.")
     try:
         # Get Questions
+        print(data)
         posting_id = data["posting_id"]
         query = '''SELECT * FROM POSTING_QUESTIONS WHERE POSTING_ID = :1'''
         params = [posting_id]
@@ -176,6 +178,7 @@ def get_questions_by_posting(data):
         return prepare_response(True, response)
     except Exception as e:
         print(e)
+        traceback.print_exc()
         return {"status": False, "data": str(e)}
     finally:
         try:
