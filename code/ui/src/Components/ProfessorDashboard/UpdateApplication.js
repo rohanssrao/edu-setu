@@ -57,6 +57,16 @@ export class UpdateApplication extends Component {
         <Form.Item label="Student Phone" name="student_phone">
           <Input disabled />
         </Form.Item>
+        {this.props.responses.map((response, idx)=>{
+          let question = response.question;
+          let response_value = response.response;
+          return (
+          <>
+            <Form.Item label={question} >
+              <Input value={response_value} disabled />
+            </Form.Item>
+          </>);
+          })}
         <Form.Item name="status" label="Status">
           <Select>
             <Option key="pending" value="pending">

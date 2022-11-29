@@ -40,6 +40,9 @@ def get_all_applications_by_student():
 def get_specific_application():
     return student_apis.get_specific_application(request.get_json(force=True))
 
+@app.route("/get_responses_for_application", methods=["POST"])
+def get_responses_for_application():
+    return professor_api.get_responses_for_application(request.get_json(force=True))
 
 @app.route("/add_application", methods=["POST"])
 def add_application():

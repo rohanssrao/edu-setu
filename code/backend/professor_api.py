@@ -318,6 +318,39 @@ def update_posting(data):
     finally:
         disconnect(con)
         
+def get_responses_for_application(data):
+    con = connect()
+    if not con:
+        return prepare_response(False,  "Unable to connect to database.")
+    try:
+        curs = con.cursor()
+    except Exception as e:
+        print(e)
+        return prepare_response(False,  "Unable to connect to database.")
+    try:
+        # Get Postings
+        application = data["application"]
+        query = '''SELECT * FROM POSTING_RESPONSES JOIN POSTING_QUESTIONS ON POSTING_RESPONSES.QUESTION_ID=POSTING_QUESTIONS.QUESTION_ID WHERE APPLICATION_ID = :1'''
+        params = [application]
+        curs.execute(query, params)
+        curs.rowfactory = makeDictFactory(curs)
+        response = curs.fetchall()
+        print(response)
+
+        try:
+            con.close()
+        except:
+            pass
+        return prepare_response(True, response)
+    except Exception as e:
+        print(e)
+        return {"status": False, "data": str(e)}
+    finally:
+        try:
+            con.close()
+        except:
+            pass
+
 
 def get_applications_for_professor(data):
     
@@ -352,7 +385,8 @@ Response:
 					student_minor: string,
 					student_year: string,
 					status: string // This is the status of the application and NOT the response.
-					remarks: string
+					remarks: string,
+                    responses: array
 
 				}
 			]
