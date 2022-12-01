@@ -5,6 +5,8 @@ import logo from "../../assets/logo.png";
 import "./Login.css";
 const { Title } = Typography;
 const { Option } = Select;
+const year = (new Date()).getFullYear();
+
 export default class Login extends React.Component {
 	constructor(props) {
 		super(props);
@@ -13,13 +15,30 @@ export default class Login extends React.Component {
 			waitingForLogin: false,
 			registerModalVisible: false,
 			registrationType: "",
+			degreeType: "",
+			yearType: "",
 		};
+		this.years = []
+		for(let i = 0; i <= 10 ; i++)
+		{
+			this.years.push(<Option key={year + i} value={year + i}>
+				{year + i}
+			</Option>)
+		}
 	}
 	formRef = React.createRef();
 	registerFormRef = React.createRef();
 	onTypeChange = (type) => {
 		console.log(type);
 		this.setState({ registrationType: type });
+	};
+	onTypeChangeDegree = (type) => {
+		console.log(type);
+		this.setState({ degreeType: type });
+	};
+	onTypeChangeYear = (type) => {
+		console.log(type);
+		this.setState({ yearType: type });
 	};
 	onClickRegister = () => {
 		this.setState({ registerModalVisible: true });
@@ -261,10 +280,28 @@ export default class Login extends React.Component {
 						) : this.state.registrationType === "student" ? (
 							<>
 								<Form.Item name="degree" label="Degree" hasFeedback>
-									<Input />
+									<Select 
+										onChange={this.onTypeChangeDegree}
+										placeholder="Select degree type"
+									>
+										<Option key="Bachelors" value="bachelors">
+											Bachelors
+										</Option>
+										<Option key="Masters" value="masters">
+											Masters
+										</Option>
+										<Option key="PhD" value="phd">
+											PhD
+										</Option>
+									</Select>
 								</Form.Item>
 								<Form.Item name="year" label="Year" hasFeedback>
-									<Input />
+									<Select
+										onChange={this.onTypeChangeYear}
+										placeholder="Select graduation year"
+									>
+										{this.years}
+									</Select>
 								</Form.Item>
 								<Form.Item name="major" label="Major" hasFeedback>
 									<Input />
