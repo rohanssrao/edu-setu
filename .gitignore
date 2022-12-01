@@ -1,3 +1,5 @@
 keys/
 *__pycache__*
 db/
+.env
+*Wallet*

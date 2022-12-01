@@ -1,6 +1,7 @@
 from utils import *
 import bcrypt
 import datetime
+import traceback
 
 def add_posting(data):
     
@@ -34,13 +35,31 @@ def add_posting(data):
         description = data["description"]
         location = data["location"]
         prerequisites = data["prerequisites"]
-        # created_at = 
-        # updated_at = 
+        questions = []
+
+        # load in application questions as list - 10 is max # of questions
+        for i in range(10):
+            if ("application question " + str(i)) in data:
+                questions.append(data["application question " + str(i)])
+
         # Insert application into database
         cur = con.cursor()
-        query = "INSERT INTO POSTINGS ( TITLE, PROFESSOR, DESCRIPTION, LOCATION, PREREQUISITES, CREATED_AT, UPDATED_AT ) VALUES (:1,:2,:3,:4,:5,SYSTIMESTAMP,SYSTIMESTAMP)"
-        params = [title, professor, description, location, prerequisites]
+        bind_id = cur.var(int)
+        query = "INSERT INTO POSTINGS ( TITLE, PROFESSOR, DESCRIPTION, LOCATION, \
+          PREREQUISITES, CREATED_AT, UPDATED_AT ) VALUES (:1,:2,:3,:4,:5,SYSTIMESTAMP,SYSTIMESTAMP) \
+          RETURNING POSTING_ID into :6"
+        params = [title, professor, description, location, prerequisites, bind_id]
         cur.execute(query, params)
+
+        # Get id of inserted
+        inserted_id = bind_id.getvalue()[0]
+
+        # Insert application questions to database
+        for i in range(len(questions)):
+            query = "INSERT INTO POSTING_QUESTIONS ( QUESTION, POSTING_ID, CREATED_AT, UPDATED_AT) VALUES (:1, :2, SYSTIMESTAMP, SYSTIMESTAMP)"
+            params = [questions[i], inserted_id]
+            cur.execute(query, params)
+
         con.commit()
         return prepare_response(
             True, f"Posting Added Successfully."
@@ -94,10 +113,13 @@ Response:
         print(e)
         return prepare_response(False,  "Unable to connect to database.")
     try:
+        # query = '''select POSTING_ID, TITLE, DESCRIPTION, USERS.EMAIL, PROFESSORS.DEPARTMENT, PROFESSORs.DESIGNATION, USERS.DISPLAY_NAME, LOCATION, PREREQUISITES, CREATED_AT, UPDATED_AT from USERS JOIN PROFESSORS ON USERS.USER_ID = PROFESSORS.USER_ID JOIN POSTINGS ON PROFESSORS.USER_ID = POSTINGS.PROFESSOR'''
         query = '''select POSTING_ID, TITLE, DESCRIPTION, USERS.EMAIL, PROFESSORS.DEPARTMENT, PROFESSORs.DESIGNATION, USERS.DISPLAY_NAME, LOCATION, PREREQUISITES, CREATED_AT, UPDATED_AT from USERS JOIN PROFESSORS ON USERS.USER_ID = PROFESSORS.USER_ID JOIN POSTINGS ON PROFESSORS.USER_ID = POSTINGS.PROFESSOR'''
         curs.execute(query)
         curs.rowfactory = makeDictFactory(curs)
         response = curs.fetchall()
+        print("Response:")
+        print(response)
         try:
             con.close()
         except:
@@ -112,6 +134,58 @@ Response:
         except:
             pass
    
+def get_questions_by_posting(data):
+    '''
+    Requst:
+    {
+        posting_id: number,
+    }
+    Response:
+    {
+        status: boolean
+        data:
+        {
+            posting_id: number,
+            question_id: number,
+            question: string,
+            created_at: string,
+            updated_at: string
+        }
+    }    
+    '''
+    con = connect()
+    if not con:
+        return prepare_response(False,  "Unable to connect to database.")
+    try:
+        curs = con.cursor()
+    except Exception as e:
+        print(e)
+        return prepare_response(False,  "Unable to connect to database.")
+    try:
+        # Get Questions
+        print(data)
+        posting_id = data["posting_id"]
+        query = '''SELECT * FROM POSTING_QUESTIONS WHERE POSTING_ID = :1'''
+        params = [posting_id]
+        curs.execute(query, params)
+        curs.rowfactory = makeDictFactory(curs)
+        response = curs.fetchall()
+
+        try:
+            con.close()
+        except:
+            pass
+        return prepare_response(True, response)
+    except Exception as e:
+        print(e)
+        traceback.print_exc()
+        return {"status": False, "data": str(e)}
+    finally:
+        try:
+            con.close()
+        except:
+            pass
+
 
 def get_all_postings_by_professor(data):
     
@@ -135,7 +209,8 @@ def get_all_postings_by_professor(data):
             location: string,
             prerequisites: string,
             created_at: string,
-            updated_at: string
+            updated_at: string,
+            questions: array
         }
         
     }
@@ -151,12 +226,15 @@ def get_all_postings_by_professor(data):
         print(e)
         return prepare_response(False,  "Unable to connect to database.")
     try:
+        # Get Postings
         professor = data["professor"]
         query = '''SELECT * FROM POSTINGS WHERE PROFESSOR = :1'''
         params = [professor]
         curs.execute(query, params)
         curs.rowfactory = makeDictFactory(curs)
         response = curs.fetchall()
+
+
         try:
             con.close()
         except:
@@ -185,6 +263,7 @@ def update_posting(data):
         description: string,
         location: string,
         prerequisites: string,
+        questions: array
     }
     Response:
     {
@@ -207,13 +286,28 @@ def update_posting(data):
         description = data["description"]
         location = data["location"]
         prerequisites = data["prerequisites"]
-        # created_at = 
-        # updated_at = 
+        questions = []
+
+        # load in application questions as list - 10 is max # of questions
+        for i in range(10):
+            if ("application question " + str(i)) in data:
+                questions.append(data["application question " + str(i)])
+
         # Insert application into database
         cur = con.cursor()
-        query = "UPDATE POSTINGS SET TITLE = :1, posting_id = :2, DESCRIPTION = :3, LOCATION = :4, PREREQUISITES = :5, UPDATED_AT = SYSTIMESTAMP WHERE posting_id = :2" 
-        params = [title, posting_id, description, location, prerequisites]
+        query = "UPDATE POSTINGS SET TITLE = :1, DESCRIPTION = :2, LOCATION = :3, PREREQUISITES = :4, UPDATED_AT = SYSTIMESTAMP WHERE posting_id = :5" 
+        params = [title, description, location, prerequisites, posting_id]
         cur.execute(query, params)
+
+        # Update questions in database
+        query = "DELETE FROM POSTING_QUESTIONS WHERE POSTING_ID= :1"
+        params = [posting_id]
+        cur.execute(query, params)
+
+        for i in range(len(questions)):
+            query = "INSERT INTO POSTING_QUESTIONS ( QUESTION, POSTING_ID, CREATED_AT, UPDATED_AT) VALUES (:1, :2, SYSTIMESTAMP, SYSTIMESTAMP)"
+            params = [questions[i], posting_id]
+            cur.execute(query, params)
         con.commit()
         return prepare_response(
             True, f"Posting Updated Successfully."
@@ -224,6 +318,39 @@ def update_posting(data):
     finally:
         disconnect(con)
         
+def get_responses_for_application(data):
+    con = connect()
+    if not con:
+        return prepare_response(False,  "Unable to connect to database.")
+    try:
+        curs = con.cursor()
+    except Exception as e:
+        print(e)
+        return prepare_response(False,  "Unable to connect to database.")
+    try:
+        # Get Postings
+        application = data["application"]
+        query = '''SELECT * FROM POSTING_RESPONSES JOIN POSTING_QUESTIONS ON POSTING_RESPONSES.QUESTION_ID=POSTING_QUESTIONS.QUESTION_ID WHERE APPLICATION_ID = :1'''
+        params = [application]
+        curs.execute(query, params)
+        curs.rowfactory = makeDictFactory(curs)
+        response = curs.fetchall()
+        print(response)
+
+        try:
+            con.close()
+        except:
+            pass
+        return prepare_response(True, response)
+    except Exception as e:
+        print(e)
+        return {"status": False, "data": str(e)}
+    finally:
+        try:
+            con.close()
+        except:
+            pass
+
 
 def get_applications_for_professor(data):
     
@@ -258,7 +385,8 @@ Response:
 					student_minor: string,
 					student_year: string,
 					status: string // This is the status of the application and NOT the response.
-					remarks: string
+					remarks: string,
+                    responses: array
 
 				}
 			]

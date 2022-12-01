@@ -71,6 +71,7 @@ export default class Login extends React.Component {
 					sessionStorage.setItem("display_name", response.data.display_name);
 					sessionStorage.setItem("type", response.data.type);
 					sessionStorage.setItem("user_id", response.data.user_id);
+					console.log("User ID: " + sessionStorage.getItem("user_id"));
 				} else {
 					sessionStorage.setItem("loggedIn", "false");
 					message.error(response.data, 3);

@@ -1,5 +1,6 @@
 from utils import *
 import bcrypt
+import traceback
 
 
 def register(data):
@@ -72,15 +73,13 @@ def register(data):
                 False, f"User with Phone: {phone} already exists."
             )
 
-        # If it is a new user, insert the details into the database.
-        query = "SELECT USER_ID_SEQ.NEXTVAL FROM DUAL"
-        cur.execute(query)
-        cur.rowfactory = makeDictFactory(cur)
-        user_id = cur.fetchone()['nextval']
+        bind_user_id = cur.var(int)
 
-        query = "INSERT INTO USERS (USER_ID, EMAIL, DISPLAY_NAME, PASSWORD, TYPE, PHONE) VALUES (:1,:2,:3,:4,:5,:6)"
-        params = [user_id, email, display_name, password, user_type, phone]
+        query = "INSERT INTO USERS (EMAIL, DISPLAY_NAME, PASSWORD, TYPE, PHONE) VALUES (:1,:2,:3,:4,:5) RETURNING USER_ID INTO :6"
+        params = [email, display_name, password, user_type, phone, bind_user_id]
         cur.execute(query, params)
+
+        user_id = bind_user_id.getvalue()[0]
 
         if user_type == "student":
             gpa = data["gpa"] if "gpa" in data.keys() else None
@@ -88,7 +87,7 @@ def register(data):
             minor = data["minor"] if "minor" in data.keys() else None
             degree = data["degree"] if "degree" in data.keys() else None
             year = data["year"] if "year" in data.keys() else None
-            query = "INSERT INTO STUDENT (USER_ID, DEGREE, YEAR, MAJOR, MINOR, GPA) VALUES (:1,:2,:3,:4,:5,:6)"
+            query = "INSERT INTO STUDENT (USER_ID, DEGREE, YEAR, MAJOR, MINOR, GPA) VALUES (:1,:2,:3,:4,:5, :6)"
             params = [user_id, degree, year, major, minor, gpa]
             cur.execute(query, params)
 
@@ -97,7 +96,7 @@ def register(data):
             ) else None
             designation = data["designation"] if "designation" in data.keys(
             ) else None
-            query = "INSERT INTO PROFESSORS (USER_ID, DEPARTMENT, DESIGNATION) VALUES (:1,:2,:3)"
+            query = "INSERT INTO PROFESSORS (USER_ID, DEPARTMENT, DESIGNATION) VALUES (:1,:2, :3)"
             params = [user_id, department, designation]
             cur.execute(query, params)
 
@@ -106,7 +105,6 @@ def register(data):
             True,
             {
                 "email": email,
-                "user_id": user_id,
                 "display_name": display_name,
                 "type": user_type
             }
@@ -219,7 +217,6 @@ def get_user_profile(data):
     }
     ```
     '''
-
     try:
         con = connect()
     except:
@@ -234,6 +231,7 @@ def get_user_profile(data):
         cur.execute(query, params)
         cur.rowfactory = makeDictFactory(cur)
         row = cur.fetchone()
+        print(row)
 
         display_name = row["display_name"]
         user_id = row["user_id"]
@@ -276,6 +274,7 @@ def get_user_profile(data):
         )
     except Exception as e:
         print(e)
+        print(traceback.format_exc())
         return prepare_response(False, str(e))
     finally:
         disconnect(con)
