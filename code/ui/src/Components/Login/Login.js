@@ -17,6 +17,7 @@ export default class Login extends React.Component {
 			registrationType: "",
 			degreeType: "",
 			yearType: "",
+			skillsType: [],
 		};
 		this.years = []
 		for(let i = 0; i <= 10 ; i++)
@@ -39,6 +40,10 @@ export default class Login extends React.Component {
 	onTypeChangeYear = (type) => {
 		console.log(type);
 		this.setState({ yearType: type });
+	};
+	onTypeChangeSkills = (type) => {
+		console.log(type);
+		this.setState({ skillsType: type });
 	};
 	onClickRegister = () => {
 		this.setState({ registerModalVisible: true });
@@ -311,6 +316,16 @@ export default class Login extends React.Component {
 								</Form.Item>
 								<Form.Item name="gpa" label="GPA" hasFeedback>
 									<InputNumber min={0} max={4} step={0.1} />
+								</Form.Item>
+								<Form.Item name="skills" label="Skills">
+									<Select
+										mode="tags"
+										style={{ width: '100%' }}
+										placeholder="Enter skills"
+										onChange={this.onTypeChangeSkills}
+										open={false}
+										//options={}
+									/>
 								</Form.Item>
 							</>
 						) : (

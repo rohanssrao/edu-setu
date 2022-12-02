@@ -2,6 +2,7 @@ import React from "react";
 import { Component } from 'react'
 import NavBar from "./navbar";
 import './studentProfile.css'
+import { Select, SelectProps } from 'antd';
 
 
 export class StudentProfile extends Component {
@@ -37,6 +38,10 @@ export class StudentProfile extends Component {
         changed_details[e.target.id] = detail
         this.setState({current_user:changed_details});
     }
+    onTypeChange = (type) => {
+		console.log(type);
+		this.setState({ registrationType: type });
+	};
     async updateProfile() {
         var current_user = this.state.current_user;
         current_user['password'] = "jane.doe@gmail.com";
@@ -83,6 +88,14 @@ export class StudentProfile extends Component {
                                     <div class="col-md-3"><label class="labels">GPA</label><input type="text" class="form-control" placeholder={this.state.current_user.gpa} id="gpa" onChange={(e) => this.updateValues(e)}/></div>
                                     <div class="col-md-3"><label class="labels">Year</label><input type="text" class="form-control" placeholder={this.state.current_user.year} id="year" onChange={(e) => this.updateValues(e)}/></div>
                                 </div>
+                                <div class="skills row"><Select
+                                    mode="tags"
+                                    style={{ width: '50%' }}
+                                    placeholder="Enter skills"
+                                    onChange={this.onTypeChange}
+                                    open={false}
+                                    //options={}
+                                /></div>
                                 <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" onClick={(e) => this.updateProfile(e)}>Save Profile</button></div>
                             </div>
                         </div>
