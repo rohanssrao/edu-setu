@@ -12,7 +12,8 @@ export class StudentProfile extends Component {
             user_id: 1007,
             user_name: "",
             current_user: {},
-        }
+            disabled: true
+        };
     }
     async componentWillMount() {
         await this.setState({ user_id: sessionStorage.getItem("user_id") })
@@ -43,6 +44,7 @@ export class StudentProfile extends Component {
 		this.setState({ registrationType: type });
 	};
     async updateProfile() {
+        this.setState({disabled:true});
         var current_user = this.state.current_user;
         current_user['password'] = "jane.doe@gmail.com";
         const requestOptions = {
@@ -56,11 +58,12 @@ export class StudentProfile extends Component {
                 if(data.status == true)
                     alert("Profile updated succesfully!")
             });
-        
         window.location.reload();
 
     }
-
+    async updateEdit() {
+        this.setState({disabled:false});
+    }
     render() {
         return (
             <>
@@ -77,28 +80,34 @@ export class StudentProfile extends Component {
                                     <h4 class="text-right">Profile Settings</h4>
                                 </div>
                                 <div class="row mt-2">
-                                    <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder={this.state.current_user.display_name} id="display_name" onChange={(e) => this.updateValues(e)}/></div>
-                                    <div class="col-md-6"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder={this.state.current_user.phone} id="phone" onChange={(e) => this.updateValues(e)}/></div>
+                                    <div class="col-md-6"><label class="labels">Name</label><input disabled = {this.state.disabled} type="text" class="form-control" placeholder={this.state.current_user.display_name} id="display_name" onChange={(e) => this.updateValues(e)}/></div>
+                                    <div class="col-md-6"><label class="labels">Mobile Number</label><input disabled = {this.state.disabled} type="text" class="form-control" placeholder={this.state.current_user.phone} id="phone" onChange={(e) => this.updateValues(e)}/></div>
 
                                 </div>
                                 <div class="row mt-3">
-                                    <div class="col-md-6"><label class="labels">Degree</label><input type="text" class="form-control" placeholder={this.state.current_user.degree} id="degree" onChange={(e) => this.updateValues(e)}/></div>
-                                    <div class="col-md-6"><label class="labels">Major</label><input type="text" class="form-control" placeholder={this.state.current_user.major} id="major" onChange={(e) => this.updateValues(e)}/></div>
-                                    <div class="col-md-6"><label class="labels">Minor</label><input type="text" class="form-control" placeholder={this.state.current_user.minor} id="minor" onChange={(e) => this.updateValues(e)}/></div>
-                                    <div class="col-md-3"><label class="labels">GPA</label><input type="text" class="form-control" placeholder={this.state.current_user.gpa} id="gpa" onChange={(e) => this.updateValues(e)}/></div>
-                                    <div class="col-md-3"><label class="labels">Year</label><input type="text" class="form-control" placeholder={this.state.current_user.year} id="year" onChange={(e) => this.updateValues(e)}/></div>
+                                    <div class="col-md-6"><label class="labels">Degree</label><input disabled = {this.state.disabled} type="text" class="form-control" placeholder={this.state.current_user.degree} id="degree" onChange={(e) => this.updateValues(e)}/></div>
+                                    <div class="col-md-6"><label class="labels">Major</label><input disabled = {this.state.disabled} type="text" class="form-control" placeholder={this.state.current_user.major} id="major" onChange={(e) => this.updateValues(e)}/></div>
+                                    <div class="col-md-6"><label class="labels">Minor</label><input disabled = {this.state.disabled} type="text" class="form-control" placeholder={this.state.current_user.minor} id="minor" onChange={(e) => this.updateValues(e)}/></div>
+                                    <div class="col-md-3"><label class="labels">GPA</label><input disabled = {this.state.disabled} type="text" class="form-control" placeholder={this.state.current_user.gpa} id="gpa" onChange={(e) => this.updateValues(e)}/></div>
+                                    <div class="col-md-3"><label class="labels">Year</label><input disabled = {this.state.disabled} type="text" class="form-control" placeholder={this.state.current_user.year} id="year" onChange={(e) => this.updateValues(e)}/></div>
                                 </div>
-                                <div class="skills row">
+                                <div class="row mt-3">
                                     <label class="labels">Skills</label>
                                     <Select
-                                    mode="tags"
-                                    style={{ width: '50%' }}
-                                    placeholder="Enter skills"
-                                    onChange={this.onTypeChange}
-                                    open={false}
-                                    //options={}
-                                /></div>
-                                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" onClick={(e) => this.updateProfile(e)}>Save Profile</button></div>
+                                        mode="tags"
+                                        disabled={this.state.disabled}
+                                        style={{ width: '50%' }}
+                                        placeholder="Enter skills"
+                                        onChange={this.onTypeChange}
+                                        open={false}
+                                        //options={}
+                                    />
+                                </div>
+                                <div class="mt-5 text-center">
+                                    {!this.state.disabled && <button class="btn btn-primary profile-button p-2" type="button" onClick={(e) => this.updateProfile(e)}>Save Profile</button>}
+                                    
+                                    {sthis.state.disabled && <button class="btn btn-primary profile-button p-2" type="button" onClick={(e) => this.updateEdit(e)}>Edit Profile</button>}
+                                </div>
                             </div>
                         </div>
                     </div>
