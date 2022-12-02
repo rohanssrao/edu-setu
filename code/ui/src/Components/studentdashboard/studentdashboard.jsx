@@ -10,6 +10,7 @@ import NavBar from "./navbar";
 import config from "../../config";
 import { Form, Input, message } from "antd";
 
+const { TextArea } = Input;
 
 const MyVerticallyCenteredModal = (props) => {
   const [loading, setLoading] = React.useState(true);
@@ -97,8 +98,9 @@ const MyVerticallyCenteredModal = (props) => {
           return(
             <div key = {"app question" + idx} >
             <p>{question.question}</p>
-            <input
-              type="text"
+            <TextArea
+              //type="textarea"
+              rows={4}
               label={question.question}
               name= {question.question}
               onChange = {(e)=>{handleApplicationQuestion(e, idx)}}
