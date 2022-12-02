@@ -11,7 +11,7 @@ export class StudentProfile extends Component {
         this.state = {
             user_id: 1007,
             user_name: "",
-            current_user: {}
+            current_user: {},
         }
     }
     async componentWillMount() {
@@ -21,7 +21,7 @@ export class StudentProfile extends Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ "user_id": this.state.user_id })
         };
-        await fetch('http://140.238.250.0:5000/get_user_profile', requestOptions)
+        await fetch('http://localhost:5000/get_user_profile', requestOptions)
             .then(response => response.json())
             .then(data => {
                 var changed_details = data.data;
@@ -88,7 +88,9 @@ export class StudentProfile extends Component {
                                     <div class="col-md-3"><label class="labels">GPA</label><input type="text" class="form-control" placeholder={this.state.current_user.gpa} id="gpa" onChange={(e) => this.updateValues(e)}/></div>
                                     <div class="col-md-3"><label class="labels">Year</label><input type="text" class="form-control" placeholder={this.state.current_user.year} id="year" onChange={(e) => this.updateValues(e)}/></div>
                                 </div>
-                                <div class="skills row"><Select
+                                <div class="skills row">
+                                    <label class="labels">Skills</label>
+                                    <Select
                                     mode="tags"
                                     style={{ width: '50%' }}
                                     placeholder="Enter skills"

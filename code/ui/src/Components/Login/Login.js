@@ -17,7 +17,7 @@ export default class Login extends React.Component {
 			registrationType: "",
 			degreeType: "",
 			yearType: "",
-			skillsType: [],
+			skillsType: "",
 		};
 		this.years = []
 		for(let i = 0; i <= 10 ; i++)
