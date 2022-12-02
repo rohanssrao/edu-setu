@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Input, Button, Typography, Select, message} from "antd";
+import { Form, Input, Button, Typography, Select, message ,InputNumber} from "antd";
 import "../Login/Login.css";
 const { Title } = Typography;
 const { Option } = Select;
@@ -7,7 +7,10 @@ const { Option } = Select;
 export class AddNewPosting extends Component {
   constructor(props) {
     super(props);
-    this.state = {applicationQuestions: 1};
+    this.state = {
+      applicationQuestions: 1,
+      gpaRequirement: false,
+    };
   }
 
   errorMessage = (text) => {
@@ -35,6 +38,9 @@ export class AddNewPosting extends Component {
       values.professor = sessionStorage.getItem("user_id");
       this.props.submitAddPosting(values);
     });
+  }
+  async updateGpaRequirement() {
+    this.setState({gpaRequirement:true});
   };
   render() {
     return (
@@ -118,6 +124,9 @@ export class AddNewPosting extends Component {
             </Option>
           </Select>
         </Form.Item>
+          <Form.Item name="gparequirement" label="GPA Requirement" >
+            <InputNumber min={0} max={4} step={0.1} />
+          </Form.Item>
         {[...Array(this.state.applicationQuestions)].map((_, idx) => {
           return (
           <div key = {"app" + idx} >

@@ -314,7 +314,7 @@ export default class Login extends React.Component {
 								<Form.Item name="minor" label="Minor" hasFeedback>
 									<Input />
 								</Form.Item>
-								<Form.Item name="gpa" label="GPA" hasFeedback>
+								<Form.Item name="gpa" label="GPA" >
 									<InputNumber min={0} max={4} step={0.1} />
 								</Form.Item>
 								<Form.Item name="skills" label="Skills">

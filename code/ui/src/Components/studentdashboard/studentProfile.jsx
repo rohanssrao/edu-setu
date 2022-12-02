@@ -106,7 +106,7 @@ export class StudentProfile extends Component {
                                 <div class="mt-5 text-center">
                                     {!this.state.disabled && <button class="btn btn-primary profile-button p-2" type="button" onClick={(e) => this.updateProfile(e)}>Save Profile</button>}
                                     
-                                    {sthis.state.disabled && <button class="btn btn-primary profile-button p-2" type="button" onClick={(e) => this.updateEdit(e)}>Edit Profile</button>}
+                                    {this.state.disabled && <button class="btn btn-primary profile-button p-2" type="button" onClick={(e) => this.updateEdit(e)}>Edit Profile</button>}
                                 </div>
                             </div>
                         </div>
