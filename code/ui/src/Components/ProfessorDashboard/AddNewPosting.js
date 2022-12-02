@@ -10,9 +10,13 @@ export class AddNewPosting extends Component {
     this.state = {
       applicationQuestions: 1,
       gpaRequirement: false,
+      degreeRequirement: "",
     };
   }
-
+  onDegreeChange = (type) => {
+		console.log(type);
+		this.setState({ degreeRequirement: type });
+	};
   errorMessage = (text) => {
     message.destroy(text);
     let config = {content:text, duration: 2, key:text};
@@ -124,9 +128,21 @@ export class AddNewPosting extends Component {
             </Option>
           </Select>
         </Form.Item>
-          <Form.Item name="gparequirement" label="GPA Requirement" >
-            <InputNumber min={0} max={4} step={0.1} />
-          </Form.Item>
+        <Form.Item name="gparequirement" label="GPA Requirement" >
+          <InputNumber min={0} max={4} step={0.1} />
+        </Form.Item>
+        <Form.Item name="degree" label="Degree Requirement">
+        <Select
+            mode="multiple"
+            style={{ width: '50%' }}
+            placeholder="Select years"
+            onChange={this.onDegreeChange}
+            options={[{value: 'Bachelors', key: 'bachelors'},
+            {value: 'Masters', key: 'masters'},
+            {value: 'PhD', key: 'phd'}]}
+        />
+        </Form.Item>
+
         {[...Array(this.state.applicationQuestions)].map((_, idx) => {
           return (
           <div key = {"app" + idx} >
