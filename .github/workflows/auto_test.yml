@@ -38,5 +38,12 @@ jobs:
       run: |
           echo "PYTHONPATH=code/backend" >> $GITHUB_ENV
     - name: Test with pytest
+      env:
+        CONFIG_DIR=${{ secrets.CONFIG_DIR }}
+        DSN=${{ secrets.DSN }}
+        ORACLEDB_PASSWORD=${{ secrets.ORACLEDB_PASSWORD }}
+        ORACLEDB_USERNAME=${{ secrets.ORACLEDB_USERNAME }}
+        WALLET_LOCATION=${{ secrets.WALLET_LOCATION }}
+        WALLET_PASSWORD=${{ secrets.WALLET_PASSWORD }}
       run: |
         pytest tests/tests_auto.py && pytest tests/tests.py
