@@ -11,7 +11,7 @@ import student_apis
 import auth
 from main import app
 
-base_url = "http://140.238.250.0:5000"
+base_url = "http://127.0.0.1:5000"
     
 def test_login():
     request = { "email":"professor@ncsu.edu", "password": "12345678"}
@@ -37,13 +37,13 @@ def test_register():
 
 
 def test_get_user_profile():
-    request = {"user_id" : 1010}
+    request = {"user_id" : 25}
     request = json.dumps(request)
     response = app.test_client().post(f'{base_url}/get_user_profile', data=request)
 
     assert response.status_code ==200
     json_response = json.loads(response.data.decode("utf-8"))
-
+    print(json_response)
     assert json_response['status'] == True
     assert type(json_response['data']) is dict
 
@@ -63,7 +63,7 @@ def test_get_all_users():
     assert type(json_response['data']) is list
 
 def test_get_specific_applications():
-    request = {"application" : "1050"}
+    request = {"application" : 1}
     request = json.dumps(request)
     response = app.test_client().get(f'{base_url}/get_specific_application', data=request)
     assert response.status_code ==200
