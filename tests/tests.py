@@ -11,6 +11,7 @@ import student_apis
 import auth
 from main import app
 
+# Base URL for API requests
 base_url = "http://127.0.0.1:5000"
     
 def test_login():
