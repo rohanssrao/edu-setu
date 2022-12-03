@@ -16,7 +16,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    environment: edu-setu-env
 
     steps:
     - uses: actions/checkout@v3
@@ -40,7 +39,7 @@ jobs:
           echo "PYTHONPATH=code/backend" >> $GITHUB_ENV
     - name: Test with pytest
       env:
-        CONFIG_DIR: /home/runner/work/edu-setu/edu-setu/Wallet_EDUSETUDB_2
+        CONFIG_DIR: ${{ secrets.CONFIG_DIR }}
         DSN: ${{ secrets.DSN }}
         ORACLEDB_PASSWORD: ${{ secrets.ORACLEDB_PASSWORD }}
         ORACLEDB_USERNAME: ${{ secrets.ORACLEDB_USERNAME }}
