@@ -46,5 +46,5 @@ jobs:
         WALLET_LOCATION: ${{ secrets.WALLET_LOCATION }}
         WALLET_PASSWORD: ${{ secrets.WALLET_PASSWORD }}
       run: |
-        dir
+        cat $CONFIG_DIR/tnsnames.ora
         pytest tests/tests_auto.py && pytest tests/tests.py
