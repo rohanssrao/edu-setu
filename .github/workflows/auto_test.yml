@@ -39,5 +39,4 @@ jobs:
           echo "PYTHONPATH=code/backend" >> $GITHUB_ENV
     - name: Test with pytest
       run: |
-        pytest tests/tests_auto.py
-        pytest tests/tests.py
+        pytest tests/tests_auto.py && pytest tests/tests.py
