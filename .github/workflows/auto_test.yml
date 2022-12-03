@@ -46,5 +46,5 @@ jobs:
         WALLET_LOCATION: ${{ secrets.WALLET_LOCATION }}
         WALLET_PASSWORD: ${{ secrets.WALLET_PASSWORD }}
       run: |
-        pwd
+        echo $CONFIG_DIR
         pytest tests/tests_auto.py && pytest tests/tests.py
