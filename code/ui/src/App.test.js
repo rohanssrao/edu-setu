@@ -5,20 +5,6 @@ import StudentDashboard from "./Components/studentdashboard/studentdashboard.jsx
 import { StudentProfile } from "./Components/studentdashboard/studentProfile.jsx";
 import Edu from "./edu.js"
 
-//
-Object.defineProperty(window, 'matchMedia', {
-  writable: true,
-  value: jest.fn().mockImplementation(query => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: jest.fn(), // deprecated
-    removeListener: jest.fn(), // deprecated
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  })),
-});
 
 test("should render Login component", () => {
   render(<Edu />);
@@ -32,7 +18,7 @@ test("should render Login component", () => {
 test("Student Homepage populates correctly", () => {
   render(<StudentDashboard />);
   expect(screen.getByText('Search for a research role')).toBeInTheDocument();
-  expect(screen.getByText('Enhance your skills by working as a research assistant under professors')).
+  expect(screen.getByText('Postings')).
     toBeInTheDocument();
   expect(screen.getByText('Location')).toBeInTheDocument();
 });
