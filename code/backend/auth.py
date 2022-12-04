@@ -298,11 +298,12 @@ def edit_profile(data):
         type: string (Professor / Student),
         phone: string,
         if type == "Student":
-            gpa: float,
             major: string,
             minor: string,
             degree: string,
-            year: string
+            year: string,
+            gpa: float,
+            skills: string (JSON array)
         elif type == "Professor":
             department: string,
             designation
@@ -363,13 +364,14 @@ def edit_profile(data):
         cur.execute(query, params)
 
         if user_type == "student":
-            gpa = data["gpa"]
             major = data["major"]
             minor = data["minor"]
             degree = data["degree"]
             year = data["year"]
-            query = "UPDATE STUDENT SET DEGREE = :1, YEAR = :2, MAJOR = :3, MINOR = :4, GPA = :5 WHERE USER_ID = :6"
-            params = [degree, year, major, minor, gpa, user_id]
+            gpa = data["gpa"]
+            skills = json.dumps(data["skills"])
+            query = "UPDATE STUDENT SET DEGREE = :1, YEAR = :2, MAJOR = :3, MINOR = :4, GPA = :5, SKILLS = :6 WHERE USER_ID = :7"
+            params = [degree, year, major, minor, gpa, skills, user_id]
             cur.execute(query, params)
 
         elif user_type == "professor":

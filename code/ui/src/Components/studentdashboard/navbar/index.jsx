@@ -25,7 +25,7 @@ export function NavBar({ name }) {
     <>
       <link rel="stylesheet" type="text/css" href="./index.css" />
 
-      <Navbar bg="light" variant="light" fixed="top" id="navbar">
+      <Navbar bg="light" variant="light" fixed="top" id="navbar" style={{ zIndex: 0 }}>
         <Container>
           <Navbar.Brand href="/student/home">
             <img src={`${process.env.PUBLIC_URL}/assets/images/Edu_Setu_Logo_Transparent.png`} alt="Logo" id="logo" />

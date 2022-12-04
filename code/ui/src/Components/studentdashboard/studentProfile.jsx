@@ -2,8 +2,7 @@ import React from "react";
 import { Component } from 'react'
 import NavBar from "./navbar";
 import './studentProfile.css'
-import { Select, Form, Space, Input, Button, SelectProps } from 'antd';
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { Select, message } from 'antd';
 import config from "../../config";
 
 
@@ -27,11 +26,9 @@ export class StudentProfile extends Component {
         await fetch(`${config.baseUrl}/get_user_profile`, requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 var changed_details = data.data;
                 changed_details["user_id"] = this.state.user_id;
                 this.setState({ current_user: changed_details, user_name: data.data.display_name })
-
             });
 
 
@@ -42,6 +39,11 @@ export class StudentProfile extends Component {
         changed_details[e.target.id] = detail
         this.setState({ current_user: changed_details });
     }
+    updateSkills(s) {
+        var changed_details = this.state.current_user;
+        changed_details["skills"] = s
+        this.setState({ current_user: changed_details });
+    }
     onTypeChange = (type) => {
         console.log(type);
         this.setState({ registrationType: type });
@@ -50,8 +52,6 @@ export class StudentProfile extends Component {
         this.setState({ disabled: true });
         var current_user = this.state.current_user;
         current_user['password'] = "jane.doe@gmail.com";
-        console.log(current_user);
-        return;
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -60,10 +60,11 @@ export class StudentProfile extends Component {
         await fetch(`${config.baseUrl}/edit_profile`, requestOptions)
             .then(response => response.json())
             .then(data => {
-                if (data.status == true)
-                    alert("Profile updated succesfully!")
+                if (data.status == true) {
+                    message.success("Profile updated successfully!");
+                }
             });
-        window.location.reload();
+        //window.location.reload();
 
     }
     async updateEdit() {
@@ -72,7 +73,7 @@ export class StudentProfile extends Component {
     render() {
         return (
             <>
-                <NavBar />
+                <NavBar name={"Profile Settings"} />
                 <div class="container rounded bg-white mt-5 mb-5">
                     <div class="row">
                         <div class="col-md-3 border-right">
@@ -81,9 +82,6 @@ export class StudentProfile extends Component {
                         </div>
                         <div class="col-md-9 border-right">
                             <div class="p-3 py-5">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h4 class="text-right">Profile Settings</h4>
-                                </div>
                                 <div class="row mt-2">
                                     <div class="col-md-6"><label class="labels">Name</label><input disabled={this.state.disabled} type="text" class="form-control" placeholder={this.state.current_user.display_name} id="display_name" onChange={(e) => this.updateValues(e)} /></div>
                                     <div class="col-md-6"><label class="labels">Mobile Number</label><input disabled={this.state.disabled} type="text" class="form-control" placeholder={this.state.current_user.phone} id="phone" onChange={(e) => this.updateValues(e)} /></div>
@@ -99,13 +97,15 @@ export class StudentProfile extends Component {
                                 <div class="row mt-3">
                                     <label class="labels">Skills</label>
                                     <Select
+                                        id="skills"
                                         mode="tags"
                                         disabled={this.state.disabled}
                                         style={{ width: '50%' }}
-                                        placeholder={this.state.current_user.skills}
-                                        onChange={this.onTypeChange}
+                                        value={this.state.current_user.skills}
+                                        onChange={(s) => this.updateSkills(s)}
                                         open={false}
-                                    />
+                                    >
+                                    </Select>
                                 </div>
                                 <div class="mt-5 text-center">
                                     {!this.state.disabled && <button class="btn btn-primary profile-button p-2" type="button" onClick={(e) => this.updateProfile(e)}>Save Profile</button>}
