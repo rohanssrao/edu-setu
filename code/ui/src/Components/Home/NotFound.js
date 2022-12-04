@@ -9,7 +9,7 @@ const NotFound = () => {
 			extra={
 				<Button
 					onClick={() => {
-						window.location.replace("/");
+						window.history.back()
 					}}
 					type="primary">
 					Back Home
