@@ -2,6 +2,7 @@ from utils import *
 import bcrypt
 import datetime
 import traceback
+import json
 
 def add_posting(data):
     
@@ -13,7 +14,9 @@ def add_posting(data):
         professor: number (user id of professor),
         description: string,
         location: string,
-        prerequisites: string
+        prerequisites: string,
+        gpa: float,
+        degree: string
     }
     Response:
     {
@@ -36,26 +39,21 @@ def add_posting(data):
         location = data["location"]
         prerequisites = data["prerequisites"]
         questions = []
-        requirements = []
+        gpa = data["gpa"] if "gpa" in data else None
+        degree = json.dumps(data["degree"]) if "degree" in data else None
 
         # load in application questions as list - 10 is max # of questions
         for i in range(10):
             if ("application question " + str(i)) in data:
                 questions.append(data["application question " + str(i)])
 
-        # Load requirements for student to apply
-        if "degreerequirement" in data:
-            requirements.append(data["degreerequirement"])
-        if "gparequirement" in data:
-            requirements.append(data["gparequirement"])
-
         # Insert application into database
         cur = con.cursor()
         bind_id = cur.var(int)
         query = "INSERT INTO POSTINGS ( TITLE, PROFESSOR, DESCRIPTION, LOCATION, \
-          PREREQUISITES, CREATED_AT, UPDATED_AT ) VALUES (:1,:2,:3,:4,:5,SYSTIMESTAMP,SYSTIMESTAMP) \
-          RETURNING POSTING_ID into :6"
-        params = [title, professor, description, location, prerequisites, bind_id]
+          PREREQUISITES, GPA, DEGREE, CREATED_AT, UPDATED_AT ) VALUES (:1,:2,:3,:4,:5,:6,:7,SYSTIMESTAMP,SYSTIMESTAMP) \
+          RETURNING POSTING_ID into :8"
+        params = [title, professor, description, location, prerequisites, gpa, degree, bind_id]
         cur.execute(query, params)
 
         # Get id of inserted
@@ -100,6 +98,8 @@ Response:
 				professor_display_name: string,
 				location: string,
 				prerequisites: string,
+				gpa: float,
+				degree: string,
 				created_at: string,
 				updated_at: string
 			}
@@ -143,7 +143,7 @@ Response:
    
 def get_questions_by_posting(data):
     '''
-    Requst:
+    Request:
     {
         posting_id: number,
     }
@@ -215,6 +215,8 @@ def get_all_postings_by_professor(data):
             description: string,
             location: string,
             prerequisites: string,
+            gpa: float,
+            degree: string,
             created_at: string,
             updated_at: string,
             questions: array
@@ -241,6 +243,9 @@ def get_all_postings_by_professor(data):
         curs.rowfactory = makeDictFactory(curs)
         response = curs.fetchall()
 
+        # Convert degree from JSON array back to list
+        for app in response:
+            app["degree"] = json.loads(app["degree"]) if app["degree"] else []
 
         try:
             con.close()
@@ -270,6 +275,8 @@ def update_posting(data):
         description: string,
         location: string,
         prerequisites: string,
+        gpa: float,
+        degree: string,
         questions: array
     }
     Response:
@@ -294,6 +301,8 @@ def update_posting(data):
         location = data["location"]
         prerequisites = data["prerequisites"]
         questions = []
+        gpa = data["gpa"] if "gpa" in data else None
+        degree = json.dumps(data["degree"]) if "degree" in data else None
 
         # load in application questions as list - 10 is max # of questions
         for i in range(10):
@@ -302,8 +311,8 @@ def update_posting(data):
 
         # Insert application into database
         cur = con.cursor()
-        query = "UPDATE POSTINGS SET TITLE = :1, DESCRIPTION = :2, LOCATION = :3, PREREQUISITES = :4, UPDATED_AT = SYSTIMESTAMP WHERE posting_id = :5" 
-        params = [title, description, location, prerequisites, posting_id]
+        query = "UPDATE POSTINGS SET TITLE = :1, DESCRIPTION = :2, LOCATION = :3, PREREQUISITES = :4, GPA = :5, DEGREE = :6, UPDATED_AT = SYSTIMESTAMP WHERE posting_id = :7" 
+        params = [title, description, location, prerequisites, gpa, degree, posting_id]
         cur.execute(query, params)
 
         # Update questions in database
@@ -379,6 +388,8 @@ Response:
 			title: string,
 			description: string,
 			prerequisites: string,
+			gpa: float,
+            degree: string,
 			applications: // A list of all the applications for this position_id
 			[
 				{
@@ -415,28 +426,28 @@ Response:
     try:
         professor = data["professor"]
         query = '''SELECT postings.posting_id,
-       postings.professor as professor_user_id,
-       title,
-       description,
-       prerequisites,
-       applications.application_id,
-	   student.user_id AS student_user_id,
-       users.display_name AS student_display_name,
-	   users.email AS student_email,
- 	   users.phone AS student_phone,
-	   student.gpa AS student_gpa,
-	   student.major AS student_major,
-	   student.minor AS student_minor,
-	   student.year AS	student_year,
-       applications.status
-       
-					
-FROM   postings 
-FULL OUTER JOIN applications on APPLICATIONS.posting_id = postings.POSTING_ID
-FULL OUTER JOIN student on applications.student = student.USER_ID
-left OUTER JOIN USERS on users.user_id = student.user_id
-where postings.PROFESSOR= :1 and application_id is not NULL
-order by postings.POSTING_ID'''
+        postings.professor as professor_user_id,
+        title,
+        description,
+        prerequisites,
+        gpa,
+        degree,
+        applications.application_id,
+        student.user_id AS student_user_id,
+        users.display_name AS student_display_name,
+        users.email AS student_email,
+        users.phone AS student_phone,
+        student.gpa AS student_gpa,
+        student.major AS student_major,
+        student.minor AS student_minor,
+        student.year AS	student_year,
+        applications.status
+        FROM   postings 
+        FULL OUTER JOIN applications on APPLICATIONS.posting_id = postings.POSTING_ID
+        FULL OUTER JOIN student on applications.student = student.USER_ID
+        left OUTER JOIN USERS on users.user_id = student.user_id
+        where postings.PROFESSOR= :1 and application_id is not NULL
+        order by postings.POSTING_ID'''
         params = [professor]
         curs.execute(query, params)
         curs.rowfactory = makeDictFactory(curs)
@@ -468,6 +479,8 @@ order by postings.POSTING_ID'''
                     temp["title"] = row["title"]
                     temp["description"] = row["description"]
                     temp["prerequisites"] = row["prerequisites"]
+                    temp["gpa"] = row["gpa"]
+                    temp["degree"] = row["degree"]
                     res[row["posting_id"]] = temp
                     dcit1 = {}
                     dcit1["application_id"] = row["application_id"]

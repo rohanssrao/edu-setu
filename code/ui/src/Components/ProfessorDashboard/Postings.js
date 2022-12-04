@@ -48,10 +48,11 @@ export default class Postings extends React.Component {
 	};
 	populateUpdateData = () => {
 		let questions = {};
-		for(let i = 0; i < this.state.updateQuestions.length; i++) {
+		for (let i = 0; i < this.state.updateQuestions.length; i++) {
 			questions['application question ' + i] = this.state.updateQuestions[i].question;
 		}
-		this.updateFormRef.current?.setFieldsValue({...this.state.updateData, ...questions});
+		this.updateFormRef.current?.setFieldsValue({ ...this.state.updateData, ...questions });
+		console.log(this.state.updateData);
 	};
 	fetchPostings = () => {
 		this.setState({ loading: true });
@@ -147,7 +148,7 @@ export default class Postings extends React.Component {
 			.then((res) => res.json())
 			.then((response) => {
 				if (response.status) {
-					this.setState({ updateQuestions: response.data});
+					this.setState({ updateQuestions: response.data });
 					this.setState({ updateVisible: true, updateData: record });
 
 				} else {
@@ -157,7 +158,7 @@ export default class Postings extends React.Component {
 			})
 			.catch((err) => console.log(err));
 	};
-	
+
 	onDeletePosting = (data) => {
 		this.setState({ loadingDeletePosting: true });
 		let url = `${config.baseUrl}/delete_posting`;
