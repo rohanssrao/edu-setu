@@ -3,9 +3,11 @@ import professor_api
 import auth
 from flask import Flask, request
 from flask_cors import CORS
-
+from resume_api import resume_api
 app = Flask(__name__)
 CORS(app)
+
+app.register_blueprint(resume_api)
 
 @app.route("/")
 def index():
