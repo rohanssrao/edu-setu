@@ -16,7 +16,8 @@ def add_posting(data):
         location: string,
         prerequisites: string,
         gpa: float,
-        degree: string
+        degree: string,
+        job_type: string
     }
     Response:
     {
@@ -35,6 +36,7 @@ def add_posting(data):
         # Get the data from JSON Payload
         professor = data["professor"]
         title = data["title"]
+        job_type = data["job_type"]
         description = data["description"]
         location = data["location"]
         prerequisites = data["prerequisites"]
@@ -51,9 +53,9 @@ def add_posting(data):
         cur = con.cursor()
         bind_id = cur.var(int)
         query = "INSERT INTO POSTINGS ( TITLE, PROFESSOR, DESCRIPTION, LOCATION, \
-          PREREQUISITES, GPA, DEGREE, CREATED_AT, UPDATED_AT ) VALUES (:1,:2,:3,:4,:5,:6,:7,SYSTIMESTAMP,SYSTIMESTAMP) \
-          RETURNING POSTING_ID into :8"
-        params = [title, professor, description, location, prerequisites, gpa, degree, bind_id]
+          PREREQUISITES, GPA, DEGREE, JOB_TYPE, CREATED_AT, UPDATED_AT ) VALUES (:1,:2,:3,:4,:5,:6,:7,:8,SYSTIMESTAMP,SYSTIMESTAMP) \
+          RETURNING POSTING_ID into :9"
+        params = [title, professor, description, location, prerequisites, gpa, degree, job_type, bind_id]
         cur.execute(query, params)
 
         # Get id of inserted
@@ -121,7 +123,7 @@ Response:
         return prepare_response(False,  "Unable to connect to database.")
     try:
         # query = '''select POSTING_ID, TITLE, DESCRIPTION, USERS.EMAIL, PROFESSORS.DEPARTMENT, PROFESSORs.DESIGNATION, USERS.DISPLAY_NAME, LOCATION, PREREQUISITES, CREATED_AT, UPDATED_AT from USERS JOIN PROFESSORS ON USERS.USER_ID = PROFESSORS.USER_ID JOIN POSTINGS ON PROFESSORS.USER_ID = POSTINGS.PROFESSOR'''
-        query = '''select POSTING_ID, TITLE, DESCRIPTION, USERS.EMAIL, PROFESSORS.DEPARTMENT, PROFESSORs.DESIGNATION, USERS.DISPLAY_NAME, LOCATION, PREREQUISITES, CREATED_AT, UPDATED_AT from USERS JOIN PROFESSORS ON USERS.USER_ID = PROFESSORS.USER_ID JOIN POSTINGS ON PROFESSORS.USER_ID = POSTINGS.PROFESSOR'''
+        query = '''select POSTING_ID, TITLE, DESCRIPTION, JOB_TYPE, USERS.EMAIL, PROFESSORS.DEPARTMENT, PROFESSORs.DESIGNATION, USERS.DISPLAY_NAME, LOCATION, PREREQUISITES, CREATED_AT, UPDATED_AT from USERS JOIN PROFESSORS ON USERS.USER_ID = PROFESSORS.USER_ID JOIN POSTINGS ON PROFESSORS.USER_ID = POSTINGS.PROFESSOR'''
         curs.execute(query)
         curs.rowfactory = makeDictFactory(curs)
         response = curs.fetchall()
@@ -277,6 +279,7 @@ def update_posting(data):
         prerequisites: string,
         gpa: float,
         degree: string,
+        job_type: string,
         questions: array
     }
     Response:
@@ -300,6 +303,7 @@ def update_posting(data):
         description = data["description"]
         location = data["location"]
         prerequisites = data["prerequisites"]
+        job_type = data["job_type"]
         questions = []
         gpa = data["gpa"] if "gpa" in data else None
         degree = json.dumps(data["degree"]) if "degree" in data else None
@@ -311,8 +315,8 @@ def update_posting(data):
 
         # Insert application into database
         cur = con.cursor()
-        query = "UPDATE POSTINGS SET TITLE = :1, DESCRIPTION = :2, LOCATION = :3, PREREQUISITES = :4, GPA = :5, DEGREE = :6, UPDATED_AT = SYSTIMESTAMP WHERE posting_id = :7" 
-        params = [title, description, location, prerequisites, gpa, degree, posting_id]
+        query = "UPDATE POSTINGS SET TITLE = :1, DESCRIPTION = :2, LOCATION = :3, PREREQUISITES = :4, GPA = :5, DEGREE = :6, JOB_TYPE = :7, UPDATED_AT = SYSTIMESTAMP WHERE posting_id = :8" 
+        params = [title, description, location, prerequisites, gpa, degree, job_type, posting_id]
         cur.execute(query, params)
 
         # Update questions in database

@@ -214,6 +214,7 @@ export default class Postings extends React.Component {
 					</Modal>
 					<Table loading={this.state.loading} size="small" dataSource={this.state.filteredData}>
 						<Column title="Title" dataIndex="title" key="title" />
+						<Column title="Job type" dataIndex="job_type" key="job_type" />
 						<Column title="Description" dataIndex="description" key="description" />
 						<Column title="Prerequisites" dataIndex="prerequisites" key="prerequisites" />
 						<Column title="Created" dataIndex="created_at" key="created_at" />
