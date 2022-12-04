@@ -36,11 +36,18 @@ def add_posting(data):
         location = data["location"]
         prerequisites = data["prerequisites"]
         questions = []
+        requirements = []
 
         # load in application questions as list - 10 is max # of questions
         for i in range(10):
             if ("application question " + str(i)) in data:
                 questions.append(data["application question " + str(i)])
+
+        # Load requirements for student to apply
+        if "degreerequirement" in data:
+            requirements.append(data["degreerequirement"])
+        if "gparequirement" in data:
+            requirements.append(data["gparequirement"])
 
         # Insert application into database
         cur = con.cursor()

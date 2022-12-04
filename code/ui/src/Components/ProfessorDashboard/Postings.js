@@ -83,6 +83,7 @@ export default class Postings extends React.Component {
 	submitAddPosting = (data) => {
 		this.setState({ loadingAddPosting: true });
 		let url = `${config.baseUrl}/add_posting`;
+		console.log(data);
 		fetch(url, {
 			method: "POST",
 			headers: {

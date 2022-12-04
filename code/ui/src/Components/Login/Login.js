@@ -361,7 +361,7 @@ export default class Login extends React.Component {
 										placeholder="Press enter to add a skill"
 										onChange={this.onTypeChangeSkills}
 										open={false}
-									//options={}
+										//options={}
 									/>
 								</Form.Item>
 
