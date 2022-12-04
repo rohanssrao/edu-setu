@@ -208,4 +208,4 @@ export class TrackApplication extends Component {
   }
 }
 
-export default TrackApplication
+export default TrackApplication;
