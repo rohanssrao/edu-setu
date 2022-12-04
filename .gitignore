@@ -3,3 +3,4 @@ keys/
 db/
 .env
 *Wallet*
+.DS_Store

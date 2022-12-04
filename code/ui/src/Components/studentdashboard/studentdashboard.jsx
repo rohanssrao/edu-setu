@@ -81,6 +81,10 @@ const MyVerticallyCenteredModal = (props) => {
       </Modal.Header>
       <Modal.Body>
         <p><small><i>Posted on: {props.currentJob.created_at}</i></small></p>
+        <p><b>Job type</b></p>
+        <p>
+          {props.currentJob.job_type}
+        </p>
         <p><b>Description</b></p>
         <p>
           {props.currentJob.description}
@@ -342,6 +346,7 @@ export class StudentDashboard extends Component {
                   <tr>
                     <th>Job ID</th>
                     <th >Title</th>
+                    <th>Type</th>
                     <th>Professor</th>
                     <th>Department</th>
                     <th>Location</th>
@@ -353,6 +358,7 @@ export class StudentDashboard extends Component {
                     this.state.jobs.map(jobs => (
                       <tr>
                         <td id="postingId">{jobs.posting_id}</td>
+                        <td id="job_type">{jobs.job_type}</td>
                         <td id="postingTitle"><a className="link-primary" onClick={() => {
                           this.setState({ modalShow: true });
                           this.setState({ currentJob: jobs });

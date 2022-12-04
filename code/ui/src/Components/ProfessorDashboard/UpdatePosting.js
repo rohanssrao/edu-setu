@@ -73,6 +73,36 @@ export class UpdatePosting extends Component {
           <Input placeholder="Title" />
         </Form.Item>
         <Form.Item
+          name="job_type"
+          label="Job Type"
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: "Please select the job type",
+            },
+          ]}>
+          <Select
+            placeholder="This is a..."
+          >
+            <Option key="internship" value="Internship">
+              Internship
+            </Option>
+            <Option key="co-op" value="Co-op">
+              Co-op
+            </Option>
+            <Option key="ft-entry" value="Full Time Entry Level">
+              Full Time Entry Level
+            </Option>
+            <Option key="ft-experienced" value="Full Time Experienced">
+              Full Time Experienced
+            </Option>
+            <Option key="part-time" value="Part Time">
+              Part Time
+            </Option>
+          </Select>
+        </Form.Item>
+        <Form.Item
           label="Description"
           name="description"
           rules={[

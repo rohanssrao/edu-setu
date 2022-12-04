@@ -11,8 +11,15 @@ export class AddNewPosting extends Component {
       applicationQuestions: 1,
       gpaRequirement: false,
       degreeRequirement: "",
+      jobType: "",
     };
   }
+
+  onTypeChange = (type) => {
+    console.log(type);
+    this.setState({ jobType: type });
+  };
+
   onDegreeChange = (type) => {
     console.log(type);
     this.setState({ degreeRequirement: type });
@@ -74,6 +81,37 @@ export class AddNewPosting extends Component {
           ]}
         >
           <Input placeholder="Title" />
+        </Form.Item>
+        <Form.Item
+          name="job_type"
+          label="Job Type"
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: "Please select the job type",
+            },
+          ]}>
+          <Select
+            onChange={this.onTypeChange}
+            placeholder="This is a..."
+          >
+            <Option key="internship" value="Internship">
+              Internship
+            </Option>
+            <Option key="co-op" value="Co-op">
+              Co-op
+            </Option>
+            <Option key="ft-entry" value="Full Time Entry Level">
+              Full Time Entry Level
+            </Option>
+            <Option key="ft-experienced" value="Full Time Experienced">
+              Full Time Experienced
+            </Option>
+            <Option key="part-time" value="Part Time">
+              Part Time
+            </Option>
+          </Select>
         </Form.Item>
         <Form.Item
           label="Description"
