@@ -9,6 +9,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import config from "../../config";
 
 
 function MyVerticallyCenteredModal(props) {
@@ -63,7 +64,7 @@ export class TrackApplication extends Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ "user_id": this.state.user_id })
     };
-    await fetch('http://140.238.250.0:5000/get_user_profile', requestOptions)
+    await fetch(`${config.baseUrl}/get_user_profile`, requestOptions)
       .then(response => response.json())
       .then(data => this.setState({ current_user: data.data }));
 
@@ -72,7 +73,7 @@ export class TrackApplication extends Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ "student": this.state.user_id })
     };
-    await fetch('http://140.238.250.0:5000/get_all_applications_by_student', requestOptions2)
+    await fetch(`${config.baseUrl}/get_all_applications_by_student`, requestOptions2)
       .then(response => response.json())
       .then(data => this.setState({ applications: data.data }, () => {
         if (this.state.applications.length == 0) {
@@ -101,7 +102,7 @@ export class TrackApplication extends Component {
     const requestOptions2 = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ "application_id": application.application_id, "status": "Withdrawn", "remarks":application.remarks })
+      body: JSON.stringify({ "application_id": application.application_id, "status": "Withdrawn", "remarks": application.remarks })
     };
     await fetch('http://140.238.250.0:5000/update_application', requestOptions2)
       .then(response => response.json())
@@ -118,9 +119,7 @@ export class TrackApplication extends Component {
   render() {
     return (
       <>
-        <NavBar />
-        <h1 className="display-6">Hi, {this.state.current_user.display_name}</h1>
-        <p>Track your applications</p>
+        <NavBar name={`${this.state.current_user.display_name}'s applications`} />
 
         <link rel="stylesheet" href="studentDashboard.css"></link>
 
@@ -209,4 +208,4 @@ export class TrackApplication extends Component {
   }
 }
 
-export default TrackApplication
+export default TrackApplication;
