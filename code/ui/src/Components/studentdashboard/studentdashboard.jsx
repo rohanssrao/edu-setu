@@ -19,8 +19,6 @@ const MyVerticallyCenteredModal = (props) => {
   const handleApplicationQuestion = (e, idx) => {
     let responses = [...appResponses];
     responses[idx] = e.target.value;
-    console.log("IDX: " + idx);
-    console.log(responses[idx]);
     setAppResponses(responses);
   }
 
@@ -127,12 +125,13 @@ export class StudentDashboard extends Component {
       selectedLocation: "",
       jobs: [],
       jobs_all: [],
-      applications: []
+      applications: [],
+      department_list:[]
 
     }
   }
   async componentWillMount() {
-    var jobs = []
+    var jobs = [];
     await this.setState({ user_id: sessionStorage.getItem("user_id") })
     const requestOptions = {
       method: 'POST',
@@ -144,8 +143,10 @@ export class StudentDashboard extends Component {
       .then(data => this.setState({ current_user: data.data }, () => { console.log(this.state.current_user); }));
     await fetch(`${config.baseUrl}/get_all_postings`)
       .then(response => response.json())
-      .then(data => this.setState({ jobs_all: data.data }, () => {
-      }));
+      .then(data => {
+        let department_set = new Set(data.data.map((job)=>(job.department)));
+        this.setState({ jobs_all: data.data, department_list:Array.from(department_set)});
+      });
     const requestOptions2 = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -161,7 +162,6 @@ export class StudentDashboard extends Component {
   }
   filterIfApplied() {
     var jobs = [];
-    console.log(this.state.jobs_all);
     for (var i = 0; i < this.state.jobs_all.length; i++) {
       var flag = 0;
       for (var j = 0; j < this.state.applications.length; j++) {
@@ -232,11 +232,25 @@ export class StudentDashboard extends Component {
       }
     }
   }
-  filterByDepartment(e) {
+  filterByDepartment(e, all) {
+
     var filter = e.target.id.toUpperCase();
     var table = document.getElementById("postings");
     var tr = table.getElementsByTagName("tr");
     var td, txtValue, i, flag = 0;
+    if(all === true){
+      // Optional parameter, filter by all
+      // Loop through all table rows, showing all of them
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[3];
+        if (td) {
+          tr[i].style.display = "";
+          flag = 1;
+        }
+      }
+      this.checkMatchingPostings(flag);
+      return;
+    }
 
     // Loop through all table rows, and hide those who don't match the search query
     for (i = 0; i < tr.length; i++) {
@@ -309,8 +323,19 @@ export class StudentDashboard extends Component {
               </Dropdown.Toggle>
 
               <Dropdown.Menu variant="dark">
-                <Dropdown.Item onClick={(e) => this.filterByDepartment(e)} id="CS">CS</Dropdown.Item>
-                <Dropdown.Item onClick={(e) => this.filterByDepartment(e)} id="Mechanical">Mechanical</Dropdown.Item>
+              <Dropdown.Item onClick={(e) => this.filterByDepartment(e, true)}
+                     key={"all"} id={"all"}>All</Dropdown.Item>
+                {
+                  this.state.department_list.map((department)=>{
+                    console.log(department);
+                    if(department == null){
+                      return;
+                    }
+                    return (
+                    <Dropdown.Item onClick={(e) => this.filterByDepartment(e)}
+                     key={department} id={department}>{department}</Dropdown.Item>);
+                  })
+                }
               </Dropdown.Menu>
             </Dropdown>
             <Dropdown className="col-sm">
