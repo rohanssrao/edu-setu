@@ -1,3 +1,0 @@
-WALLET_LOCATION = (SOURCE = (METHOD = file) (METHOD_DATA = (DIRECTORY="C:\Users\david\Documents\GitHub\sql_dev_test\db_wallet")))
-SSL_SERVER_DN_MATCH=yes
-SQLNET.WALLET_OVERRIDE = TRUE
