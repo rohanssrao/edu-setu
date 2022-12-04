@@ -539,6 +539,30 @@ def delete_posting(data):
         # Get the data from JSON Payload
         posting_id = data["posting_id"]
         cur = con.cursor()
+
+        # Get all answers linked to this post
+        query = "SELECT application_id from APPLICATIONS where posting_id = :1"
+        params = [posting_id]
+        cur.execute(query, params)
+        app_ids_to_delete = cur.fetchall()
+        print(app_ids_to_delete)
+
+        for id in app_ids_to_delete:
+            query = "DELETE FROM POSTING_RESPONSES WHERE application_id = :1"
+            params = [id[0]]
+            cur.execute(query, params)
+
+        query = "DELETE FROM POSTING_QUESTIONS WHERE posting_id = :1"
+        params = [posting_id]
+        cur.execute(query, params)
+
+        # Delete from all applications
+        for id in app_ids_to_delete:
+            query = "DELETE FROM APPLICATIONS WHERE application_id = :1"
+            params = [id[0]]
+            cur.execute(query, params)
+
+
         query = "DELETE FROM POSTINGS WHERE posting_id = :1" 
         params = [posting_id]
         cur.execute(query, params)
