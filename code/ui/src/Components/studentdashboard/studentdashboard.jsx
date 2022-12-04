@@ -28,7 +28,7 @@ const MyVerticallyCenteredModal = (props) => {
   const handleApply = () => {
     //build appropriate object
     let answers = [];
-    for(let i = 0; i < appQuestions.length; i++) {
+    for (let i = 0; i < appQuestions.length; i++) {
       answers.push({
         question_id: appQuestions[i].question_id,
         answer: appResponses[i]
@@ -37,9 +37,9 @@ const MyVerticallyCenteredModal = (props) => {
     props.apply(props.currentJob, answers, props.user_id);
   }
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     let postingId = props.currentJob.posting_id;
-    if(postingId){
+    if (postingId) {
       let url = `${config.baseUrl}/get_questions_by_posting`;
       fetch(url, {
         method: "POST",
@@ -62,14 +62,14 @@ const MyVerticallyCenteredModal = (props) => {
           setLoading(false);
         })
         .catch((err) => console.log(err));
-    } 
-    
+    }
+
   }, [props.currentJob.posting_id]);
 
   return (
     <Modal
-      show = {props.show}
-      onHide = {props.onHide}
+      show={props.show}
+      onHide={props.onHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -93,20 +93,20 @@ const MyVerticallyCenteredModal = (props) => {
 
         {loading && <p>
           Loading...
-          </p>}
-        {!loading && appQuestions && appQuestions.map((question, idx)=>{
-          return(
-            <div key = {"app question" + idx} >
-            <p>{question.question}</p>
-            <TextArea
-              //type="textarea"
-              rows={4}
-              label={question.question}
-              name= {question.question}
-              onChange = {(e)=>{handleApplicationQuestion(e, idx)}}
-              value={appResponses[idx]}
-            />
-          </div>);
+        </p>}
+        {!loading && appQuestions && appQuestions.map((question, idx) => {
+          return (
+            <div key={"app question" + idx} >
+              <p>{question.question}</p>
+              <TextArea
+                //type="textarea"
+                rows={4}
+                label={question.question}
+                name={question.question}
+                onChange={(e) => { handleApplicationQuestion(e, idx) }}
+                value={appResponses[idx]}
+              />
+            </div>);
         })}
         <p><b>Application Requirements</b></p>
         <p>
@@ -162,7 +162,7 @@ export class StudentDashboard extends Component {
       .then(response => response.json())
       .then(data => this.setState({ applications: data.data }, () => {
         this.filterIfApplied();
-        
+
       }));
   }
   filterIfApplied() {
@@ -189,7 +189,7 @@ export class StudentDashboard extends Component {
   }
   async apply(jobs, answers, user_id) {
     var posting_id = jobs.posting_id;
-    
+
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -294,10 +294,9 @@ export class StudentDashboard extends Component {
   render() {
     return (
       <>
-        <NavBar />
-        <h1 className="display-3">Search for a research role</h1>
-        <p>Enhance your skills by working as a research assistant under professors</p>
+        <NavBar name={"Search for a research role"} />
         <div className="container">
+          <p></p>
           <div className="row justify-content-center align-items-center">
             <InputGroup className="col-sm text-center">
               <FormControl
@@ -327,7 +326,7 @@ export class StudentDashboard extends Component {
               <Dropdown.Menu variant="dark">
                 <Dropdown.Item onClick={(e) => this.filterByLocation(e)} id="Remote">Remote</Dropdown.Item>
                 <Dropdown.Item onClick={(e) => this.filterByLocation(e)} id="Hybrid">Hybrid</Dropdown.Item>
-                <Dropdown.Item onClick={(e) => this.filterByLocation(e)} id="Physical">Physical</Dropdown.Item>
+                <Dropdown.Item onClick={(e) => this.filterByLocation(e)} id="In Person">In Person</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </div>
@@ -379,9 +378,10 @@ export class StudentDashboard extends Component {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu variant="dark">
-                              <Dropdown.Item active onClick={() => {                          
+                              <Dropdown.Item active onClick={() => {
                                 this.setState({ modalShow: true });
-                                this.setState({ currentJob: jobs });}}>Apply</Dropdown.Item>
+                                this.setState({ currentJob: jobs });
+                              }}>Apply</Dropdown.Item>
                               <Dropdown.Item >Save for Later</Dropdown.Item>
                               <Dropdown.Item >Get shareable URL</Dropdown.Item>
                             </Dropdown.Menu>
