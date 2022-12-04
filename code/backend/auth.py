@@ -1,6 +1,7 @@
 from utils import *
 import bcrypt
 import traceback
+import json
 
 
 def register(data):
@@ -20,6 +21,7 @@ def register(data):
             minor: string,
             degree: string,
             year: string
+            skills: string (JSON array)
         elif type == "Professor":
             department: string,
             designation
@@ -82,13 +84,14 @@ def register(data):
         user_id = bind_user_id.getvalue()[0]
 
         if user_type == "student":
-            gpa = data["gpa"] if "gpa" in data.keys() else None
             major = data["major"] if "major" in data.keys() else None
             minor = data["minor"] if "minor" in data.keys() else None
             degree = data["degree"] if "degree" in data.keys() else None
             year = data["year"] if "year" in data.keys() else None
-            query = "INSERT INTO STUDENT (USER_ID, DEGREE, YEAR, MAJOR, MINOR, GPA) VALUES (:1,:2,:3,:4,:5, :6)"
-            params = [user_id, degree, year, major, minor, gpa]
+            gpa = data["gpa"] if "gpa" in data.keys() else None
+            skills = json.dumps(data["skills"]).lower() if "skills" in data.keys() else None
+            query = "INSERT INTO STUDENT (USER_ID, DEGREE, YEAR, MAJOR, MINOR, GPA, SKILLS) VALUES (:1,:2,:3,:4,:5, :6, :7)"
+            params = [user_id, degree, year, major, minor, gpa, skills]
             cur.execute(query, params)
 
         elif user_type == "professor":
@@ -210,6 +213,7 @@ def get_user_profile(data):
                 minor: string,
                 degree: string,
                 year: string
+                skills: string (JSON array)
             elif type == "Professor":
                 department: string,
                 designation: string
@@ -257,6 +261,7 @@ def get_user_profile(data):
             data1["minor"] = row["minor"]
             data1["degree"] = row["degree"]
             data1["year"] = row["year"]
+            data1["skills"] = json.loads(row["skills"])
 
         elif user_type == "professor":
             query = "SELECT * FROM PROFESSORS WHERE USER_ID = :1"
@@ -293,11 +298,12 @@ def edit_profile(data):
         type: string (Professor / Student),
         phone: string,
         if type == "Student":
-            gpa: float,
             major: string,
             minor: string,
             degree: string,
-            year: string
+            year: string,
+            gpa: float,
+            skills: string (JSON array)
         elif type == "Professor":
             department: string,
             designation
@@ -358,13 +364,14 @@ def edit_profile(data):
         cur.execute(query, params)
 
         if user_type == "student":
-            gpa = data["gpa"]
             major = data["major"]
             minor = data["minor"]
             degree = data["degree"]
             year = data["year"]
-            query = "UPDATE STUDENT SET DEGREE = :1, YEAR = :2, MAJOR = :3, MINOR = :4, GPA = :5 WHERE USER_ID = :6"
-            params = [degree, year, major, minor, gpa, user_id]
+            gpa = data["gpa"]
+            skills = json.dumps(data["skills"])
+            query = "UPDATE STUDENT SET DEGREE = :1, YEAR = :2, MAJOR = :3, MINOR = :4, GPA = :5, SKILLS = :6 WHERE USER_ID = :7"
+            params = [degree, year, major, minor, gpa, skills, user_id]
             cur.execute(query, params)
 
         elif user_type == "professor":
