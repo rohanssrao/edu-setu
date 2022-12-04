@@ -126,7 +126,8 @@ export class StudentDashboard extends Component {
       jobs: [],
       jobs_all: [],
       applications: [],
-      department_list:[]
+      department_list:[],
+      location_list:[]
 
     }
   }
@@ -144,8 +145,11 @@ export class StudentDashboard extends Component {
     await fetch(`${config.baseUrl}/get_all_postings`)
       .then(response => response.json())
       .then(data => {
+        console.log(data);
         let department_set = new Set(data.data.map((job)=>(job.department)));
-        this.setState({ jobs_all: data.data, department_list:Array.from(department_set)});
+        let location_set = new Set(data.data.map((job)=>(job.location)));
+        this.setState({ jobs_all: data.data, department_list:Array.from(department_set),
+        location_list:Array.from(location_set)});
       });
     const requestOptions2 = {
       method: 'POST',
@@ -275,13 +279,26 @@ export class StudentDashboard extends Component {
     }
 
   }
-  filterByLocation(e) {
+  filterByLocation(e, all) {
 
     var filter = e.target.id.toUpperCase();
     var table = document.getElementById("postings");
     var tr = table.getElementsByTagName("tr");
     var td, txtValue, i, flag = 0;
 
+    if(all === true){
+      // Optional parameter, filter by all
+      // Loop through all table rows, showing all of them
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[4];
+        if (td) {
+          tr[i].style.display = "";
+          flag = 1;
+        }
+      }
+      this.checkMatchingPostings(flag);
+      return;
+    }
     // Loop through all table rows, and hide those who don't match the search query
     for (i = 0; i < tr.length; i++) {
       td = tr[i].getElementsByTagName("td")[4];
@@ -327,7 +344,6 @@ export class StudentDashboard extends Component {
                      key={"all"} id={"all"}>All</Dropdown.Item>
                 {
                   this.state.department_list.map((department)=>{
-                    console.log(department);
                     if(department == null){
                       return;
                     }
@@ -344,9 +360,18 @@ export class StudentDashboard extends Component {
               </Dropdown.Toggle>
 
               <Dropdown.Menu variant="dark">
-                <Dropdown.Item onClick={(e) => this.filterByLocation(e)} id="Remote">Remote</Dropdown.Item>
-                <Dropdown.Item onClick={(e) => this.filterByLocation(e)} id="Hybrid">Hybrid</Dropdown.Item>
-                <Dropdown.Item onClick={(e) => this.filterByLocation(e)} id="Physical">Physical</Dropdown.Item>
+                <Dropdown.Item onClick={(e) => this.filterByLocation(e, true)}
+                      key={"all"} id={"all"}>All</Dropdown.Item>
+                  {
+                    this.state.location_list.map((location)=>{
+                      if(location == null){
+                        return;
+                      }
+                      return (
+                      <Dropdown.Item onClick={(e) => this.filterByLocation(e)}
+                      key={location} id={location}>{location}</Dropdown.Item>);
+                  })
+                }
               </Dropdown.Menu>
             </Dropdown>
           </div>
