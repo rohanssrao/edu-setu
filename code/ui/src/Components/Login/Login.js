@@ -20,6 +20,7 @@ export default class Login extends React.Component {
 			degreeType: "",
 			yearType: "",
 			skillsType: "",
+			designationType: "",
 		};
 		this.years = []
 		for (let i = 0; i <= 10; i++) {
@@ -49,6 +50,10 @@ export default class Login extends React.Component {
 	onTypeChangeSkills = (type) => {
 		console.log(type);
 		this.setState({ skillsType: type });
+	};
+	onTypeChangeDesignation = (type) => {
+		console.log(type);
+		this.setState({ designationType: type });
 	};
 	onClickRegister = () => {
 		this.setState({ registerModalVisible: true });
@@ -349,30 +354,15 @@ export default class Login extends React.Component {
 								]}>
 									<InputNumber min={0} max={4} step={0.1} />
 								</Form.Item>
-								<Form.Item label="Skills">
-									<Form.List name="skills">
-										{(fields, { add, remove }) => (
-											<>
-												{fields.map(({ key, name, ...restField }) => (
-													<Space key={key} style={{ display: 'flex', marginBottom: 2 }} align="baseline">
-														<Form.Item
-															{...restField}
-															name={name}
-															rules={[{ required: true, message: 'Missing skill' }]}
-														>
-															<Input placeholder="Skill" />
-														</Form.Item>
-														<MinusCircleOutlined onClick={() => remove(name)} />
-													</Space>
-												))}
-												<Form.Item>
-													<Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-														Add skill
-													</Button>
-												</Form.Item>
-											</>
-										)}
-									</Form.List>
+								<Form.Item name="skills" label="Skills">
+									<Select
+										mode="tags"
+										style={{ width: '100%' }}
+										placeholder="Press enter to add a skill"
+										onChange={this.onTypeChangeSkills}
+										open={false}
+									//options={}
+									/>
 								</Form.Item>
 
 
@@ -386,7 +376,20 @@ export default class Login extends React.Component {
 									<Input />
 								</Form.Item>
 								<Form.Item name="designation" label="Designation" hasFeedback>
-									<Input />
+									<Select
+										onChange={this.onTypeChangeDesignation}
+										placeholder="Select designation type"
+									>
+										<Option key="Assistant Professor" value="Assistant Professor">
+											Assistant Professor
+										</Option>
+										<Option key="Associate Professor" value="Associate Professor">
+											Associate Professor
+										</Option>
+										<Option key="Professor" value="Professor">
+											Professor
+										</Option>
+									</Select>
 								</Form.Item>
 							</>
 						)}
