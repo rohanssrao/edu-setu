@@ -323,8 +323,11 @@ export default class Login extends React.Component {
 										style={{ width: '100%' }}
 										placeholder="Enter skills"
 										onChange={this.onTypeChangeSkills}
-										open={false}
-										//options={}
+										//open={false}
+										options={[{value: "Python", key:"python"},
+										{value: "Numpy", key:"numpy"},
+										{value: "Pandas", key:"pandas"},
+										{value: "Matplotlib", key:"matplotlib"},]}
 									/>
 								</Form.Item>
 							</>

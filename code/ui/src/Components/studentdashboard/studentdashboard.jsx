@@ -108,6 +108,10 @@ const MyVerticallyCenteredModal = (props) => {
             />
           </div>);
         })}
+        <p><b>Application Requirements</b></p>
+        <p>
+          {props.currentJob.requirements}
+        </p>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={handleApply}>Apply</Button>
