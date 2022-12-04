@@ -31,6 +31,7 @@ export function NavBar() {
             <img src={`${process.env.PUBLIC_URL}/assets/images/Edu_Setu_Logo_Transparent.png`} alt="Logo" id="logo" />
           </Navbar.Brand>
           <Nav className="mr-auto">
+            <Nav.Link href="/resume_generator" class="underline-hover-effect" id="underline-hover-effect">Edite Resume</Nav.Link>
             <Nav.Link href="#home" class="underline-hover-effect" id="underline-hover-effect">Saved Jobs</Nav.Link>
             <Nav.Link href="/student/trackApplications" class="underline-hover-effect" id="underline-hover-effect"> Applications</Nav.Link>
             <Dropdown >
