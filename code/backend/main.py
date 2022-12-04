@@ -3,10 +3,24 @@ import professor_api
 import auth
 from flask import Flask, request
 from flask_cors import CORS
-from resume_api import resume_api
+
+from flask_jwt_extended import JWTManager
+from models import db
 app = Flask(__name__)
 CORS(app)
+# Setup the Flask-JWT-Extended extension
+# Change this!
+app.config["JWT_SECRET_KEY"] = "5f352379324c22463451387a0aec5d2f"
+jwt = JWTManager(app)
+app.config["JWT_SECRET_KEY"] = "5f352379324c22463451387a0aec5d2f"
 
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+db.init_app(app)
+
+
+from resume_api import resume_api
 app.register_blueprint(resume_api)
 
 @app.route("/")

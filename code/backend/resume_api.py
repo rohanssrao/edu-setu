@@ -1,34 +1,22 @@
-from flask import Flask, request, Response, abort, url_for
-from flask_cors import CORS
+from flask import Flask, request, Response, abort
 from load_json_to_db import save_json_to_db, delete_from_db, update_user_data
 from models import db, UserLogin
 from user_data import AllUserData
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
-from flask_jwt_extended import JWTManager
 from flask import Blueprint
-from main import app
-
+from main import jwt
 resume_api = Blueprint('resume_api',__name__)
 
-# Setup the Flask-JWT-Extended extension
-# Change this!
-app.config["JWT_SECRET_KEY"] = "5f352379324c22463451387a0aec5d2f"
-jwt = JWTManager(app)
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-db.init_app(app)
-
-
-@app.route("/")
+@resume_api.route("/")
 def hello_world():
     return "<p>Hello, World!</p>"
 
 
-@app.route("/api/get", methods=['GET'])
+@resume_api.route("/api/get", methods=['GET'])
 @jwt_required()
 def get_user_data():
     user_id = get_jwt_identity()
@@ -37,7 +25,7 @@ def get_user_data():
     return list(all_user_data)
 
 
-@app.route('/api/submit', methods=['POST'])
+@resume_api.route('/api/submit', methods=['POST'])
 @jwt_required()
 def create():
     user_id = get_jwt_identity()
@@ -47,7 +35,7 @@ def create():
     return Response("{'a':'b'}", status=201, mimetype='application/json') if is_sucess else Response("{'a':'b'}", status=406, mimetype='application/json')
 
 
-@app.route('/api/delete', methods=['POST'])
+@resume_api.route('/api/delete', methods=['POST'])
 @jwt_required()
 def delete_entry_from_db():
     user_id = get_jwt_identity()
@@ -59,7 +47,7 @@ def delete_entry_from_db():
     return Response("{'a':'b'}", status=201, mimetype='application/json') if is_sucess else Response("{'a':'b'}", status=406, mimetype='application/json')
 
 
-@app.route('/api/register', methods=['POST'])
+@resume_api.route('/api/register', methods=['POST'])
 def new_user():
     '''
     new user registration
@@ -93,7 +81,7 @@ def verify_password(email, password):
     return user
 
 
-@app.route('/api/login', methods=["POST"])
+@resume_api.route('/api/login', methods=["POST"])
 def login():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
@@ -107,7 +95,7 @@ def login():
 # without a valid JWT present.
 
 
-@app.route("/api/protected", methods=["GET"])
+@resume_api.route("/api/protected", methods=["GET"])
 @jwt_required()
 def protected():
     # Access the identity of the current user with get_jwt_identity
