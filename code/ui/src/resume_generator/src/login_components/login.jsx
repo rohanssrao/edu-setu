@@ -12,11 +12,12 @@ export class Login extends React.Component {
       <Form
         name="basic"
         labelCol={{
-          span: 8
+          span: 4
         }}
         wrapperCol={{
-          span: 16
+          span: 18
         }}
+
         initialValues={{
           remember: true
         }}
