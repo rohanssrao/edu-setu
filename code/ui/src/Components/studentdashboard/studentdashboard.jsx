@@ -138,6 +138,7 @@ export class StudentDashboard extends Component {
       applications: [],
       department_list: [],
       location_list: [],
+      degree_list: [],
       type_list: []
     }
   }
@@ -440,6 +441,27 @@ export class StudentDashboard extends Component {
                     return (
                       <Dropdown.Item onClick={(e) => this.filterByLocation(e)}
                         key={location} id={location}>{location}</Dropdown.Item>);
+                  })
+                }
+
+              </Dropdown.Menu>
+            </Dropdown>
+            <Dropdown className="col-sm">
+              <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
+                Degree Type
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu variant="dark">
+                <Dropdown.Item onClick={(e) => this.filterByLocation(e, true)}
+                  key={"all"} id={"all"}>All</Dropdown.Item>
+                {
+                  this.state.degree_list.map((degree) => {
+                    if (degree == null) {
+                      return;
+                    }
+                    return (
+                      <Dropdown.Item onClick={(e) => this.filterByLocation(e)}
+                        key={degree} id={degree}>{degree}</Dropdown.Item>);
                   })
                 }
 
