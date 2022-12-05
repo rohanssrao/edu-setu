@@ -1,4 +1,4 @@
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import "./resume_template/resume.css";
 import { Col, Row } from "antd";
 import Resume from "./resume_components/resume";
