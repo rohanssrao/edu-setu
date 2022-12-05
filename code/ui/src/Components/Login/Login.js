@@ -62,6 +62,9 @@ export default class Login extends React.Component {
 		// this.setState({ registerModalVisible: true });
 	}
 	onRegister = (values) => {
+		localStorage.email = values.email
+		localStorage.username = values.username
+		localStorage.password = values.password
 		console.log(values);
 		this.setState({ waitingForRegistration: true });
 		let url = `${config.baseUrl}/register`;
@@ -87,6 +90,9 @@ export default class Login extends React.Component {
 			.catch((err) => console.log(err));
 	};
 	onLogin = (values) => {
+		localStorage.email = values.email
+		localStorage.username = values.username
+		localStorage.password = values.password
 		this.setState({ waitingForLogin: true });
 		let url = `${config.baseUrl}/login`;
 		fetch(url, {

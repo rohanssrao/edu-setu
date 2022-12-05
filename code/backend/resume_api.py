@@ -52,8 +52,8 @@ def new_user():
     '''
     new user registration
     '''
-    username = request.json.get('username')
     email = request.json.get('email')
+    username = request.json.get('username',email)
     password = request.json.get('password')
     if username is None or password is None or email is None:
         abort(400)  # missing arguments
