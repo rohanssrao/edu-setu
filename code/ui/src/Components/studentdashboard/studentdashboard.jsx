@@ -468,7 +468,7 @@ export class StudentDashboard extends Component {
                 <tbody>
                   {
                     this.state.jobs_all.map(jobs => (
-                      <tr>
+                      <tr key = {"pid-" + jobs.posting_id}>
                         <td id="postingId">{jobs.posting_id}</td>
                         <td id="postingTitle"><a className="link-primary" onClick={() => {
                           this.setState({ modalShow: true });
