@@ -52,6 +52,9 @@ You might be wondering "what" opportunities exactly? Well, the one that every st
 
 And, as you might have guessed, students can come in to apply and connect with the professors via this portal. Edu-Setu keeps the track of all the postings and applications, removing the hassle of "emailing" the professor and waiting for the opportunities to get buried.
 
+Resume Editing Tool
+Creating a personalized résumé for different job requirements can be a tedious task. That's why we developed a résumé-building tool to simplify this process. Our tool allows users to easily upload and organize their education, personal information, extracurricular activities, work experience, and skills. With just a few clicks, they can customize their résumé to match the requirements of a specific job and then download it as a PDF. Unlike many other résumé-building tools, our tool uses a professional, clean template that is suitable for job applications.
+
 ---
 
 ## Getting Started
