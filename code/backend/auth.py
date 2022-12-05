@@ -228,6 +228,8 @@ def get_user_profile(data):
     try:
         # Get the data from JSON Payload
         user_id = data["user_id"]
+        
+        print(user_id)
 
         cur = con.cursor()
         query = "SELECT * FROM USERS WHERE USER_ID = :1"
@@ -261,7 +263,8 @@ def get_user_profile(data):
             data1["minor"] = row["minor"]
             data1["degree"] = row["degree"]
             data1["year"] = row["year"]
-            data1["skills"] = json.loads(row["skills"])
+            # data1["skills"] = json.loads(row["skills"])
+            data1["skills"] = json.loads(row["skills"]) if row["skills"] else []
 
         elif user_type == "professor":
             query = "SELECT * FROM PROFESSORS WHERE USER_ID = :1"
