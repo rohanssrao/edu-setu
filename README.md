@@ -4,7 +4,6 @@
   <img src="./assets/Edu_Setu_Logo.gif" alt="Logo"/>
 </p>
 
-## Discord channel link - [![Discord](https://img.shields.io/discord/1010335378831585310)](https://discord.gg/ANGKkKvmWH)
 
 [![License](https://img.shields.io/github/license/jayrajmulani/group1-se-homeworks)](https://github.com/jayrajmulani/group2-se-homeworks/blob/main/LICENSE)
 ![Repo size](https://img.shields.io/github/repo-size/jayrajmulani/edu-setu)
@@ -16,15 +15,13 @@
 
 ## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [About](#about)
-- [Getting started](#getting-started)
+- [Getting Started](#getting-started)
 - [Documentation](#documentation)
-- [Development Specifications](#development-specifications)
-  - [Backend](./code/backend/README.md)
-  - [Frontend](./code/ui/README.md)
-- [Features Overview](https://www.youtube.com/watch?v=2PfVqtwufgw)
+  - [Development Specifications](#development-specifications)
 - [License](#license)
-- [Future Scope](#future-scope)
+- [Future scope](#future-scope)
 - [Contributors](#contributors)
 
 ---
@@ -76,6 +73,7 @@ docker run -it -d -p 3000:3000 jayrajmulani/edusetu_ui
 
 ## Documentation
 
+Documenation is contained in `code/docs`
 <br/>
 
 ### Development Specifications
