@@ -165,7 +165,7 @@ export class TrackApplication extends Component {
                             <Col xs={2}>
                               {
                                 (application.status.toLowerCase() == "pending" && <Badge bg="warning">Pending</Badge>) ||
-                                (application.status.toLowerCase() == "hired" && <Badge bg="success">Hired</Badge>) ||
+                                (application.status.toLowerCase() == "selected" && <Badge bg="success">Selected</Badge>) ||
                                 (application.status.toLowerCase() == "rejected" && <Badge bg="danger">Rejected</Badge>) ||
                                 (application.status.toLowerCase() == "withdrawn" && <Badge bg="dark">Withdrawn</Badge>) ||
                                 (application.status.toLowerCase() == "in_progress" && <Badge bg="info">In Progress</Badge>)
