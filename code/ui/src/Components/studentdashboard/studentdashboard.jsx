@@ -136,8 +136,8 @@ export class StudentDashboard extends Component {
       jobs: [],
       jobs_all: [],
       applications: [],
-      department_list:[],
-      location_list:[]
+      department_list: [],
+      location_list: []
 
     }
   }
@@ -156,10 +156,12 @@ export class StudentDashboard extends Component {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        let department_set = new Set(data.data.map((job)=>(job.department)));
-        let location_set = new Set(data.data.map((job)=>(job.location)));
-        this.setState({ jobs_all: data.data, department_list:Array.from(department_set),
-        location_list:Array.from(location_set)});
+        let department_set = new Set(data.data.map((job) => (job.department)));
+        let location_set = new Set(data.data.map((job) => (job.location)));
+        this.setState({
+          jobs_all: data.data, department_list: Array.from(department_set),
+          location_list: Array.from(location_set)
+        });
       });
     const requestOptions2 = {
       method: 'POST',
@@ -252,7 +254,7 @@ export class StudentDashboard extends Component {
     var table = document.getElementById("postings");
     var tr = table.getElementsByTagName("tr");
     var td, txtValue, i, flag = 0;
-    if(all === true){
+    if (all === true) {
       // Optional parameter, filter by all
       // Loop through all table rows, showing all of them
       for (i = 0; i < tr.length; i++) {
@@ -296,7 +298,7 @@ export class StudentDashboard extends Component {
     var tr = table.getElementsByTagName("tr");
     var td, txtValue, i, flag = 0;
 
-    if(all === true){
+    if (all === true) {
       // Optional parameter, filter by all
       // Loop through all table rows, showing all of them
       for (i = 0; i < tr.length; i++) {
@@ -349,16 +351,16 @@ export class StudentDashboard extends Component {
               </Dropdown.Toggle>
 
               <Dropdown.Menu variant="dark">
-              <Dropdown.Item onClick={(e) => this.filterByDepartment(e, true)}
-                     key={"all"} id={"all"}>All</Dropdown.Item>
+                <Dropdown.Item onClick={(e) => this.filterByDepartment(e, true)}
+                  key={"all"} id={"all"}>All</Dropdown.Item>
                 {
-                  this.state.department_list.map((department)=>{
-                    if(department == null){
+                  this.state.department_list.map((department) => {
+                    if (department == null) {
                       return;
                     }
                     return (
-                    <Dropdown.Item onClick={(e) => this.filterByDepartment(e)}
-                     key={department} id={department}>{department}</Dropdown.Item>);
+                      <Dropdown.Item onClick={(e) => this.filterByDepartment(e)}
+                        key={department} id={department}>{department}</Dropdown.Item>);
                   })
                 }
               </Dropdown.Menu>
@@ -370,15 +372,15 @@ export class StudentDashboard extends Component {
 
               <Dropdown.Menu variant="dark">
                 <Dropdown.Item onClick={(e) => this.filterByLocation(e, true)}
-                      key={"all"} id={"all"}>All</Dropdown.Item>
-                  {
-                    this.state.location_list.map((location)=>{
-                      if(location == null){
-                        return;
-                      }
-                      return (
+                  key={"all"} id={"all"}>All</Dropdown.Item>
+                {
+                  this.state.location_list.map((location) => {
+                    if (location == null) {
+                      return;
+                    }
+                    return (
                       <Dropdown.Item onClick={(e) => this.filterByLocation(e)}
-                      key={location} id={location}>{location}</Dropdown.Item>);
+                        key={location} id={location}>{location}</Dropdown.Item>);
                   })
                 }
 
@@ -409,7 +411,6 @@ export class StudentDashboard extends Component {
                     this.state.jobs.map(jobs => (
                       <tr>
                         <td id="postingId">{jobs.posting_id}</td>
-                        <td id="job_type">{jobs.job_type}</td>
                         <td id="postingTitle"><a className="link-primary" onClick={() => {
                           this.setState({ modalShow: true });
                           this.setState({ currentJob: jobs });
@@ -425,6 +426,7 @@ export class StudentDashboard extends Component {
                             onHide={() => this.setState({ modalShow: false })}
 
                           /></td>
+                        <td id="job_type">{jobs.job_type}</td>
                         <td>{jobs.display_name}</td>
                         <td id="postingDepartment">{jobs.department}</td>
                         <td id="postingLocation">{jobs.location}</td>
