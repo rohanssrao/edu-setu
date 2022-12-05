@@ -20,18 +20,24 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     {children}
   </a>
 ));
-export function NavBar() {
+export function NavBar({ name }) {
   return (
     <>
-    <link rel="stylesheet" type="text/css" href="./index.css"/>
+      <link rel="stylesheet" type="text/css" href="./index.css" />
 
-      <Navbar bg="light" variant="light" fixed="top" id="navbar">
+      <Navbar bg="light" variant="light" fixed="top" id="navbar" style={{ zIndex: 0 }}>
         <Container>
           <Navbar.Brand href="/student/home">
             <img src={`${process.env.PUBLIC_URL}/assets/images/Edu_Setu_Logo_Transparent.png`} alt="Logo" id="logo" />
+            {name}
           </Navbar.Brand>
           <Nav className="mr-auto">
-            <Nav.Link href="#home" class="underline-hover-effect" id="underline-hover-effect">Saved Jobs</Nav.Link>
+
+
+            <Nav.Link href="/resume_generator" class="underline-hover-effect" id="underline-hover-effect">Edit Resume</Nav.Link>
+            <Nav.Link href="/student/home" class="underline-hover-effect" id="underline-hover-effect">Postings</Nav.Link>
+            <Nav.Link href="/student/savedJobs" class="underline-hover-effect" id="underline-hover-effect">Saved Jobs</Nav.Link>
+
             <Nav.Link href="/student/trackApplications" class="underline-hover-effect" id="underline-hover-effect"> Applications</Nav.Link>
             <Dropdown >
               <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components"  >

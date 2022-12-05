@@ -22,6 +22,7 @@ export default class Postings extends React.Component {
 			updateVisible: false,
 			updateData: {},
 			loadingDeletePosting: false,
+			updateQuestions: []
 		};
 	}
 	onSearch = (value) => {
@@ -46,7 +47,12 @@ export default class Postings extends React.Component {
 		this.setState({ visible: true });
 	};
 	populateUpdateData = () => {
-		this.updateFormRef.current?.setFieldsValue(this.state.updateData);
+		let questions = {};
+		for (let i = 0; i < this.state.updateQuestions.length; i++) {
+			questions['application question ' + i] = this.state.updateQuestions[i].question;
+		}
+		this.updateFormRef.current?.setFieldsValue({ ...this.state.updateData, ...questions });
+		console.log(this.state.updateData);
 	};
 	fetchPostings = () => {
 		this.setState({ loading: true });
@@ -78,6 +84,7 @@ export default class Postings extends React.Component {
 	submitAddPosting = (data) => {
 		this.setState({ loadingAddPosting: true });
 		let url = `${config.baseUrl}/add_posting`;
+		console.log(data);
 		fetch(url, {
 			method: "POST",
 			headers: {
@@ -126,8 +133,32 @@ export default class Postings extends React.Component {
 			.catch((err) => console.log(err));
 	};
 	onUpdate = (record) => {
-		this.setState({ updateVisible: true, updateData: record });
+		// Fetch Questions 
+		let url = `${config.baseUrl}/get_questions_by_posting`;
+		fetch(url, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "*",
+			},
+			body: JSON.stringify({
+				posting_id: record.posting_id,
+			}),
+		})
+			.then((res) => res.json())
+			.then((response) => {
+				if (response.status) {
+					this.setState({ updateQuestions: response.data });
+					this.setState({ updateVisible: true, updateData: record });
+
+				} else {
+					message.error(response.data, 1);
+				}
+				this.setState({ loading: false });
+			})
+			.catch((err) => console.log(err));
 	};
+
 	onDeletePosting = (data) => {
 		this.setState({ loadingDeletePosting: true });
 		let url = `${config.baseUrl}/delete_posting`;
@@ -183,6 +214,7 @@ export default class Postings extends React.Component {
 					</Modal>
 					<Table loading={this.state.loading} size="small" dataSource={this.state.filteredData}>
 						<Column title="Title" dataIndex="title" key="title" />
+						<Column title="Job type" dataIndex="job_type" key="job_type" />
 						<Column title="Description" dataIndex="description" key="description" />
 						<Column title="Prerequisites" dataIndex="prerequisites" key="prerequisites" />
 						<Column title="Created" dataIndex="created_at" key="created_at" />

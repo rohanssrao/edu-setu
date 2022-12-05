@@ -3,7 +3,7 @@ import React from "react";
 import { Typography, Divider, Table, message, Modal, Button, Space, Tooltip, Tag } from "antd";
 import config from "../../config";
 import Column from "antd/lib/table/Column";
-import { EditOutlined, ReloadOutlined } from "@ant-design/icons";
+import { EditOutlined, ReloadOutlined, EyeOutlined } from "@ant-design/icons";
 import { UpdateApplication } from "./UpdateApplication";
 const { Title } = Typography;
 const statusColors = {
@@ -26,6 +26,7 @@ export default class Applications extends React.Component {
 			updateVisible: false,
 			applicantsData: {},
 			updateApplicantData: {},
+			responses: []
 		};
 	}
 	onCloseEdit = () => {
@@ -40,6 +41,34 @@ export default class Applications extends React.Component {
 			applicantsData: record,
 		});
 	};
+
+	fetchApplicationQuestions = (record) => {
+		let url = `${config.baseUrl}/get_responses_for_application`;
+		console.log(record);
+		fetch(url, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"Access-Control-Allow-Origin": "*",
+			},
+			body: JSON.stringify({
+				application: record.application_id
+			}),
+		})
+			.then((res) => res.json())
+			.then((response) => {
+				console.log(response);
+				if (response.status) {
+					console.log(response.data);
+					this.setState({ responses: response.data });
+				} else {
+					message.error(response.data, 1);
+				}
+				this.setState({ loading: false });
+			})
+			.catch((err) => console.log(err));
+	}
+
 	fetchApplications = () => {
 		this.setState({ loading: true });
 		let url = `${config.baseUrl}/get_applications_for_professor`;
@@ -55,6 +84,7 @@ export default class Applications extends React.Component {
 		})
 			.then((res) => res.json())
 			.then((response) => {
+				console.log(response);
 				if (response.status) {
 					console.log(response.data);
 					this.setState({ data: response.data, filteredData: response.data });
@@ -71,6 +101,7 @@ export default class Applications extends React.Component {
 	}
 	onUpdateApplication = (record) => {
 		this.setState({ updateApplicantData: record, updateVisible: true });
+		this.fetchApplicationQuestions(record);
 	};
 	populateUpdateData = () => {
 		if (this.updateFormRef.current.getFieldsValue().application_id !== this.state.updateApplicantData.application_id)
@@ -136,6 +167,7 @@ export default class Applications extends React.Component {
 							<Column title="Minor" dataIndex="student_minor" key="student_minor" />
 							<Column title="Phone" dataIndex="student_phone" key="student_phone" />
 							<Column title="Year" dataIndex="student_year" key="student_year" />
+							<Column title="Responses" dataIndex ="student_responses" key="data_index" />
 							<Column
 								title="Status"
 								key="status"
@@ -148,7 +180,7 @@ export default class Applications extends React.Component {
 								key="action"
 								render={(record) => (
 									<Space size="small">
-										<Tooltip title="test">
+										<Tooltip title="Update Application">
 											<Button type="link" icon={<EditOutlined />} onClick={() => this.onUpdateApplication(record)} />
 										</Tooltip>
 									</Space>

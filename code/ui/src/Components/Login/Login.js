@@ -1,10 +1,14 @@
 import React from "react";
-import { Form, Input, Button, Typography, Modal, message, Divider, Select, InputNumber } from "antd";
+import { Form, Input, Button, Typography, Modal, message, Divider, Select, InputNumber, Space, } from "antd";
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import config from "../../config";
 import logo from "../../assets/logo.png";
 import "./Login.css";
+import majors from "./majors";
 const { Title } = Typography;
 const { Option } = Select;
+const year = (new Date()).getFullYear();
+
 export default class Login extends React.Component {
 	constructor(props) {
 		super(props);
@@ -13,13 +17,43 @@ export default class Login extends React.Component {
 			waitingForLogin: false,
 			registerModalVisible: false,
 			registrationType: "",
+			degreeType: "",
+			yearType: "",
+			skillsType: "",
+			designationType: "",
 		};
+		this.years = []
+		for (let i = 0; i <= 10; i++) {
+			this.years.push(<Option key={year + i} value={year + i}>
+				{year + i}
+			</Option>)
+		}
+		this.majors = []
+		majors.forEach(major => {
+			this.majors.push({ "label": major[2], "value": major[2] });
+		});
 	}
 	formRef = React.createRef();
 	registerFormRef = React.createRef();
 	onTypeChange = (type) => {
 		console.log(type);
 		this.setState({ registrationType: type });
+	};
+	onTypeChangeDegree = (type) => {
+		console.log(type);
+		this.setState({ degreeType: type });
+	};
+	onTypeChangeYear = (type) => {
+		console.log(type);
+		this.setState({ yearType: type });
+	};
+	onTypeChangeSkills = (type) => {
+		console.log(type);
+		this.setState({ skillsType: type });
+	};
+	onTypeChangeDesignation = (type) => {
+		console.log(type);
+		this.setState({ designationType: type });
 	};
 	onClickRegister = () => {
 		this.setState({ registerModalVisible: true });
@@ -28,6 +62,11 @@ export default class Login extends React.Component {
 		// this.setState({ registerModalVisible: true });
 	}
 	onRegister = (values) => {
+		delete localStorage['token']
+		localStorage.email = values.email
+		localStorage.username = values.username
+		localStorage.password = values.password
+		console.log(values);
 		this.setState({ waitingForRegistration: true });
 		let url = `${config.baseUrl}/register`;
 		fetch(url, {
@@ -52,6 +91,10 @@ export default class Login extends React.Component {
 			.catch((err) => console.log(err));
 	};
 	onLogin = (values) => {
+		delete localStorage['token']
+		localStorage.email = values.email
+		localStorage.username = values.username
+		localStorage.password = values.password
 		this.setState({ waitingForLogin: true });
 		let url = `${config.baseUrl}/login`;
 		fetch(url, {
@@ -71,6 +114,7 @@ export default class Login extends React.Component {
 					sessionStorage.setItem("display_name", response.data.display_name);
 					sessionStorage.setItem("type", response.data.type);
 					sessionStorage.setItem("user_id", response.data.user_id);
+					console.log("User ID: " + sessionStorage.getItem("user_id"));
 				} else {
 					sessionStorage.setItem("loggedIn", "false");
 					message.error(response.data, 3);
@@ -166,7 +210,7 @@ export default class Login extends React.Component {
 								{
 									required: true,
 									type: "email",
-									message: "Please input valid Email",
+									message: "Please input a valid email",
 								},
 							]}>
 							<Input />
@@ -177,7 +221,7 @@ export default class Login extends React.Component {
 							rules={[
 								{
 									required: true,
-									message: "Please enter your Full Name",
+									message: "Please enter your name",
 								},
 							]}>
 							<Input />
@@ -188,7 +232,7 @@ export default class Login extends React.Component {
 							rules={[
 								{
 									pattern: new RegExp("^[0-9]{10}$"),
-									message: "Please enter a valid phone. Just the 10 digits!",
+									message: "Please enter a valid phone number (just the 10 digits)",
 								},
 							]}
 							hasFeedback>
@@ -200,11 +244,11 @@ export default class Login extends React.Component {
 							rules={[
 								{
 									required: true,
-									message: "Please input password. This will be used for Login.",
+									message: "Please choose a password",
 								},
 								{
 									pattern: new RegExp(".{8,}"),
-									message: "Password must be minumum 8 characters long.",
+									message: "Password must be at least 8 characters long.",
 								},
 							]}
 							hasFeedback>
@@ -218,7 +262,7 @@ export default class Login extends React.Component {
 							rules={[
 								{
 									required: true,
-									message: "Please confirm your password!",
+									message: "Please confirm your password",
 								},
 								({ getFieldValue }) => ({
 									validator(_, value) {
@@ -226,7 +270,7 @@ export default class Login extends React.Component {
 											return Promise.resolve();
 										}
 
-										return Promise.reject(new Error("The two passwords that you entered do not match!"));
+										return Promise.reject(new Error("Passwords do not match"));
 									},
 								}),
 							]}>
@@ -239,13 +283,12 @@ export default class Login extends React.Component {
 							rules={[
 								{
 									required: true,
-									message: "Please select a type.",
+									message: "Please select your user type",
 								},
 							]}>
 							<Select
 								onChange={this.onTypeChange}
-								placeholder="Are you a?"
-								// defaultValue={"student"}
+								placeholder="I am a..."
 							>
 								<Option key="student" value="student">
 									Student
@@ -260,20 +303,80 @@ export default class Login extends React.Component {
 						) : this.state.registrationType === "student" ? (
 							<>
 								<Form.Item name="degree" label="Degree" hasFeedback>
-									<Input />
+									<Select
+										onChange={this.onTypeChangeDegree}
+										placeholder="Select degree type"
+									>
+										<Option key="Bachelor's" value="Bachelor's">
+											Bachelor's
+										</Option>
+										<Option key="Master's" value="Master's">
+											Master's
+										</Option>
+										<Option key="Ph.D." value="Ph.D.">
+											Ph.D.
+										</Option>
+									</Select>
 								</Form.Item>
 								<Form.Item name="year" label="Year" hasFeedback>
-									<Input />
+									<Select
+										onChange={this.onTypeChangeYear}
+										placeholder="Select graduation year"
+									>
+										{this.years}
+									</Select>
 								</Form.Item>
-								<Form.Item name="major" label="Major" hasFeedback>
-									<Input />
+								<Form.Item name="major" label="Major" hasFeedback rules={[
+									{
+										required: true,
+										message: "Please select your major",
+									},
+								]}>
+									<Select
+										showSearch
+										placeholder="Select major"
+										filterOption={(input, option) =>
+											(option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+										}
+										options={this.majors}
+									>
+									</Select>
 								</Form.Item>
 								<Form.Item name="minor" label="Minor" hasFeedback>
-									<Input />
+									<Select
+										showSearch
+										placeholder="Select minor"
+										allowClear
+										filterOption={(input, option) =>
+											(option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+										}
+										options={this.majors}
+									>
+									</Select>
 								</Form.Item>
-								<Form.Item name="gpa" label="GPA" hasFeedback>
+								<Form.Item name="gpa" label="GPA" rules={[
+									{
+										required: true,
+										message: "Please enter your GPA",
+									},
+								]}>
 									<InputNumber min={0} max={4} step={0.1} />
 								</Form.Item>
+								<Form.Item name="skills" label="Skills">
+									<Select
+										mode="tags"
+										style={{ width: '100%' }}
+										placeholder="Press enter to add a skill"
+										onChange={this.onTypeChangeSkills}
+										open={false}
+										//options={}
+									/>
+								</Form.Item>
+
+
+
+
+
 							</>
 						) : (
 							<>
@@ -281,7 +384,20 @@ export default class Login extends React.Component {
 									<Input />
 								</Form.Item>
 								<Form.Item name="designation" label="Designation" hasFeedback>
-									<Input />
+									<Select
+										onChange={this.onTypeChangeDesignation}
+										placeholder="Select designation type"
+									>
+										<Option key="Assistant Professor" value="Assistant Professor">
+											Assistant Professor
+										</Option>
+										<Option key="Associate Professor" value="Associate Professor">
+											Associate Professor
+										</Option>
+										<Option key="Professor" value="Professor">
+											Professor
+										</Option>
+									</Select>
 								</Form.Item>
 							</>
 						)}
@@ -306,7 +422,7 @@ export default class Login extends React.Component {
 						</Button>
 					</Form>
 				</Modal>
-			</div>
+			</div >
 		);
 	}
 }

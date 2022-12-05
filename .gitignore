@@ -1,3 +1,6 @@
 keys/
 *__pycache__*
 db/
+.env
+*Wallet*
+.DS_Store

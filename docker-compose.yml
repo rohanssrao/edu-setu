@@ -7,10 +7,16 @@ services:
      - 5000
     ports:
       - 5000:5000
+    env_file:
+      - ./.env
     environment:
       - FLASK_ENV=development
       - FLASK_APP=main.py
       - FLASK_DEBUG=1
+      - CONFIG_DIR=/usr/src/backend/Wallet_EDUSETUDB_2
+      - WALLET_LOCATION=/usr/src/backend/Wallet_EDUSETUDB_2
+    volumes:
+      - ./Wallet_EDUSETUDB_2:/usr/src/backend/Wallet_EDUSETUDB_2
   ui:
     build: ./code/ui
     expose:
@@ -19,3 +25,6 @@ services:
       - 3000:3000
     links:
       - "backend:backend"
+
+volumes:
+  Wallet_EDUSETUDB_2:

@@ -276,12 +276,25 @@ def add_application(data):
         student = data["user_id"]
         status = "pending"
         Posting_id = data["posting_id"]
+        responses = data["responses"]
         remarks = ""
         # Insert application into database
         cur = con.cursor()
-        query = "INSERT INTO APPLICATIONS (STUDENT, STATUS, POSTING_ID, REMARKS, CREATED_AT, UPDATED_AT) VALUES (:1,:2,:3,:4,SYSTIMESTAMP,SYSTIMESTAMP)"
-        params = [student,status,Posting_id,remarks]
+        bind_id = cur.var(int)
+        query = "INSERT INTO APPLICATIONS (STUDENT, STATUS, POSTING_ID, REMARKS, CREATED_AT, UPDATED_AT) VALUES (:1,:2,:3,:4,SYSTIMESTAMP,SYSTIMESTAMP) RETURNING APPLICATION_ID into :5"
+        params = [student,status,Posting_id,remarks, bind_id]
         cur.execute(query, params)
+
+        # Get ID of inserted
+        inserted_id = bind_id.getvalue()[0]
+
+        # Insert responses into database
+        for i in range(len(responses)):
+            print(responses[i])
+            query = "INSERT INTO POSTING_RESPONSES (RESPONSE, QUESTION_ID, CREATED_AT, APPLICATION_ID) VALUES (:1, :2, SYSTIMESTAMP, :3) "
+            params = [responses[i]['answer'], responses[i]['question_id'], inserted_id]
+            cur.execute(query, params)
+        
         con.commit()
         return prepare_response(
             True, f"Application Added Successfully."

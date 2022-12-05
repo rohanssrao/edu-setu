@@ -4,10 +4,10 @@ import { Route, BrowserRouter as Router, Switch, Redirect } from "react-router-d
 import Login from "./Components/Login/Login";
 import Home from "./Components/Home/Home";
 import NotFound from "./Components/Home/NotFound";
-import { StudentProfile } from "./components/studentdashboard/studentProfile";
-import TrackApplication from "./components/studentdashboard/trackapplication";
-import { StudentHomePage } from "./components/studentdashboard";
-
+import { StudentProfile } from "./Components/studentdashboard/studentProfile";
+import TrackApplication from "./Components/studentdashboard/trackapplication";
+import { StudentHomePage } from "./Components/studentdashboard";
+import { RGWrapper } from "./rg_wrapper";
 export default class Redirections extends Component {
 	constructor(props) {
 		super(props);
@@ -36,6 +36,9 @@ export default class Redirections extends Component {
 					<Route path="/professor" render={this.authGuard(Home)}></Route>
 					<Route path="/auth">
 						<Login />
+					</Route>
+					<Route path="/resume_generator">
+						<RGWrapper />
 					</Route>
 					{/* <Route path="/resetPassword">
                         <ResetPassword></ResetPassword>

@@ -11,7 +11,7 @@ import pytest
 
 sys.path.append("../code/backend")
 
-base_url = "http://140.238.250.0:5000"
+base_url = "http://127.0.0.1:5000"
 
 
 def test_index_route():

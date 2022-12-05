@@ -4,8 +4,24 @@ import auth
 from flask import Flask, request
 from flask_cors import CORS
 
+from flask_jwt_extended import JWTManager
+from models import db
 app = Flask(__name__)
 CORS(app)
+# Setup the Flask-JWT-Extended extension
+# Change this!
+app.config["JWT_SECRET_KEY"] = "5f352379324c22463451387a0aec5d2f"
+jwt = JWTManager(app)
+app.config["JWT_SECRET_KEY"] = "5f352379324c22463451387a0aec5d2f"
+
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+db.init_app(app)
+
+
+from resume_api import resume_api
+app.register_blueprint(resume_api)
 
 @app.route("/")
 def index():
@@ -40,6 +56,9 @@ def get_all_applications_by_student():
 def get_specific_application():
     return student_apis.get_specific_application(request.get_json(force=True))
 
+@app.route("/get_responses_for_application", methods=["POST"])
+def get_responses_for_application():
+    return professor_api.get_responses_for_application(request.get_json(force=True))
 
 @app.route("/add_application", methods=["POST"])
 def add_application():
@@ -56,6 +75,11 @@ def get_all_postings_by_professor():
 @app.route("/get_all_postings", methods=["GET"])
 def get_all_postings():
     return professor_api.get_all_postings()
+
+@app.route("/get_questions_by_posting", methods=["POST"])
+def get_questions_by_posting():
+    print(request.get_json(force=True))
+    return professor_api.get_questions_by_posting(request.get_json(force=True))
 
 @app.route("/update_posting", methods=["POST"])
 def update_posting():

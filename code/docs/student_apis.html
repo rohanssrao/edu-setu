@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="pdoc 12.2.0"/>
+    <meta name="generator" content="pdoc 12.3.0"/>
     <title>student_apis API documentation</title>
 
     <style>/*! * Bootstrap Reboot v5.0.0 (https://getbootstrap.com/) * Copyright 2011-2021 The Bootstrap Authors * Copyright 2011-2021 Twitter, Inc. * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) * Forked from Normalize.css, licensed MIT (https://github.com/necolas/normalize.css/blob/master/LICENSE.md) */*,::after,::before{box-sizing:border-box}@media (prefers-reduced-motion:no-preference){:root{scroll-behavior:smooth}}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}hr{margin:1rem 0;color:inherit;background-color:currentColor;border:0;opacity:.25}hr:not([size]){height:1px}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:.5rem;font-weight:500;line-height:1.2}h1{font-size:calc(1.375rem + 1.5vw)}@media (min-width:1200px){h1{font-size:2.5rem}}h2{font-size:calc(1.325rem + .9vw)}@media (min-width:1200px){h2{font-size:2rem}}h3{font-size:calc(1.3rem + .6vw)}@media (min-width:1200px){h3{font-size:1.75rem}}h4{font-size:calc(1.275rem + .3vw)}@media (min-width:1200px){h4{font-size:1.5rem}}h5{font-size:1.25rem}h6{font-size:1rem}p{margin-top:0;margin-bottom:1rem}abbr[data-bs-original-title],abbr[title]{-webkit-text-decoration:underline dotted;text-decoration:underline dotted;cursor:help;-webkit-text-decoration-skip-ink:none;text-decoration-skip-ink:none}address{margin-bottom:1rem;font-style:normal;line-height:inherit}ol,ul{padding-left:2rem}dl,ol,ul{margin-top:0;margin-bottom:1rem}ol ol,ol ul,ul ol,ul ul{margin-bottom:0}dt{font-weight:700}dd{margin-bottom:.5rem;margin-left:0}blockquote{margin:0 0 1rem}b,strong{font-weight:bolder}small{font-size:.875em}mark{padding:.2em;background-color:#fcf8e3}sub,sup{position:relative;font-size:.75em;line-height:0;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}a{color:#0d6efd;text-decoration:underline}a:hover{color:#0a58ca}a:not([href]):not([class]),a:not([href]):not([class]):hover{color:inherit;text-decoration:none}code,kbd,pre,samp{font-family:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:1em;direction:ltr;unicode-bidi:bidi-override}pre{display:block;margin-top:0;margin-bottom:1rem;overflow:auto;font-size:.875em}pre code{font-size:inherit;color:inherit;word-break:normal}code{font-size:.875em;color:#d63384;word-wrap:break-word}a>code{color:inherit}kbd{padding:.2rem .4rem;font-size:.875em;color:#fff;background-color:#212529;border-radius:.2rem}kbd kbd{padding:0;font-size:1em;font-weight:700}figure{margin:0 0 1rem}img,svg{vertical-align:middle}table{caption-side:bottom;border-collapse:collapse}caption{padding-top:.5rem;padding-bottom:.5rem;color:#6c757d;text-align:left}th{text-align:inherit;text-align:-webkit-match-parent}tbody,td,tfoot,th,thead,tr{border-color:inherit;border-style:solid;border-width:0}label{display:inline-block}button{border-radius:0}button:focus:not(:focus-visible){outline:0}button,input,optgroup,select,textarea{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}button,select{text-transform:none}[role=button]{cursor:pointer}select{word-wrap:normal}select:disabled{opacity:1}[list]::-webkit-calendar-picker-indicator{display:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled),button:not(:disabled){cursor:pointer}::-moz-focus-inner{padding:0;border-style:none}textarea{resize:vertical}fieldset{min-width:0;padding:0;margin:0;border:0}legend{float:left;width:100%;padding:0;margin-bottom:.5rem;font-size:calc(1.275rem + .3vw);line-height:inherit}@media (min-width:1200px){legend{font-size:1.5rem}}legend+*{clear:left}::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-fields-wrapper,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-minute,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-text,::-webkit-datetime-edit-year-field{padding:0}::-webkit-inner-spin-button{height:auto}[type=search]{outline-offset:-2px;-webkit-appearance:textfield}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-color-swatch-wrapper{padding:0}::file-selector-button{font:inherit}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}output{display:inline-block}iframe{border:0}summary{display:list-item;cursor:pointer}progress{vertical-align:baseline}[hidden]{display:none!important}</style>
@@ -349,200 +349,213 @@ student_apis    </h1>
 </span><span id="L-276"><a href="#L-276"><span class="linenos">276</span></a>        <span class="n">student</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">]</span>
 </span><span id="L-277"><a href="#L-277"><span class="linenos">277</span></a>        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;pending&quot;</span>
 </span><span id="L-278"><a href="#L-278"><span class="linenos">278</span></a>        <span class="n">Posting_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;posting_id&quot;</span><span class="p">]</span>
-</span><span id="L-279"><a href="#L-279"><span class="linenos">279</span></a>        <span class="n">remarks</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-</span><span id="L-280"><a href="#L-280"><span class="linenos">280</span></a>        <span class="c1"># Insert application into database</span>
-</span><span id="L-281"><a href="#L-281"><span class="linenos">281</span></a>        <span class="n">cur</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
-</span><span id="L-282"><a href="#L-282"><span class="linenos">282</span></a>        <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO APPLICATIONS (STUDENT, STATUS, POSTING_ID, REMARKS, CREATED_AT, UPDATED_AT) VALUES (:1,:2,:3,:4,SYSTIMESTAMP,SYSTIMESTAMP)&quot;</span>
-</span><span id="L-283"><a href="#L-283"><span class="linenos">283</span></a>        <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">student</span><span class="p">,</span><span class="n">status</span><span class="p">,</span><span class="n">Posting_id</span><span class="p">,</span><span class="n">remarks</span><span class="p">]</span>
-</span><span id="L-284"><a href="#L-284"><span class="linenos">284</span></a>        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
-</span><span id="L-285"><a href="#L-285"><span class="linenos">285</span></a>        <span class="n">con</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-</span><span id="L-286"><a href="#L-286"><span class="linenos">286</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span>
-</span><span id="L-287"><a href="#L-287"><span class="linenos">287</span></a>            <span class="kc">True</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Application Added Successfully.&quot;</span>
-</span><span id="L-288"><a href="#L-288"><span class="linenos">288</span></a>        <span class="p">)</span>
-</span><span id="L-289"><a href="#L-289"><span class="linenos">289</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="L-290"><a href="#L-290"><span class="linenos">290</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-</span><span id="L-291"><a href="#L-291"><span class="linenos">291</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
-</span><span id="L-292"><a href="#L-292"><span class="linenos">292</span></a>    <span class="k">finally</span><span class="p">:</span>
-</span><span id="L-293"><a href="#L-293"><span class="linenos">293</span></a>        <span class="n">disconnect</span><span class="p">(</span><span class="n">con</span><span class="p">)</span>
-</span><span id="L-294"><a href="#L-294"><span class="linenos">294</span></a>
-</span><span id="L-295"><a href="#L-295"><span class="linenos">295</span></a>
-</span><span id="L-296"><a href="#L-296"><span class="linenos">296</span></a><span class="k">def</span> <span class="nf">get_all_application</span><span class="p">():</span>
-</span><span id="L-297"><a href="#L-297"><span class="linenos">297</span></a>    
-</span><span id="L-298"><a href="#L-298"><span class="linenos">298</span></a>    <span class="sd">&#39;&#39;&#39;</span>
-</span><span id="L-299"><a href="#L-299"><span class="linenos">299</span></a><span class="sd">    ```</span>
-</span><span id="L-300"><a href="#L-300"><span class="linenos">300</span></a><span class="sd">    /get_all_applications_by_student [POST]</span>
-</span><span id="L-301"><a href="#L-301"><span class="linenos">301</span></a><span class="sd">Request:</span>
-</span><span id="L-302"><a href="#L-302"><span class="linenos">302</span></a><span class="sd">{</span>
-</span><span id="L-303"><a href="#L-303"><span class="linenos">303</span></a><span class="sd">    email : string,</span>
-</span><span id="L-304"><a href="#L-304"><span class="linenos">304</span></a><span class="sd">    password: string</span>
-</span><span id="L-305"><a href="#L-305"><span class="linenos">305</span></a><span class="sd">}</span>
-</span><span id="L-306"><a href="#L-306"><span class="linenos">306</span></a><span class="sd">Response:</span>
-</span><span id="L-307"><a href="#L-307"><span class="linenos">307</span></a><span class="sd">{</span>
-</span><span id="L-308"><a href="#L-308"><span class="linenos">308</span></a><span class="sd">	status: boolean,</span>
-</span><span id="L-309"><a href="#L-309"><span class="linenos">309</span></a>
-</span><span id="L-310"><a href="#L-310"><span class="linenos">310</span></a><span class="sd">	if status is True:</span>
-</span><span id="L-311"><a href="#L-311"><span class="linenos">311</span></a><span class="sd">		data:</span>
-</span><span id="L-312"><a href="#L-312"><span class="linenos">312</span></a><span class="sd">		[</span>
-</span><span id="L-313"><a href="#L-313"><span class="linenos">313</span></a><span class="sd">			{</span>
-</span><span id="L-314"><a href="#L-314"><span class="linenos">314</span></a><span class="sd">				application_id: number,</span>
-</span><span id="L-315"><a href="#L-315"><span class="linenos">315</span></a><span class="sd">				posting_id: number,</span>
-</span><span id="L-316"><a href="#L-316"><span class="linenos">316</span></a><span class="sd">				title: string,</span>
-</span><span id="L-317"><a href="#L-317"><span class="linenos">317</span></a><span class="sd">				description: string,</span>
-</span><span id="L-318"><a href="#L-318"><span class="linenos">318</span></a><span class="sd">				location: string,</span>
-</span><span id="L-319"><a href="#L-319"><span class="linenos">319</span></a><span class="sd">				prerequisites: string,</span>
-</span><span id="L-320"><a href="#L-320"><span class="linenos">320</span></a><span class="sd">				created_at: string, (of the application, NOT the posting)</span>
-</span><span id="L-321"><a href="#L-321"><span class="linenos">321</span></a><span class="sd">				updated_at: string, (of the application, NOT the posting)</span>
-</span><span id="L-322"><a href="#L-322"><span class="linenos">322</span></a><span class="sd">				professor_user_id: number,</span>
-</span><span id="L-323"><a href="#L-323"><span class="linenos">323</span></a><span class="sd">				professor_email: string,</span>
-</span><span id="L-324"><a href="#L-324"><span class="linenos">324</span></a><span class="sd">				professor_department: string,</span>
-</span><span id="L-325"><a href="#L-325"><span class="linenos">325</span></a><span class="sd">				professor_designation: string</span>
-</span><span id="L-326"><a href="#L-326"><span class="linenos">326</span></a><span class="sd">				professor_display_name: string,</span>
-</span><span id="L-327"><a href="#L-327"><span class="linenos">327</span></a><span class="sd">				student_user_id: number,</span>
-</span><span id="L-328"><a href="#L-328"><span class="linenos">328</span></a><span class="sd">				student_display_name: string,</span>
-</span><span id="L-329"><a href="#L-329"><span class="linenos">329</span></a><span class="sd">				student_email: string,</span>
-</span><span id="L-330"><a href="#L-330"><span class="linenos">330</span></a><span class="sd">				student_phone: string,</span>
-</span><span id="L-331"><a href="#L-331"><span class="linenos">331</span></a><span class="sd">				student_gpa: float,</span>
-</span><span id="L-332"><a href="#L-332"><span class="linenos">332</span></a><span class="sd">				student_major: string,</span>
-</span><span id="L-333"><a href="#L-333"><span class="linenos">333</span></a><span class="sd">				student_minor: string,</span>
-</span><span id="L-334"><a href="#L-334"><span class="linenos">334</span></a><span class="sd">				student_year: string,</span>
-</span><span id="L-335"><a href="#L-335"><span class="linenos">335</span></a><span class="sd">				status: string // This is the status of the application and NOT the response.</span>
-</span><span id="L-336"><a href="#L-336"><span class="linenos">336</span></a><span class="sd">				remarks: string</span>
-</span><span id="L-337"><a href="#L-337"><span class="linenos">337</span></a><span class="sd">			}</span>
-</span><span id="L-338"><a href="#L-338"><span class="linenos">338</span></a><span class="sd">		]</span>
-</span><span id="L-339"><a href="#L-339"><span class="linenos">339</span></a><span class="sd">	else:</span>
-</span><span id="L-340"><a href="#L-340"><span class="linenos">340</span></a><span class="sd">	data: string (error message)</span>
-</span><span id="L-341"><a href="#L-341"><span class="linenos">341</span></a><span class="sd">}</span>
-</span><span id="L-342"><a href="#L-342"><span class="linenos">342</span></a><span class="sd">    ```</span>
-</span><span id="L-343"><a href="#L-343"><span class="linenos">343</span></a><span class="sd">    &#39;&#39;&#39;</span>
-</span><span id="L-344"><a href="#L-344"><span class="linenos">344</span></a>    <span class="n">con</span> <span class="o">=</span> <span class="n">connect</span><span class="p">()</span>
-</span><span id="L-345"><a href="#L-345"><span class="linenos">345</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">con</span><span class="p">:</span>
-</span><span id="L-346"><a href="#L-346"><span class="linenos">346</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span>  <span class="s2">&quot;Unable to connect to database.&quot;</span><span class="p">)</span>
-</span><span id="L-347"><a href="#L-347"><span class="linenos">347</span></a>    <span class="k">try</span><span class="p">:</span>
-</span><span id="L-348"><a href="#L-348"><span class="linenos">348</span></a>        <span class="n">curs</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
-</span><span id="L-349"><a href="#L-349"><span class="linenos">349</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="L-350"><a href="#L-350"><span class="linenos">350</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-</span><span id="L-351"><a href="#L-351"><span class="linenos">351</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span>  <span class="s2">&quot;Unable to connect to database.&quot;</span><span class="p">)</span>
-</span><span id="L-352"><a href="#L-352"><span class="linenos">352</span></a>    <span class="k">try</span><span class="p">:</span>
-</span><span id="L-353"><a href="#L-353"><span class="linenos">353</span></a>        <span class="n">query</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;WITH student_data</span>
-</span><span id="L-354"><a href="#L-354"><span class="linenos">354</span></a><span class="s1">     AS (SELECT applications.application_id AS student_application_id,</span>
-</span><span id="L-355"><a href="#L-355"><span class="linenos">355</span></a><span class="s1">                applications.posting_id     AS student_posting_id,</span>
-</span><span id="L-356"><a href="#L-356"><span class="linenos">356</span></a><span class="s1">                applications.student,</span>
-</span><span id="L-357"><a href="#L-357"><span class="linenos">357</span></a><span class="s1">                users.display_name          AS student_display_name,</span>
-</span><span id="L-358"><a href="#L-358"><span class="linenos">358</span></a><span class="s1">                users.email                 AS student_email,</span>
-</span><span id="L-359"><a href="#L-359"><span class="linenos">359</span></a><span class="s1">                users.phone                 AS student_phone,</span>
-</span><span id="L-360"><a href="#L-360"><span class="linenos">360</span></a><span class="s1">                applications.CREATED_AT,</span>
-</span><span id="L-361"><a href="#L-361"><span class="linenos">361</span></a><span class="s1">                applications.UPDATED_AT,</span>
-</span><span id="L-362"><a href="#L-362"><span class="linenos">362</span></a><span class="s1">                applications.status,</span>
-</span><span id="L-363"><a href="#L-363"><span class="linenos">363</span></a><span class="s1">                applications.remarks,</span>
-</span><span id="L-364"><a href="#L-364"><span class="linenos">364</span></a><span class="s1">                student.degree,</span>
-</span><span id="L-365"><a href="#L-365"><span class="linenos">365</span></a><span class="s1">                student.gpa,</span>
-</span><span id="L-366"><a href="#L-366"><span class="linenos">366</span></a><span class="s1">                student.major,</span>
-</span><span id="L-367"><a href="#L-367"><span class="linenos">367</span></a><span class="s1">                student.minor,</span>
-</span><span id="L-368"><a href="#L-368"><span class="linenos">368</span></a><span class="s1">                student.year</span>
-</span><span id="L-369"><a href="#L-369"><span class="linenos">369</span></a><span class="s1">         FROM   applications,</span>
-</span><span id="L-370"><a href="#L-370"><span class="linenos">370</span></a><span class="s1">                student,</span>
-</span><span id="L-371"><a href="#L-371"><span class="linenos">371</span></a><span class="s1">                users</span>
-</span><span id="L-372"><a href="#L-372"><span class="linenos">372</span></a><span class="s1">         WHERE  applications.student = student.user_id</span>
-</span><span id="L-373"><a href="#L-373"><span class="linenos">373</span></a><span class="s1">                AND users.user_id = student.user_id),</span>
-</span><span id="L-374"><a href="#L-374"><span class="linenos">374</span></a><span class="s1">     professor_data</span>
-</span><span id="L-375"><a href="#L-375"><span class="linenos">375</span></a><span class="s1">     AS (SELECT applications.application_id AS professor_application_id,</span>
-</span><span id="L-376"><a href="#L-376"><span class="linenos">376</span></a><span class="s1">                applications.posting_id     AS professor_posting_id,</span>
-</span><span id="L-377"><a href="#L-377"><span class="linenos">377</span></a><span class="s1">                postings.title,</span>
-</span><span id="L-378"><a href="#L-378"><span class="linenos">378</span></a><span class="s1">                postings.description,</span>
-</span><span id="L-379"><a href="#L-379"><span class="linenos">379</span></a><span class="s1">                postings.location,</span>
-</span><span id="L-380"><a href="#L-380"><span class="linenos">380</span></a><span class="s1">                postings.prerequisites,</span>
-</span><span id="L-381"><a href="#L-381"><span class="linenos">381</span></a><span class="s1">                postings.professor,</span>
-</span><span id="L-382"><a href="#L-382"><span class="linenos">382</span></a><span class="s1">                users.display_name          AS professor_display_name,</span>
-</span><span id="L-383"><a href="#L-383"><span class="linenos">383</span></a><span class="s1">                users.email                 AS professor_email,</span>
-</span><span id="L-384"><a href="#L-384"><span class="linenos">384</span></a><span class="s1">                users.phone                 AS professor_phone,</span>
-</span><span id="L-385"><a href="#L-385"><span class="linenos">385</span></a><span class="s1">                professors.department,</span>
-</span><span id="L-386"><a href="#L-386"><span class="linenos">386</span></a><span class="s1">                professors.designation</span>
-</span><span id="L-387"><a href="#L-387"><span class="linenos">387</span></a><span class="s1">         FROM   applications,</span>
-</span><span id="L-388"><a href="#L-388"><span class="linenos">388</span></a><span class="s1">                postings,</span>
-</span><span id="L-389"><a href="#L-389"><span class="linenos">389</span></a><span class="s1">                users,</span>
-</span><span id="L-390"><a href="#L-390"><span class="linenos">390</span></a><span class="s1">                professors</span>
-</span><span id="L-391"><a href="#L-391"><span class="linenos">391</span></a><span class="s1">         WHERE  applications.posting_id = postings.posting_id</span>
-</span><span id="L-392"><a href="#L-392"><span class="linenos">392</span></a><span class="s1">                AND postings.professor = professors.user_id</span>
-</span><span id="L-393"><a href="#L-393"><span class="linenos">393</span></a><span class="s1">                AND users.user_id = professors.user_id)</span>
-</span><span id="L-394"><a href="#L-394"><span class="linenos">394</span></a><span class="s1">SELECT student_application_id AS application_id,</span>
-</span><span id="L-395"><a href="#L-395"><span class="linenos">395</span></a><span class="s1">       student_posting_id     AS posting_id,</span>
-</span><span id="L-396"><a href="#L-396"><span class="linenos">396</span></a><span class="s1">       title , description, location, prerequisites, CREATED_AT, UPDATED_AT, STATUS,REMARKS,</span>
-</span><span id="L-397"><a href="#L-397"><span class="linenos">397</span></a><span class="s1">       professor as professor_user_id,</span>
-</span><span id="L-398"><a href="#L-398"><span class="linenos">398</span></a><span class="s1">       professor_email, department, designation, professor_display_name, </span>
-</span><span id="L-399"><a href="#L-399"><span class="linenos">399</span></a><span class="s1">       student as student_user_id,</span>
-</span><span id="L-400"><a href="#L-400"><span class="linenos">400</span></a><span class="s1">       student_display_name, student_email, student_phone, gpa, major, minor, year</span>
-</span><span id="L-401"><a href="#L-401"><span class="linenos">401</span></a>
-</span><span id="L-402"><a href="#L-402"><span class="linenos">402</span></a>
-</span><span id="L-403"><a href="#L-403"><span class="linenos">403</span></a>
-</span><span id="L-404"><a href="#L-404"><span class="linenos">404</span></a><span class="s1">FROM   student_data,</span>
-</span><span id="L-405"><a href="#L-405"><span class="linenos">405</span></a><span class="s1">       professor_data</span>
-</span><span id="L-406"><a href="#L-406"><span class="linenos">406</span></a><span class="s1">WHERE  student_data.student_application_id =</span>
-</span><span id="L-407"><a href="#L-407"><span class="linenos">407</span></a><span class="s1">       professor_data.professor_application_id</span>
-</span><span id="L-408"><a href="#L-408"><span class="linenos">408</span></a><span class="s1">       AND student_data.student_posting_id =</span>
-</span><span id="L-409"><a href="#L-409"><span class="linenos">409</span></a><span class="s1">professor_data.professor_posting_id &#39;&#39;&#39;</span>
-</span><span id="L-410"><a href="#L-410"><span class="linenos">410</span></a>        <span class="n">curs</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-</span><span id="L-411"><a href="#L-411"><span class="linenos">411</span></a>        <span class="n">curs</span><span class="o">.</span><span class="n">rowfactory</span> <span class="o">=</span> <span class="n">makeDictFactory</span><span class="p">(</span><span class="n">curs</span><span class="p">)</span>
-</span><span id="L-412"><a href="#L-412"><span class="linenos">412</span></a>        <span class="n">response</span> <span class="o">=</span> <span class="n">curs</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-</span><span id="L-413"><a href="#L-413"><span class="linenos">413</span></a>        <span class="k">try</span><span class="p">:</span>
-</span><span id="L-414"><a href="#L-414"><span class="linenos">414</span></a>            <span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span id="L-415"><a href="#L-415"><span class="linenos">415</span></a>        <span class="k">except</span><span class="p">:</span>
-</span><span id="L-416"><a href="#L-416"><span class="linenos">416</span></a>            <span class="k">pass</span>
-</span><span id="L-417"><a href="#L-417"><span class="linenos">417</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
-</span><span id="L-418"><a href="#L-418"><span class="linenos">418</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="L-419"><a href="#L-419"><span class="linenos">419</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-</span><span id="L-420"><a href="#L-420"><span class="linenos">420</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
-</span><span id="L-421"><a href="#L-421"><span class="linenos">421</span></a>    <span class="k">finally</span><span class="p">:</span>
-</span><span id="L-422"><a href="#L-422"><span class="linenos">422</span></a>        <span class="k">try</span><span class="p">:</span>
-</span><span id="L-423"><a href="#L-423"><span class="linenos">423</span></a>            <span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span id="L-424"><a href="#L-424"><span class="linenos">424</span></a>        <span class="k">except</span><span class="p">:</span>
-</span><span id="L-425"><a href="#L-425"><span class="linenos">425</span></a>            <span class="k">pass</span>
-</span><span id="L-426"><a href="#L-426"><span class="linenos">426</span></a>
-</span><span id="L-427"><a href="#L-427"><span class="linenos">427</span></a>
-</span><span id="L-428"><a href="#L-428"><span class="linenos">428</span></a><span class="k">def</span> <span class="nf">update_application</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-</span><span id="L-429"><a href="#L-429"><span class="linenos">429</span></a>    
-</span><span id="L-430"><a href="#L-430"><span class="linenos">430</span></a>    <span class="sd">&#39;&#39;&#39;</span>
-</span><span id="L-431"><a href="#L-431"><span class="linenos">431</span></a><span class="sd">    ```</span>
-</span><span id="L-432"><a href="#L-432"><span class="linenos">432</span></a><span class="sd">    /update_application [POST]</span>
-</span><span id="L-433"><a href="#L-433"><span class="linenos">433</span></a><span class="sd">    Request:</span>
-</span><span id="L-434"><a href="#L-434"><span class="linenos">434</span></a><span class="sd">    {</span>
-</span><span id="L-435"><a href="#L-435"><span class="linenos">435</span></a><span class="sd">        application_id: number,</span>
-</span><span id="L-436"><a href="#L-436"><span class="linenos">436</span></a><span class="sd">        status: string (This should be overwritten in the DB by API),</span>
-</span><span id="L-437"><a href="#L-437"><span class="linenos">437</span></a><span class="sd">    remarks: string</span>
-</span><span id="L-438"><a href="#L-438"><span class="linenos">438</span></a><span class="sd">    }</span>
-</span><span id="L-439"><a href="#L-439"><span class="linenos">439</span></a><span class="sd">    Response:</span>
-</span><span id="L-440"><a href="#L-440"><span class="linenos">440</span></a><span class="sd">    {</span>
-</span><span id="L-441"><a href="#L-441"><span class="linenos">441</span></a><span class="sd">        status: boolean</span>
-</span><span id="L-442"><a href="#L-442"><span class="linenos">442</span></a><span class="sd">        data: (Success / Error message as per status)</span>
-</span><span id="L-443"><a href="#L-443"><span class="linenos">443</span></a><span class="sd">        // UPDATED_AT timestamp should be auto updated by the API</span>
-</span><span id="L-444"><a href="#L-444"><span class="linenos">444</span></a><span class="sd">    }</span>
-</span><span id="L-445"><a href="#L-445"><span class="linenos">445</span></a><span class="sd">    ```</span>
-</span><span id="L-446"><a href="#L-446"><span class="linenos">446</span></a><span class="sd">    &#39;&#39;&#39;</span>
-</span><span id="L-447"><a href="#L-447"><span class="linenos">447</span></a>    
-</span><span id="L-448"><a href="#L-448"><span class="linenos">448</span></a>    
-</span><span id="L-449"><a href="#L-449"><span class="linenos">449</span></a>    <span class="k">try</span><span class="p">:</span>
-</span><span id="L-450"><a href="#L-450"><span class="linenos">450</span></a>        <span class="n">con</span> <span class="o">=</span> <span class="n">connect</span><span class="p">()</span>
-</span><span id="L-451"><a href="#L-451"><span class="linenos">451</span></a>    <span class="k">except</span><span class="p">:</span>
-</span><span id="L-452"><a href="#L-452"><span class="linenos">452</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Unable to create DB connection&quot;</span><span class="p">)</span>
-</span><span id="L-453"><a href="#L-453"><span class="linenos">453</span></a>    <span class="k">try</span><span class="p">:</span>
-</span><span id="L-454"><a href="#L-454"><span class="linenos">454</span></a>        <span class="c1"># Get the data from JSON Payload</span>
-</span><span id="L-455"><a href="#L-455"><span class="linenos">455</span></a>        <span class="n">app_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;application_id&quot;</span><span class="p">]</span>
-</span><span id="L-456"><a href="#L-456"><span class="linenos">456</span></a>        <span class="n">status</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span>
-</span><span id="L-457"><a href="#L-457"><span class="linenos">457</span></a>        <span class="n">remarks</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;remarks&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;remarks&quot;</span> <span class="ow">in</span>  <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
-</span><span id="L-458"><a href="#L-458"><span class="linenos">458</span></a>        
-</span><span id="L-459"><a href="#L-459"><span class="linenos">459</span></a>        <span class="c1"># Insert application into database</span>
-</span><span id="L-460"><a href="#L-460"><span class="linenos">460</span></a>        <span class="n">cur</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
-</span><span id="L-461"><a href="#L-461"><span class="linenos">461</span></a>        <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;UPDATE APPLICATIONS SET STATUS = :1, REMARKS = :2 , UPDATED_AT = SYSTIMESTAMP WHERE APPLICATION_ID = :3&quot;</span>
-</span><span id="L-462"><a href="#L-462"><span class="linenos">462</span></a>        <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">status</span><span class="p">,</span><span class="n">remarks</span><span class="p">,</span><span class="n">app_id</span><span class="p">]</span>
-</span><span id="L-463"><a href="#L-463"><span class="linenos">463</span></a>        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
-</span><span id="L-464"><a href="#L-464"><span class="linenos">464</span></a>        <span class="n">con</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-</span><span id="L-465"><a href="#L-465"><span class="linenos">465</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span>
-</span><span id="L-466"><a href="#L-466"><span class="linenos">466</span></a>            <span class="kc">True</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Application Updated Successfully.&quot;</span>
-</span><span id="L-467"><a href="#L-467"><span class="linenos">467</span></a>        <span class="p">)</span>
-</span><span id="L-468"><a href="#L-468"><span class="linenos">468</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="L-469"><a href="#L-469"><span class="linenos">469</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-</span><span id="L-470"><a href="#L-470"><span class="linenos">470</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
-</span><span id="L-471"><a href="#L-471"><span class="linenos">471</span></a>    <span class="k">finally</span><span class="p">:</span>
-</span><span id="L-472"><a href="#L-472"><span class="linenos">472</span></a>        <span class="n">disconnect</span><span class="p">(</span><span class="n">con</span><span class="p">)</span>
+</span><span id="L-279"><a href="#L-279"><span class="linenos">279</span></a>        <span class="n">responses</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;responses&quot;</span><span class="p">]</span>
+</span><span id="L-280"><a href="#L-280"><span class="linenos">280</span></a>        <span class="n">remarks</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span id="L-281"><a href="#L-281"><span class="linenos">281</span></a>        <span class="c1"># Insert application into database</span>
+</span><span id="L-282"><a href="#L-282"><span class="linenos">282</span></a>        <span class="n">cur</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+</span><span id="L-283"><a href="#L-283"><span class="linenos">283</span></a>        <span class="n">bind_id</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</span><span id="L-284"><a href="#L-284"><span class="linenos">284</span></a>        <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO APPLICATIONS (STUDENT, STATUS, POSTING_ID, REMARKS, CREATED_AT, UPDATED_AT) VALUES (:1,:2,:3,:4,SYSTIMESTAMP,SYSTIMESTAMP) RETURNING APPLICATION_ID into :5&quot;</span>
+</span><span id="L-285"><a href="#L-285"><span class="linenos">285</span></a>        <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">student</span><span class="p">,</span><span class="n">status</span><span class="p">,</span><span class="n">Posting_id</span><span class="p">,</span><span class="n">remarks</span><span class="p">,</span> <span class="n">bind_id</span><span class="p">]</span>
+</span><span id="L-286"><a href="#L-286"><span class="linenos">286</span></a>        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</span><span id="L-287"><a href="#L-287"><span class="linenos">287</span></a>
+</span><span id="L-288"><a href="#L-288"><span class="linenos">288</span></a>        <span class="c1"># Get ID of inserted</span>
+</span><span id="L-289"><a href="#L-289"><span class="linenos">289</span></a>        <span class="n">inserted_id</span> <span class="o">=</span> <span class="n">bind_id</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="L-290"><a href="#L-290"><span class="linenos">290</span></a>
+</span><span id="L-291"><a href="#L-291"><span class="linenos">291</span></a>        <span class="c1"># Insert responses into database</span>
+</span><span id="L-292"><a href="#L-292"><span class="linenos">292</span></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">responses</span><span class="p">)):</span>
+</span><span id="L-293"><a href="#L-293"><span class="linenos">293</span></a>            <span class="nb">print</span><span class="p">(</span><span class="n">responses</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span><span id="L-294"><a href="#L-294"><span class="linenos">294</span></a>            <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO POSTING_RESPONSES (RESPONSE, QUESTION_ID, CREATED_AT, APPLICATION_ID) VALUES (:1, :2, SYSTIMESTAMP, :3) &quot;</span>
+</span><span id="L-295"><a href="#L-295"><span class="linenos">295</span></a>            <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">responses</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;answer&#39;</span><span class="p">],</span> <span class="n">responses</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;question_id&#39;</span><span class="p">],</span> <span class="n">inserted_id</span><span class="p">]</span>
+</span><span id="L-296"><a href="#L-296"><span class="linenos">296</span></a>            <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</span><span id="L-297"><a href="#L-297"><span class="linenos">297</span></a>        
+</span><span id="L-298"><a href="#L-298"><span class="linenos">298</span></a>        <span class="n">con</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</span><span id="L-299"><a href="#L-299"><span class="linenos">299</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span>
+</span><span id="L-300"><a href="#L-300"><span class="linenos">300</span></a>            <span class="kc">True</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Application Added Successfully.&quot;</span>
+</span><span id="L-301"><a href="#L-301"><span class="linenos">301</span></a>        <span class="p">)</span>
+</span><span id="L-302"><a href="#L-302"><span class="linenos">302</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="L-303"><a href="#L-303"><span class="linenos">303</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span><span id="L-304"><a href="#L-304"><span class="linenos">304</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+</span><span id="L-305"><a href="#L-305"><span class="linenos">305</span></a>    <span class="k">finally</span><span class="p">:</span>
+</span><span id="L-306"><a href="#L-306"><span class="linenos">306</span></a>        <span class="n">disconnect</span><span class="p">(</span><span class="n">con</span><span class="p">)</span>
+</span><span id="L-307"><a href="#L-307"><span class="linenos">307</span></a>
+</span><span id="L-308"><a href="#L-308"><span class="linenos">308</span></a>
+</span><span id="L-309"><a href="#L-309"><span class="linenos">309</span></a><span class="k">def</span> <span class="nf">get_all_application</span><span class="p">():</span>
+</span><span id="L-310"><a href="#L-310"><span class="linenos">310</span></a>    
+</span><span id="L-311"><a href="#L-311"><span class="linenos">311</span></a>    <span class="sd">&#39;&#39;&#39;</span>
+</span><span id="L-312"><a href="#L-312"><span class="linenos">312</span></a><span class="sd">    ```</span>
+</span><span id="L-313"><a href="#L-313"><span class="linenos">313</span></a><span class="sd">    /get_all_applications_by_student [POST]</span>
+</span><span id="L-314"><a href="#L-314"><span class="linenos">314</span></a><span class="sd">Request:</span>
+</span><span id="L-315"><a href="#L-315"><span class="linenos">315</span></a><span class="sd">{</span>
+</span><span id="L-316"><a href="#L-316"><span class="linenos">316</span></a><span class="sd">    email : string,</span>
+</span><span id="L-317"><a href="#L-317"><span class="linenos">317</span></a><span class="sd">    password: string</span>
+</span><span id="L-318"><a href="#L-318"><span class="linenos">318</span></a><span class="sd">}</span>
+</span><span id="L-319"><a href="#L-319"><span class="linenos">319</span></a><span class="sd">Response:</span>
+</span><span id="L-320"><a href="#L-320"><span class="linenos">320</span></a><span class="sd">{</span>
+</span><span id="L-321"><a href="#L-321"><span class="linenos">321</span></a><span class="sd">	status: boolean,</span>
+</span><span id="L-322"><a href="#L-322"><span class="linenos">322</span></a>
+</span><span id="L-323"><a href="#L-323"><span class="linenos">323</span></a><span class="sd">	if status is True:</span>
+</span><span id="L-324"><a href="#L-324"><span class="linenos">324</span></a><span class="sd">		data:</span>
+</span><span id="L-325"><a href="#L-325"><span class="linenos">325</span></a><span class="sd">		[</span>
+</span><span id="L-326"><a href="#L-326"><span class="linenos">326</span></a><span class="sd">			{</span>
+</span><span id="L-327"><a href="#L-327"><span class="linenos">327</span></a><span class="sd">				application_id: number,</span>
+</span><span id="L-328"><a href="#L-328"><span class="linenos">328</span></a><span class="sd">				posting_id: number,</span>
+</span><span id="L-329"><a href="#L-329"><span class="linenos">329</span></a><span class="sd">				title: string,</span>
+</span><span id="L-330"><a href="#L-330"><span class="linenos">330</span></a><span class="sd">				description: string,</span>
+</span><span id="L-331"><a href="#L-331"><span class="linenos">331</span></a><span class="sd">				location: string,</span>
+</span><span id="L-332"><a href="#L-332"><span class="linenos">332</span></a><span class="sd">				prerequisites: string,</span>
+</span><span id="L-333"><a href="#L-333"><span class="linenos">333</span></a><span class="sd">				created_at: string, (of the application, NOT the posting)</span>
+</span><span id="L-334"><a href="#L-334"><span class="linenos">334</span></a><span class="sd">				updated_at: string, (of the application, NOT the posting)</span>
+</span><span id="L-335"><a href="#L-335"><span class="linenos">335</span></a><span class="sd">				professor_user_id: number,</span>
+</span><span id="L-336"><a href="#L-336"><span class="linenos">336</span></a><span class="sd">				professor_email: string,</span>
+</span><span id="L-337"><a href="#L-337"><span class="linenos">337</span></a><span class="sd">				professor_department: string,</span>
+</span><span id="L-338"><a href="#L-338"><span class="linenos">338</span></a><span class="sd">				professor_designation: string</span>
+</span><span id="L-339"><a href="#L-339"><span class="linenos">339</span></a><span class="sd">				professor_display_name: string,</span>
+</span><span id="L-340"><a href="#L-340"><span class="linenos">340</span></a><span class="sd">				student_user_id: number,</span>
+</span><span id="L-341"><a href="#L-341"><span class="linenos">341</span></a><span class="sd">				student_display_name: string,</span>
+</span><span id="L-342"><a href="#L-342"><span class="linenos">342</span></a><span class="sd">				student_email: string,</span>
+</span><span id="L-343"><a href="#L-343"><span class="linenos">343</span></a><span class="sd">				student_phone: string,</span>
+</span><span id="L-344"><a href="#L-344"><span class="linenos">344</span></a><span class="sd">				student_gpa: float,</span>
+</span><span id="L-345"><a href="#L-345"><span class="linenos">345</span></a><span class="sd">				student_major: string,</span>
+</span><span id="L-346"><a href="#L-346"><span class="linenos">346</span></a><span class="sd">				student_minor: string,</span>
+</span><span id="L-347"><a href="#L-347"><span class="linenos">347</span></a><span class="sd">				student_year: string,</span>
+</span><span id="L-348"><a href="#L-348"><span class="linenos">348</span></a><span class="sd">				status: string // This is the status of the application and NOT the response.</span>
+</span><span id="L-349"><a href="#L-349"><span class="linenos">349</span></a><span class="sd">				remarks: string</span>
+</span><span id="L-350"><a href="#L-350"><span class="linenos">350</span></a><span class="sd">			}</span>
+</span><span id="L-351"><a href="#L-351"><span class="linenos">351</span></a><span class="sd">		]</span>
+</span><span id="L-352"><a href="#L-352"><span class="linenos">352</span></a><span class="sd">	else:</span>
+</span><span id="L-353"><a href="#L-353"><span class="linenos">353</span></a><span class="sd">	data: string (error message)</span>
+</span><span id="L-354"><a href="#L-354"><span class="linenos">354</span></a><span class="sd">}</span>
+</span><span id="L-355"><a href="#L-355"><span class="linenos">355</span></a><span class="sd">    ```</span>
+</span><span id="L-356"><a href="#L-356"><span class="linenos">356</span></a><span class="sd">    &#39;&#39;&#39;</span>
+</span><span id="L-357"><a href="#L-357"><span class="linenos">357</span></a>    <span class="n">con</span> <span class="o">=</span> <span class="n">connect</span><span class="p">()</span>
+</span><span id="L-358"><a href="#L-358"><span class="linenos">358</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">con</span><span class="p">:</span>
+</span><span id="L-359"><a href="#L-359"><span class="linenos">359</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span>  <span class="s2">&quot;Unable to connect to database.&quot;</span><span class="p">)</span>
+</span><span id="L-360"><a href="#L-360"><span class="linenos">360</span></a>    <span class="k">try</span><span class="p">:</span>
+</span><span id="L-361"><a href="#L-361"><span class="linenos">361</span></a>        <span class="n">curs</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+</span><span id="L-362"><a href="#L-362"><span class="linenos">362</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="L-363"><a href="#L-363"><span class="linenos">363</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span><span id="L-364"><a href="#L-364"><span class="linenos">364</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span>  <span class="s2">&quot;Unable to connect to database.&quot;</span><span class="p">)</span>
+</span><span id="L-365"><a href="#L-365"><span class="linenos">365</span></a>    <span class="k">try</span><span class="p">:</span>
+</span><span id="L-366"><a href="#L-366"><span class="linenos">366</span></a>        <span class="n">query</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;WITH student_data</span>
+</span><span id="L-367"><a href="#L-367"><span class="linenos">367</span></a><span class="s1">     AS (SELECT applications.application_id AS student_application_id,</span>
+</span><span id="L-368"><a href="#L-368"><span class="linenos">368</span></a><span class="s1">                applications.posting_id     AS student_posting_id,</span>
+</span><span id="L-369"><a href="#L-369"><span class="linenos">369</span></a><span class="s1">                applications.student,</span>
+</span><span id="L-370"><a href="#L-370"><span class="linenos">370</span></a><span class="s1">                users.display_name          AS student_display_name,</span>
+</span><span id="L-371"><a href="#L-371"><span class="linenos">371</span></a><span class="s1">                users.email                 AS student_email,</span>
+</span><span id="L-372"><a href="#L-372"><span class="linenos">372</span></a><span class="s1">                users.phone                 AS student_phone,</span>
+</span><span id="L-373"><a href="#L-373"><span class="linenos">373</span></a><span class="s1">                applications.CREATED_AT,</span>
+</span><span id="L-374"><a href="#L-374"><span class="linenos">374</span></a><span class="s1">                applications.UPDATED_AT,</span>
+</span><span id="L-375"><a href="#L-375"><span class="linenos">375</span></a><span class="s1">                applications.status,</span>
+</span><span id="L-376"><a href="#L-376"><span class="linenos">376</span></a><span class="s1">                applications.remarks,</span>
+</span><span id="L-377"><a href="#L-377"><span class="linenos">377</span></a><span class="s1">                student.degree,</span>
+</span><span id="L-378"><a href="#L-378"><span class="linenos">378</span></a><span class="s1">                student.gpa,</span>
+</span><span id="L-379"><a href="#L-379"><span class="linenos">379</span></a><span class="s1">                student.major,</span>
+</span><span id="L-380"><a href="#L-380"><span class="linenos">380</span></a><span class="s1">                student.minor,</span>
+</span><span id="L-381"><a href="#L-381"><span class="linenos">381</span></a><span class="s1">                student.year</span>
+</span><span id="L-382"><a href="#L-382"><span class="linenos">382</span></a><span class="s1">         FROM   applications,</span>
+</span><span id="L-383"><a href="#L-383"><span class="linenos">383</span></a><span class="s1">                student,</span>
+</span><span id="L-384"><a href="#L-384"><span class="linenos">384</span></a><span class="s1">                users</span>
+</span><span id="L-385"><a href="#L-385"><span class="linenos">385</span></a><span class="s1">         WHERE  applications.student = student.user_id</span>
+</span><span id="L-386"><a href="#L-386"><span class="linenos">386</span></a><span class="s1">                AND users.user_id = student.user_id),</span>
+</span><span id="L-387"><a href="#L-387"><span class="linenos">387</span></a><span class="s1">     professor_data</span>
+</span><span id="L-388"><a href="#L-388"><span class="linenos">388</span></a><span class="s1">     AS (SELECT applications.application_id AS professor_application_id,</span>
+</span><span id="L-389"><a href="#L-389"><span class="linenos">389</span></a><span class="s1">                applications.posting_id     AS professor_posting_id,</span>
+</span><span id="L-390"><a href="#L-390"><span class="linenos">390</span></a><span class="s1">                postings.title,</span>
+</span><span id="L-391"><a href="#L-391"><span class="linenos">391</span></a><span class="s1">                postings.description,</span>
+</span><span id="L-392"><a href="#L-392"><span class="linenos">392</span></a><span class="s1">                postings.location,</span>
+</span><span id="L-393"><a href="#L-393"><span class="linenos">393</span></a><span class="s1">                postings.prerequisites,</span>
+</span><span id="L-394"><a href="#L-394"><span class="linenos">394</span></a><span class="s1">                postings.professor,</span>
+</span><span id="L-395"><a href="#L-395"><span class="linenos">395</span></a><span class="s1">                users.display_name          AS professor_display_name,</span>
+</span><span id="L-396"><a href="#L-396"><span class="linenos">396</span></a><span class="s1">                users.email                 AS professor_email,</span>
+</span><span id="L-397"><a href="#L-397"><span class="linenos">397</span></a><span class="s1">                users.phone                 AS professor_phone,</span>
+</span><span id="L-398"><a href="#L-398"><span class="linenos">398</span></a><span class="s1">                professors.department,</span>
+</span><span id="L-399"><a href="#L-399"><span class="linenos">399</span></a><span class="s1">                professors.designation</span>
+</span><span id="L-400"><a href="#L-400"><span class="linenos">400</span></a><span class="s1">         FROM   applications,</span>
+</span><span id="L-401"><a href="#L-401"><span class="linenos">401</span></a><span class="s1">                postings,</span>
+</span><span id="L-402"><a href="#L-402"><span class="linenos">402</span></a><span class="s1">                users,</span>
+</span><span id="L-403"><a href="#L-403"><span class="linenos">403</span></a><span class="s1">                professors</span>
+</span><span id="L-404"><a href="#L-404"><span class="linenos">404</span></a><span class="s1">         WHERE  applications.posting_id = postings.posting_id</span>
+</span><span id="L-405"><a href="#L-405"><span class="linenos">405</span></a><span class="s1">                AND postings.professor = professors.user_id</span>
+</span><span id="L-406"><a href="#L-406"><span class="linenos">406</span></a><span class="s1">                AND users.user_id = professors.user_id)</span>
+</span><span id="L-407"><a href="#L-407"><span class="linenos">407</span></a><span class="s1">SELECT student_application_id AS application_id,</span>
+</span><span id="L-408"><a href="#L-408"><span class="linenos">408</span></a><span class="s1">       student_posting_id     AS posting_id,</span>
+</span><span id="L-409"><a href="#L-409"><span class="linenos">409</span></a><span class="s1">       title , description, location, prerequisites, CREATED_AT, UPDATED_AT, STATUS,REMARKS,</span>
+</span><span id="L-410"><a href="#L-410"><span class="linenos">410</span></a><span class="s1">       professor as professor_user_id,</span>
+</span><span id="L-411"><a href="#L-411"><span class="linenos">411</span></a><span class="s1">       professor_email, department, designation, professor_display_name, </span>
+</span><span id="L-412"><a href="#L-412"><span class="linenos">412</span></a><span class="s1">       student as student_user_id,</span>
+</span><span id="L-413"><a href="#L-413"><span class="linenos">413</span></a><span class="s1">       student_display_name, student_email, student_phone, gpa, major, minor, year</span>
+</span><span id="L-414"><a href="#L-414"><span class="linenos">414</span></a>
+</span><span id="L-415"><a href="#L-415"><span class="linenos">415</span></a>
+</span><span id="L-416"><a href="#L-416"><span class="linenos">416</span></a>
+</span><span id="L-417"><a href="#L-417"><span class="linenos">417</span></a><span class="s1">FROM   student_data,</span>
+</span><span id="L-418"><a href="#L-418"><span class="linenos">418</span></a><span class="s1">       professor_data</span>
+</span><span id="L-419"><a href="#L-419"><span class="linenos">419</span></a><span class="s1">WHERE  student_data.student_application_id =</span>
+</span><span id="L-420"><a href="#L-420"><span class="linenos">420</span></a><span class="s1">       professor_data.professor_application_id</span>
+</span><span id="L-421"><a href="#L-421"><span class="linenos">421</span></a><span class="s1">       AND student_data.student_posting_id =</span>
+</span><span id="L-422"><a href="#L-422"><span class="linenos">422</span></a><span class="s1">professor_data.professor_posting_id &#39;&#39;&#39;</span>
+</span><span id="L-423"><a href="#L-423"><span class="linenos">423</span></a>        <span class="n">curs</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</span><span id="L-424"><a href="#L-424"><span class="linenos">424</span></a>        <span class="n">curs</span><span class="o">.</span><span class="n">rowfactory</span> <span class="o">=</span> <span class="n">makeDictFactory</span><span class="p">(</span><span class="n">curs</span><span class="p">)</span>
+</span><span id="L-425"><a href="#L-425"><span class="linenos">425</span></a>        <span class="n">response</span> <span class="o">=</span> <span class="n">curs</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+</span><span id="L-426"><a href="#L-426"><span class="linenos">426</span></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="L-427"><a href="#L-427"><span class="linenos">427</span></a>            <span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span id="L-428"><a href="#L-428"><span class="linenos">428</span></a>        <span class="k">except</span><span class="p">:</span>
+</span><span id="L-429"><a href="#L-429"><span class="linenos">429</span></a>            <span class="k">pass</span>
+</span><span id="L-430"><a href="#L-430"><span class="linenos">430</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+</span><span id="L-431"><a href="#L-431"><span class="linenos">431</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="L-432"><a href="#L-432"><span class="linenos">432</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span><span id="L-433"><a href="#L-433"><span class="linenos">433</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
+</span><span id="L-434"><a href="#L-434"><span class="linenos">434</span></a>    <span class="k">finally</span><span class="p">:</span>
+</span><span id="L-435"><a href="#L-435"><span class="linenos">435</span></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="L-436"><a href="#L-436"><span class="linenos">436</span></a>            <span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span id="L-437"><a href="#L-437"><span class="linenos">437</span></a>        <span class="k">except</span><span class="p">:</span>
+</span><span id="L-438"><a href="#L-438"><span class="linenos">438</span></a>            <span class="k">pass</span>
+</span><span id="L-439"><a href="#L-439"><span class="linenos">439</span></a>
+</span><span id="L-440"><a href="#L-440"><span class="linenos">440</span></a>
+</span><span id="L-441"><a href="#L-441"><span class="linenos">441</span></a><span class="k">def</span> <span class="nf">update_application</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+</span><span id="L-442"><a href="#L-442"><span class="linenos">442</span></a>    
+</span><span id="L-443"><a href="#L-443"><span class="linenos">443</span></a>    <span class="sd">&#39;&#39;&#39;</span>
+</span><span id="L-444"><a href="#L-444"><span class="linenos">444</span></a><span class="sd">    ```</span>
+</span><span id="L-445"><a href="#L-445"><span class="linenos">445</span></a><span class="sd">    /update_application [POST]</span>
+</span><span id="L-446"><a href="#L-446"><span class="linenos">446</span></a><span class="sd">    Request:</span>
+</span><span id="L-447"><a href="#L-447"><span class="linenos">447</span></a><span class="sd">    {</span>
+</span><span id="L-448"><a href="#L-448"><span class="linenos">448</span></a><span class="sd">        application_id: number,</span>
+</span><span id="L-449"><a href="#L-449"><span class="linenos">449</span></a><span class="sd">        status: string (This should be overwritten in the DB by API),</span>
+</span><span id="L-450"><a href="#L-450"><span class="linenos">450</span></a><span class="sd">    remarks: string</span>
+</span><span id="L-451"><a href="#L-451"><span class="linenos">451</span></a><span class="sd">    }</span>
+</span><span id="L-452"><a href="#L-452"><span class="linenos">452</span></a><span class="sd">    Response:</span>
+</span><span id="L-453"><a href="#L-453"><span class="linenos">453</span></a><span class="sd">    {</span>
+</span><span id="L-454"><a href="#L-454"><span class="linenos">454</span></a><span class="sd">        status: boolean</span>
+</span><span id="L-455"><a href="#L-455"><span class="linenos">455</span></a><span class="sd">        data: (Success / Error message as per status)</span>
+</span><span id="L-456"><a href="#L-456"><span class="linenos">456</span></a><span class="sd">        // UPDATED_AT timestamp should be auto updated by the API</span>
+</span><span id="L-457"><a href="#L-457"><span class="linenos">457</span></a><span class="sd">    }</span>
+</span><span id="L-458"><a href="#L-458"><span class="linenos">458</span></a><span class="sd">    ```</span>
+</span><span id="L-459"><a href="#L-459"><span class="linenos">459</span></a><span class="sd">    &#39;&#39;&#39;</span>
+</span><span id="L-460"><a href="#L-460"><span class="linenos">460</span></a>    
+</span><span id="L-461"><a href="#L-461"><span class="linenos">461</span></a>    
+</span><span id="L-462"><a href="#L-462"><span class="linenos">462</span></a>    <span class="k">try</span><span class="p">:</span>
+</span><span id="L-463"><a href="#L-463"><span class="linenos">463</span></a>        <span class="n">con</span> <span class="o">=</span> <span class="n">connect</span><span class="p">()</span>
+</span><span id="L-464"><a href="#L-464"><span class="linenos">464</span></a>    <span class="k">except</span><span class="p">:</span>
+</span><span id="L-465"><a href="#L-465"><span class="linenos">465</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Unable to create DB connection&quot;</span><span class="p">)</span>
+</span><span id="L-466"><a href="#L-466"><span class="linenos">466</span></a>    <span class="k">try</span><span class="p">:</span>
+</span><span id="L-467"><a href="#L-467"><span class="linenos">467</span></a>        <span class="c1"># Get the data from JSON Payload</span>
+</span><span id="L-468"><a href="#L-468"><span class="linenos">468</span></a>        <span class="n">app_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;application_id&quot;</span><span class="p">]</span>
+</span><span id="L-469"><a href="#L-469"><span class="linenos">469</span></a>        <span class="n">status</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span>
+</span><span id="L-470"><a href="#L-470"><span class="linenos">470</span></a>        <span class="n">remarks</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;remarks&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;remarks&quot;</span> <span class="ow">in</span>  <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
+</span><span id="L-471"><a href="#L-471"><span class="linenos">471</span></a>        
+</span><span id="L-472"><a href="#L-472"><span class="linenos">472</span></a>        <span class="c1"># Insert application into database</span>
+</span><span id="L-473"><a href="#L-473"><span class="linenos">473</span></a>        <span class="n">cur</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+</span><span id="L-474"><a href="#L-474"><span class="linenos">474</span></a>        <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;UPDATE APPLICATIONS SET STATUS = :1, REMARKS = :2 , UPDATED_AT = SYSTIMESTAMP WHERE APPLICATION_ID = :3&quot;</span>
+</span><span id="L-475"><a href="#L-475"><span class="linenos">475</span></a>        <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">status</span><span class="p">,</span><span class="n">remarks</span><span class="p">,</span><span class="n">app_id</span><span class="p">]</span>
+</span><span id="L-476"><a href="#L-476"><span class="linenos">476</span></a>        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</span><span id="L-477"><a href="#L-477"><span class="linenos">477</span></a>        <span class="n">con</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</span><span id="L-478"><a href="#L-478"><span class="linenos">478</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span>
+</span><span id="L-479"><a href="#L-479"><span class="linenos">479</span></a>            <span class="kc">True</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Application Updated Successfully.&quot;</span>
+</span><span id="L-480"><a href="#L-480"><span class="linenos">480</span></a>        <span class="p">)</span>
+</span><span id="L-481"><a href="#L-481"><span class="linenos">481</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="L-482"><a href="#L-482"><span class="linenos">482</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span><span id="L-483"><a href="#L-483"><span class="linenos">483</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+</span><span id="L-484"><a href="#L-484"><span class="linenos">484</span></a>    <span class="k">finally</span><span class="p">:</span>
+</span><span id="L-485"><a href="#L-485"><span class="linenos">485</span></a>        <span class="n">disconnect</span><span class="p">(</span><span class="n">con</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -962,21 +975,34 @@ Response:
 </span><span id="add_application-277"><a href="#add_application-277"><span class="linenos">277</span></a>        <span class="n">student</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">]</span>
 </span><span id="add_application-278"><a href="#add_application-278"><span class="linenos">278</span></a>        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;pending&quot;</span>
 </span><span id="add_application-279"><a href="#add_application-279"><span class="linenos">279</span></a>        <span class="n">Posting_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;posting_id&quot;</span><span class="p">]</span>
-</span><span id="add_application-280"><a href="#add_application-280"><span class="linenos">280</span></a>        <span class="n">remarks</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-</span><span id="add_application-281"><a href="#add_application-281"><span class="linenos">281</span></a>        <span class="c1"># Insert application into database</span>
-</span><span id="add_application-282"><a href="#add_application-282"><span class="linenos">282</span></a>        <span class="n">cur</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
-</span><span id="add_application-283"><a href="#add_application-283"><span class="linenos">283</span></a>        <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO APPLICATIONS (STUDENT, STATUS, POSTING_ID, REMARKS, CREATED_AT, UPDATED_AT) VALUES (:1,:2,:3,:4,SYSTIMESTAMP,SYSTIMESTAMP)&quot;</span>
-</span><span id="add_application-284"><a href="#add_application-284"><span class="linenos">284</span></a>        <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">student</span><span class="p">,</span><span class="n">status</span><span class="p">,</span><span class="n">Posting_id</span><span class="p">,</span><span class="n">remarks</span><span class="p">]</span>
-</span><span id="add_application-285"><a href="#add_application-285"><span class="linenos">285</span></a>        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
-</span><span id="add_application-286"><a href="#add_application-286"><span class="linenos">286</span></a>        <span class="n">con</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-</span><span id="add_application-287"><a href="#add_application-287"><span class="linenos">287</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span>
-</span><span id="add_application-288"><a href="#add_application-288"><span class="linenos">288</span></a>            <span class="kc">True</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Application Added Successfully.&quot;</span>
-</span><span id="add_application-289"><a href="#add_application-289"><span class="linenos">289</span></a>        <span class="p">)</span>
-</span><span id="add_application-290"><a href="#add_application-290"><span class="linenos">290</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="add_application-291"><a href="#add_application-291"><span class="linenos">291</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-</span><span id="add_application-292"><a href="#add_application-292"><span class="linenos">292</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
-</span><span id="add_application-293"><a href="#add_application-293"><span class="linenos">293</span></a>    <span class="k">finally</span><span class="p">:</span>
-</span><span id="add_application-294"><a href="#add_application-294"><span class="linenos">294</span></a>        <span class="n">disconnect</span><span class="p">(</span><span class="n">con</span><span class="p">)</span>
+</span><span id="add_application-280"><a href="#add_application-280"><span class="linenos">280</span></a>        <span class="n">responses</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;responses&quot;</span><span class="p">]</span>
+</span><span id="add_application-281"><a href="#add_application-281"><span class="linenos">281</span></a>        <span class="n">remarks</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span id="add_application-282"><a href="#add_application-282"><span class="linenos">282</span></a>        <span class="c1"># Insert application into database</span>
+</span><span id="add_application-283"><a href="#add_application-283"><span class="linenos">283</span></a>        <span class="n">cur</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+</span><span id="add_application-284"><a href="#add_application-284"><span class="linenos">284</span></a>        <span class="n">bind_id</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</span><span id="add_application-285"><a href="#add_application-285"><span class="linenos">285</span></a>        <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO APPLICATIONS (STUDENT, STATUS, POSTING_ID, REMARKS, CREATED_AT, UPDATED_AT) VALUES (:1,:2,:3,:4,SYSTIMESTAMP,SYSTIMESTAMP) RETURNING APPLICATION_ID into :5&quot;</span>
+</span><span id="add_application-286"><a href="#add_application-286"><span class="linenos">286</span></a>        <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">student</span><span class="p">,</span><span class="n">status</span><span class="p">,</span><span class="n">Posting_id</span><span class="p">,</span><span class="n">remarks</span><span class="p">,</span> <span class="n">bind_id</span><span class="p">]</span>
+</span><span id="add_application-287"><a href="#add_application-287"><span class="linenos">287</span></a>        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</span><span id="add_application-288"><a href="#add_application-288"><span class="linenos">288</span></a>
+</span><span id="add_application-289"><a href="#add_application-289"><span class="linenos">289</span></a>        <span class="c1"># Get ID of inserted</span>
+</span><span id="add_application-290"><a href="#add_application-290"><span class="linenos">290</span></a>        <span class="n">inserted_id</span> <span class="o">=</span> <span class="n">bind_id</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="add_application-291"><a href="#add_application-291"><span class="linenos">291</span></a>
+</span><span id="add_application-292"><a href="#add_application-292"><span class="linenos">292</span></a>        <span class="c1"># Insert responses into database</span>
+</span><span id="add_application-293"><a href="#add_application-293"><span class="linenos">293</span></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">responses</span><span class="p">)):</span>
+</span><span id="add_application-294"><a href="#add_application-294"><span class="linenos">294</span></a>            <span class="nb">print</span><span class="p">(</span><span class="n">responses</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span><span id="add_application-295"><a href="#add_application-295"><span class="linenos">295</span></a>            <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO POSTING_RESPONSES (RESPONSE, QUESTION_ID, CREATED_AT, APPLICATION_ID) VALUES (:1, :2, SYSTIMESTAMP, :3) &quot;</span>
+</span><span id="add_application-296"><a href="#add_application-296"><span class="linenos">296</span></a>            <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">responses</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;answer&#39;</span><span class="p">],</span> <span class="n">responses</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;question_id&#39;</span><span class="p">],</span> <span class="n">inserted_id</span><span class="p">]</span>
+</span><span id="add_application-297"><a href="#add_application-297"><span class="linenos">297</span></a>            <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</span><span id="add_application-298"><a href="#add_application-298"><span class="linenos">298</span></a>        
+</span><span id="add_application-299"><a href="#add_application-299"><span class="linenos">299</span></a>        <span class="n">con</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</span><span id="add_application-300"><a href="#add_application-300"><span class="linenos">300</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span>
+</span><span id="add_application-301"><a href="#add_application-301"><span class="linenos">301</span></a>            <span class="kc">True</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Application Added Successfully.&quot;</span>
+</span><span id="add_application-302"><a href="#add_application-302"><span class="linenos">302</span></a>        <span class="p">)</span>
+</span><span id="add_application-303"><a href="#add_application-303"><span class="linenos">303</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="add_application-304"><a href="#add_application-304"><span class="linenos">304</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span><span id="add_application-305"><a href="#add_application-305"><span class="linenos">305</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+</span><span id="add_application-306"><a href="#add_application-306"><span class="linenos">306</span></a>    <span class="k">finally</span><span class="p">:</span>
+</span><span id="add_application-307"><a href="#add_application-307"><span class="linenos">307</span></a>        <span class="n">disconnect</span><span class="p">(</span><span class="n">con</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -1010,136 +1036,136 @@ Response:
 
     </div>
     <a class="headerlink" href="#get_all_application"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="get_all_application-297"><a href="#get_all_application-297"><span class="linenos">297</span></a><span class="k">def</span> <span class="nf">get_all_application</span><span class="p">():</span>
-</span><span id="get_all_application-298"><a href="#get_all_application-298"><span class="linenos">298</span></a>    
-</span><span id="get_all_application-299"><a href="#get_all_application-299"><span class="linenos">299</span></a>    <span class="sd">&#39;&#39;&#39;</span>
-</span><span id="get_all_application-300"><a href="#get_all_application-300"><span class="linenos">300</span></a><span class="sd">    ```</span>
-</span><span id="get_all_application-301"><a href="#get_all_application-301"><span class="linenos">301</span></a><span class="sd">    /get_all_applications_by_student [POST]</span>
-</span><span id="get_all_application-302"><a href="#get_all_application-302"><span class="linenos">302</span></a><span class="sd">Request:</span>
-</span><span id="get_all_application-303"><a href="#get_all_application-303"><span class="linenos">303</span></a><span class="sd">{</span>
-</span><span id="get_all_application-304"><a href="#get_all_application-304"><span class="linenos">304</span></a><span class="sd">    email : string,</span>
-</span><span id="get_all_application-305"><a href="#get_all_application-305"><span class="linenos">305</span></a><span class="sd">    password: string</span>
-</span><span id="get_all_application-306"><a href="#get_all_application-306"><span class="linenos">306</span></a><span class="sd">}</span>
-</span><span id="get_all_application-307"><a href="#get_all_application-307"><span class="linenos">307</span></a><span class="sd">Response:</span>
-</span><span id="get_all_application-308"><a href="#get_all_application-308"><span class="linenos">308</span></a><span class="sd">{</span>
-</span><span id="get_all_application-309"><a href="#get_all_application-309"><span class="linenos">309</span></a><span class="sd">	status: boolean,</span>
-</span><span id="get_all_application-310"><a href="#get_all_application-310"><span class="linenos">310</span></a>
-</span><span id="get_all_application-311"><a href="#get_all_application-311"><span class="linenos">311</span></a><span class="sd">	if status is True:</span>
-</span><span id="get_all_application-312"><a href="#get_all_application-312"><span class="linenos">312</span></a><span class="sd">		data:</span>
-</span><span id="get_all_application-313"><a href="#get_all_application-313"><span class="linenos">313</span></a><span class="sd">		[</span>
-</span><span id="get_all_application-314"><a href="#get_all_application-314"><span class="linenos">314</span></a><span class="sd">			{</span>
-</span><span id="get_all_application-315"><a href="#get_all_application-315"><span class="linenos">315</span></a><span class="sd">				application_id: number,</span>
-</span><span id="get_all_application-316"><a href="#get_all_application-316"><span class="linenos">316</span></a><span class="sd">				posting_id: number,</span>
-</span><span id="get_all_application-317"><a href="#get_all_application-317"><span class="linenos">317</span></a><span class="sd">				title: string,</span>
-</span><span id="get_all_application-318"><a href="#get_all_application-318"><span class="linenos">318</span></a><span class="sd">				description: string,</span>
-</span><span id="get_all_application-319"><a href="#get_all_application-319"><span class="linenos">319</span></a><span class="sd">				location: string,</span>
-</span><span id="get_all_application-320"><a href="#get_all_application-320"><span class="linenos">320</span></a><span class="sd">				prerequisites: string,</span>
-</span><span id="get_all_application-321"><a href="#get_all_application-321"><span class="linenos">321</span></a><span class="sd">				created_at: string, (of the application, NOT the posting)</span>
-</span><span id="get_all_application-322"><a href="#get_all_application-322"><span class="linenos">322</span></a><span class="sd">				updated_at: string, (of the application, NOT the posting)</span>
-</span><span id="get_all_application-323"><a href="#get_all_application-323"><span class="linenos">323</span></a><span class="sd">				professor_user_id: number,</span>
-</span><span id="get_all_application-324"><a href="#get_all_application-324"><span class="linenos">324</span></a><span class="sd">				professor_email: string,</span>
-</span><span id="get_all_application-325"><a href="#get_all_application-325"><span class="linenos">325</span></a><span class="sd">				professor_department: string,</span>
-</span><span id="get_all_application-326"><a href="#get_all_application-326"><span class="linenos">326</span></a><span class="sd">				professor_designation: string</span>
-</span><span id="get_all_application-327"><a href="#get_all_application-327"><span class="linenos">327</span></a><span class="sd">				professor_display_name: string,</span>
-</span><span id="get_all_application-328"><a href="#get_all_application-328"><span class="linenos">328</span></a><span class="sd">				student_user_id: number,</span>
-</span><span id="get_all_application-329"><a href="#get_all_application-329"><span class="linenos">329</span></a><span class="sd">				student_display_name: string,</span>
-</span><span id="get_all_application-330"><a href="#get_all_application-330"><span class="linenos">330</span></a><span class="sd">				student_email: string,</span>
-</span><span id="get_all_application-331"><a href="#get_all_application-331"><span class="linenos">331</span></a><span class="sd">				student_phone: string,</span>
-</span><span id="get_all_application-332"><a href="#get_all_application-332"><span class="linenos">332</span></a><span class="sd">				student_gpa: float,</span>
-</span><span id="get_all_application-333"><a href="#get_all_application-333"><span class="linenos">333</span></a><span class="sd">				student_major: string,</span>
-</span><span id="get_all_application-334"><a href="#get_all_application-334"><span class="linenos">334</span></a><span class="sd">				student_minor: string,</span>
-</span><span id="get_all_application-335"><a href="#get_all_application-335"><span class="linenos">335</span></a><span class="sd">				student_year: string,</span>
-</span><span id="get_all_application-336"><a href="#get_all_application-336"><span class="linenos">336</span></a><span class="sd">				status: string // This is the status of the application and NOT the response.</span>
-</span><span id="get_all_application-337"><a href="#get_all_application-337"><span class="linenos">337</span></a><span class="sd">				remarks: string</span>
-</span><span id="get_all_application-338"><a href="#get_all_application-338"><span class="linenos">338</span></a><span class="sd">			}</span>
-</span><span id="get_all_application-339"><a href="#get_all_application-339"><span class="linenos">339</span></a><span class="sd">		]</span>
-</span><span id="get_all_application-340"><a href="#get_all_application-340"><span class="linenos">340</span></a><span class="sd">	else:</span>
-</span><span id="get_all_application-341"><a href="#get_all_application-341"><span class="linenos">341</span></a><span class="sd">	data: string (error message)</span>
-</span><span id="get_all_application-342"><a href="#get_all_application-342"><span class="linenos">342</span></a><span class="sd">}</span>
-</span><span id="get_all_application-343"><a href="#get_all_application-343"><span class="linenos">343</span></a><span class="sd">    ```</span>
-</span><span id="get_all_application-344"><a href="#get_all_application-344"><span class="linenos">344</span></a><span class="sd">    &#39;&#39;&#39;</span>
-</span><span id="get_all_application-345"><a href="#get_all_application-345"><span class="linenos">345</span></a>    <span class="n">con</span> <span class="o">=</span> <span class="n">connect</span><span class="p">()</span>
-</span><span id="get_all_application-346"><a href="#get_all_application-346"><span class="linenos">346</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">con</span><span class="p">:</span>
-</span><span id="get_all_application-347"><a href="#get_all_application-347"><span class="linenos">347</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span>  <span class="s2">&quot;Unable to connect to database.&quot;</span><span class="p">)</span>
-</span><span id="get_all_application-348"><a href="#get_all_application-348"><span class="linenos">348</span></a>    <span class="k">try</span><span class="p">:</span>
-</span><span id="get_all_application-349"><a href="#get_all_application-349"><span class="linenos">349</span></a>        <span class="n">curs</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
-</span><span id="get_all_application-350"><a href="#get_all_application-350"><span class="linenos">350</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="get_all_application-351"><a href="#get_all_application-351"><span class="linenos">351</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-</span><span id="get_all_application-352"><a href="#get_all_application-352"><span class="linenos">352</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span>  <span class="s2">&quot;Unable to connect to database.&quot;</span><span class="p">)</span>
-</span><span id="get_all_application-353"><a href="#get_all_application-353"><span class="linenos">353</span></a>    <span class="k">try</span><span class="p">:</span>
-</span><span id="get_all_application-354"><a href="#get_all_application-354"><span class="linenos">354</span></a>        <span class="n">query</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;WITH student_data</span>
-</span><span id="get_all_application-355"><a href="#get_all_application-355"><span class="linenos">355</span></a><span class="s1">     AS (SELECT applications.application_id AS student_application_id,</span>
-</span><span id="get_all_application-356"><a href="#get_all_application-356"><span class="linenos">356</span></a><span class="s1">                applications.posting_id     AS student_posting_id,</span>
-</span><span id="get_all_application-357"><a href="#get_all_application-357"><span class="linenos">357</span></a><span class="s1">                applications.student,</span>
-</span><span id="get_all_application-358"><a href="#get_all_application-358"><span class="linenos">358</span></a><span class="s1">                users.display_name          AS student_display_name,</span>
-</span><span id="get_all_application-359"><a href="#get_all_application-359"><span class="linenos">359</span></a><span class="s1">                users.email                 AS student_email,</span>
-</span><span id="get_all_application-360"><a href="#get_all_application-360"><span class="linenos">360</span></a><span class="s1">                users.phone                 AS student_phone,</span>
-</span><span id="get_all_application-361"><a href="#get_all_application-361"><span class="linenos">361</span></a><span class="s1">                applications.CREATED_AT,</span>
-</span><span id="get_all_application-362"><a href="#get_all_application-362"><span class="linenos">362</span></a><span class="s1">                applications.UPDATED_AT,</span>
-</span><span id="get_all_application-363"><a href="#get_all_application-363"><span class="linenos">363</span></a><span class="s1">                applications.status,</span>
-</span><span id="get_all_application-364"><a href="#get_all_application-364"><span class="linenos">364</span></a><span class="s1">                applications.remarks,</span>
-</span><span id="get_all_application-365"><a href="#get_all_application-365"><span class="linenos">365</span></a><span class="s1">                student.degree,</span>
-</span><span id="get_all_application-366"><a href="#get_all_application-366"><span class="linenos">366</span></a><span class="s1">                student.gpa,</span>
-</span><span id="get_all_application-367"><a href="#get_all_application-367"><span class="linenos">367</span></a><span class="s1">                student.major,</span>
-</span><span id="get_all_application-368"><a href="#get_all_application-368"><span class="linenos">368</span></a><span class="s1">                student.minor,</span>
-</span><span id="get_all_application-369"><a href="#get_all_application-369"><span class="linenos">369</span></a><span class="s1">                student.year</span>
-</span><span id="get_all_application-370"><a href="#get_all_application-370"><span class="linenos">370</span></a><span class="s1">         FROM   applications,</span>
-</span><span id="get_all_application-371"><a href="#get_all_application-371"><span class="linenos">371</span></a><span class="s1">                student,</span>
-</span><span id="get_all_application-372"><a href="#get_all_application-372"><span class="linenos">372</span></a><span class="s1">                users</span>
-</span><span id="get_all_application-373"><a href="#get_all_application-373"><span class="linenos">373</span></a><span class="s1">         WHERE  applications.student = student.user_id</span>
-</span><span id="get_all_application-374"><a href="#get_all_application-374"><span class="linenos">374</span></a><span class="s1">                AND users.user_id = student.user_id),</span>
-</span><span id="get_all_application-375"><a href="#get_all_application-375"><span class="linenos">375</span></a><span class="s1">     professor_data</span>
-</span><span id="get_all_application-376"><a href="#get_all_application-376"><span class="linenos">376</span></a><span class="s1">     AS (SELECT applications.application_id AS professor_application_id,</span>
-</span><span id="get_all_application-377"><a href="#get_all_application-377"><span class="linenos">377</span></a><span class="s1">                applications.posting_id     AS professor_posting_id,</span>
-</span><span id="get_all_application-378"><a href="#get_all_application-378"><span class="linenos">378</span></a><span class="s1">                postings.title,</span>
-</span><span id="get_all_application-379"><a href="#get_all_application-379"><span class="linenos">379</span></a><span class="s1">                postings.description,</span>
-</span><span id="get_all_application-380"><a href="#get_all_application-380"><span class="linenos">380</span></a><span class="s1">                postings.location,</span>
-</span><span id="get_all_application-381"><a href="#get_all_application-381"><span class="linenos">381</span></a><span class="s1">                postings.prerequisites,</span>
-</span><span id="get_all_application-382"><a href="#get_all_application-382"><span class="linenos">382</span></a><span class="s1">                postings.professor,</span>
-</span><span id="get_all_application-383"><a href="#get_all_application-383"><span class="linenos">383</span></a><span class="s1">                users.display_name          AS professor_display_name,</span>
-</span><span id="get_all_application-384"><a href="#get_all_application-384"><span class="linenos">384</span></a><span class="s1">                users.email                 AS professor_email,</span>
-</span><span id="get_all_application-385"><a href="#get_all_application-385"><span class="linenos">385</span></a><span class="s1">                users.phone                 AS professor_phone,</span>
-</span><span id="get_all_application-386"><a href="#get_all_application-386"><span class="linenos">386</span></a><span class="s1">                professors.department,</span>
-</span><span id="get_all_application-387"><a href="#get_all_application-387"><span class="linenos">387</span></a><span class="s1">                professors.designation</span>
-</span><span id="get_all_application-388"><a href="#get_all_application-388"><span class="linenos">388</span></a><span class="s1">         FROM   applications,</span>
-</span><span id="get_all_application-389"><a href="#get_all_application-389"><span class="linenos">389</span></a><span class="s1">                postings,</span>
-</span><span id="get_all_application-390"><a href="#get_all_application-390"><span class="linenos">390</span></a><span class="s1">                users,</span>
-</span><span id="get_all_application-391"><a href="#get_all_application-391"><span class="linenos">391</span></a><span class="s1">                professors</span>
-</span><span id="get_all_application-392"><a href="#get_all_application-392"><span class="linenos">392</span></a><span class="s1">         WHERE  applications.posting_id = postings.posting_id</span>
-</span><span id="get_all_application-393"><a href="#get_all_application-393"><span class="linenos">393</span></a><span class="s1">                AND postings.professor = professors.user_id</span>
-</span><span id="get_all_application-394"><a href="#get_all_application-394"><span class="linenos">394</span></a><span class="s1">                AND users.user_id = professors.user_id)</span>
-</span><span id="get_all_application-395"><a href="#get_all_application-395"><span class="linenos">395</span></a><span class="s1">SELECT student_application_id AS application_id,</span>
-</span><span id="get_all_application-396"><a href="#get_all_application-396"><span class="linenos">396</span></a><span class="s1">       student_posting_id     AS posting_id,</span>
-</span><span id="get_all_application-397"><a href="#get_all_application-397"><span class="linenos">397</span></a><span class="s1">       title , description, location, prerequisites, CREATED_AT, UPDATED_AT, STATUS,REMARKS,</span>
-</span><span id="get_all_application-398"><a href="#get_all_application-398"><span class="linenos">398</span></a><span class="s1">       professor as professor_user_id,</span>
-</span><span id="get_all_application-399"><a href="#get_all_application-399"><span class="linenos">399</span></a><span class="s1">       professor_email, department, designation, professor_display_name, </span>
-</span><span id="get_all_application-400"><a href="#get_all_application-400"><span class="linenos">400</span></a><span class="s1">       student as student_user_id,</span>
-</span><span id="get_all_application-401"><a href="#get_all_application-401"><span class="linenos">401</span></a><span class="s1">       student_display_name, student_email, student_phone, gpa, major, minor, year</span>
-</span><span id="get_all_application-402"><a href="#get_all_application-402"><span class="linenos">402</span></a>
-</span><span id="get_all_application-403"><a href="#get_all_application-403"><span class="linenos">403</span></a>
-</span><span id="get_all_application-404"><a href="#get_all_application-404"><span class="linenos">404</span></a>
-</span><span id="get_all_application-405"><a href="#get_all_application-405"><span class="linenos">405</span></a><span class="s1">FROM   student_data,</span>
-</span><span id="get_all_application-406"><a href="#get_all_application-406"><span class="linenos">406</span></a><span class="s1">       professor_data</span>
-</span><span id="get_all_application-407"><a href="#get_all_application-407"><span class="linenos">407</span></a><span class="s1">WHERE  student_data.student_application_id =</span>
-</span><span id="get_all_application-408"><a href="#get_all_application-408"><span class="linenos">408</span></a><span class="s1">       professor_data.professor_application_id</span>
-</span><span id="get_all_application-409"><a href="#get_all_application-409"><span class="linenos">409</span></a><span class="s1">       AND student_data.student_posting_id =</span>
-</span><span id="get_all_application-410"><a href="#get_all_application-410"><span class="linenos">410</span></a><span class="s1">professor_data.professor_posting_id &#39;&#39;&#39;</span>
-</span><span id="get_all_application-411"><a href="#get_all_application-411"><span class="linenos">411</span></a>        <span class="n">curs</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-</span><span id="get_all_application-412"><a href="#get_all_application-412"><span class="linenos">412</span></a>        <span class="n">curs</span><span class="o">.</span><span class="n">rowfactory</span> <span class="o">=</span> <span class="n">makeDictFactory</span><span class="p">(</span><span class="n">curs</span><span class="p">)</span>
-</span><span id="get_all_application-413"><a href="#get_all_application-413"><span class="linenos">413</span></a>        <span class="n">response</span> <span class="o">=</span> <span class="n">curs</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-</span><span id="get_all_application-414"><a href="#get_all_application-414"><span class="linenos">414</span></a>        <span class="k">try</span><span class="p">:</span>
-</span><span id="get_all_application-415"><a href="#get_all_application-415"><span class="linenos">415</span></a>            <span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span id="get_all_application-416"><a href="#get_all_application-416"><span class="linenos">416</span></a>        <span class="k">except</span><span class="p">:</span>
-</span><span id="get_all_application-417"><a href="#get_all_application-417"><span class="linenos">417</span></a>            <span class="k">pass</span>
-</span><span id="get_all_application-418"><a href="#get_all_application-418"><span class="linenos">418</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
-</span><span id="get_all_application-419"><a href="#get_all_application-419"><span class="linenos">419</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="get_all_application-420"><a href="#get_all_application-420"><span class="linenos">420</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-</span><span id="get_all_application-421"><a href="#get_all_application-421"><span class="linenos">421</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
-</span><span id="get_all_application-422"><a href="#get_all_application-422"><span class="linenos">422</span></a>    <span class="k">finally</span><span class="p">:</span>
-</span><span id="get_all_application-423"><a href="#get_all_application-423"><span class="linenos">423</span></a>        <span class="k">try</span><span class="p">:</span>
-</span><span id="get_all_application-424"><a href="#get_all_application-424"><span class="linenos">424</span></a>            <span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span id="get_all_application-425"><a href="#get_all_application-425"><span class="linenos">425</span></a>        <span class="k">except</span><span class="p">:</span>
-</span><span id="get_all_application-426"><a href="#get_all_application-426"><span class="linenos">426</span></a>            <span class="k">pass</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="get_all_application-310"><a href="#get_all_application-310"><span class="linenos">310</span></a><span class="k">def</span> <span class="nf">get_all_application</span><span class="p">():</span>
+</span><span id="get_all_application-311"><a href="#get_all_application-311"><span class="linenos">311</span></a>    
+</span><span id="get_all_application-312"><a href="#get_all_application-312"><span class="linenos">312</span></a>    <span class="sd">&#39;&#39;&#39;</span>
+</span><span id="get_all_application-313"><a href="#get_all_application-313"><span class="linenos">313</span></a><span class="sd">    ```</span>
+</span><span id="get_all_application-314"><a href="#get_all_application-314"><span class="linenos">314</span></a><span class="sd">    /get_all_applications_by_student [POST]</span>
+</span><span id="get_all_application-315"><a href="#get_all_application-315"><span class="linenos">315</span></a><span class="sd">Request:</span>
+</span><span id="get_all_application-316"><a href="#get_all_application-316"><span class="linenos">316</span></a><span class="sd">{</span>
+</span><span id="get_all_application-317"><a href="#get_all_application-317"><span class="linenos">317</span></a><span class="sd">    email : string,</span>
+</span><span id="get_all_application-318"><a href="#get_all_application-318"><span class="linenos">318</span></a><span class="sd">    password: string</span>
+</span><span id="get_all_application-319"><a href="#get_all_application-319"><span class="linenos">319</span></a><span class="sd">}</span>
+</span><span id="get_all_application-320"><a href="#get_all_application-320"><span class="linenos">320</span></a><span class="sd">Response:</span>
+</span><span id="get_all_application-321"><a href="#get_all_application-321"><span class="linenos">321</span></a><span class="sd">{</span>
+</span><span id="get_all_application-322"><a href="#get_all_application-322"><span class="linenos">322</span></a><span class="sd">	status: boolean,</span>
+</span><span id="get_all_application-323"><a href="#get_all_application-323"><span class="linenos">323</span></a>
+</span><span id="get_all_application-324"><a href="#get_all_application-324"><span class="linenos">324</span></a><span class="sd">	if status is True:</span>
+</span><span id="get_all_application-325"><a href="#get_all_application-325"><span class="linenos">325</span></a><span class="sd">		data:</span>
+</span><span id="get_all_application-326"><a href="#get_all_application-326"><span class="linenos">326</span></a><span class="sd">		[</span>
+</span><span id="get_all_application-327"><a href="#get_all_application-327"><span class="linenos">327</span></a><span class="sd">			{</span>
+</span><span id="get_all_application-328"><a href="#get_all_application-328"><span class="linenos">328</span></a><span class="sd">				application_id: number,</span>
+</span><span id="get_all_application-329"><a href="#get_all_application-329"><span class="linenos">329</span></a><span class="sd">				posting_id: number,</span>
+</span><span id="get_all_application-330"><a href="#get_all_application-330"><span class="linenos">330</span></a><span class="sd">				title: string,</span>
+</span><span id="get_all_application-331"><a href="#get_all_application-331"><span class="linenos">331</span></a><span class="sd">				description: string,</span>
+</span><span id="get_all_application-332"><a href="#get_all_application-332"><span class="linenos">332</span></a><span class="sd">				location: string,</span>
+</span><span id="get_all_application-333"><a href="#get_all_application-333"><span class="linenos">333</span></a><span class="sd">				prerequisites: string,</span>
+</span><span id="get_all_application-334"><a href="#get_all_application-334"><span class="linenos">334</span></a><span class="sd">				created_at: string, (of the application, NOT the posting)</span>
+</span><span id="get_all_application-335"><a href="#get_all_application-335"><span class="linenos">335</span></a><span class="sd">				updated_at: string, (of the application, NOT the posting)</span>
+</span><span id="get_all_application-336"><a href="#get_all_application-336"><span class="linenos">336</span></a><span class="sd">				professor_user_id: number,</span>
+</span><span id="get_all_application-337"><a href="#get_all_application-337"><span class="linenos">337</span></a><span class="sd">				professor_email: string,</span>
+</span><span id="get_all_application-338"><a href="#get_all_application-338"><span class="linenos">338</span></a><span class="sd">				professor_department: string,</span>
+</span><span id="get_all_application-339"><a href="#get_all_application-339"><span class="linenos">339</span></a><span class="sd">				professor_designation: string</span>
+</span><span id="get_all_application-340"><a href="#get_all_application-340"><span class="linenos">340</span></a><span class="sd">				professor_display_name: string,</span>
+</span><span id="get_all_application-341"><a href="#get_all_application-341"><span class="linenos">341</span></a><span class="sd">				student_user_id: number,</span>
+</span><span id="get_all_application-342"><a href="#get_all_application-342"><span class="linenos">342</span></a><span class="sd">				student_display_name: string,</span>
+</span><span id="get_all_application-343"><a href="#get_all_application-343"><span class="linenos">343</span></a><span class="sd">				student_email: string,</span>
+</span><span id="get_all_application-344"><a href="#get_all_application-344"><span class="linenos">344</span></a><span class="sd">				student_phone: string,</span>
+</span><span id="get_all_application-345"><a href="#get_all_application-345"><span class="linenos">345</span></a><span class="sd">				student_gpa: float,</span>
+</span><span id="get_all_application-346"><a href="#get_all_application-346"><span class="linenos">346</span></a><span class="sd">				student_major: string,</span>
+</span><span id="get_all_application-347"><a href="#get_all_application-347"><span class="linenos">347</span></a><span class="sd">				student_minor: string,</span>
+</span><span id="get_all_application-348"><a href="#get_all_application-348"><span class="linenos">348</span></a><span class="sd">				student_year: string,</span>
+</span><span id="get_all_application-349"><a href="#get_all_application-349"><span class="linenos">349</span></a><span class="sd">				status: string // This is the status of the application and NOT the response.</span>
+</span><span id="get_all_application-350"><a href="#get_all_application-350"><span class="linenos">350</span></a><span class="sd">				remarks: string</span>
+</span><span id="get_all_application-351"><a href="#get_all_application-351"><span class="linenos">351</span></a><span class="sd">			}</span>
+</span><span id="get_all_application-352"><a href="#get_all_application-352"><span class="linenos">352</span></a><span class="sd">		]</span>
+</span><span id="get_all_application-353"><a href="#get_all_application-353"><span class="linenos">353</span></a><span class="sd">	else:</span>
+</span><span id="get_all_application-354"><a href="#get_all_application-354"><span class="linenos">354</span></a><span class="sd">	data: string (error message)</span>
+</span><span id="get_all_application-355"><a href="#get_all_application-355"><span class="linenos">355</span></a><span class="sd">}</span>
+</span><span id="get_all_application-356"><a href="#get_all_application-356"><span class="linenos">356</span></a><span class="sd">    ```</span>
+</span><span id="get_all_application-357"><a href="#get_all_application-357"><span class="linenos">357</span></a><span class="sd">    &#39;&#39;&#39;</span>
+</span><span id="get_all_application-358"><a href="#get_all_application-358"><span class="linenos">358</span></a>    <span class="n">con</span> <span class="o">=</span> <span class="n">connect</span><span class="p">()</span>
+</span><span id="get_all_application-359"><a href="#get_all_application-359"><span class="linenos">359</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">con</span><span class="p">:</span>
+</span><span id="get_all_application-360"><a href="#get_all_application-360"><span class="linenos">360</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span>  <span class="s2">&quot;Unable to connect to database.&quot;</span><span class="p">)</span>
+</span><span id="get_all_application-361"><a href="#get_all_application-361"><span class="linenos">361</span></a>    <span class="k">try</span><span class="p">:</span>
+</span><span id="get_all_application-362"><a href="#get_all_application-362"><span class="linenos">362</span></a>        <span class="n">curs</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+</span><span id="get_all_application-363"><a href="#get_all_application-363"><span class="linenos">363</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="get_all_application-364"><a href="#get_all_application-364"><span class="linenos">364</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span><span id="get_all_application-365"><a href="#get_all_application-365"><span class="linenos">365</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span>  <span class="s2">&quot;Unable to connect to database.&quot;</span><span class="p">)</span>
+</span><span id="get_all_application-366"><a href="#get_all_application-366"><span class="linenos">366</span></a>    <span class="k">try</span><span class="p">:</span>
+</span><span id="get_all_application-367"><a href="#get_all_application-367"><span class="linenos">367</span></a>        <span class="n">query</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;WITH student_data</span>
+</span><span id="get_all_application-368"><a href="#get_all_application-368"><span class="linenos">368</span></a><span class="s1">     AS (SELECT applications.application_id AS student_application_id,</span>
+</span><span id="get_all_application-369"><a href="#get_all_application-369"><span class="linenos">369</span></a><span class="s1">                applications.posting_id     AS student_posting_id,</span>
+</span><span id="get_all_application-370"><a href="#get_all_application-370"><span class="linenos">370</span></a><span class="s1">                applications.student,</span>
+</span><span id="get_all_application-371"><a href="#get_all_application-371"><span class="linenos">371</span></a><span class="s1">                users.display_name          AS student_display_name,</span>
+</span><span id="get_all_application-372"><a href="#get_all_application-372"><span class="linenos">372</span></a><span class="s1">                users.email                 AS student_email,</span>
+</span><span id="get_all_application-373"><a href="#get_all_application-373"><span class="linenos">373</span></a><span class="s1">                users.phone                 AS student_phone,</span>
+</span><span id="get_all_application-374"><a href="#get_all_application-374"><span class="linenos">374</span></a><span class="s1">                applications.CREATED_AT,</span>
+</span><span id="get_all_application-375"><a href="#get_all_application-375"><span class="linenos">375</span></a><span class="s1">                applications.UPDATED_AT,</span>
+</span><span id="get_all_application-376"><a href="#get_all_application-376"><span class="linenos">376</span></a><span class="s1">                applications.status,</span>
+</span><span id="get_all_application-377"><a href="#get_all_application-377"><span class="linenos">377</span></a><span class="s1">                applications.remarks,</span>
+</span><span id="get_all_application-378"><a href="#get_all_application-378"><span class="linenos">378</span></a><span class="s1">                student.degree,</span>
+</span><span id="get_all_application-379"><a href="#get_all_application-379"><span class="linenos">379</span></a><span class="s1">                student.gpa,</span>
+</span><span id="get_all_application-380"><a href="#get_all_application-380"><span class="linenos">380</span></a><span class="s1">                student.major,</span>
+</span><span id="get_all_application-381"><a href="#get_all_application-381"><span class="linenos">381</span></a><span class="s1">                student.minor,</span>
+</span><span id="get_all_application-382"><a href="#get_all_application-382"><span class="linenos">382</span></a><span class="s1">                student.year</span>
+</span><span id="get_all_application-383"><a href="#get_all_application-383"><span class="linenos">383</span></a><span class="s1">         FROM   applications,</span>
+</span><span id="get_all_application-384"><a href="#get_all_application-384"><span class="linenos">384</span></a><span class="s1">                student,</span>
+</span><span id="get_all_application-385"><a href="#get_all_application-385"><span class="linenos">385</span></a><span class="s1">                users</span>
+</span><span id="get_all_application-386"><a href="#get_all_application-386"><span class="linenos">386</span></a><span class="s1">         WHERE  applications.student = student.user_id</span>
+</span><span id="get_all_application-387"><a href="#get_all_application-387"><span class="linenos">387</span></a><span class="s1">                AND users.user_id = student.user_id),</span>
+</span><span id="get_all_application-388"><a href="#get_all_application-388"><span class="linenos">388</span></a><span class="s1">     professor_data</span>
+</span><span id="get_all_application-389"><a href="#get_all_application-389"><span class="linenos">389</span></a><span class="s1">     AS (SELECT applications.application_id AS professor_application_id,</span>
+</span><span id="get_all_application-390"><a href="#get_all_application-390"><span class="linenos">390</span></a><span class="s1">                applications.posting_id     AS professor_posting_id,</span>
+</span><span id="get_all_application-391"><a href="#get_all_application-391"><span class="linenos">391</span></a><span class="s1">                postings.title,</span>
+</span><span id="get_all_application-392"><a href="#get_all_application-392"><span class="linenos">392</span></a><span class="s1">                postings.description,</span>
+</span><span id="get_all_application-393"><a href="#get_all_application-393"><span class="linenos">393</span></a><span class="s1">                postings.location,</span>
+</span><span id="get_all_application-394"><a href="#get_all_application-394"><span class="linenos">394</span></a><span class="s1">                postings.prerequisites,</span>
+</span><span id="get_all_application-395"><a href="#get_all_application-395"><span class="linenos">395</span></a><span class="s1">                postings.professor,</span>
+</span><span id="get_all_application-396"><a href="#get_all_application-396"><span class="linenos">396</span></a><span class="s1">                users.display_name          AS professor_display_name,</span>
+</span><span id="get_all_application-397"><a href="#get_all_application-397"><span class="linenos">397</span></a><span class="s1">                users.email                 AS professor_email,</span>
+</span><span id="get_all_application-398"><a href="#get_all_application-398"><span class="linenos">398</span></a><span class="s1">                users.phone                 AS professor_phone,</span>
+</span><span id="get_all_application-399"><a href="#get_all_application-399"><span class="linenos">399</span></a><span class="s1">                professors.department,</span>
+</span><span id="get_all_application-400"><a href="#get_all_application-400"><span class="linenos">400</span></a><span class="s1">                professors.designation</span>
+</span><span id="get_all_application-401"><a href="#get_all_application-401"><span class="linenos">401</span></a><span class="s1">         FROM   applications,</span>
+</span><span id="get_all_application-402"><a href="#get_all_application-402"><span class="linenos">402</span></a><span class="s1">                postings,</span>
+</span><span id="get_all_application-403"><a href="#get_all_application-403"><span class="linenos">403</span></a><span class="s1">                users,</span>
+</span><span id="get_all_application-404"><a href="#get_all_application-404"><span class="linenos">404</span></a><span class="s1">                professors</span>
+</span><span id="get_all_application-405"><a href="#get_all_application-405"><span class="linenos">405</span></a><span class="s1">         WHERE  applications.posting_id = postings.posting_id</span>
+</span><span id="get_all_application-406"><a href="#get_all_application-406"><span class="linenos">406</span></a><span class="s1">                AND postings.professor = professors.user_id</span>
+</span><span id="get_all_application-407"><a href="#get_all_application-407"><span class="linenos">407</span></a><span class="s1">                AND users.user_id = professors.user_id)</span>
+</span><span id="get_all_application-408"><a href="#get_all_application-408"><span class="linenos">408</span></a><span class="s1">SELECT student_application_id AS application_id,</span>
+</span><span id="get_all_application-409"><a href="#get_all_application-409"><span class="linenos">409</span></a><span class="s1">       student_posting_id     AS posting_id,</span>
+</span><span id="get_all_application-410"><a href="#get_all_application-410"><span class="linenos">410</span></a><span class="s1">       title , description, location, prerequisites, CREATED_AT, UPDATED_AT, STATUS,REMARKS,</span>
+</span><span id="get_all_application-411"><a href="#get_all_application-411"><span class="linenos">411</span></a><span class="s1">       professor as professor_user_id,</span>
+</span><span id="get_all_application-412"><a href="#get_all_application-412"><span class="linenos">412</span></a><span class="s1">       professor_email, department, designation, professor_display_name, </span>
+</span><span id="get_all_application-413"><a href="#get_all_application-413"><span class="linenos">413</span></a><span class="s1">       student as student_user_id,</span>
+</span><span id="get_all_application-414"><a href="#get_all_application-414"><span class="linenos">414</span></a><span class="s1">       student_display_name, student_email, student_phone, gpa, major, minor, year</span>
+</span><span id="get_all_application-415"><a href="#get_all_application-415"><span class="linenos">415</span></a>
+</span><span id="get_all_application-416"><a href="#get_all_application-416"><span class="linenos">416</span></a>
+</span><span id="get_all_application-417"><a href="#get_all_application-417"><span class="linenos">417</span></a>
+</span><span id="get_all_application-418"><a href="#get_all_application-418"><span class="linenos">418</span></a><span class="s1">FROM   student_data,</span>
+</span><span id="get_all_application-419"><a href="#get_all_application-419"><span class="linenos">419</span></a><span class="s1">       professor_data</span>
+</span><span id="get_all_application-420"><a href="#get_all_application-420"><span class="linenos">420</span></a><span class="s1">WHERE  student_data.student_application_id =</span>
+</span><span id="get_all_application-421"><a href="#get_all_application-421"><span class="linenos">421</span></a><span class="s1">       professor_data.professor_application_id</span>
+</span><span id="get_all_application-422"><a href="#get_all_application-422"><span class="linenos">422</span></a><span class="s1">       AND student_data.student_posting_id =</span>
+</span><span id="get_all_application-423"><a href="#get_all_application-423"><span class="linenos">423</span></a><span class="s1">professor_data.professor_posting_id &#39;&#39;&#39;</span>
+</span><span id="get_all_application-424"><a href="#get_all_application-424"><span class="linenos">424</span></a>        <span class="n">curs</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</span><span id="get_all_application-425"><a href="#get_all_application-425"><span class="linenos">425</span></a>        <span class="n">curs</span><span class="o">.</span><span class="n">rowfactory</span> <span class="o">=</span> <span class="n">makeDictFactory</span><span class="p">(</span><span class="n">curs</span><span class="p">)</span>
+</span><span id="get_all_application-426"><a href="#get_all_application-426"><span class="linenos">426</span></a>        <span class="n">response</span> <span class="o">=</span> <span class="n">curs</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+</span><span id="get_all_application-427"><a href="#get_all_application-427"><span class="linenos">427</span></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="get_all_application-428"><a href="#get_all_application-428"><span class="linenos">428</span></a>            <span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span id="get_all_application-429"><a href="#get_all_application-429"><span class="linenos">429</span></a>        <span class="k">except</span><span class="p">:</span>
+</span><span id="get_all_application-430"><a href="#get_all_application-430"><span class="linenos">430</span></a>            <span class="k">pass</span>
+</span><span id="get_all_application-431"><a href="#get_all_application-431"><span class="linenos">431</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+</span><span id="get_all_application-432"><a href="#get_all_application-432"><span class="linenos">432</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="get_all_application-433"><a href="#get_all_application-433"><span class="linenos">433</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span><span id="get_all_application-434"><a href="#get_all_application-434"><span class="linenos">434</span></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
+</span><span id="get_all_application-435"><a href="#get_all_application-435"><span class="linenos">435</span></a>    <span class="k">finally</span><span class="p">:</span>
+</span><span id="get_all_application-436"><a href="#get_all_application-436"><span class="linenos">436</span></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="get_all_application-437"><a href="#get_all_application-437"><span class="linenos">437</span></a>            <span class="n">con</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span id="get_all_application-438"><a href="#get_all_application-438"><span class="linenos">438</span></a>        <span class="k">except</span><span class="p">:</span>
+</span><span id="get_all_application-439"><a href="#get_all_application-439"><span class="linenos">439</span></a>            <span class="k">pass</span>
 </span></pre></div>
 
 
@@ -1202,51 +1228,51 @@ Response:
 
     </div>
     <a class="headerlink" href="#update_application"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="update_application-429"><a href="#update_application-429"><span class="linenos">429</span></a><span class="k">def</span> <span class="nf">update_application</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-</span><span id="update_application-430"><a href="#update_application-430"><span class="linenos">430</span></a>    
-</span><span id="update_application-431"><a href="#update_application-431"><span class="linenos">431</span></a>    <span class="sd">&#39;&#39;&#39;</span>
-</span><span id="update_application-432"><a href="#update_application-432"><span class="linenos">432</span></a><span class="sd">    ```</span>
-</span><span id="update_application-433"><a href="#update_application-433"><span class="linenos">433</span></a><span class="sd">    /update_application [POST]</span>
-</span><span id="update_application-434"><a href="#update_application-434"><span class="linenos">434</span></a><span class="sd">    Request:</span>
-</span><span id="update_application-435"><a href="#update_application-435"><span class="linenos">435</span></a><span class="sd">    {</span>
-</span><span id="update_application-436"><a href="#update_application-436"><span class="linenos">436</span></a><span class="sd">        application_id: number,</span>
-</span><span id="update_application-437"><a href="#update_application-437"><span class="linenos">437</span></a><span class="sd">        status: string (This should be overwritten in the DB by API),</span>
-</span><span id="update_application-438"><a href="#update_application-438"><span class="linenos">438</span></a><span class="sd">    remarks: string</span>
-</span><span id="update_application-439"><a href="#update_application-439"><span class="linenos">439</span></a><span class="sd">    }</span>
-</span><span id="update_application-440"><a href="#update_application-440"><span class="linenos">440</span></a><span class="sd">    Response:</span>
-</span><span id="update_application-441"><a href="#update_application-441"><span class="linenos">441</span></a><span class="sd">    {</span>
-</span><span id="update_application-442"><a href="#update_application-442"><span class="linenos">442</span></a><span class="sd">        status: boolean</span>
-</span><span id="update_application-443"><a href="#update_application-443"><span class="linenos">443</span></a><span class="sd">        data: (Success / Error message as per status)</span>
-</span><span id="update_application-444"><a href="#update_application-444"><span class="linenos">444</span></a><span class="sd">        // UPDATED_AT timestamp should be auto updated by the API</span>
-</span><span id="update_application-445"><a href="#update_application-445"><span class="linenos">445</span></a><span class="sd">    }</span>
-</span><span id="update_application-446"><a href="#update_application-446"><span class="linenos">446</span></a><span class="sd">    ```</span>
-</span><span id="update_application-447"><a href="#update_application-447"><span class="linenos">447</span></a><span class="sd">    &#39;&#39;&#39;</span>
-</span><span id="update_application-448"><a href="#update_application-448"><span class="linenos">448</span></a>    
-</span><span id="update_application-449"><a href="#update_application-449"><span class="linenos">449</span></a>    
-</span><span id="update_application-450"><a href="#update_application-450"><span class="linenos">450</span></a>    <span class="k">try</span><span class="p">:</span>
-</span><span id="update_application-451"><a href="#update_application-451"><span class="linenos">451</span></a>        <span class="n">con</span> <span class="o">=</span> <span class="n">connect</span><span class="p">()</span>
-</span><span id="update_application-452"><a href="#update_application-452"><span class="linenos">452</span></a>    <span class="k">except</span><span class="p">:</span>
-</span><span id="update_application-453"><a href="#update_application-453"><span class="linenos">453</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Unable to create DB connection&quot;</span><span class="p">)</span>
-</span><span id="update_application-454"><a href="#update_application-454"><span class="linenos">454</span></a>    <span class="k">try</span><span class="p">:</span>
-</span><span id="update_application-455"><a href="#update_application-455"><span class="linenos">455</span></a>        <span class="c1"># Get the data from JSON Payload</span>
-</span><span id="update_application-456"><a href="#update_application-456"><span class="linenos">456</span></a>        <span class="n">app_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;application_id&quot;</span><span class="p">]</span>
-</span><span id="update_application-457"><a href="#update_application-457"><span class="linenos">457</span></a>        <span class="n">status</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span>
-</span><span id="update_application-458"><a href="#update_application-458"><span class="linenos">458</span></a>        <span class="n">remarks</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;remarks&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;remarks&quot;</span> <span class="ow">in</span>  <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
-</span><span id="update_application-459"><a href="#update_application-459"><span class="linenos">459</span></a>        
-</span><span id="update_application-460"><a href="#update_application-460"><span class="linenos">460</span></a>        <span class="c1"># Insert application into database</span>
-</span><span id="update_application-461"><a href="#update_application-461"><span class="linenos">461</span></a>        <span class="n">cur</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
-</span><span id="update_application-462"><a href="#update_application-462"><span class="linenos">462</span></a>        <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;UPDATE APPLICATIONS SET STATUS = :1, REMARKS = :2 , UPDATED_AT = SYSTIMESTAMP WHERE APPLICATION_ID = :3&quot;</span>
-</span><span id="update_application-463"><a href="#update_application-463"><span class="linenos">463</span></a>        <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">status</span><span class="p">,</span><span class="n">remarks</span><span class="p">,</span><span class="n">app_id</span><span class="p">]</span>
-</span><span id="update_application-464"><a href="#update_application-464"><span class="linenos">464</span></a>        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
-</span><span id="update_application-465"><a href="#update_application-465"><span class="linenos">465</span></a>        <span class="n">con</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-</span><span id="update_application-466"><a href="#update_application-466"><span class="linenos">466</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span>
-</span><span id="update_application-467"><a href="#update_application-467"><span class="linenos">467</span></a>            <span class="kc">True</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Application Updated Successfully.&quot;</span>
-</span><span id="update_application-468"><a href="#update_application-468"><span class="linenos">468</span></a>        <span class="p">)</span>
-</span><span id="update_application-469"><a href="#update_application-469"><span class="linenos">469</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="update_application-470"><a href="#update_application-470"><span class="linenos">470</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-</span><span id="update_application-471"><a href="#update_application-471"><span class="linenos">471</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
-</span><span id="update_application-472"><a href="#update_application-472"><span class="linenos">472</span></a>    <span class="k">finally</span><span class="p">:</span>
-</span><span id="update_application-473"><a href="#update_application-473"><span class="linenos">473</span></a>        <span class="n">disconnect</span><span class="p">(</span><span class="n">con</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="update_application-442"><a href="#update_application-442"><span class="linenos">442</span></a><span class="k">def</span> <span class="nf">update_application</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+</span><span id="update_application-443"><a href="#update_application-443"><span class="linenos">443</span></a>    
+</span><span id="update_application-444"><a href="#update_application-444"><span class="linenos">444</span></a>    <span class="sd">&#39;&#39;&#39;</span>
+</span><span id="update_application-445"><a href="#update_application-445"><span class="linenos">445</span></a><span class="sd">    ```</span>
+</span><span id="update_application-446"><a href="#update_application-446"><span class="linenos">446</span></a><span class="sd">    /update_application [POST]</span>
+</span><span id="update_application-447"><a href="#update_application-447"><span class="linenos">447</span></a><span class="sd">    Request:</span>
+</span><span id="update_application-448"><a href="#update_application-448"><span class="linenos">448</span></a><span class="sd">    {</span>
+</span><span id="update_application-449"><a href="#update_application-449"><span class="linenos">449</span></a><span class="sd">        application_id: number,</span>
+</span><span id="update_application-450"><a href="#update_application-450"><span class="linenos">450</span></a><span class="sd">        status: string (This should be overwritten in the DB by API),</span>
+</span><span id="update_application-451"><a href="#update_application-451"><span class="linenos">451</span></a><span class="sd">    remarks: string</span>
+</span><span id="update_application-452"><a href="#update_application-452"><span class="linenos">452</span></a><span class="sd">    }</span>
+</span><span id="update_application-453"><a href="#update_application-453"><span class="linenos">453</span></a><span class="sd">    Response:</span>
+</span><span id="update_application-454"><a href="#update_application-454"><span class="linenos">454</span></a><span class="sd">    {</span>
+</span><span id="update_application-455"><a href="#update_application-455"><span class="linenos">455</span></a><span class="sd">        status: boolean</span>
+</span><span id="update_application-456"><a href="#update_application-456"><span class="linenos">456</span></a><span class="sd">        data: (Success / Error message as per status)</span>
+</span><span id="update_application-457"><a href="#update_application-457"><span class="linenos">457</span></a><span class="sd">        // UPDATED_AT timestamp should be auto updated by the API</span>
+</span><span id="update_application-458"><a href="#update_application-458"><span class="linenos">458</span></a><span class="sd">    }</span>
+</span><span id="update_application-459"><a href="#update_application-459"><span class="linenos">459</span></a><span class="sd">    ```</span>
+</span><span id="update_application-460"><a href="#update_application-460"><span class="linenos">460</span></a><span class="sd">    &#39;&#39;&#39;</span>
+</span><span id="update_application-461"><a href="#update_application-461"><span class="linenos">461</span></a>    
+</span><span id="update_application-462"><a href="#update_application-462"><span class="linenos">462</span></a>    
+</span><span id="update_application-463"><a href="#update_application-463"><span class="linenos">463</span></a>    <span class="k">try</span><span class="p">:</span>
+</span><span id="update_application-464"><a href="#update_application-464"><span class="linenos">464</span></a>        <span class="n">con</span> <span class="o">=</span> <span class="n">connect</span><span class="p">()</span>
+</span><span id="update_application-465"><a href="#update_application-465"><span class="linenos">465</span></a>    <span class="k">except</span><span class="p">:</span>
+</span><span id="update_application-466"><a href="#update_application-466"><span class="linenos">466</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Unable to create DB connection&quot;</span><span class="p">)</span>
+</span><span id="update_application-467"><a href="#update_application-467"><span class="linenos">467</span></a>    <span class="k">try</span><span class="p">:</span>
+</span><span id="update_application-468"><a href="#update_application-468"><span class="linenos">468</span></a>        <span class="c1"># Get the data from JSON Payload</span>
+</span><span id="update_application-469"><a href="#update_application-469"><span class="linenos">469</span></a>        <span class="n">app_id</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;application_id&quot;</span><span class="p">]</span>
+</span><span id="update_application-470"><a href="#update_application-470"><span class="linenos">470</span></a>        <span class="n">status</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span>
+</span><span id="update_application-471"><a href="#update_application-471"><span class="linenos">471</span></a>        <span class="n">remarks</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;remarks&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;remarks&quot;</span> <span class="ow">in</span>  <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
+</span><span id="update_application-472"><a href="#update_application-472"><span class="linenos">472</span></a>        
+</span><span id="update_application-473"><a href="#update_application-473"><span class="linenos">473</span></a>        <span class="c1"># Insert application into database</span>
+</span><span id="update_application-474"><a href="#update_application-474"><span class="linenos">474</span></a>        <span class="n">cur</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+</span><span id="update_application-475"><a href="#update_application-475"><span class="linenos">475</span></a>        <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;UPDATE APPLICATIONS SET STATUS = :1, REMARKS = :2 , UPDATED_AT = SYSTIMESTAMP WHERE APPLICATION_ID = :3&quot;</span>
+</span><span id="update_application-476"><a href="#update_application-476"><span class="linenos">476</span></a>        <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">status</span><span class="p">,</span><span class="n">remarks</span><span class="p">,</span><span class="n">app_id</span><span class="p">]</span>
+</span><span id="update_application-477"><a href="#update_application-477"><span class="linenos">477</span></a>        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+</span><span id="update_application-478"><a href="#update_application-478"><span class="linenos">478</span></a>        <span class="n">con</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</span><span id="update_application-479"><a href="#update_application-479"><span class="linenos">479</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span>
+</span><span id="update_application-480"><a href="#update_application-480"><span class="linenos">480</span></a>            <span class="kc">True</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Application Updated Successfully.&quot;</span>
+</span><span id="update_application-481"><a href="#update_application-481"><span class="linenos">481</span></a>        <span class="p">)</span>
+</span><span id="update_application-482"><a href="#update_application-482"><span class="linenos">482</span></a>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="update_application-483"><a href="#update_application-483"><span class="linenos">483</span></a>        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span><span id="update_application-484"><a href="#update_application-484"><span class="linenos">484</span></a>        <span class="k">return</span> <span class="n">prepare_response</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+</span><span id="update_application-485"><a href="#update_application-485"><span class="linenos">485</span></a>    <span class="k">finally</span><span class="p">:</span>
+</span><span id="update_application-486"><a href="#update_application-486"><span class="linenos">486</span></a>        <span class="n">disconnect</span><span class="p">(</span><span class="n">con</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -1369,7 +1395,7 @@ Response:
                 }
 
                 let heading;
-                switch (result.doc.type) {
+                switch (result.doc.kind) {
                     case "function":
                         if (doc.fullname.endsWith(".__init__")) {
                             heading = `<span class="name">${doc.fullname.replace(/\.__init__$/, "")}</span>${doc.signature}`;
@@ -1396,7 +1422,7 @@ Response:
                 }
                 html += `
                         <section class="search-result">
-                        <a href="${url}" class="attr ${doc.type}">${heading}</a>
+                        <a href="${url}" class="attr ${doc.kind}">${heading}</a>
                         <div class="docstring">${doc.doc}</div>
                         </section>
                     `;
