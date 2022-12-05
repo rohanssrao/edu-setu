@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Input, Button, Typography, Select, message} from "antd";
+import { Form, Input, Button, Typography, Select, message, InputNumber } from "antd";
 import "../Login/Login.css";
 const { Title } = Typography;
 const { Option } = Select;
@@ -7,27 +7,35 @@ const { Option } = Select;
 export class AddNewPosting extends Component {
   constructor(props) {
     super(props);
-    this.state = {applicationQuestions: 1};
+    this.state = {
+      applicationQuestions: 1,
+      gpaRequirement: false,
+      degreeRequirement: "",
+    };
   }
-
+  onDegreeChange = (type) => {
+    console.log(type);
+    this.setState({ degreeRequirement: type });
+  };
   errorMessage = (text) => {
     message.destroy(text);
-    let config = {content:text, duration: 2, key:text};
+    let config = { content: text, duration: 2, key: text };
     message.error(config);
   }
 
   alterApplicationQuestions = (value) => {
-    this.setState((prevState)=>{
-    if(prevState.applicationQuestions + value < 0){
-      this.errorMessage("No question to remove!");
-      return prevState;
-    }
-    else if(prevState.applicationQuestions + value > 10){
-      this.errorMessage("You can only have 10 questions per posting!");
-      return prevState;
-    }
-    return {
-      applicationQuestions:prevState.applicationQuestions + value}
+    this.setState((prevState) => {
+      if (prevState.applicationQuestions + value < 0) {
+        this.errorMessage("No question to remove!");
+        return prevState;
+      }
+      else if (prevState.applicationQuestions + value > 10) {
+        this.errorMessage("You can only have 10 questions per posting!");
+        return prevState;
+      }
+      return {
+        applicationQuestions: prevState.applicationQuestions + value
+      }
     });
   }
   onSubmitAddPosting = () => {
@@ -35,6 +43,9 @@ export class AddNewPosting extends Component {
       values.professor = sessionStorage.getItem("user_id");
       this.props.submitAddPosting(values);
     });
+  }
+  async updateGpaRequirement() {
+    this.setState({ gpaRequirement: true });
   };
   render() {
     return (
@@ -58,7 +69,7 @@ export class AddNewPosting extends Component {
           rules={[
             {
               required: true,
-              message: "Please input your Title!",
+              message: "Please input a title.",
             },
           ]}
         >
@@ -75,7 +86,7 @@ export class AddNewPosting extends Component {
           ]}
         >
           <Input.TextArea
-            placeholder="Describe this posting, like a job description!"
+            placeholder="Provide a brief description"
             rows={8}
           />
         </Form.Item>
@@ -86,13 +97,13 @@ export class AddNewPosting extends Component {
             {
               required: true,
               message:
-                "Please specify the pre-requisite skills/qualifications for this role.",
+                "Please specify the prerequisite skills/qualifications for this role.",
             },
           ]}
         >
           <Input.TextArea
             rows={8}
-            placeholder="Describe what all skills/quilifications students need to have to be eligible to apply for this posting"
+            placeholder="Describe desired skills and qualifications"
           />
         </Form.Item>
         <Form.Item
@@ -107,35 +118,50 @@ export class AddNewPosting extends Component {
           ]}
         >
           <Select placeholder="Where would the student work?">
-            <Option key="in_person" value="In Person">
+            <Option key="In Person" value="In Person">
               In Person
             </Option>
-            <Option key="remote" value="Remote">
+            <Option key="Remote" value="Remote">
               Remote
             </Option>
-            <Option key="hybrid" value="Hybrid">
+            <Option key="Hybrid" value="Hybrid">
               Hybrid
             </Option>
           </Select>
         </Form.Item>
+        <Form.Item name="gpa" label="GPA Requirement" >
+          <InputNumber min={0} max={4} step={0.1} />
+        </Form.Item>
+        <Form.Item name="degree" label="Degree Requirement">
+          <Select
+            mode="multiple"
+            style={{ width: '50%' }}
+            placeholder="Select degree"
+            onChange={this.onDegreeChange}
+            options={[{ value: "Bachelor's", key: "Bachelor's" },
+            { value: "Master's", key: "Master's" },
+            { value: "Ph.D.", key: "Ph.D." }]}
+          />
+        </Form.Item>
+
         {[...Array(this.state.applicationQuestions)].map((_, idx) => {
           return (
-          <div key = {"app" + idx} >
-            <Form.Item 
-              label={"Application Question " + (idx+1) + " :" }
-              name= {"application question " + idx}
-              rules={[
-                {
-                  required: false
-                }
-              ]}
-            >
-              <Input.TextArea
-                placeholder="Provide any questions you want applicants to answer."
-                rows={4}
-              />
-            </Form.Item>
-          </div>);
+            <div key={"app" + idx} >
+              <Form.Item
+                label={"Application Question " + (idx + 1) + " :"}
+                name={"application question " + idx}
+                rules={[
+                  {
+                    required: false
+                  }
+                ]}
+              >
+                <Input.TextArea
+                  placeholder="Provide any questions you want applicants to answer."
+                  rows={4}
+                />
+              </Form.Item>
+            </div>);
         })}
         <Button block danger onClick={() => this.alterApplicationQuestions(-1)}>
           Remove Application Question

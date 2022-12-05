@@ -10,6 +10,7 @@ import NavBar from "./navbar";
 import config from "../../config";
 import { Form, Input, message } from "antd";
 
+const { TextArea } = Input;
 
 const MyVerticallyCenteredModal = (props) => {
   const [loading, setLoading] = React.useState(true);
@@ -19,15 +20,13 @@ const MyVerticallyCenteredModal = (props) => {
   const handleApplicationQuestion = (e, idx) => {
     let responses = [...appResponses];
     responses[idx] = e.target.value;
-    console.log("IDX: " + idx);
-    console.log(responses[idx]);
     setAppResponses(responses);
   }
 
   const handleApply = () => {
     //build appropriate object
     let answers = [];
-    for(let i = 0; i < appQuestions.length; i++) {
+    for (let i = 0; i < appQuestions.length; i++) {
       answers.push({
         question_id: appQuestions[i].question_id,
         answer: appResponses[i]
@@ -36,9 +35,9 @@ const MyVerticallyCenteredModal = (props) => {
     props.apply(props.currentJob, answers, props.user_id);
   }
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     let postingId = props.currentJob.posting_id;
-    if(postingId){
+    if (postingId) {
       let url = `${config.baseUrl}/get_questions_by_posting`;
       fetch(url, {
         method: "POST",
@@ -61,14 +60,14 @@ const MyVerticallyCenteredModal = (props) => {
           setLoading(false);
         })
         .catch((err) => console.log(err));
-    } 
-    
+    }
+
   }, [props.currentJob.posting_id]);
 
   return (
     <Modal
-      show = {props.show}
-      onHide = {props.onHide}
+      show={props.show}
+      onHide={props.onHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -92,20 +91,25 @@ const MyVerticallyCenteredModal = (props) => {
 
         {loading && <p>
           Loading...
-          </p>}
-        {!loading && appQuestions && appQuestions.map((question, idx)=>{
-          return(
-            <div key = {"app question" + idx} >
-            <p>{question.question}</p>
-            <input
-              type="text"
-              label={question.question}
-              name= {question.question}
-              onChange = {(e)=>{handleApplicationQuestion(e, idx)}}
-              value={appResponses[idx]}
-            />
-          </div>);
+        </p>}
+        {!loading && appQuestions && appQuestions.map((question, idx) => {
+          return (
+            <div key={"app question" + idx} >
+              <p>{question.question}</p>
+              <TextArea
+                //type="textarea"
+                rows={4}
+                label={question.question}
+                name={question.question}
+                onChange={(e) => { handleApplicationQuestion(e, idx) }}
+                value={appResponses[idx]}
+              />
+            </div>);
         })}
+        <p><b>Application Requirements</b></p>
+        <p>
+          {props.currentJob.requirements}
+        </p>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={handleApply}>Apply</Button>
@@ -127,12 +131,14 @@ export class StudentDashboard extends Component {
       selectedLocation: "",
       jobs: [],
       jobs_all: [],
-      applications: []
+      applications: [],
+      department_list:[],
+      location_list:[]
 
     }
   }
   async componentWillMount() {
-    var jobs = []
+    var jobs = [];
     await this.setState({ user_id: sessionStorage.getItem("user_id") })
     const requestOptions = {
       method: 'POST',
@@ -144,8 +150,13 @@ export class StudentDashboard extends Component {
       .then(data => this.setState({ current_user: data.data }, () => { console.log(this.state.current_user); }));
     await fetch(`${config.baseUrl}/get_all_postings`)
       .then(response => response.json())
-      .then(data => this.setState({ jobs_all: data.data }, () => {
-      }));
+      .then(data => {
+        console.log(data);
+        let department_set = new Set(data.data.map((job)=>(job.department)));
+        let location_set = new Set(data.data.map((job)=>(job.location)));
+        this.setState({ jobs_all: data.data, department_list:Array.from(department_set),
+        location_list:Array.from(location_set)});
+      });
     const requestOptions2 = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -156,12 +167,11 @@ export class StudentDashboard extends Component {
       .then(response => response.json())
       .then(data => this.setState({ applications: data.data }, () => {
         this.filterIfApplied();
-        
+
       }));
   }
   filterIfApplied() {
     var jobs = [];
-    console.log(this.state.jobs_all);
     for (var i = 0; i < this.state.jobs_all.length; i++) {
       var flag = 0;
       for (var j = 0; j < this.state.applications.length; j++) {
@@ -183,7 +193,7 @@ export class StudentDashboard extends Component {
   }
   async apply(jobs, answers, user_id) {
     var posting_id = jobs.posting_id;
-    
+
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -232,11 +242,25 @@ export class StudentDashboard extends Component {
       }
     }
   }
-  filterByDepartment(e) {
+  filterByDepartment(e, all) {
+
     var filter = e.target.id.toUpperCase();
     var table = document.getElementById("postings");
     var tr = table.getElementsByTagName("tr");
     var td, txtValue, i, flag = 0;
+    if(all === true){
+      // Optional parameter, filter by all
+      // Loop through all table rows, showing all of them
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[3];
+        if (td) {
+          tr[i].style.display = "";
+          flag = 1;
+        }
+      }
+      this.checkMatchingPostings(flag);
+      return;
+    }
 
     // Loop through all table rows, and hide those who don't match the search query
     for (i = 0; i < tr.length; i++) {
@@ -261,13 +285,26 @@ export class StudentDashboard extends Component {
     }
 
   }
-  filterByLocation(e) {
+  filterByLocation(e, all) {
 
     var filter = e.target.id.toUpperCase();
     var table = document.getElementById("postings");
     var tr = table.getElementsByTagName("tr");
     var td, txtValue, i, flag = 0;
 
+    if(all === true){
+      // Optional parameter, filter by all
+      // Loop through all table rows, showing all of them
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[4];
+        if (td) {
+          tr[i].style.display = "";
+          flag = 1;
+        }
+      }
+      this.checkMatchingPostings(flag);
+      return;
+    }
     // Loop through all table rows, and hide those who don't match the search query
     for (i = 0; i < tr.length; i++) {
       td = tr[i].getElementsByTagName("td")[4];
@@ -288,10 +325,9 @@ export class StudentDashboard extends Component {
   render() {
     return (
       <>
-        <NavBar />
-        <h1 className="display-3">Search for a research role</h1>
-        <p>Enhance your skills by working as a research assistant under professors</p>
+        <NavBar name={"Search for a research role"} />
         <div className="container">
+          <p></p>
           <div className="row justify-content-center align-items-center">
             <InputGroup className="col-sm text-center">
               <FormControl
@@ -309,8 +345,18 @@ export class StudentDashboard extends Component {
               </Dropdown.Toggle>
 
               <Dropdown.Menu variant="dark">
-                <Dropdown.Item onClick={(e) => this.filterByDepartment(e)} id="CS">CS</Dropdown.Item>
-                <Dropdown.Item onClick={(e) => this.filterByDepartment(e)} id="Mechanical">Mechanical</Dropdown.Item>
+              <Dropdown.Item onClick={(e) => this.filterByDepartment(e, true)}
+                     key={"all"} id={"all"}>All</Dropdown.Item>
+                {
+                  this.state.department_list.map((department)=>{
+                    if(department == null){
+                      return;
+                    }
+                    return (
+                    <Dropdown.Item onClick={(e) => this.filterByDepartment(e)}
+                     key={department} id={department}>{department}</Dropdown.Item>);
+                  })
+                }
               </Dropdown.Menu>
             </Dropdown>
             <Dropdown className="col-sm">
@@ -319,9 +365,19 @@ export class StudentDashboard extends Component {
               </Dropdown.Toggle>
 
               <Dropdown.Menu variant="dark">
-                <Dropdown.Item onClick={(e) => this.filterByLocation(e)} id="Remote">Remote</Dropdown.Item>
-                <Dropdown.Item onClick={(e) => this.filterByLocation(e)} id="Hybrid">Hybrid</Dropdown.Item>
-                <Dropdown.Item onClick={(e) => this.filterByLocation(e)} id="Physical">Physical</Dropdown.Item>
+                <Dropdown.Item onClick={(e) => this.filterByLocation(e, true)}
+                      key={"all"} id={"all"}>All</Dropdown.Item>
+                  {
+                    this.state.location_list.map((location)=>{
+                      if(location == null){
+                        return;
+                      }
+                      return (
+                      <Dropdown.Item onClick={(e) => this.filterByLocation(e)}
+                      key={location} id={location}>{location}</Dropdown.Item>);
+                  })
+                }
+
               </Dropdown.Menu>
             </Dropdown>
           </div>
@@ -373,9 +429,10 @@ export class StudentDashboard extends Component {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu variant="dark">
-                              <Dropdown.Item active onClick={() => {                          
+                              <Dropdown.Item active onClick={() => {
                                 this.setState({ modalShow: true });
-                                this.setState({ currentJob: jobs });}}>Apply</Dropdown.Item>
+                                this.setState({ currentJob: jobs });
+                              }}>Apply</Dropdown.Item>
                               <Dropdown.Item >Save for Later</Dropdown.Item>
                               <Dropdown.Item >Get shareable URL</Dropdown.Item>
                             </Dropdown.Menu>
