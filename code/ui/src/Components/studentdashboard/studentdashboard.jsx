@@ -467,7 +467,7 @@ export class StudentDashboard extends Component {
                 </thead>
                 <tbody>
                   {
-                    this.state.jobs.map(jobs => (
+                    this.state.jobs_all.map(jobs => (
                       <tr>
                         <td id="postingId">{jobs.posting_id}</td>
                         <td id="postingTitle"><a className="link-primary" onClick={() => {
