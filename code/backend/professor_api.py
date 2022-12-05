@@ -452,6 +452,7 @@ def get_applications_for_professor(data):
         postings.degree,
         applications.application_id,
         student.user_id AS student_user_id,
+        student.skills AS student_skills,
         users.display_name AS student_display_name,
         users.email AS student_email,
         users.phone AS student_phone,
@@ -480,6 +481,7 @@ def get_applications_for_professor(data):
                 dcit1["student_display_name"] = row["student_display_name"]
                 dcit1["student_email"] = row["student_email"]
                 dcit1["student_phone"] = row["student_phone"]
+                dcit1["student_skills"] = row["student_skills"]
                 dcit1["student_gpa"] = row["student_gpa"]
                 dcit1["student_major"] = row["student_major"]
                 dcit1["student_minor"] = row["student_minor"]
@@ -505,6 +507,7 @@ def get_applications_for_professor(data):
                     dcit1["student_display_name"] = row["student_display_name"]
                     dcit1["student_email"] = row["student_email"]
                     dcit1["student_phone"] = row["student_phone"]
+                    dcit1["student_skills"] = row["student_skills"]
                     dcit1["student_gpa"] = row["student_gpa"]
                     dcit1["student_major"] = row["student_major"]
                     dcit1["student_minor"] = row["student_minor"]

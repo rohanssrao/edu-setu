@@ -84,9 +84,14 @@ export default class Applications extends React.Component {
 		})
 			.then((res) => res.json())
 			.then((response) => {
-				console.log(response);
 				if (response.status) {
-					console.log(response.data);
+					for(let i = 0; i < response.data.length; i++) {
+						console.log(response.data[i]?.Applications?.length);
+						for(let j = 0; j < response.data[i]?.Applications?.length; j++) {
+							response.data[i].Applications[j].student_skills = JSON.parse(response.data[i]?.Applications[j]?.student_skills);
+							console.log(response.data[i]?.Applications[j]?.student_skills);
+						}
+					}
 					this.setState({ data: response.data, filteredData: response.data });
 				} else {
 					message.error(response.data, 1);
@@ -167,7 +172,6 @@ export default class Applications extends React.Component {
 							<Column title="Minor" dataIndex="student_minor" key="student_minor" />
 							<Column title="Phone" dataIndex="student_phone" key="student_phone" />
 							<Column title="Year" dataIndex="student_year" key="student_year" />
-							<Column title="Responses" dataIndex ="student_responses" key="data_index" />
 							<Column
 								title="Status"
 								key="status"
@@ -205,7 +209,7 @@ export default class Applications extends React.Component {
 									{record.title}
 								</Button>
 							)}
-						/>
+						/> 
 						<Column title="Description" dataIndex="description" key="description" />
 						<Column title="Prerequisites" dataIndex="prerequisites" key="prerequisites" />
 						<Column title="No. of Applicants" key="applicants" render={(record) => <Tag color="blue">{record?.Applications?.length}</Tag>} />
