@@ -65,15 +65,44 @@ We have already deployed the backend on Oracle Cloud Infrastructure. So, that in
 Follow the below steps to get started:
 
 1. [Install docker](https://docs.docker.com/get-docker/), if it's not already installed in your system!
-2. Start Docker Desktop and run the container using the below command - Yes, just one command...
+2. Start Docker Desktop
+3. Clone this repository
+4. Navigate to directory `code` and run the following:
 
 ```
-docker run -it -d -p 3000:3000 jayrajmulani/edusetu_ui
+docker compose up --build
 ```
 
-3. Navigate to [localhost:3000](http://localhost:3000) to your browser.
-4. Hit register to create your account
-5. Login to begin bridging opportunities!
+5. Navigate to [localhost:3000](http://localhost:3000) to your browser.
+6. Hit register to create your account
+7. Login to begin bridging opportunities!
+
+Alternative run method:
+1. Clone the repository
+2. In `code/backend`, run the following commands
+
+```
+pip3 install -r requirements.txt
+flask run
+```
+
+3. Open a new terminal
+4. In `code/frontend`, run the following commands
+
+```
+npm install
+npm start
+```
+or 
+```
+npm install
+npm run build
+npm install -g serve
+serve -s build -l 3000
+```
+5. Navigate to [localhost:3000](http://localhost:3000) to your browser.
+6. Hit register to create your account
+7. Login to begin bridging opportunities!
 
 ---
 
