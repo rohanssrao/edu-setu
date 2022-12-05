@@ -137,8 +137,8 @@ export class StudentDashboard extends Component {
       jobs_all: [],
       applications: [],
       department_list: [],
-      location_list: []
-
+      location_list: [],
+      type_list: []
     }
   }
   async componentWillMount() {
@@ -158,9 +158,11 @@ export class StudentDashboard extends Component {
         console.log(data);
         let department_set = new Set(data.data.map((job) => (job.department)));
         let location_set = new Set(data.data.map((job) => (job.location)));
+        let type_set = new Set(data.data.map((job) => (job.job_type)));
         this.setState({
           jobs_all: data.data, department_list: Array.from(department_set),
-          location_list: Array.from(location_set)
+          location_list: Array.from(location_set),
+          type_list: Array.from(type_set)
         });
       });
     const requestOptions2 = {
@@ -258,7 +260,7 @@ export class StudentDashboard extends Component {
       // Optional parameter, filter by all
       // Loop through all table rows, showing all of them
       for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[3];
+        td = tr[i].getElementsByTagName("td")[4];
         if (td) {
           tr[i].style.display = "";
           flag = 1;
@@ -270,7 +272,7 @@ export class StudentDashboard extends Component {
 
     // Loop through all table rows, and hide those who don't match the search query
     for (i = 0; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName("td")[3];
+      td = tr[i].getElementsByTagName("td")[4];
       if (td) {
         txtValue = td.textContent || td.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -302,7 +304,7 @@ export class StudentDashboard extends Component {
       // Optional parameter, filter by all
       // Loop through all table rows, showing all of them
       for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[4];
+        td = tr[i].getElementsByTagName("td")[5];
         if (td) {
           tr[i].style.display = "";
           flag = 1;
@@ -313,7 +315,43 @@ export class StudentDashboard extends Component {
     }
     // Loop through all table rows, and hide those who don't match the search query
     for (i = 0; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName("td")[4];
+      td = tr[i].getElementsByTagName("td")[5];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+          flag = 1
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+    this.checkMatchingPostings(flag);
+  }
+
+  filterByType(e, all) {
+
+    var filter = e.target.id.toUpperCase();
+    var table = document.getElementById("postings");
+    var tr = table.getElementsByTagName("tr");
+    var td, txtValue, i, flag = 0;
+
+    if (all === true) {
+      // Optional parameter, filter by all
+      // Loop through all table rows, showing all of them
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[2];
+        if (td) {
+          tr[i].style.display = "";
+          flag = 1;
+        }
+      }
+      this.checkMatchingPostings(flag);
+      return;
+    }
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[2];
       if (td) {
         txtValue = td.textContent || td.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -345,6 +383,27 @@ export class StudentDashboard extends Component {
                 Search
               </Button>
             </InputGroup>
+            <Dropdown className="col-sm">
+              <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
+                Job Type
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu variant="dark">
+                <Dropdown.Item onClick={(e) => this.filterByType(e, true)}
+                  key={"all"} id={"all"}>All</Dropdown.Item>
+                {
+                  this.state.type_list.map((job_type) => {
+                    if (job_type == null) {
+                      return;
+                    }
+                    return (
+                      <Dropdown.Item onClick={(e) => this.filterByType(e)}
+                        key={job_type} id={job_type}>{job_type}</Dropdown.Item>);
+                  })
+                }
+
+              </Dropdown.Menu>
+            </Dropdown>
             <Dropdown className="col-sm text-center" id="searchDepartment">
               <Dropdown.Toggle variant="secondary">
                 Department
