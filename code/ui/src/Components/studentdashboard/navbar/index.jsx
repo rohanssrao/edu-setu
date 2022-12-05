@@ -34,7 +34,7 @@ export function NavBar({ name }) {
           <Nav className="mr-auto">
 
 
-            <Nav.Link href="/resume_generator" class="underline-hover-effect" id="underline-hover-effect">Edite Resume</Nav.Link>
+            <Nav.Link href="/resume_generator" class="underline-hover-effect" id="underline-hover-effect">Edit Resume</Nav.Link>
             <Nav.Link href="/student/home" class="underline-hover-effect" id="underline-hover-effect">Postings</Nav.Link>
             <Nav.Link href="/student/savedJobs" class="underline-hover-effect" id="underline-hover-effect">Saved Jobs</Nav.Link>
 

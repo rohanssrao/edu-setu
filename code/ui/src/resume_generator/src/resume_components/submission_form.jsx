@@ -48,7 +48,7 @@ export class UserForm extends React.Component {
         </Form.Item>
 
         <Form.Item
-          label="Eamil"
+          label="Email"
           name="email"
           rules={[
             {
@@ -126,7 +126,7 @@ export class EduForm extends React.Component {
         </Form.Item>
 
         <Form.Item
-          label="Locaion"
+          label="Location"
           name="location"
           rules={[
             {

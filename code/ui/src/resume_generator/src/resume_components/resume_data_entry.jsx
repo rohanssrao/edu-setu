@@ -195,7 +195,7 @@ export default class Resume extends React.Component {
               {this.generate_wrapper(data, 'project_data', Project)}
             </Space>
           </Panel>
-          <Panel header="Extracurrisulum" key="6">
+          <Panel header="Extracurriculars" key="6">
             <Button
               type="primary"
               block
