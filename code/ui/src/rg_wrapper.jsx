@@ -18,24 +18,25 @@ export class RGWrapper extends React.Component {
     const token = localStorage.token;
     if (token) {
       fetch("http://127.0.0.1:5000/api/protected", {
-        method: "POST",
+        method: "GET",
         headers: new Headers({
-          "content-type": "application/json",
           Accept: "application/json",
           Authorization: `Bearer ${token}`,
-        }),
-        body: JSON.stringify({}),
+        })
       }).then((response) => {
         if(response.status === 405){
           this.setState({status:1})
+          console.log("verification failed, request a new token")
         }
         else{
           this.setState({status:4})
+          console.log("token verified")
         }
-        console.log(response.status);
+        
       });
     } else {
       this.setState({ status: 1 });
+      console.log("token not found request a new token")
     }
   };
   //helping method to save token
@@ -46,9 +47,14 @@ export class RGWrapper extends React.Component {
       localStorage.token = json_response.access_token;
       this.setState({ status: 4 });
     } else if (status === 400) {
-      console.log("user name or password no match");
-      console.log("register as new user");
-      this.setState({ status: 2 });
+      if(this.state.status === 2){
+        console.log("user name or password no match");
+        console.log("register as new user");
+        this.setState({status:5}) //failed
+      }
+      else{
+        this.setState({ status: 2 });
+      }
     }
   };
 
@@ -86,21 +92,34 @@ export class RGWrapper extends React.Component {
         }),
       }).then((response) => {
         this.save_credential(response);
-        this.state.set({timeout:this.state.timeout + 1})
+        this.setState({timeout:this.state.timeout + 1})
       });
     }
   };
   initlization = () => {
     if (this.state.status === 0) {
       this.verify_token();
+      console.log("verify token")
     } else if (this.state.status === 1) {
       this.request_token();
+      console.log("request new token")
     } else if (this.state.status === 2) {
       this.register_user();
+      console.log("user doesn't exist, create new user")
     }
   };
+  componentDidMount(){
+    this.setState({status:0})
+  }
+  componentDidUpdate(){
+    console.log("initlization")
+    if(this.state !== 4 || this.state !==5){
+      this.initlization()
+    }
+   
+  }
   render() {
-    this.initlization();
+    // this.initlization();
     // const Navbar = NavBar()
     let ResumeApp = null
     if(this.state.status === 4){
@@ -109,7 +128,7 @@ export class RGWrapper extends React.Component {
     else{
       ResumeApp = <h1> Loading </h1>
     }
-    if (this.state.status > 3){
+    if (this.state.status ===5){ //fail
       ResumeApp = <React.Fragment> 
         <h1> Loading Failed </h1>
         <p> email exist and password doesn't match</p>
