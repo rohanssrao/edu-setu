@@ -9,7 +9,7 @@ sys.path.append("../code/backend")
 import utils
 import student_apis
 import auth
-from main import app
+from main import app,db
 
 # Base URL for API requests
 base_url = "http://127.0.0.1:5000"
@@ -166,6 +166,14 @@ def test_edit_profile():
     assert type(json_response['data']) is str
 
 
+'''
+test resume api
+'''
+def test_get_existing_user():
+    null_user = "not_existing"
+    email = "not_existing@gmail.com"
+    password = "not_existing"
+    
 
 
 

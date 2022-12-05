@@ -24,13 +24,13 @@ export class RGWrapper extends React.Component {
           Authorization: `Bearer ${token}`,
         })
       }).then((response) => {
-        if(response.status === 405){
-          this.setState({status:1})
-          console.log("verification failed, request a new token")
-        }
-        else{
+        if(response.status === 200){
           this.setState({status:4})
           console.log("token verified")
+        }
+        else{
+          this.setState({status:1})
+          console.log("verification failed, request a new token")
         }
         
       });
@@ -49,7 +49,6 @@ export class RGWrapper extends React.Component {
     } else if (status === 400) {
       if(this.state.status === 2){
         console.log("user name or password no match");
-        console.log("register as new user");
         this.setState({status:5}) //failed
       }
       else{
@@ -92,7 +91,6 @@ export class RGWrapper extends React.Component {
         }),
       }).then((response) => {
         this.save_credential(response);
-        this.setState({timeout:this.state.timeout + 1})
       });
     }
   };
@@ -109,7 +107,7 @@ export class RGWrapper extends React.Component {
     }
   };
   componentDidMount(){
-    this.setState({status:0})
+    this.initlization()
   }
   componentDidUpdate(){
     console.log("initlization")

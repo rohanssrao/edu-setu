@@ -7,7 +7,7 @@
             "request": "launch",
             "module": "flask",
             "env": {
-                "FLASK_APP": "main.py",
+                "FLASK_APP": "${workspaceRoot}/code/backend/main.py",
                 "FLASK_DEBUG": "1"
             },
             "args": [
@@ -15,11 +15,11 @@
                 "--no-debugger",
                 "--no-reload"
             ],
+            
             "jinja": true,
             "justMyCode": true
         },
-
-
+      
         {
             "name": "Launch Chrome",
             "request": "launch",
@@ -27,7 +27,6 @@
             "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}"
         },
-    
         {
             "name": "Debug app",
             "type": "firefox",

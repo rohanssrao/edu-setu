@@ -64,10 +64,11 @@ def new_user():
     try:
         db.session.add(user)
         db.session.commit()
-        return Response("{'response':'user created'}", status=406, mimetype='application/json')
+        access_token = create_access_token(identity=user.id)
+        return {'response':'user created', 'status':201, 'access_token':access_token}
     except:
         db.session.rollback()
-    return Response("{'response':'Error when create user'}", status=201, mimetype='application/json')
+        return {'response':'email already taken', 'status':400}
 
 
 def verify_password(email, password):
