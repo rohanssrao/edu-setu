@@ -30,6 +30,7 @@
 ---
 
 <a href="https://app.animaker.com/animo/xJq8qgUlHE0MX9wp/"><h2>Intro Video</h2></a>
+<a href="https://www.youtube.com/watch?v=cVp6sCb1FUc"><h2>Project 2 Updated Demo </h2> </a>
 
 <p align="center">
   <a href="https://app.animaker.com/animo/xJq8qgUlHE0MX9wp/"><img src="./assets/video1.png" alt="Click me" width="50%" height="50%"/></a>
