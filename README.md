@@ -36,12 +36,12 @@
 </p>
 
 
+## Demo of New Features
+https://www.youtube.com/watch?v=cVp6sCb1FUc
 ---
 
 ## About
 
-### Project 2 Updated Demo
-https://www.youtube.com/watch?v=cVp6sCb1FUc
 
 "Setu" literally translates to "Bridge" in Hindi.
 
