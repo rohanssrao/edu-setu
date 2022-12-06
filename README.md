@@ -33,6 +33,17 @@
   <a href="https://app.animaker.com/animo/xJq8qgUlHE0MX9wp/"><img src="./assets/video1.png" alt="Click me" width="50%" height="50%"/></a>
 </p>
 
+## New Features
+* Resume Generator
+* Student Skills
+* GPA/Degree Requirements
+* Application Questions
+* Job Types
+* Functional Posting Filters
+* Edit Profile
+* UI Improvements
+* Bugfixes
+
 
 ## Demo of New Features
 [<p align="center"><img src="https://i3.ytimg.com/vi/cVp6sCb1FUc/maxresdefault.jpg" width="50%" /></p>](https://www.youtube.com/watch?v=cVp6sCb1FUc)
