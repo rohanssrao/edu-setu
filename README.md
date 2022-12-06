@@ -4,27 +4,25 @@
   <img src="./assets/Edu_Setu_Logo.gif" alt="Logo"/>
 </p>
 
-## Discord channel link - [![Discord](https://img.shields.io/discord/1010335378831585310)](https://discord.gg/ANGKkKvmWH)
 
 [![License](https://img.shields.io/github/license/jayrajmulani/group1-se-homeworks)](https://github.com/jayrajmulani/group2-se-homeworks/blob/main/LICENSE)
-![Repo size](https://img.shields.io/github/repo-size/jayrajmulani/edu-setu)
+![Repo size](https://img.shields.io/github/repo-size/rohanssrao/edu-setu)
 [![DOI](https://zenodo.org/badge/563549628.svg)](https://zenodo.org/badge/latestdoi/563549628)
-[![Travis](https://app.travis-ci.com/jayrajmulani/group1-se-homeworks.svg?branch=main)](https://app.travis-ci.com/github/jayrajmulani/group1-se-homeworks/pull_requests)
-[![Contributors](https://img.shields.io/github/contributors/jayrajmulani/edu-setu)](https://github.com/jayrajmulani/edu-setu/graphs/contributors)
+[![backend](https://github.com/rohanssrao/edu-setu/actions/workflows/auto_test.yml/badge.svg)](https://github.com/rohanssrao/edu-setu/actions/workflows/auto_test.yml)
+[![frontend](https://github.com/rohanssrao/edu-setu/actions/workflows/build_test_react.yml/badge.svg)](https://github.com/rohanssrao/edu-setu/actions/workflows/build_test_react.yml)
+[![Contributors](https://img.shields.io/github/contributors/rohanssrao/edu-setu)](https://github.com/rohanssrao/edu-setu/graphs/contributors)
 
 ---
 
 ## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [About](#about)
-- [Getting started](#getting-started)
+- [Getting Started](#getting-started)
 - [Documentation](#documentation)
-- [Development Specifications](#development-specifications)
-  - [Backend](./code/backend/README.md)
-  - [Frontend](./code/ui/README.md)
-- [Features Overview](https://www.youtube.com/watch?v=2PfVqtwufgw)
+  - [Development Specifications](#development-specifications)
 - [License](#license)
-- [Future Scope](#future-scope)
+- [Future scope](#future-scope)
 - [Contributors](#contributors)
 
 ---
@@ -111,6 +109,7 @@ serve -s build -l 3000
 
 ## Documentation
 
+Documenation is contained in `code/docs`
 <br/>
 
 ### Development Specifications

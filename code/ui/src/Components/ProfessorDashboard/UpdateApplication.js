@@ -57,6 +57,9 @@ export class UpdateApplication extends Component {
         <Form.Item label="Student Phone" name="student_phone">
           <Input disabled />
         </Form.Item>
+        <Form.Item label="Student Skills" name="student_skills">
+          <Input disabled />
+        </Form.Item>
         {this.props.responses.map((response, idx)=>{
           let question = response.question;
           let response_value = response.response;
