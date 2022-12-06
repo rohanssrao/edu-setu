@@ -37,7 +37,7 @@
 
 
 ## Demo of New Features
-https://www.youtube.com/watch?v=cVp6sCb1FUc
+[<p align="center"><img src="https://i3.ytimg.com/vi/cVp6sCb1FUc/maxresdefault.jpg" width="50%" /></p>](https://www.youtube.com/watch?v=cVp6sCb1FUc)
 ---
 
 ## About
