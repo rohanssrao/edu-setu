@@ -7,7 +7,7 @@
 
 [![License](https://img.shields.io/github/license/jayrajmulani/group1-se-homeworks)](https://github.com/jayrajmulani/group2-se-homeworks/blob/main/LICENSE)
 ![Repo size](https://img.shields.io/github/repo-size/rohanssrao/edu-setu)
-[![DOI](https://zenodo.org/badge/527647386.svg)](https://zenodo.org/badge/latestdoi/527647386)
+[![DOI](https://zenodo.org/badge/563549628.svg)](https://zenodo.org/badge/latestdoi/563549628)
 [![backend](https://github.com/rohanssrao/edu-setu/actions/workflows/auto_test.yml/badge.svg)](https://github.com/rohanssrao/edu-setu/actions/workflows/auto_test.yml)
 [![frontend](https://github.com/rohanssrao/edu-setu/actions/workflows/build_test_react.yml/badge.svg)](https://github.com/rohanssrao/edu-setu/actions/workflows/build_test_react.yml)
 [![Contributors](https://img.shields.io/github/contributors/rohanssrao/edu-setu)](https://github.com/rohanssrao/edu-setu/graphs/contributors)
@@ -33,9 +33,13 @@
   <a href="https://app.animaker.com/animo/xJq8qgUlHE0MX9wp/"><img src="./assets/video1.png" alt="Click me" width="50%" height="50%"/></a>
 </p>
 
+
+## Demo of New Features
+[<p align="center"><img src="https://i3.ytimg.com/vi/cVp6sCb1FUc/maxresdefault.jpg" width="50%" /></p>](https://www.youtube.com/watch?v=cVp6sCb1FUc)
 ---
 
 ## About
+
 
 "Setu" literally translates to "Bridge" in Hindi.
 
@@ -50,25 +54,56 @@ You might be wondering "what" opportunities exactly? Well, the one that every st
 
 And, as you might have guessed, students can come in to apply and connect with the professors via this portal. Edu-Setu keeps the track of all the postings and applications, removing the hassle of "emailing" the professor and waiting for the opportunities to get buried.
 
+Resume Editing Tool
+Creating a personalized résumé for different job requirements can be a tedious task. That's why we developed a résumé-building tool to simplify this process. Our tool allows users to easily upload and organize their education, personal information, extracurricular activities, work experience, and skills. With just a few clicks, they can customize their résumé to match the requirements of a specific job and then download it as a PDF. Unlike many other résumé-building tools, our tool uses a professional, clean template that is suitable for job applications.
+
 ---
 
 ## Getting Started
 
-Like any web application, this project consists of 3 major components. Frontend, Backend and Database.
-We have already deployed the backend on Oracle Cloud Infrastructure. So, that includes the _complicated_ Database configuration setup. All you need to do to start using this project is to setup the User Interface. Unfortunately, we couldn't deploy the frontend on the server because of memory limitations on the free-tier account. So, we have the next-best thing in place! Yes, using DOCKER, which means you don't even have to clone the git repo!
+The project is Dockerized to allow for portability and scalability. It uses a cloud database hosted with Oracle Cloud's free tier.
 
-Follow the below steps to get started:
+### Follow the below steps to get started:
 
-1. [Install docker](https://docs.docker.com/get-docker/), if it's not already installed in your system!
-2. Start Docker Desktop and run the container using the below command - Yes, just one command...
+1. [Install Docker](https://docs.docker.com/get-docker/), if it's not already installed in your system!
+2. Start Docker Desktop.
+3. Clone this repository.
+4. Navigate to directory `code` and run the following:
 
 ```
-docker run -it -d -p 3000:3000 jayrajmulani/edusetu_ui
+docker compose up --build
 ```
 
-3. Navigate to [localhost:3000](http://localhost:3000) to your browser.
-4. Hit register to create your account
-5. Login to begin bridging opportunities!
+5. Navigate to [localhost:3000](http://localhost:3000) to your browser.
+6. Hit register to create your account.
+7. Login to begin bridging opportunities!
+
+### Alternative run method:
+1. Clone the repository
+2. In `code/backend`, run the following commands
+
+```
+pip3 install -r requirements.txt
+flask run
+```
+
+3. Open a new terminal
+4. In `code/frontend`, run the following commands
+
+```
+npm install
+npm start
+```
+or 
+```
+npm install
+npm run build
+npm install -g serve
+serve -s build -l 3000
+```
+5. Navigate to [localhost:3000](http://localhost:3000) to your browser.
+6. Hit register to create your account
+7. Login to begin bridging opportunities!
 
 ---
 
@@ -97,17 +132,6 @@ The portal is developed with the above mentioned tech-stack. Detailed documentat
 This project is licensed under [MIT](https://mit-license.org/).
 
 Further details regarding the license can be found [here](https://github.com/jayrajmulani/group1-se-homeworks/blob/main/LICENSE).
-
-## Future scope
-
-- Provide push notifications to students when there is an update to their current application status and to professors when a student applies for a job posting.
-- Provide interview zoom schedule links right from the portal to the applicants if selected for an interview, also provide a button to students to show if they can attend the meeting on the provided scheduled date or would like to request another date.
-- Include a referral feature that will allow hired candidates to provide a referral to other suitable students for other positions available under the professor they work for.
-- Provide a page to assign weekly shifts for hired students as per their available timeframe.
-- Scale up the project by using cloud storage to store other important features like resumes, cover letters, and internship certificates of students so the professor can make a better decision on who to shortlist for interview.
-- Validate whether an email is an Edu mail (can also validate it for specific college edu mail as only students from that college should be allowed to apply for college specific positions) or not, also provide an OTP mechanism so that only authentic users can register.
-- Provide a feature so that students or professors who have worked together on a project can endorse each other's skills (Like Linkedin).
-- Once logged in maintain the status as logged in for a particular device until the user signs out to provide more convenience to the user.
 
 <a href="https://app.animaker.com/animo/xJq8qgUlHE0MX9wp/"><h2>Why FORK our project</h2></a>
 

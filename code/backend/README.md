@@ -1,3 +1,5 @@
+# Backend README
+
 # Development Specifications
 
 ## Backend
@@ -5,7 +7,7 @@
 ### Relational Diagram
 
 <img src="../../assets/Relational_Diagram.png"/>
-<!-- ![Relational Diagram](../../assets/Relational_Diagram.svg) -->
+
 
 ### API Endpoints
 
@@ -30,6 +32,7 @@ Response:
     else:
         data: string (containing an error message)
 }
+
 ```
 
 ---
@@ -73,7 +76,6 @@ Response:
 
 ```
 
-
 /get_all_users [GET]
 Request: N/A
 Response:
@@ -91,6 +93,7 @@ Response:
     else:
         data: string (containing an error message)
 }
+
 ```
 
 ---
@@ -208,6 +211,7 @@ Response:
     status: boolean,
     data: message (Success / Error message as per status)
 }
+
 ```
 
 ---
@@ -228,6 +232,7 @@ Response:
     data: message (Success / Error message as per status)
     // CREATED_AT and UPDATED_AT timestamps to be appropriately set by the API
 }
+
 ```
 
 ---
@@ -259,6 +264,7 @@ Response:
 	else:
 	data: string (error message)
 }
+
 ```
 
 ---
@@ -302,6 +308,7 @@ Response:
 	else:
 	data: string (error message)
 }
+
 ```
 
 ---
@@ -322,6 +329,7 @@ Response:
 	data: (Success / Error message as per status)
 	// UPDATED_AT timestamp should be auto updated by the API
 }
+
 ```
 
 ---
@@ -372,6 +380,7 @@ Response:
 	status: boolean
 	data: (Success / Error message as per status)
 }
+
 ```
 
 ---
@@ -425,6 +434,7 @@ Response:
 	data: message (Success / Error message as per status)
 	// CREATED_AT and UPDATED_AT timestamps to be appropriately set by the API
 }
+
 ```
 
 ---
@@ -466,4 +476,237 @@ Response:
 		}
 	]
 }
+
+```
+
+# API Endpoints for Resume
+
+Auto-generated using OpenAI
+
+```python
+# Resume API
+
+This API provides endpoints for managing a user's resume. It includes endpoints for registering a new user, logging in, and managing resume data.
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+* Python 3.x
+* Flask
+* Flask-JWT
+
+### Installing
+
+Install the required packages using the following command:
+```
+
+pip install -r requirements.txt
+
+```python
+## Endpoints
+
+### /
+
+This endpoint returns a simple message.
+
+**Method:** GET
+
+**URL:** /
+
+**Response:**
+```
+
+### **/api/register**
+
+This endpoint registers a new user.
+
+**Method:** POST
+
+**URL:** /api/register
+
+**Data:**
+
+```python
+{
+    "email": "user@example.com",
+    "username": "username",
+    "password": "password"
+}
+```
+
+**Response:**
+
+```python
+{
+    "response": "user created",
+    "status": 201,
+    "access_token": "access_token"
+}
+```
+
+### **/api/login**
+
+This endpoint logs in an existing user.
+
+**Method:** POST
+
+**URL:** /api/login
+
+**Data:**
+
+```python
+{
+    "email": "user@example.com",
+    "password": "password"
+}
+```
+
+**Response:**
+
+```python
+{
+    "access_token": "access_token"
+}
+```
+
+### **/api/get**
+
+This endpoint returns the data of a user who is logged in.
+
+**Method:** GET
+
+**URL:** /api/get
+
+**Headers:**
+
+```python
+Authorization: Bearer <access_token>
+```
+
+**Response:**
+
+```python
+[    {        "id": 1,        "user_id": 1,        "data": {...},        "type": "resume"    }]
+```
+
+### **/api/submit**
+
+This endpoint saves data for a user who is logged in.
+
+**Method:** POST
+
+**URL:** /api/submit
+
+**Headers:**
+
+```python
+Authorization: Bearer <access_token>
+```
+
+**Data:**
+
+```python
+{
+    "data": {...},
+    "type": "resume"
+}
+```
+
+**Response:**
+
+```python
+{
+    "a": "b"
+}
+```
+
+### **/api/delete**
+
+This endpoint deletes data for a user who is logged in.
+
+**Method:** POST
+
+**URL:** /api/delete
+
+**Headers:**
+
+```python
+Authorization: Bearer <access_token>
+```
+
+**Data:**
+
+```python
+{
+    "data_id": 1,
+    "type": "resume"
+}
+```
+
+**Response:**
+
+```python
+{
+    "a": "b"
+}
+
+```
+
+# Table Scheme for Resume
+
+```python
+credential
+id (primary key, integer)
+username (string, not null)
+email (string, not null, unique)
+password (string, not null)
+
+users
+id (primary key, integer)
+username (string, not null)
+email (string, not null)
+website (string, nullable)
+phone (string, not null)
+user_id (foreign key to credential.id, not null)
+
+edu
+id (primary key, integer)
+school (string, not null)
+place (string, nullable)
+program (string, nullable)
+date (string, not null)
+gpa (string, not null)
+user_id (foreign key to credential.id, not null)
+
+skill
+id (primary key, integer)
+name (string, not null)
+contents (pickle, not null)
+user_id (foreign key to credential.id, not null)
+
+project
+id (primary key, integer)
+name (string, not null)
+content (text, nullable)
+tags (pickle, not null)
+user_id (foreign key to credential.id, not null)
+
+experience
+id (primary key, integer)
+title (string, not null)
+organization (string, not null)
+location (string, not null)
+date (string, not null)
+description (text, nullable)
+user_id (foreign key to credential.id, not null)
+
+foreign keys
+users.user_id references credential.id
+edu.user_id references credential.id
+skill.user_id references credential.id
+project.user_id references credential.id
+experience.user_id references credential.id
 ```
