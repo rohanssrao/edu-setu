@@ -63,14 +63,13 @@ Creating a personalized résumé for different job requirements can be a tedious
 
 ## Getting Started
 
-Like any web application, this project consists of 3 major components. Frontend, Backend and Database.
-We have already deployed the backend on Oracle Cloud Infrastructure. So, that includes the _complicated_ Database configuration setup. All you need to do to start using this project is to setup the User Interface. Unfortunately, we couldn't deploy the frontend on the server because of memory limitations on the free-tier account. So, we have the next-best thing in place! Yes, using DOCKER, which means you don't even have to clone the git repo!
+The project is Dockerized to allow for portability and scalability. It uses a cloud database hosted with Oracle Cloud's free tier.
 
-Follow the below steps to get started:
+### Follow the below steps to get started:
 
-1. [Install docker](https://docs.docker.com/get-docker/), if it's not already installed in your system!
-2. Start Docker Desktop
-3. Clone this repository
+1. [Install Docker](https://docs.docker.com/get-docker/), if it's not already installed in your system!
+2. Start Docker Desktop.
+3. Clone this repository.
 4. Navigate to directory `code` and run the following:
 
 ```
@@ -78,10 +77,10 @@ docker compose up --build
 ```
 
 5. Navigate to [localhost:3000](http://localhost:3000) to your browser.
-6. Hit register to create your account
+6. Hit register to create your account.
 7. Login to begin bridging opportunities!
 
-Alternative run method:
+### Alternative run method:
 1. Clone the repository
 2. In `code/backend`, run the following commands
 
