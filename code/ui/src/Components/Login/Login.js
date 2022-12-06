@@ -5,6 +5,7 @@ import config from "../../config";
 import logo from "../../assets/logo.png";
 import "./Login.css";
 import majors from "./majors";
+import csvFile from './skills.csv'
 const { Title } = Typography;
 const { Option } = Select;
 const year = (new Date()).getFullYear();
@@ -21,6 +22,7 @@ export default class Login extends React.Component {
 			yearType: "",
 			skillsType: "",
 			designationType: "",
+			skillsOptions: [],
 		};
 		this.years = []
 		for (let i = 0; i <= 10; i++) {
@@ -32,6 +34,20 @@ export default class Login extends React.Component {
 		majors.forEach(major => {
 			this.majors.push({ "label": major[2], "value": major[2] });
 		});
+		fetch(csvFile)
+		  .then((response) => response.text())
+		  .then((csv) => {
+			// parse the CSV data
+			const rows = csv.split('\n');
+			const options = rows.map((row) => {
+			  const cells = row.split(',');
+			  return {
+				value: cells[0],
+				label: cells[0], 
+			  };
+			});
+			this.setState({ skillsOptions:options });
+		  });
 	}
 	formRef = React.createRef();
 	registerFormRef = React.createRef();
@@ -368,8 +384,8 @@ export default class Login extends React.Component {
 										style={{ width: '100%' }}
 										placeholder="Press enter to add a skill"
 										onChange={this.onTypeChangeSkills}
-										open={false}
-										//options={}
+										//open={false}
+										options={this.state.skillsOptions}
 									/>
 								</Form.Item>
 
